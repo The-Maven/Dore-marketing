@@ -3052,11 +3052,6 @@ button {
   flex-shrink: 0;
 }
 
-.contact-channel-icon--whatsapp {
-  background: rgba(37, 211, 102, 0.1);
-  color: #25d366;
-}
-
 .contact-channel-icon--email {
   background: rgba(56, 189, 248, 0.12);
   color: var(--accent);
@@ -3493,7 +3488,7 @@ button {
 
 .landing .ln-nav .brand-red,
 .landing .ln-nav .ln-logo-text {
-  color: #111111;
+  color: var(--accent);
 }
 
 .landing .ln-nav .brand-ekg {
@@ -3730,10 +3725,6 @@ button {
   color: var(--accent);
 }
 
-.landing .ln-footer-brand .brand-red {
-  color: #111111;
-}
-
 .landing .ln-footer-cols h4 {
   color: #6c6c6c;
 }
@@ -3824,7 +3815,7 @@ button {
 
 .dash .ln-logo-text,
 .dash .brand-red {
-  color: #111111;
+  color: var(--accent);
 }
 
 .dash .brand-ekg {

@@ -53,15 +53,6 @@ function MailIcon() {
   );
 }
 
-function WhatsAppIcon() {
-  return (
-    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-      <path d="M12 21a9 9 0 1 0-7.8-4.5L3 21l4.7-1.2A9 9 0 0 0 12 21Z" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
-      <path d="M9.2 10.2c.2-.5.4-.6.7-.6h.5c.2 0 .4.2.5.4l.6 1.5c.1.2 0 .4-.1.6l-.4.5c.3.7.9 1.4 1.6 1.8l.6-.3c.2-.1.4-.1.6 0l1.4.6c.2.1.3.3.3.5v.5c0 .3-.1.5-.5.7-.4.2-.9.3-1.4.2-2.2-.5-4.1-2.3-4.7-4.4-.1-.5 0-1 .2-1.5Z" fill="currentColor" />
-    </svg>
-  );
-}
-
 function BoltIcon() {
   return (
     <svg width="15" height="15" viewBox="0 0 24 24" fill="none" aria-hidden="true">
@@ -120,7 +111,6 @@ function CompassIcon() {
 }
 
 const EMAIL_CODES = [97, 110, 116, 104, 111, 110, 121, 107, 119, 97, 119, 117, 64, 103, 109, 97, 105, 108, 46, 99, 111, 109];
-const WA_CODES = [104, 116, 116, 112, 115, 58, 47, 47, 119, 97, 46, 109, 101, 47, 52, 52, 55, 51, 48, 48, 51, 53, 55, 57, 50, 57];
 
 function decode(codes) {
   return String.fromCharCode(...codes);
@@ -136,6 +126,9 @@ const inspirationLogos = [
   "UBS"
 ];
 
+const CALENDLY_EXEC_BRIEFING_URL = "https://calendly.com/your-link/executive-briefing";
+const CALENDLY_DIAGNOSTIC_URL = "https://calendly.com/your-link/diagnostic-sprint-scoping";
+
 function ContactForm() {
   const [form, setForm] = useState({ name: "", email: "", company: "", message: "" });
   const [status, setStatus] = useState("");
@@ -147,10 +140,6 @@ function ContactForm() {
 
   const openMailClient = () => {
     window.location.href = `mailto:${emailAddress}`;
-  };
-
-  const openWhatsApp = () => {
-    window.open(decode(WA_CODES), "_blank", "noopener,noreferrer");
   };
 
   const handleSubmit = (event) => {
@@ -184,10 +173,6 @@ function ContactForm() {
           <span className="ln-btn-icon"><MailIcon /></span>
           Email
         </button>
-        <button className="ln-btn ln-btn--outline" onClick={openWhatsApp} type="button">
-          <span className="ln-btn-icon"><WhatsAppIcon /></span>
-          WhatsApp
-        </button>
       </div>
 
       <form className="ln-contact-form" onSubmit={handleSubmit}>
@@ -218,6 +203,9 @@ function ContactForm() {
 }
 
 export default function Landing() {
+  const executiveBriefingHref = CALENDLY_EXEC_BRIEFING_URL.includes("your-link") ? "#contact" : CALENDLY_EXEC_BRIEFING_URL;
+  const diagnosticScopingHref = CALENDLY_DIAGNOSTIC_URL.includes("your-link") ? "#contact" : CALENDLY_DIAGNOSTIC_URL;
+
   return (
     <div className="landing">
       <nav className="ln-nav">
@@ -234,8 +222,8 @@ export default function Landing() {
             <a href="#journey">Impact</a>
             <a href="#contact">Contact</a>
           </div>
-          <a className="ln-btn ln-btn--outline ln-btn--sm" href="#contact">
-            Book a Conversation
+          <a className="ln-btn ln-btn--outline ln-btn--sm" href={executiveBriefingHref}>
+            Book Executive Briefing
           </a>
         </div>
       </nav>
@@ -250,9 +238,9 @@ export default function Landing() {
           </div>
 
           <h1 className="ln-hero-heading">
-            Fintech execution at{" "}
+            AI decision infrastructure{" "}
             <span className="ln-hero-wellbeing">
-              decision <span className="ln-hero-accent">speed</span>
+              for financial <span className="ln-hero-accent">institutions</span>
               <svg className="ln-hero-scribble" viewBox="0 0 640 18" fill="none" aria-hidden="true">
                 <path d="M2 10h44l12-6 14 12 18-9h30l13-5 13 10h25l11-7 13 11h29l10-6h86l14-6 14 12 19-9h31l13-5 13 10h26l11-7 14 11h31l11-6h92" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" />
               </svg>
@@ -260,12 +248,15 @@ export default function Landing() {
           </h1>
 
           <p className="ln-hero-sub">
-            We design and ship precision decision systems for fintech operators: capturing transaction intelligence, scoring risk, and triggering faster action across payments rails (SEPA, Faster Payments, FedNow, RTP, ACH, SWIFT), crypto on-ramp/off-ramp flows, and M&amp;A workflows from CIM and QoE through SPA, TSA, and PMI.
+            We build premium execution systems for banks, processors, and regulated fintechs where speed, control, and auditability directly affect margin and risk posture.
+          </p>
+          <p className="ln-hero-sub" style={{ marginTop: 10 }}>
+            Start with our Instant Payments Decision-Speed Sprint: a 90-day engagement to cut exception cycle time, improve straight-through processing, and strengthen policy-bound decisioning.
           </p>
 
           <div className="ln-hero-actions">
-            <a className="ln-btn ln-btn--primary" href="#contact">Let&apos;s Talk</a>
-            <a href="#services" className="ln-btn ln-btn--ghost">View Services</a>
+            <a className="ln-btn ln-btn--primary" href={executiveBriefingHref}>Book Executive Briefing</a>
+            <a href={diagnosticScopingHref} className="ln-btn ln-btn--ghost">Book Diagnostic Sprint Scoping</a>
           </div>
 
           <div className="ln-hero-image-wrap ln-hero-image-wrap--composite">
@@ -399,28 +390,23 @@ export default function Landing() {
 
       <section className="ln-section" id="services">
         <span className="ln-sec-num" aria-hidden="true">03</span>
-        <p className="ln-section-eyebrow">Execution Offers</p>
-        <h2 className="ln-section-heading">Commercial decision-system offers for fintech operators</h2>
+        <p className="ln-section-eyebrow">Flagship Engagements</p>
+        <h2 className="ln-section-heading">Enterprise scope with clear entry points</h2>
         <p className="ln-section-sub">
-          These are outcome-led offers designed to defend and expand profit pools through faster execution, stronger controls, and better operating leverage.
+          Engage at the level you need now: an immediate operating wedge, core platform expansion, or strategic leadership and governance.
         </p>
 
+        <p className="ln-section-eyebrow" style={{ marginTop: 22 }}>Entry</p>
         <div className="ln-features-grid ln-features-grid--three">
           <article className="ln-feature-card">
-            <h3>AI Payments Acceleration</h3>
-            <p>Event-driven AI for routing, exception handling, and reconciliation across SEPA, Faster Payments, FedNow, RTP, ACH, and SWIFT rails.</p>
+            <h3>Instant Payments Decision-Speed Sprint</h3>
+            <p>A focused 90-day engagement for FedNow, RTP, ACH, Faster Payments, and SWIFT operations. We reduce exception latency and improve control under live conditions.</p>
             <a className="ln-feature-link" href="/service-ai-payments-acceleration.html">Read breakdown</a>
           </article>
-          <article className="ln-feature-card">
-            <h3>M&amp;A and Advisory Intelligence</h3>
-            <p>Automated diligence extraction and deal signal scoring for CIM, QoE, NWC, TSA, SPA, carve-out, and PMI workflows.</p>
-            <a className="ln-feature-link" href="/service-ma-advisory-intelligence.html">Read breakdown</a>
-          </article>
-          <article className="ln-feature-card">
-            <h3>Escrow Intelligence Automation</h3>
-            <p>AI-assisted release logic for fiat and stablecoin escrow, plus dispute analysis and trust monitoring for multi-party transactions.</p>
-            <a className="ln-feature-link" href="/service-escrow-intelligence-automation.html">Read breakdown</a>
-          </article>
+        </div>
+
+        <p className="ln-section-eyebrow" style={{ marginTop: 24 }}>Core</p>
+        <div className="ln-features-grid ln-features-grid--three">
           <article className="ln-feature-card">
             <h3>Intelligent Data Pipelines</h3>
             <p>Streaming ingestion, entity resolution, feature pipelines, and high-quality decision context.</p>
@@ -437,6 +423,15 @@ export default function Landing() {
             <a className="ln-feature-link" href="/service-decision-reliability-engineering.html">Read breakdown</a>
           </article>
           <article className="ln-feature-card">
+            <h3>Escrow Intelligence Automation</h3>
+            <p>AI-assisted release logic for fiat and stablecoin escrow, plus dispute analysis and trust monitoring for multi-party transactions.</p>
+            <a className="ln-feature-link" href="/service-escrow-intelligence-automation.html">Read breakdown</a>
+          </article>
+        </div>
+
+        <p className="ln-section-eyebrow" style={{ marginTop: 24 }}>Strategic</p>
+        <div className="ln-features-grid ln-features-grid--three">
+          <article className="ln-feature-card">
             <h3>AI Due Diligence</h3>
             <p>Independent review of AI/data stacks, controls, and execution risk for leadership and investors.</p>
             <a className="ln-feature-link" href="/service-ai-due-diligence.html">Read breakdown</a>
@@ -450,6 +445,11 @@ export default function Landing() {
             <h3>AI Product and Workflow Design</h3>
             <p>Human-in-the-loop product flows that make autonomous intelligence usable and trusted.</p>
             <a className="ln-feature-link" href="/service-ai-product-workflow-design.html">Read breakdown</a>
+          </article>
+          <article className="ln-feature-card">
+            <h3>M&amp;A and Advisory Intelligence</h3>
+            <p>Automated diligence extraction and deal signal scoring for CIM, QoE, NWC, TSA, SPA, carve-out, and PMI workflows.</p>
+            <a className="ln-feature-link" href="/service-ma-advisory-intelligence.html">Read breakdown</a>
           </article>
         </div>
       </section>
