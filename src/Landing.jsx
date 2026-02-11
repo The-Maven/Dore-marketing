@@ -225,7 +225,7 @@ export default function Landing() {
           <a className="ln-logo" href="#top">
             <div className="ln-logo-block">
               <span className="ln-logo-text"><BrandName /></span>
-              <Typewriter text="ai systems for fintech execution" speed={50} delay={600} />
+              <Typewriter text="precision systems for fintech execution" speed={50} delay={600} />
             </div>
           </a>
           <div className="ln-nav-links">
@@ -260,7 +260,7 @@ export default function Landing() {
           </h1>
 
           <p className="ln-hero-sub">
-            We design and ship AI-powered fintech pipelines that capture transaction data, score risk, and trigger faster actions across payments rails (SEPA, Faster Payments, FedNow, RTP, ACH, SWIFT), on-ramp/off-ramp crypto flows, and M&A/advisory workflows from CIM and QoE through SPA, TSA, and PMI.
+            We design and ship precision decision systems for fintech operators: capturing transaction intelligence, scoring risk, and triggering faster action across payments rails (SEPA, Faster Payments, FedNow, RTP, ACH, SWIFT), crypto on-ramp/off-ramp flows, and M&amp;A workflows from CIM and QoE through SPA, TSA, and PMI.
           </p>
 
           <div className="ln-hero-actions">
@@ -294,7 +294,16 @@ export default function Landing() {
       <section className="ln-section ln-exec-stats" id="execution">
         <span className="ln-sec-num" aria-hidden="true">01</span>
         <p className="ln-section-eyebrow">Execution Standard</p>
-        <h2 className="ln-section-heading">Designed for measurable commercial impact</h2>
+        <h2 className="ln-section-heading">Designed for measurable commercial impact and control</h2>
+        <p className="ln-section-sub">
+          We target cycle-time reduction, higher throughput, and stronger profit capture. Market scenarios suggest central AI adoption could improve banking cost bases by roughly 15-20 percent, with outsized gains for early movers.
+        </p>
+        <p className="ln-market-source">
+          Market references:{" "}
+          <a href="https://www.mckinsey.com/featured-insights/week-in-charts/bankings-agentic-ai-opportunity" target="_blank" rel="noopener noreferrer">Banking&apos;s agentic AI opportunity</a>
+          {" "}and{" "}
+          <a href="https://www.mckinsey.com/industries/financial-services/our-insights/global-banking-annual-review" target="_blank" rel="noopener noreferrer">Global Banking Annual Review</a>.
+        </p>
         <div className="ln-exec-grid">
           <article>
             <i><PulseIcon /></i>
@@ -309,27 +318,27 @@ export default function Landing() {
           <article>
             <i><LinkIcon /></i>
             <strong>Control</strong>
-            <span>Policy-bound execution with evidence-ready audit trails.</span>
-          </article>
+              <span>Policy-bound execution with evidence-ready audit trails.</span>
+            </article>
           <article>
             <i><CompassIcon /></i>
             <strong>Clarity</strong>
-            <span>Leadership visibility across risk, speed, and value capture.</span>
-          </article>
-        </div>
-      </section>
+              <span>Leadership visibility across risk, speed, and value capture.</span>
+            </article>
+          </div>
+        </section>
 
       <section className="ln-section ln-market" id="approach">
         <span className="ln-sec-num" aria-hidden="true">02</span>
         <p className="ln-section-eyebrow">How we implement</p>
-        <h2 className="ln-section-heading">From fragmented data to AI-driven operational decisions</h2>
+        <h2 className="ln-section-heading">From fragmented data to precision operational decisions</h2>
         <p className="ln-section-sub">
-          Each engagement starts with data and workflow diagnosis, then moves into production AI delivery with measurable cycle-time and decision-quality improvements.
+          Each engagement starts with workflow and control diagnosis, then moves into production decision systems with measurable cycle-time, quality, and margin impact.
         </p>
 
         <div className="ln-market-grid">
           <article className="ln-market-card">
-            <p className="ln-market-card-label">What blocks performance today</p>
+            <p className="ln-market-card-label">Where value leaks today</p>
             <div className="ln-market-metric-list">
               <div className="ln-market-metric">
                 <strong>Siloed transaction intelligence</strong>
@@ -341,13 +350,13 @@ export default function Landing() {
               </div>
               <div className="ln-market-metric">
                 <strong>Low decision confidence</strong>
-                <span>Teams lack explainable, auditable intelligence to automate safely.</span>
+                <span>Teams lack explainable, auditable intelligence to automate with confidence.</span>
               </div>
             </div>
           </article>
 
           <article className="ln-market-card ln-market-card--accent">
-            <p className="ln-market-card-label">What changes with our AI stack</p>
+            <p className="ln-market-card-label">What changes with our execution stack</p>
             <div className="ln-market-metric-list">
               <div className="ln-market-metric">
                 <strong>Faster transaction decisions</strong>
@@ -358,8 +367,8 @@ export default function Landing() {
                 <span>Pipeline-driven enrichment and summarization reduce repetitive analysis.</span>
               </div>
               <div className="ln-market-metric">
-                <strong>Autonomous decision support</strong>
-                <span>Rule + model orchestration with human override and audit trails.</span>
+                <strong>Controlled autonomy</strong>
+                <span>Rule + model orchestration with policy checks, human approval where required, and audit trails.</span>
               </div>
             </div>
           </article>
@@ -390,10 +399,10 @@ export default function Landing() {
 
       <section className="ln-section" id="services">
         <span className="ln-sec-num" aria-hidden="true">03</span>
-        <p className="ln-section-eyebrow">AI Services</p>
-        <h2 className="ln-section-heading">Commercial AI offerings for fintech operators</h2>
+        <p className="ln-section-eyebrow">Execution Offers</p>
+        <h2 className="ln-section-heading">Commercial decision-system offers for fintech operators</h2>
         <p className="ln-section-sub">
-          These are outcome-led offers designed to improve transaction speed, deal velocity, and operating margin without long transformation programs.
+          These are outcome-led offers designed to defend and expand profit pools through faster execution, stronger controls, and better operating leverage.
         </p>
 
         <div className="ln-features-grid ln-features-grid--three">
@@ -418,8 +427,8 @@ export default function Landing() {
             <a className="ln-feature-link" href="/service-intelligent-data-pipelines.html">Read breakdown</a>
           </article>
           <article className="ln-feature-card">
-            <h3>Agentic AI Operations</h3>
-            <p>Autonomous workflows with policy guards, escalation logic, and full auditability.</p>
+            <h3>Agentic Operations</h3>
+            <p>Autonomous workflows with policy guards, approval checkpoints, escalation logic, and full auditability.</p>
             <a className="ln-feature-link" href="/service-agentic-ai-operations.html">Read breakdown</a>
           </article>
           <article className="ln-feature-card">
@@ -473,17 +482,17 @@ export default function Landing() {
 
       <section className="ln-section ln-showcase" id="journey">
         <span className="ln-sec-num" aria-hidden="true">05</span>
-        <p className="ln-section-eyebrow">AI Impact</p>
+        <p className="ln-section-eyebrow">Execution Impact</p>
         <h2 className="ln-section-heading">Built for fintech execution where every decision has financial consequence</h2>
         <p className="ln-section-sub">
-          We combine a decade of transaction-system delivery with modern AI engineering to build faster, safer, and more intelligent operating models.
+          We combine a decade of transaction-system delivery with modern decision engineering to build faster, safer, and commercially stronger operating models.
         </p>
 
         <div className="ln-showcase-grid">
           <article className="ln-network-panel">
             <header className="ln-network-head">
               <h3>Where we focus</h3>
-              <span className="ln-network-pill">AI-first</span>
+              <span className="ln-network-pill">Execution-first</span>
             </header>
             <div className="ln-journey-points">
               <p>Payment-speed optimization with intelligent routing and exception handling across SEPA, Faster Payments, FedNow, RTP, ACH, and SWIFT.</p>
@@ -499,7 +508,7 @@ export default function Landing() {
               <div className="ln-delay-grid">
                 <div><strong>Faster</strong><span>transaction triage and action cycles</span></div>
                 <div><strong>Higher</strong><span>decision confidence with richer context</span></div>
-                <div><strong>Lower</strong><span>manual operational overhead</span></div>
+                <div><strong>Lower</strong><span>manual operational overhead and cost drag</span></div>
               </div>
             </article>
             <article className="ln-metric-card">
@@ -516,7 +525,7 @@ export default function Landing() {
 
       <section className="ln-section ln-workflow" id="workflow">
         <p className="ln-section-eyebrow">Workflow</p>
-        <h2 className="ln-section-heading">From raw signals to controlled autonomous decisions</h2>
+        <h2 className="ln-section-heading">From raw signals to controlled decisions at scale</h2>
         <div className="ln-workflow-diagram">
           <div><b>01</b><span>Capture</span><p>Rails, on-chain, off-chain events.</p></div>
           <div><b>02</b><span>Enrich</span><p>Entity, risk, and context normalization.</p></div>
@@ -537,12 +546,12 @@ export default function Landing() {
           </div>
           <div className="ln-emotional-content">
             <p className="ln-section-eyebrow">About</p>
-            <h2 className="ln-emotional-heading">AI implementation depth with business-level clarity</h2>
+            <h2 className="ln-emotional-heading">Execution depth with business-level clarity</h2>
             <p className="ln-emotional-body">
-              We implement AI systems that capture, structure, and operationalize fintech data so teams can act faster and automate high-value decisions safely.
+              We implement decision systems that capture, structure, and operationalize fintech data so teams can act faster and automate high-value decisions safely.
             </p>
             <p className="ln-emotional-body" style={{ marginTop: 12 }}>
-              We focus on intelligent operating pipelines: decision-ready context, autonomous workflow triggers, and resilient production controls.
+              We focus on intelligent operating pipelines: decision-ready context, policy-bound workflow triggers, and resilient production controls.
             </p>
           </div>
         </div>
@@ -565,7 +574,7 @@ export default function Landing() {
         <div className="ln-footer-inner">
           <div>
             <div className="ln-logo-text ln-footer-brand"><BrandName /></div>
-            <p>AI implementation firm for fintech operators, based in London.</p>
+            <p>Decision-systems implementation firm for fintech operators, based in London.</p>
           </div>
           <div className="ln-footer-cols">
             <div>

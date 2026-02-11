@@ -532,6 +532,25 @@ button {
   max-width: 500px;
 }
 
+.ln-market-source {
+  margin: -36px auto 44px;
+  max-width: 760px;
+  text-align: center;
+  font-size: 12px;
+  letter-spacing: 0.02em;
+  color: #7f7f7f;
+}
+
+.ln-market-source a {
+  color: #6a6a6a;
+  border-bottom: 1px solid #bdbdbd;
+}
+
+.ln-market-source a:hover {
+  color: #111111;
+  border-bottom-color: #111111;
+}
+
 /* ── Feature Cards ── */
 .ln-features-grid {
   display: grid;
