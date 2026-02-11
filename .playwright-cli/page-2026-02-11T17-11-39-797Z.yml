@@ -1,0 +1,262 @@
+- generic [ref=e3]:
+  - navigation [ref=e4]:
+    - generic [ref=e5]:
+      - link "AK Advisory f" [ref=e241] [cursor=pointer]:
+        - /url: "#top"
+        - generic [ref=e7]:
+          - generic [ref=e9]:
+            - text: AK Advisory
+            - img [ref=e11]
+          - generic [ref=e13]:
+            - text: f
+            - img [ref=e14]
+      - generic [ref=e16]:
+        - link "Services" [ref=e17] [cursor=pointer]:
+          - /url: "#services"
+        - link "Approach" [ref=e18] [cursor=pointer]:
+          - /url: "#approach"
+        - link "Journey" [ref=e19] [cursor=pointer]:
+          - /url: "#journey"
+        - link "Contact" [ref=e20] [cursor=pointer]:
+          - /url: "#contact"
+      - link "Book a Conversation" [ref=e21] [cursor=pointer]:
+        - /url: "#contact"
+  - generic [ref=e23]:
+    - heading "Payments. Digital assets. Cloud. Built to run in production" [level=1] [ref=e24]:
+      - text: Payments. Digital assets. Cloud.
+      - generic [ref=e25]:
+        - text: Built to run in production
+        - img [ref=e26]
+    - paragraph [ref=e28]: We advise fintechs, banks, marketplaces, and crypto-native teams building mission-critical financial infrastructure.
+    - generic [ref=e29]:
+      - link "Let's Talk" [ref=e30] [cursor=pointer]:
+        - /url: "#contact"
+      - link "View Services" [ref=e31] [cursor=pointer]:
+        - /url: "#services"
+    - generic [ref=e32]:
+      - img "Software engineering code interface" [ref=e33]
+      - img "Digital payments and fintech analytics dashboard" [ref=e34]
+      - generic [ref=e35]: Code + Payments Infrastructure
+  - generic [ref=e37]:
+    - generic [ref=e38]:
+      - img [ref=e40]
+      - text: Cross-border and multi-rail payments
+    - generic [ref=e42]:
+      - img [ref=e44]
+      - text: Cloud and reliability engineering
+    - generic [ref=e46]:
+      - img [ref=e48]
+      - text: Practical AI for operations teams
+  - generic [ref=e50]:
+    - paragraph [ref=e51]: How engagements are structured
+    - heading "Clear outcomes, short cycles, measurable risk reduction" [level=2] [ref=e52]
+    - paragraph [ref=e53]: Each engagement starts with architecture and operations diagnosis, then moves into delivery with weekly executive-ready progress reporting.
+    - generic [ref=e54]:
+      - article [ref=e55]:
+        - paragraph [ref=e56]: Common pressure points
+        - generic [ref=e57]:
+          - generic [ref=e58]:
+            - strong [ref=e59]: Fragmented rails
+            - generic [ref=e60]: Disconnected initiation, tracking, and reconciliation workflows.
+          - generic [ref=e61]:
+            - strong [ref=e62]: Manual operations
+            - generic [ref=e63]: High analyst overhead in exception handling and reporting.
+          - generic [ref=e64]:
+            - strong [ref=e65]: Reliability gaps
+            - generic [ref=e66]: Limited observability and weak incident-response routines.
+      - article [ref=e67]:
+        - paragraph [ref=e68]: What improves
+        - generic [ref=e69]:
+          - generic [ref=e70]:
+            - strong [ref=e71]: Faster decision cycles
+            - generic [ref=e72]: Shared operating metrics across product, engineering, and operations.
+          - generic [ref=e73]:
+            - strong [ref=e74]: Lower operational drag
+            - generic [ref=e75]: Automation and clearer ownership for high-volume workflows.
+          - generic [ref=e76]:
+            - strong [ref=e77]: Audit-ready controls
+            - generic [ref=e78]: Better traceability and incident documentation across systems.
+  - generic [ref=e80]:
+    - paragraph [ref=e81]: Inspired by experts from leading financial institutions
+    - list "Industry inspiration institutions" [ref=e82]:
+      - listitem [ref=e83]:
+        - generic "Goldman Sachs fallback mark" [ref=e242]: GS
+        - generic [ref=e84]: Goldman Sachs
+      - listitem [ref=e85]:
+        - generic "JPMorganChase fallback mark" [ref=e243]: J
+        - generic [ref=e86]: JPMorganChase
+      - listitem [ref=e87]:
+        - generic "Morgan Stanley fallback mark" [ref=e244]: MS
+        - generic [ref=e88]: Morgan Stanley
+      - listitem [ref=e89]:
+        - generic "Bank of America fallback mark" [ref=e245]: BOA
+        - generic [ref=e90]: Bank of America
+      - listitem [ref=e91]:
+        - generic "Citi fallback mark" [ref=e246]: C
+        - generic [ref=e92]: Citi
+      - listitem [ref=e93]:
+        - generic "Barclays fallback mark" [ref=e247]: B
+        - generic [ref=e94]: Barclays
+      - listitem [ref=e95]:
+        - generic "UBS fallback mark" [ref=e248]: U
+        - generic [ref=e96]: UBS
+    - paragraph [ref=e97]: Logos shown for market context only. No endorsement or client relationship is implied.
+  - generic [ref=e98]:
+    - paragraph [ref=e99]: Services
+    - heading "Consulting support across the full fintech infrastructure stack" [level=2] [ref=e100]
+    - paragraph [ref=e101]: We structure service lines by platform stage, regulatory profile, and transaction volume.
+    - generic [ref=e102]:
+      - article [ref=e103]:
+        - heading "Payments Infrastructure" [level=3] [ref=e104]
+        - paragraph [ref=e105]: Multi-rail architecture spanning SWIFT, ISO 20022, FedNow, RTP, ACH, and SEPA.
+        - link "Read breakdown" [ref=e106] [cursor=pointer]:
+          - /url: /payments-infrastructure.html
+      - article [ref=e107]:
+        - heading "Crypto & Digital Assets" [level=3] [ref=e108]
+        - paragraph [ref=e109]: Stablecoin and fiat bridging, wallet and custody design, on-chain monitoring, and controls.
+        - link "Read breakdown" [ref=e110] [cursor=pointer]:
+          - /url: /digital-assets-infrastructure.html
+      - article [ref=e111]:
+        - heading "Escrow & Marketplace Payments" [level=3] [ref=e112]
+        - paragraph [ref=e113]: Multi-party orchestration, release logic, dispute workflows, and trust frameworks.
+        - link "Read breakdown" [ref=e114] [cursor=pointer]:
+          - /url: /payments-infrastructure.html#escrow
+      - article [ref=e115]:
+        - heading "Cloud Architecture" [level=3] [ref=e116]
+        - paragraph [ref=e117]: Cloud-native platform design, IaC, microservices, containerization, and legacy migration.
+        - link "Read breakdown" [ref=e118] [cursor=pointer]:
+          - /url: /platform-reliability.html#cloud
+      - article [ref=e119]:
+        - heading "AI & Intelligent Automation" [level=3] [ref=e120]
+        - paragraph [ref=e121]: LLM-enabled financial operations, anomaly detection, and practical implementation roadmaps.
+        - link "Read breakdown" [ref=e122] [cursor=pointer]:
+          - /url: /platform-reliability.html#ai
+      - article [ref=e123]:
+        - heading "Reliability Engineering" [level=3] [ref=e124]
+        - paragraph [ref=e125]: Observability, SLO/SLI design, incident management, and resilience planning.
+        - link "Read breakdown" [ref=e126] [cursor=pointer]:
+          - /url: /platform-reliability.html
+      - article [ref=e127]:
+        - heading "Technical Due Diligence" [level=3] [ref=e128]
+        - paragraph [ref=e129]: Architecture reviews, stack risk assessments, and build-vs-buy analysis for leadership teams.
+        - link "Read breakdown" [ref=e130] [cursor=pointer]:
+          - /url: /platform-reliability.html#due-diligence
+      - article [ref=e131]:
+        - heading "Fractional Technical Leadership" [level=3] [ref=e132]
+        - paragraph [ref=e133]: Interim CTO-level guidance, team mentoring, and delivery governance for scaling organizations.
+        - link "Read breakdown" [ref=e134] [cursor=pointer]:
+          - /url: /platform-reliability.html#leadership
+      - article [ref=e135]:
+        - heading "Product & UX Alignment" [level=3] [ref=e136]
+        - paragraph [ref=e137]: Translate operational complexity into usable workflows and adoption-focused product decisions.
+        - link "Read breakdown" [ref=e138] [cursor=pointer]:
+          - /url: /platform-reliability.html#product-ux
+  - generic [ref=e139]:
+    - paragraph [ref=e140]: The journey so far
+    - heading "Experience forged in global transaction banking and fintech delivery" [level=2] [ref=e141]
+    - paragraph [ref=e142]: A decade of building payments and platform capabilities in tier-1 institutional environments, now applied to founder-led and enterprise teams.
+    - generic [ref=e143]:
+      - article [ref=e144]:
+        - generic [ref=e145]:
+          - heading "Professional background" [level=3] [ref=e146]
+          - generic [ref=e147]: Operator-led
+        - generic [ref=e148]:
+          - paragraph [ref=e149]: We have built multi-rail API infrastructure and cloud-native platform capabilities for institutional use cases.
+          - paragraph [ref=e150]: We have delivered LLM-enabled operations analytics platforms with strong internal adoption.
+          - paragraph [ref=e151]: We operate from London with UK and West Africa market context for cross-border payments strategy.
+          - paragraph [ref=e152]: We work in partnership with product, engineering, operations, and risk teams to ship outcomes faster.
+      - complementary [ref=e153]:
+        - article [ref=e154]:
+          - generic [ref=e155]:
+            - heading "Representative outcomes" [level=3] [ref=e156]
+            - generic [ref=e157]: Delivery
+          - generic [ref=e158]:
+            - generic [ref=e159]:
+              - strong [ref=e160]: ~40%
+              - text: manual analysis reduction
+            - generic [ref=e161]:
+              - strong [ref=e162]: 85%+
+              - text: adoption in six months
+            - generic [ref=e163]:
+              - strong [ref=e164]: 0 to 1
+              - text: LLM analytics product launch
+        - article [ref=e165]:
+          - generic [ref=e166]:
+            - heading "Engagement style" [level=3] [ref=e167]
+            - generic [ref=e168]: Working model
+          - generic [ref=e169]:
+            - generic [ref=e170]:
+              - strong [ref=e171]: Senior
+              - text: hands-on architecture input
+            - generic [ref=e172]:
+              - strong [ref=e173]: Pragmatic
+              - text: focus on shipped outcomes
+            - generic [ref=e174]:
+              - strong [ref=e175]: Transparent
+              - text: weekly progress and risks
+  - generic [ref=e177]:
+    - img "Professional team reviewing infrastructure plans" [ref=e179]
+    - generic [ref=e180]:
+      - paragraph [ref=e181]: About
+      - heading "Technical depth with business-level clarity" [level=2] [ref=e182]
+      - paragraph [ref=e183]: We support teams modernizing payment infrastructure, strengthening platform reliability, and launching new fintech capabilities under real delivery constraints.
+      - paragraph [ref=e184]: "We focus on stronger operating platforms: clearer architecture decisions, better execution discipline, and systems that hold up when transaction volumes rise."
+  - generic [ref=e185]:
+    - paragraph [ref=e186]: Let's Talk
+    - heading "Discuss your payments, platform, or reliability roadmap" [level=2] [ref=e187]
+    - paragraph [ref=e188]: For payments modernization, digital asset infrastructure, escrow architecture, cloud migration, or practical AI in financial operations.
+    - generic [ref=e189]:
+      - button "Email" [ref=e190] [cursor=pointer]:
+        - img [ref=e192]
+        - text: Email
+      - button "WhatsApp" [ref=e195] [cursor=pointer]:
+        - img [ref=e197]
+        - text: WhatsApp
+    - generic [ref=e200]:
+      - generic [ref=e201]:
+        - generic [ref=e202]:
+          - generic [ref=e203]: Name *
+          - textbox "Name *" [ref=e204]
+        - generic [ref=e205]:
+          - generic [ref=e206]: Email *
+          - textbox "Email *" [ref=e207]
+      - generic [ref=e208]:
+        - generic [ref=e209]: Company
+        - textbox "Company" [ref=e210]
+      - generic [ref=e211]:
+        - generic [ref=e212]: Message *
+        - textbox "Message *" [ref=e213]
+      - button "Submit" [ref=e214] [cursor=pointer]
+      - paragraph [ref=e215]
+  - contentinfo [ref=e216]:
+    - generic [ref=e217]:
+      - generic [ref=e218]:
+        - generic [ref=e220]:
+          - text: AK Advisory
+          - img [ref=e222]
+        - paragraph [ref=e224]: Independent fintech infrastructure consultancy based in London.
+      - generic [ref=e225]:
+        - generic [ref=e226]:
+          - heading "Explore" [level=4] [ref=e227]
+          - link "Services" [ref=e228] [cursor=pointer]:
+            - /url: "#services"
+          - link "Approach" [ref=e229] [cursor=pointer]:
+            - /url: "#approach"
+          - link "Journey" [ref=e230] [cursor=pointer]:
+            - /url: "#journey"
+        - generic [ref=e231]:
+          - heading "Deep Dives" [level=4] [ref=e232]
+          - link "Payments" [ref=e233] [cursor=pointer]:
+            - /url: /payments-infrastructure.html
+          - link "Digital Assets" [ref=e234] [cursor=pointer]:
+            - /url: /digital-assets-infrastructure.html
+          - link "Platform & Reliability" [ref=e235] [cursor=pointer]:
+            - /url: /platform-reliability.html
+        - generic [ref=e236]:
+          - heading "Legal" [level=4] [ref=e237]
+          - link "Contact" [ref=e238] [cursor=pointer]:
+            - /url: "#contact"
+          - link "Terms" [ref=e239] [cursor=pointer]:
+            - /url: "#"
+          - link "Registered in England & Wales" [ref=e240] [cursor=pointer]:
+            - /url: "#"

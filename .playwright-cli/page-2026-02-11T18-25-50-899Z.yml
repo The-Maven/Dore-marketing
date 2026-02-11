@@ -1,0 +1,71 @@
+- main [ref=e2]:
+  - generic [ref=e3]:
+    - link "AK Advisory" [ref=e4] [cursor=pointer]:
+      - /url: /
+    - link "Back to services" [ref=e5] [cursor=pointer]:
+      - /url: /#services
+  - heading "AI Payments Acceleration" [level=1] [ref=e6]
+  - paragraph [ref=e7]: "Offer: We help payments teams cut response times and increase straight-through processing by deploying AI into live transaction operations across domestic, cross-border, and crypto-linked flows."
+  - img "Digital payments operations" [ref=e9]
+  - generic [ref=e10]:
+    - heading "What you get" [level=2] [ref=e11]
+    - list [ref=e12]:
+      - listitem [ref=e13]: A payments-ops AI layer that prioritizes exceptions by financial impact.
+      - listitem [ref=e14]: Faster decision support for routing, retries, and reconciliation actions.
+      - listitem [ref=e15]: Executive visibility on cycle-time, backlog, and preventable loss drivers.
+  - generic [ref=e16]:
+    - heading "Rails and crypto scope" [level=2] [ref=e17]
+    - generic [ref=e18]:
+      - article [ref=e19]:
+        - heading "Payment rails" [level=3] [ref=e20]
+        - paragraph [ref=e21]: SEPA (SCT and SCT Inst), UK Faster Payments, FedNow, RTP, ACH, and SWIFT gpi/MT-MX workflows.
+      - article [ref=e22]:
+        - heading "On-ramp and off-ramp" [level=3] [ref=e23]
+        - paragraph [ref=e24]: "AI support for fiat-to-crypto on-ramp and crypto-to-fiat off-ramp decisions: route choice, settlement confidence, and exception triage."
+      - article [ref=e25]:
+        - heading "On-chain context" [level=3] [ref=e26]
+        - paragraph [ref=e27]: Wallet-risk and transaction-pattern enrichment from blockchain analytics and KYT signals.
+      - article [ref=e28]:
+        - heading "Off-chain controls" [level=3] [ref=e29]
+        - paragraph [ref=e30]: KYC/KYB, sanctions screening, ledger controls, and reconciliation checks integrated into decision workflows.
+  - generic [ref=e31]:
+    - heading "Commercial outcomes" [level=2] [ref=e32]
+    - generic [ref=e33]:
+      - article [ref=e34]:
+        - heading "Speed" [level=3] [ref=e35]
+        - paragraph [ref=e36]: Shorter exception-resolution and settlement decision cycles.
+      - article [ref=e37]:
+        - heading "Efficiency" [level=3] [ref=e38]
+        - paragraph [ref=e39]: Less manual analyst effort in repetitive triage and reporting.
+      - article [ref=e40]:
+        - heading "Control" [level=3] [ref=e41]
+        - paragraph [ref=e42]: Clearer operational guardrails for high-value payment events.
+      - article [ref=e43]:
+        - heading "Margin" [level=3] [ref=e44]
+        - paragraph [ref=e45]: Lower leakage from delay, misrouting, and unprioritized incidents.
+  - generic [ref=e46]:
+    - heading "How we engage" [level=2] [ref=e47]
+    - paragraph [ref=e48]: "90-day sprint with weekly delivery checkpoints: workflow mapping, AI scoring in production queues, and KPI-based optimization."
+  - generic [ref=e49]:
+    - heading "Why this matters now" [level=2] [ref=e50]
+    - list [ref=e51]:
+      - listitem [ref=e52]:
+        - 'link "Federal Reserve: FedNow Service" [ref=e53] [cursor=pointer]':
+          - /url: https://www.frbservices.org/financial-services/fednow/about.html
+      - listitem [ref=e54]:
+        - link "The Clearing House RTP Network" [ref=e55] [cursor=pointer]:
+          - /url: https://www.theclearinghouse.org/payment-systems/rtp
+      - listitem [ref=e56]:
+        - link "SWIFT ISO 20022" [ref=e57] [cursor=pointer]:
+          - /url: https://www.swift.com/standards/iso-20022
+      - listitem [ref=e58]:
+        - 'link "European Payments Council: SEPA schemes" [ref=e59] [cursor=pointer]':
+          - /url: https://www.epc-cep.eu/what-we-do/sepa-payment-schemes
+      - listitem [ref=e60]:
+        - 'link "Pay.UK: Faster Payment System" [ref=e61] [cursor=pointer]':
+          - /url: https://www.wearepay.uk/what-we-do/payment-systems/faster-payment-system/
+      - listitem [ref=e62]:
+        - 'link "FATF guidance: virtual assets and Travel Rule context" [ref=e63] [cursor=pointer]':
+          - /url: https://www.fatf-gafi.org/en/publications/Fatfrecommendations/Guidance-rba-virtual-assets-2021.html
+  - link "Book a conversation" [ref=e64] [cursor=pointer]:
+    - /url: /#contact

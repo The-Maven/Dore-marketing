@@ -1,0 +1,304 @@
+- generic [ref=e3]:
+  - navigation [ref=e4]:
+    - generic [ref=e5]:
+      - link "AK Advisory" [ref=e6] [cursor=pointer]:
+        - /url: "#top"
+        - generic [ref=e7]:
+          - generic [ref=e9]:
+            - text: AK Advisory
+            - img [ref=e11]
+          - img [ref=e14]
+      - generic [ref=e16]:
+        - link "Services" [ref=e17] [cursor=pointer]:
+          - /url: "#services"
+        - link "Approach" [ref=e18] [cursor=pointer]:
+          - /url: "#approach"
+        - link "Impact" [ref=e19] [cursor=pointer]:
+          - /url: "#journey"
+        - link "Contact" [ref=e20] [cursor=pointer]:
+          - /url: "#contact"
+      - link "Book a Conversation" [ref=e21] [cursor=pointer]:
+        - /url: "#contact"
+  - generic [ref=e23]:
+    - heading "Fintech execution at decision speed" [level=1] [ref=e24]:
+      - text: Fintech execution
+      - generic [ref=e25]:
+        - text: at decision speed
+        - img [ref=e26]
+    - paragraph [ref=e28]: We design and ship AI-powered fintech pipelines that capture transaction data, score risk, and trigger faster actions across payments rails (SEPA, Faster Payments, FedNow, RTP, ACH, SWIFT), on-ramp/off-ramp crypto flows, and M&A/advisory workflows from CIM and QoE through SPA, TSA, and PMI.
+    - generic [ref=e29]:
+      - link "Let's Talk" [ref=e30] [cursor=pointer]:
+        - /url: "#contact"
+      - link "View Services" [ref=e31] [cursor=pointer]:
+        - /url: "#services"
+    - generic [ref=e32]:
+      - img "Modern software engineering workspace" [ref=e33]
+      - img "Professional digital payments point-of-sale interaction" [ref=e34]
+  - generic [ref=e36]:
+    - generic [ref=e37]:
+      - img [ref=e39]
+      - text: Multi-rail payments and crypto ramps
+    - generic [ref=e41]:
+      - img [ref=e43]
+      - text: Decision-grade data pipelines and controls
+    - generic [ref=e45]:
+      - img [ref=e47]
+      - text: M&A and advisory decision acceleration
+  - generic [ref=e49]:
+    - paragraph [ref=e50]: Execution Standard
+    - heading "Designed for measurable commercial impact" [level=2] [ref=e51]
+    - generic [ref=e52]:
+      - article [ref=e53]:
+        - img [ref=e55]
+        - strong [ref=e57]: Cycle time
+        - generic [ref=e58]: Shortened decision loops from signal to action.
+      - article [ref=e59]:
+        - img [ref=e61]
+        - strong [ref=e63]: Throughput
+        - generic [ref=e64]: More operational decisions handled at the same team size.
+      - article [ref=e65]:
+        - img [ref=e67]
+        - strong [ref=e69]: Control
+        - generic [ref=e70]: Policy-bound execution with evidence-ready audit trails.
+      - article [ref=e71]:
+        - img [ref=e73]
+        - strong [ref=e76]: Clarity
+        - generic [ref=e77]: Leadership visibility across risk, speed, and value capture.
+  - generic [ref=e78]:
+    - paragraph [ref=e79]: How we implement
+    - heading "From fragmented data to AI-driven operational decisions" [level=2] [ref=e80]
+    - paragraph [ref=e81]: Each engagement starts with data and workflow diagnosis, then moves into production AI delivery with measurable cycle-time and decision-quality improvements.
+    - generic [ref=e82]:
+      - article [ref=e83]:
+        - paragraph [ref=e84]: What blocks performance today
+        - generic [ref=e85]:
+          - generic [ref=e86]:
+            - strong [ref=e87]: Siloed transaction intelligence
+            - generic [ref=e88]: Critical payment, escrow, and advisory signals are spread across tools and teams.
+          - generic [ref=e89]:
+            - strong [ref=e90]: Manual decision loops
+            - generic [ref=e91]: Analysts spend too much time collecting context before acting.
+          - generic [ref=e92]:
+            - strong [ref=e93]: Low decision confidence
+            - generic [ref=e94]: Teams lack explainable, auditable intelligence to automate safely.
+      - article [ref=e95]:
+        - paragraph [ref=e96]: What changes with our AI stack
+        - generic [ref=e97]:
+          - generic [ref=e98]:
+            - strong [ref=e99]: Faster transaction decisions
+            - generic [ref=e100]: Context-rich recommendations generated in real time for operations and risk teams.
+          - generic [ref=e101]:
+            - strong [ref=e102]: Lower manual workload
+            - generic [ref=e103]: Pipeline-driven enrichment and summarization reduce repetitive analysis.
+          - generic [ref=e104]:
+            - strong [ref=e105]: Autonomous decision support
+            - generic [ref=e106]: Rule + model orchestration with human override and audit trails.
+  - generic [ref=e108]:
+    - paragraph [ref=e109]: Inspired by experts from leading financial institutions
+    - list "Industry inspiration institutions" [ref=e110]:
+      - generic [ref=e111]:
+        - listitem [ref=e112]: Goldman Sachs
+        - listitem [ref=e113]: JPMorganChase
+        - listitem [ref=e114]: Morgan Stanley
+        - listitem [ref=e115]: Bank of America
+        - listitem [ref=e116]: Citi
+        - listitem [ref=e117]: Barclays
+        - listitem [ref=e118]: UBS
+        - listitem [ref=e119]: Goldman Sachs
+        - listitem [ref=e120]: JPMorganChase
+        - listitem [ref=e121]: Morgan Stanley
+        - listitem [ref=e122]: Bank of America
+        - listitem [ref=e123]: Citi
+        - listitem [ref=e124]: Barclays
+        - listitem [ref=e125]: UBS
+  - region "Execution visuals" [ref=e126]:
+    - img "Advisory team in strategic execution session" [ref=e127]
+    - img "Fintech analytics workspace" [ref=e128]
+    - img "High-performance product and engineering control room" [ref=e129]
+  - generic [ref=e130]:
+    - paragraph [ref=e131]: AI Services
+    - heading "Commercial AI offerings for fintech operators" [level=2] [ref=e132]
+    - paragraph [ref=e133]: These are outcome-led offers designed to improve transaction speed, deal velocity, and operating margin without long transformation programs.
+    - generic [ref=e134]:
+      - article [ref=e135]:
+        - heading "AI Payments Acceleration" [level=3] [ref=e136]
+        - paragraph [ref=e137]: Event-driven AI for routing, exception handling, and reconciliation across SEPA, Faster Payments, FedNow, RTP, ACH, and SWIFT rails.
+        - link "Read breakdown" [ref=e138] [cursor=pointer]:
+          - /url: /service-ai-payments-acceleration.html
+      - article [ref=e139]:
+        - heading "M&A and Advisory Intelligence" [level=3] [ref=e140]
+        - paragraph [ref=e141]: Automated diligence extraction and deal signal scoring for CIM, QoE, NWC, TSA, SPA, carve-out, and PMI workflows.
+        - link "Read breakdown" [ref=e142] [cursor=pointer]:
+          - /url: /service-ma-advisory-intelligence.html
+      - article [ref=e143]:
+        - heading "Escrow Intelligence Automation" [level=3] [ref=e144]
+        - paragraph [ref=e145]: AI-assisted release logic for fiat and stablecoin escrow, plus dispute analysis and trust monitoring for multi-party transactions.
+        - link "Read breakdown" [ref=e146] [cursor=pointer]:
+          - /url: /service-escrow-intelligence-automation.html
+      - article [ref=e147]:
+        - heading "Intelligent Data Pipelines" [level=3] [ref=e148]
+        - paragraph [ref=e149]: Streaming ingestion, entity resolution, feature pipelines, and high-quality decision context.
+        - link "Read breakdown" [ref=e150] [cursor=pointer]:
+          - /url: /service-intelligent-data-pipelines.html
+      - article [ref=e151]:
+        - heading "Agentic AI Operations" [level=3] [ref=e152]
+        - paragraph [ref=e153]: Autonomous workflows with policy guards, escalation logic, and full auditability.
+        - link "Read breakdown" [ref=e154] [cursor=pointer]:
+          - /url: /service-agentic-ai-operations.html
+      - article [ref=e155]:
+        - heading "Decision Reliability Engineering" [level=3] [ref=e156]
+        - paragraph [ref=e157]: Model reliability, observability, and fallback design for high-stakes financial decisions.
+        - link "Read breakdown" [ref=e158] [cursor=pointer]:
+          - /url: /service-decision-reliability-engineering.html
+      - article [ref=e159]:
+        - heading "AI Due Diligence" [level=3] [ref=e160]
+        - paragraph [ref=e161]: Independent review of AI/data stacks, controls, and execution risk for leadership and investors.
+        - link "Read breakdown" [ref=e162] [cursor=pointer]:
+          - /url: /service-ai-due-diligence.html
+      - article [ref=e163]:
+        - heading "Fractional AI Leadership" [level=3] [ref=e164]
+        - paragraph [ref=e165]: Hands-on AI program leadership, roadmap ownership, and implementation governance.
+        - link "Read breakdown" [ref=e166] [cursor=pointer]:
+          - /url: /service-fractional-ai-leadership.html
+      - article [ref=e167]:
+        - heading "AI Product and Workflow Design" [level=3] [ref=e168]
+        - paragraph [ref=e169]: Human-in-the-loop product flows that make autonomous intelligence usable and trusted.
+        - link "Read breakdown" [ref=e170] [cursor=pointer]:
+          - /url: /service-ai-product-workflow-design.html
+  - generic [ref=e171]:
+    - paragraph [ref=e172]: AI Impact
+    - heading "Built for fintech execution where every decision has financial consequence" [level=2] [ref=e173]
+    - paragraph [ref=e174]: We combine a decade of transaction-system delivery with modern AI engineering to build faster, safer, and more intelligent operating models.
+    - generic [ref=e175]:
+      - article [ref=e176]:
+        - generic [ref=e177]:
+          - heading "Where we focus" [level=3] [ref=e178]
+          - generic [ref=e179]: AI-first
+        - generic [ref=e180]:
+          - paragraph [ref=e181]: Payment-speed optimization with intelligent routing and exception handling across SEPA, Faster Payments, FedNow, RTP, ACH, and SWIFT.
+          - paragraph [ref=e182]: Crypto operating intelligence across on-chain signals, off-chain controls, and fiat/crypto on-ramp and off-ramp workflows.
+          - paragraph [ref=e183]: M&A and advisory pipelines covering CIM and VDR intake, QoE and NWC analysis, and SPA/TSA decision support through PMI.
+          - paragraph [ref=e184]: Escrow and transaction orchestration with AI-assisted release logic, dispute workflows, explainability, governance, and human override.
+      - complementary [ref=e185]:
+        - article [ref=e186]:
+          - generic [ref=e187]:
+            - heading "Representative outcomes" [level=3] [ref=e188]
+            - generic [ref=e189]: Execution
+          - generic [ref=e190]:
+            - generic [ref=e191]:
+              - strong [ref=e192]: Faster
+              - text: transaction triage and action cycles
+            - generic [ref=e193]:
+              - strong [ref=e194]: Higher
+              - text: decision confidence with richer context
+            - generic [ref=e195]:
+              - strong [ref=e196]: Lower
+              - text: manual operational overhead
+        - article [ref=e197]:
+          - generic [ref=e198]:
+            - heading "Delivery model" [level=3] [ref=e199]
+            - generic [ref=e200]: How we work
+          - generic [ref=e201]:
+            - generic [ref=e202]:
+              - strong [ref=e203]: Hands-on
+              - text: pipeline and model implementation
+            - generic [ref=e204]:
+              - strong [ref=e205]: Pragmatic
+              - text: focused on production outcomes
+            - generic [ref=e206]:
+              - strong [ref=e207]: Transparent
+              - text: weekly metrics and risks
+  - generic [ref=e208]:
+    - paragraph [ref=e209]: Workflow
+    - heading "From raw signals to controlled autonomous decisions" [level=2] [ref=e210]
+    - generic [ref=e211]:
+      - generic [ref=e212]:
+        - generic [ref=e213]: "01"
+        - generic [ref=e214]: Capture
+        - paragraph [ref=e215]: Rails, on-chain, off-chain events.
+        - text: →
+      - generic [ref=e216]:
+        - generic [ref=e217]: "02"
+        - generic [ref=e218]: Enrich
+        - paragraph [ref=e219]: Entity, risk, and context normalization.
+        - text: →
+      - generic [ref=e220]:
+        - generic [ref=e221]: "03"
+        - generic [ref=e222]: Score
+        - paragraph [ref=e223]: Model + policy prioritization.
+        - text: →
+      - generic [ref=e224]:
+        - generic [ref=e225]: "04"
+        - generic [ref=e226]: Decide
+        - paragraph [ref=e227]: Recommend, approve, or auto-execute.
+        - text: →
+      - generic [ref=e228]:
+        - generic [ref=e229]: "05"
+        - generic [ref=e230]: Learn
+        - paragraph [ref=e231]: Outcome telemetry and continuous tuning.
+  - generic [ref=e233]:
+    - img "Professional team reviewing infrastructure plans" [ref=e235]
+    - generic [ref=e236]:
+      - paragraph [ref=e237]: About
+      - heading "AI implementation depth with business-level clarity" [level=2] [ref=e238]
+      - paragraph [ref=e239]: We implement AI systems that capture, structure, and operationalize fintech data so teams can act faster and automate high-value decisions safely.
+      - paragraph [ref=e240]: "We focus on intelligent operating pipelines: decision-ready context, autonomous workflow triggers, and resilient production controls."
+  - generic [ref=e241]:
+    - paragraph [ref=e242]: Let's Talk
+    - heading "Discuss your payments, platform, or reliability roadmap" [level=2] [ref=e243]
+    - paragraph [ref=e244]: For payments modernization, digital asset infrastructure, escrow architecture, cloud migration, or practical AI in financial operations.
+    - generic [ref=e245]:
+      - button "Email" [ref=e246] [cursor=pointer]:
+        - img [ref=e248]
+        - text: Email
+      - button "WhatsApp" [ref=e251] [cursor=pointer]:
+        - img [ref=e253]
+        - text: WhatsApp
+    - generic [ref=e256]:
+      - generic [ref=e257]:
+        - generic [ref=e258]:
+          - generic [ref=e259]: Name *
+          - textbox "Name *" [ref=e260]
+        - generic [ref=e261]:
+          - generic [ref=e262]: Email *
+          - textbox "Email *" [ref=e263]
+      - generic [ref=e264]:
+        - generic [ref=e265]: Company
+        - textbox "Company" [ref=e266]
+      - generic [ref=e267]:
+        - generic [ref=e268]: Message *
+        - textbox "Message *" [ref=e269]
+      - button "Submit" [ref=e270] [cursor=pointer]
+      - paragraph [ref=e271]
+  - contentinfo [ref=e272]:
+    - generic [ref=e273]:
+      - generic [ref=e274]:
+        - generic [ref=e276]:
+          - text: AK Advisory
+          - img [ref=e278]
+        - paragraph [ref=e280]: AI implementation firm for fintech operators, based in London.
+      - generic [ref=e281]:
+        - generic [ref=e282]:
+          - heading "Explore" [level=4] [ref=e283]
+          - link "Services" [ref=e284] [cursor=pointer]:
+            - /url: "#services"
+          - link "Approach" [ref=e285] [cursor=pointer]:
+            - /url: "#approach"
+          - link "Journey" [ref=e286] [cursor=pointer]:
+            - /url: "#journey"
+        - generic [ref=e287]:
+          - heading "Deep Dives" [level=4] [ref=e288]
+          - link "AI Payments" [ref=e289] [cursor=pointer]:
+            - /url: /service-ai-payments-acceleration.html
+          - link "M&A Intelligence" [ref=e290] [cursor=pointer]:
+            - /url: /service-ma-advisory-intelligence.html
+          - link "Agentic Ops" [ref=e291] [cursor=pointer]:
+            - /url: /service-agentic-ai-operations.html
+        - generic [ref=e292]:
+          - heading "Legal" [level=4] [ref=e293]
+          - link "Contact" [ref=e294] [cursor=pointer]:
+            - /url: "#contact"
+          - link "Terms" [ref=e295] [cursor=pointer]:
+            - /url: "#"
+          - link "Registered in England & Wales" [ref=e296] [cursor=pointer]:
+            - /url: "#"

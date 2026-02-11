@@ -1,0 +1,19 @@
+{
+  "name": "consultancy-website",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "parcel index.html --port 1234",
+    "build": "parcel build index.html service-ai-payments-acceleration.html service-ma-advisory-intelligence.html service-escrow-intelligence-automation.html service-intelligent-data-pipelines.html service-agentic-ai-operations.html service-decision-reliability-engineering.html service-ai-due-diligence.html service-fractional-ai-leadership.html service-ai-product-workflow-design.html --dist-dir dist"
+  },
+  "dependencies": {
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
+  },
+  "devDependencies": {
+    "parcel": "^2.14.0"
+  },
+  "overrides": {
+    "browserslist": "4.24.4"
+  }
+}
