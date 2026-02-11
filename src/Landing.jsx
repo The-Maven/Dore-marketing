@@ -126,13 +126,14 @@ const inspirationLogos = [
   "UBS"
 ];
 
-const CALENDLY_EXEC_BRIEFING_URL = "https://calendly.com/your-link/executive-briefing";
-const CALENDLY_DIAGNOSTIC_URL = "https://calendly.com/your-link/diagnostic-sprint-scoping";
+const CALENDLY_EXEC_BRIEFING_URL = "https://calendly.com/tonykkwawu/30min";
+const CALENDLY_DIAGNOSTIC_URL = "https://calendly.com/tonykkwawu/30min";
 
 function ContactForm() {
   const [form, setForm] = useState({ name: "", email: "", company: "", message: "" });
   const [status, setStatus] = useState("");
   const emailAddress = useMemo(() => decode(EMAIL_CODES), []);
+  const bookingHref = CALENDLY_EXEC_BRIEFING_URL.includes("your-link") ? "#contact" : CALENDLY_EXEC_BRIEFING_URL;
 
   const update = (field) => (event) => {
     setForm((prev) => ({ ...prev, [field]: event.target.value }));
@@ -173,6 +174,9 @@ function ContactForm() {
           <span className="ln-btn-icon"><MailIcon /></span>
           Email
         </button>
+        <a className="ln-btn ln-btn--outline" href={bookingHref} target="_blank" rel="noopener noreferrer">
+          Book Directly
+        </a>
       </div>
 
       <form className="ln-contact-form" onSubmit={handleSubmit}>
