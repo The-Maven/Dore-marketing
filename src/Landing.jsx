@@ -1,5 +1,14 @@
 import { useEffect, useState } from "react";
 
+import atlasBrainNetwork from "./images/atlas-brain-network.jpg";
+import atlasFinancialGraph from "./images/atlas-financial-graph.jpg";
+import atlasMobilePayment from "./images/atlas-mobile-payment.jpg";
+import heroMeeting from "./images/hero-meeting.jpg";
+import heroTradingDesk from "./images/hero-trading-desk.jpg";
+import ribbonAnalyticsWorkspace from "./images/ribbon-analytics-workspace.jpg";
+import ribbonControlRoom from "./images/ribbon-control-room.jpg";
+import ribbonStrategySession from "./images/ribbon-strategy-session.jpg";
+
 function WaveMark({ className = "" }) {
   return (
     <svg className={className} viewBox="0 0 44 12" fill="none" aria-hidden="true">
@@ -240,14 +249,66 @@ export default function Landing() {
           <div className="ln-hero-image-wrap ln-hero-image-wrap--composite">
             <img
               className="ln-hero-image ln-hero-image--left"
-              src="https://images.unsplash.com/photo-1642790106117-e829e14a795f?auto=format&fit=crop&w=1400&q=80"
-              alt="Professional financial analytics dashboard in a modern operations environment"
+              src={heroTradingDesk}
+              alt="Institutional trading desk with multiple market data screens"
             />
             <img
               className="ln-hero-image ln-hero-image--right"
-              src="https://images.unsplash.com/photo-1556745757-8d76bdb6984b?auto=format&fit=crop&w=1400&q=80"
-              alt="Professional digital payments point-of-sale interaction"
+              src={heroMeeting}
+              alt="Professionals in a collaborative business meeting"
             />
+          </div>
+
+          <div className="ln-hero-proof" aria-label="Decision infrastructure system map">
+            <div className="ln-hero-proof-main">
+              <div className="ln-hero-proof-head">
+                <span className="ln-proof-kicker">Operator system map</span>
+                <span className="ln-proof-status">Policy-bound</span>
+              </div>
+              <div className="ln-hero-proof-grid">
+                <article className="ln-proof-column">
+                  <span className="ln-proof-label">Signals</span>
+                  <div className="ln-proof-stack">
+                    <span>Market data</span>
+                    <span>Internal systems</span>
+                    <span>Third-party inputs</span>
+                  </div>
+                </article>
+                <article className="ln-proof-column ln-proof-column--accent">
+                  <span className="ln-proof-label">Decision core</span>
+                  <div className="ln-proof-stack">
+                    <span>Entity resolution</span>
+                    <span>LLM + rules orchestration</span>
+                    <span>Human approval gates</span>
+                  </div>
+                </article>
+                <article className="ln-proof-column">
+                  <span className="ln-proof-label">Execution</span>
+                  <div className="ln-proof-stack">
+                    <span>Recommended action</span>
+                    <span>Audit trail</span>
+                    <span>Outcome telemetry</span>
+                  </div>
+                </article>
+              </div>
+            </div>
+            <aside className="ln-hero-proof-side">
+              <div className="ln-proof-metric">
+                <strong>Control surface</strong>
+                <span>Approvals, policy, escalation, evidence</span>
+              </div>
+              <div className="ln-proof-metric">
+                <strong>Delivery model</strong>
+                <span>Platform build, governance layer, operating rhythm</span>
+              </div>
+              <div className="ln-proof-trace">
+                <span>Capture</span>
+                <span>Enrich</span>
+                <span>Score</span>
+                <span>Decide</span>
+                <span>Learn</span>
+              </div>
+            </aside>
           </div>
         </section>
       </div>
@@ -344,6 +405,29 @@ export default function Landing() {
         </div>
       </section>
 
+      <section className="ln-implementation-atlas" aria-label="Implementation illustrations">
+        <div className="ln-implementation-atlas-grid">
+          <figure className="ln-atlas-image-card ln-atlas-image-card--wide">
+            <img
+              src={atlasBrainNetwork}
+              alt="Stylized brain with neural network connections"
+            />
+          </figure>
+          <figure className="ln-atlas-image-card">
+            <img
+              src={atlasMobilePayment}
+              alt="Illustration of mobile payment confirmation"
+            />
+          </figure>
+          <figure className="ln-atlas-image-card">
+            <img
+              src={atlasFinancialGraph}
+              alt="Financial graph showing upward and downward movement"
+            />
+          </figure>
+        </div>
+      </section>
+
       <section className="ln-logo-band" id="inspiration">
         <div className="ln-logo-band-inner">
           <p className="ln-logo-band-title">Built on standards set at the world&apos;s leading financial institutions</p>
@@ -361,9 +445,9 @@ export default function Landing() {
       </section>
 
       <section className="ln-editorial-ribbon" aria-label="Execution visuals">
-        <img src="https://images.unsplash.com/photo-1551836022-d5d88e9218df?auto=format&fit=crop&w=1400&q=80" alt="Advisory team in strategic execution session" />
-        <img src="https://images.unsplash.com/photo-1559526324-4b87b5e36e44?auto=format&fit=crop&w=1400&q=80" alt="Fintech analytics workspace" />
-        <img src="https://images.unsplash.com/photo-1590283603385-17ffb3a7f29f?auto=format&fit=crop&w=1400&q=80" alt="High-performance product and engineering control room" />
+        <img src={ribbonStrategySession} alt="Advisory team in strategic execution session" />
+        <img src={ribbonAnalyticsWorkspace} alt="Fintech analytics workspace" />
+        <img src={ribbonControlRoom} alt="High-performance product and engineering control room" />
       </section>
 
       <section className="ln-section" id="services">
@@ -442,8 +526,30 @@ export default function Landing() {
         <p className="ln-section-eyebrow">Service Preview</p>
         <h2 className="ln-section-heading">How we deliver for leadership and on the ground</h2>
         <div className="ln-split-row">
-          <div className="ln-split-media">
-            <img src="https://images.unsplash.com/photo-1553877522-43269d4ea984?auto=format&fit=crop&w=1600&q=80" alt="Executive fintech planning session" />
+          <div className="ln-split-media ln-split-media--diagram">
+            <div className="ln-service-diagram ln-service-diagram--leadership" aria-label="Leadership decision program structure">
+              <div className="ln-service-diagram-head">
+                <span>Leadership operating frame</span>
+                <strong>Commercial view</strong>
+              </div>
+              <div className="ln-service-lanes">
+                <div>
+                  <b>Value</b>
+                  <span>Revenue velocity</span>
+                  <span>Adoption wedge</span>
+                </div>
+                <div>
+                  <b>Risk</b>
+                  <span>Controls</span>
+                  <span>Model oversight</span>
+                </div>
+                <div>
+                  <b>Execution</b>
+                  <span>Owner cadence</span>
+                  <span>90-day roadmap</span>
+                </div>
+              </div>
+            </div>
           </div>
           <div className="ln-split-copy">
             <h3>Commercial narrative for leadership</h3>
@@ -452,8 +558,26 @@ export default function Landing() {
           </div>
         </div>
         <div className="ln-split-row ln-split-row--reverse">
-          <div className="ln-split-media">
-            <img src="https://images.unsplash.com/photo-1600267165477-6d4cc741b379?auto=format&fit=crop&w=1600&q=80" alt="Fintech operations team in execution mode" />
+          <div className="ln-split-media ln-split-media--diagram">
+            <div className="ln-service-diagram ln-service-diagram--delivery" aria-label="Operator delivery loop">
+              <div className="ln-service-diagram-head">
+                <span>Operator loop</span>
+                <strong>Production path</strong>
+              </div>
+              <div className="ln-delivery-loop">
+                <span>Signal</span>
+                <span>Prioritise</span>
+                <span>Approve</span>
+                <span>Execute</span>
+                <span>Measure</span>
+              </div>
+              <div className="ln-delivery-controls">
+                <span>API layer</span>
+                <span>Data pipeline</span>
+                <span>Audit log</span>
+                <span>Fallback path</span>
+              </div>
+            </div>
           </div>
           <div className="ln-split-copy">
             <h3>Operator-grade delivery in production</h3>
