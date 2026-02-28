@@ -1,0 +1,230 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>About | newvalue foundation</title>
+    <link rel="stylesheet" href="./pages.css" />
+    <style>
+      :root {
+        --about-bg: #0a0a0a;
+        --about-surface: #101010;
+        --about-ink: #f5f5f5;
+        --about-muted: rgba(245, 245, 245, 0.72);
+        --about-line: rgba(255, 255, 255, 0.1);
+        --about-accent: #38bdf8;
+      }
+
+      body {
+        background: var(--about-bg);
+        color: var(--about-ink);
+      }
+
+      .page {
+        max-width: 1200px;
+        padding-top: 28px;
+        padding-bottom: 72px;
+      }
+
+      .topbar {
+        border-bottom-color: var(--about-line);
+        margin-bottom: 0;
+      }
+
+      .topbar .brand-new {
+        color: #f5f5f5;
+      }
+
+      .back {
+        border-color: rgba(56, 189, 248, 0.38);
+        color: var(--about-ink);
+      }
+
+      .back:hover {
+        background: rgba(56, 189, 248, 0.1);
+        border-color: rgba(56, 189, 248, 0.62);
+        color: var(--about-ink);
+      }
+
+      .about-shell {
+        margin-top: 28px;
+        background: transparent;
+      }
+
+      .about-grid {
+        display: grid;
+        grid-template-columns: 200px minmax(0, 1fr);
+        gap: 56px;
+        align-items: start;
+        padding: 72px 0;
+      }
+
+      .about-avatar-wrap {
+        display: flex;
+        justify-content: flex-start;
+      }
+
+      .about-avatar {
+        width: 190px;
+        height: 190px;
+        border-radius: 50%;
+        object-fit: cover;
+        object-position: center -10px;
+        border: 3px solid rgba(56, 189, 248, 0.82);
+        box-shadow: 0 18px 44px rgba(0, 0, 0, 0.34), 0 0 0 10px rgba(56, 189, 248, 0.08);
+      }
+
+      .about-copy {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .about-eyebrow {
+        margin: 0 0 12px;
+        color: rgba(56, 189, 248, 0.9);
+        font-size: 12px;
+        font-weight: 700;
+        letter-spacing: 0.24em;
+        text-transform: uppercase;
+      }
+
+      h1 {
+        margin: 0;
+        color: var(--about-ink);
+        font-size: clamp(2.15rem, 3.8vw, 3.3rem);
+        line-height: 1.02;
+      }
+
+      .about-role {
+        margin: 10px 0 26px;
+        color: var(--about-muted);
+        font-size: 1rem;
+      }
+
+      .about-copy p {
+        margin: 0 0 18px;
+        max-width: 68ch;
+        color: rgba(245, 245, 245, 0.84);
+        font-size: 1rem;
+        line-height: 1.68;
+      }
+
+      .about-copy .about-close {
+        margin-top: 4px;
+        margin-bottom: 0;
+        color: var(--about-ink);
+        font-weight: 600;
+        letter-spacing: -0.01em;
+      }
+
+      .about-actions {
+        display: flex;
+        align-items: center;
+        gap: 22px;
+        margin-top: 26px;
+        flex-wrap: wrap;
+      }
+
+      .about-link {
+        color: var(--about-accent);
+        font-size: 15px;
+        font-weight: 600;
+        border-bottom: 1px solid rgba(56, 189, 248, 0.55);
+      }
+
+      .about-link:hover {
+        border-bottom-color: var(--about-accent);
+      }
+
+      .cta {
+        background: transparent;
+        color: var(--about-ink);
+        border: 1px solid rgba(56, 189, 248, 0.38);
+      }
+
+      .cta:hover {
+        background: rgba(56, 189, 248, 0.1);
+        color: var(--about-ink);
+      }
+
+      @media (max-width: 860px) {
+        .about-grid {
+          grid-template-columns: 1fr;
+          gap: 28px;
+          justify-items: center;
+          text-align: center;
+          padding: 56px 0;
+        }
+
+        .about-copy {
+          align-items: center;
+        }
+
+        .about-copy p {
+          max-width: 100%;
+        }
+
+        .about-actions {
+          justify-content: center;
+        }
+      }
+
+      @media (max-width: 640px) {
+        .topbar {
+          align-items: flex-start;
+          gap: 12px;
+          flex-direction: column;
+        }
+
+        .about-grid {
+          padding: 48px 0;
+        }
+
+        .about-avatar {
+          width: 170px;
+          height: 170px;
+        }
+
+        .about-actions {
+          width: 100%;
+          gap: 14px;
+        }
+
+        .cta {
+          width: min(100%, 320px);
+          justify-content: center;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main class="page">
+      <div class="topbar">
+        <a class="brand" href="/"><span class="brand-wordmark"><span class="brand-new">new</span>value foundation</span><svg class="brand-wave" viewBox="0 0 44 12" fill="none" aria-hidden="true"><path d="M1 6h7l3-4 4 8 4-6h6l3-3 3 6h10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" /></svg></a>
+        <a class="back" href="/">Back to home</a>
+      </div>
+
+      <section class="about-shell" aria-label="About Anthony Kwawu">
+        <div class="about-grid">
+          <div class="about-avatar-wrap">
+            <img class="about-avatar" src="./src/images/anthony-kwawu-portrait.png" alt="Anthony Kwawu" />
+          </div>
+          <div class="about-copy">
+            <p class="about-eyebrow">THE OPERATORS BEHIND THE WORK</p>
+            <h1>Anthony Kwawu</h1>
+            <p class="about-role">Founder, newvalue foundation</p>
+            <p>Eight years at Goldman Sachs meant operating inside one of the most demanding financial technology environments in the world, building AI platforms, owning data infrastructure, and delivering production systems where performance, control, and regulatory scrutiny all mattered at once.</p>
+            <p>That work included taking an LLM-powered analytics platform from a blank page to executive-level visibility, alongside leading API platform development, cloud migration at scale, and finance infrastructure for institutional operations and risk teams. It is the kind of execution that depends on technical rigour, commercial judgment, and strong operators working in step.</p>
+            <p>newvalue foundation brings that standard into organisations building at the intersection of financial infrastructure and intelligent systems, directly and in collaboration with other talented product, engineering, data, and domain specialists brought in where the mandate demands it. Whether the need is a fractional CPO or CTO engagement, a platform build, or an AI transformation programme, the model is senior, hands-on, and built to move serious work forward.</p>
+            <p class="about-close">Wall Street-calibre execution. Without the  overhead.</p>
+            <div class="about-actions">
+              <a class="about-link" href="https://linkedin.com/in/anthony-kwawu" target="_blank" rel="noopener noreferrer">LinkedIn ↗</a>
+              <a class="cta" href="/#contact">Book a session →</a>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+  </body>
+</html>

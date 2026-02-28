@@ -53,6 +53,11 @@ a {
   white-space: nowrap;
 }
 
+.brand-new,
+.brand .brand-new {
+  color: #000;
+}
+
 .brand-wave {
   width: 44px;
   height: 12px;

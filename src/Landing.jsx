@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 
 function WaveMark({ className = "" }) {
   return (
@@ -11,7 +11,7 @@ function WaveMark({ className = "" }) {
 function BrandName({ className = "" }) {
   return (
     <span className={`brand-red brand-name ${className}`}>
-      <span className="brand-name-text">newvalue foundation</span>
+      <span className="brand-name-text"><span className="brand-new">new</span>value foundation</span>
       <WaveMark className="brand-ekg" />
     </span>
   );
@@ -41,15 +41,6 @@ function Typewriter({ text, speed = 45, delay = 400 }) {
       <span>{displayed}</span>
       <WaveMark className={`ln-typewriter-ekg ${displayed.length >= text.length ? "ln-typewriter-ekg--done" : ""}`} />
     </span>
-  );
-}
-
-function MailIcon() {
-  return (
-    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-      <rect x="3" y="5" width="18" height="14" rx="2" stroke="currentColor" strokeWidth="1.8" />
-      <path d="M4 7l8 6 8-6" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
-    </svg>
   );
 }
 
@@ -110,12 +101,6 @@ function CompassIcon() {
   );
 }
 
-const EMAIL_CODES = [97, 110, 116, 104, 111, 110, 121, 107, 119, 97, 119, 117, 64, 103, 109, 97, 105, 108, 46, 99, 111, 109];
-
-function decode(codes) {
-  return String.fromCharCode(...codes);
-}
-
 const inspirationLogos = [
   "Goldman Sachs",
   "JPMorganChase",
@@ -128,107 +113,99 @@ const inspirationLogos = [
 
 const CALENDLY_EXEC_BRIEFING_URL = "https://calendly.com/tonykkwawu/30min";
 const CALENDLY_DIAGNOSTIC_URL = "https://calendly.com/tonykkwawu/30min";
+const NAV_LINKS = [
+  { href: "/about.html", label: "About" },
+  { href: "#services", label: "Services" },
+  { href: "#approach", label: "Approach" },
+  { href: "#journey", label: "Impact" },
+  { href: "#contact", label: "Contact" }
+];
 
 function ContactForm() {
-  const [form, setForm] = useState({ name: "", email: "", company: "", message: "" });
-  const [status, setStatus] = useState("");
-  const emailAddress = useMemo(() => decode(EMAIL_CODES), []);
   const bookingHref = CALENDLY_EXEC_BRIEFING_URL.includes("your-link") ? "#contact" : CALENDLY_EXEC_BRIEFING_URL;
-
-  const update = (field) => (event) => {
-    setForm((prev) => ({ ...prev, [field]: event.target.value }));
-  };
-
-  const openMailClient = () => {
-    window.location.href = `mailto:${emailAddress}`;
-  };
-
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    if (!form.name || !form.email || !form.message) {
-      setStatus("Please complete all required fields.");
-      return;
-    }
-
-    const subject = encodeURIComponent(`Consultancy enquiry from ${form.name}`);
-    const body = encodeURIComponent(
-      `Name: ${form.name}\nEmail: ${form.email}\nCompany: ${form.company || "N/A"}\n\nMessage:\n${form.message}`
-    );
-
-    window.location.href = `mailto:${emailAddress}?subject=${subject}&body=${body}`;
-    setStatus("Thanks - we will be in touch within 24 hours.");
-    setForm({ name: "", email: "", company: "", message: "" });
-  };
 
   return (
     <section className="ln-section ln-contact" id="contact">
       <span className="ln-sec-num" aria-hidden="true">06</span>
       <p className="ln-section-eyebrow">Let&apos;s Talk</p>
-      <h2 className="ln-section-heading">Discuss your payments, platform, or reliability roadmap</h2>
+      <h2 className="ln-section-heading">Book a 30-minute session directly</h2>
       <p className="ln-section-sub">
-        For payments modernization, digital asset infrastructure, escrow architecture, cloud migration, or practical AI in financial operations.
+        Pick a time and we&apos;ll discuss your priorities across research platforms, data infrastructure, AI systems, and fintech execution.
       </p>
 
       <div className="ln-contact-actions">
-        <button className="ln-btn ln-btn--primary" onClick={openMailClient} type="button">
-          <span className="ln-btn-icon"><MailIcon /></span>
-          Email
-        </button>
-        <a className="ln-btn ln-btn--outline" href={bookingHref} target="_blank" rel="noopener noreferrer">
+        <a className="ln-btn ln-btn--primary" href={bookingHref} target="_blank" rel="noopener noreferrer">
           Book Directly
         </a>
       </div>
-
-      <form className="ln-contact-form" onSubmit={handleSubmit}>
-        <div className="ln-contact-grid">
-          <div className="ln-contact-field">
-            <label htmlFor="name">Name *</label>
-            <input id="name" value={form.name} onChange={update("name")} required />
-          </div>
-          <div className="ln-contact-field">
-            <label htmlFor="email">Email *</label>
-            <input id="email" type="email" value={form.email} onChange={update("email")} required />
-          </div>
-        </div>
-        <div className="ln-contact-field">
-          <label htmlFor="company">Company</label>
-          <input id="company" value={form.company} onChange={update("company")} />
-        </div>
-        <div className="ln-contact-field">
-          <label htmlFor="message">Message *</label>
-          <textarea id="message" rows="5" value={form.message} onChange={update("message")} required />
-        </div>
-
-        <button className="ln-btn ln-btn--primary" type="submit">Submit</button>
-        <p className="ln-contact-status" aria-live="polite">{status}</p>
-      </form>
     </section>
   );
 }
 
 export default function Landing() {
+  const [menuOpen, setMenuOpen] = useState(false);
   const executiveBriefingHref = CALENDLY_EXEC_BRIEFING_URL.includes("your-link") ? "#contact" : CALENDLY_EXEC_BRIEFING_URL;
   const diagnosticScopingHref = CALENDLY_DIAGNOSTIC_URL.includes("your-link") ? "#contact" : CALENDLY_DIAGNOSTIC_URL;
+
+  useEffect(() => {
+    if (!menuOpen) {
+      return undefined;
+    }
+
+    const handleKeyDown = (event) => {
+      if (event.key === "Escape") {
+        setMenuOpen(false);
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [menuOpen]);
 
   return (
     <div className="landing">
       <nav className="ln-nav">
         <div className="ln-nav-inner">
+          <button
+            type="button"
+            className={`ln-menu-toggle ${menuOpen ? "is-open" : ""}`}
+            aria-expanded={menuOpen}
+            aria-controls="site-nav-menu"
+            aria-label={menuOpen ? "Close navigation menu" : "Open navigation menu"}
+            onClick={() => setMenuOpen((open) => !open)}
+          >
+            <span />
+            <span />
+            <span />
+          </button>
           <a className="ln-logo" href="#top">
             <div className="ln-logo-block">
               <span className="ln-logo-text"><BrandName /></span>
-              <Typewriter text="precision systems for fintech execution" speed={50} delay={600} />
+              <Typewriter text="decision infrastructure. built on wall street standards." speed={50} delay={600} />
             </div>
           </a>
           <div className="ln-nav-links">
-            <a href="#services">Services</a>
-            <a href="#approach">Approach</a>
-            <a href="#journey">Impact</a>
-            <a href="#contact">Contact</a>
+            {NAV_LINKS.map((link) => (
+              <a href={link.href} key={link.href}>{link.label}</a>
+            ))}
           </div>
           <a className="ln-btn ln-btn--outline ln-btn--sm" href={executiveBriefingHref}>
             Book Executive Briefing
           </a>
+        </div>
+        <div
+          className={`ln-nav-drawer ${menuOpen ? "is-open" : ""}`}
+          id="site-nav-menu"
+        >
+          {NAV_LINKS.map((link) => (
+            <a
+              href={link.href}
+              key={`drawer-${link.href}`}
+              onClick={() => setMenuOpen(false)}
+            >
+              {link.label}
+            </a>
+          ))}
         </div>
       </nav>
 
@@ -242,20 +219,17 @@ export default function Landing() {
           </div>
 
           <h1 className="ln-hero-heading">
-            AI decision infrastructure{" "}
+            Decision infrastructure for institutions where{" "}
             <span className="ln-hero-wellbeing">
-              for financial <span className="ln-hero-accent">institutions</span>
-              <svg className="ln-hero-scribble" viewBox="0 0 640 18" fill="none" aria-hidden="true">
-                <path d="M2 10h44l12-6 14 12 18-9h30l13-5 13 10h25l11-7 13 11h29l10-6h86l14-6 14 12 19-9h31l13-5 13 10h26l11-7 14 11h31l11-6h92" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" />
+              <span className="ln-hero-accent">outcomes</span> matter
+              <svg className="ln-hero-scribble" viewBox="0 0 260 18" fill="none" aria-hidden="true">
+                <path d="M2 10h34l11-6 13 12 16-9h27l12-5 12 10h23l10-7 12 11h26l9-6h41" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" />
               </svg>
             </span>
           </h1>
 
           <p className="ln-hero-sub">
-            We build premium execution systems for banks, processors, and regulated fintechs where speed, control, and auditability directly affect margin and risk posture.
-          </p>
-          <p className="ln-hero-sub" style={{ marginTop: 10 }}>
-            Start with our Instant Payments Decision-Speed Sprint: a 90-day engagement to cut exception cycle time, improve straight-through processing, and strengthen policy-bound decisioning.
+            Built by operators from the world&apos;s leading financial institutions. We design and deliver the platforms, pipelines, and AI systems that turn fragmented data into confident, auditable decisions.
           </p>
 
           <div className="ln-hero-actions">
@@ -280,9 +254,9 @@ export default function Landing() {
 
       <section className="ln-trust">
         <div className="ln-trust-row">
-          <span><span className="ln-trust-icon"><BoltIcon /></span> Multi-rail payments and crypto ramps</span>
-          <span><span className="ln-trust-icon"><ShieldIcon /></span> Decision-grade data pipelines and controls</span>
-          <span><span className="ln-trust-icon"><SparkIcon /></span> M&amp;A and advisory decision acceleration</span>
+          <span><span className="ln-trust-icon"><BoltIcon /></span> Research platforms and analytics infrastructure</span>
+          <span><span className="ln-trust-icon"><ShieldIcon /></span> AI governance, data pipelines, and controls</span>
+          <span><span className="ln-trust-icon"><SparkIcon /></span> Decision systems for investors and institutions</span>
         </div>
       </section>
 
@@ -291,7 +265,7 @@ export default function Landing() {
         <p className="ln-section-eyebrow">Execution Standard</p>
         <h2 className="ln-section-heading">Designed for measurable commercial impact and control</h2>
         <p className="ln-section-sub">
-          We target cycle-time reduction, higher throughput, and stronger profit capture. Market scenarios suggest central AI adoption could improve banking cost bases by roughly 15-20 percent, with outsized gains for early movers.
+          We target cycle-time reduction, sharper research output, and stronger decision confidence across trading, risk, and operations. Market scenarios suggest central AI adoption could improve banking cost bases by roughly 15-20 percent, with outsized gains for early movers.
         </p>
         <p className="ln-market-source">
           Market references:{" "}
@@ -326,9 +300,9 @@ export default function Landing() {
       <section className="ln-section ln-market" id="approach">
         <span className="ln-sec-num" aria-hidden="true">02</span>
         <p className="ln-section-eyebrow">How we implement</p>
-        <h2 className="ln-section-heading">From fragmented data to precision operational decisions</h2>
+        <h2 className="ln-section-heading">From fragmented data to institutional-grade decision systems</h2>
         <p className="ln-section-sub">
-          Each engagement starts with workflow and control diagnosis, then moves into production decision systems with measurable cycle-time, quality, and margin impact.
+          Each engagement starts with infrastructure and workflow diagnosis, then moves into production-ready platforms with measurable improvements in speed, quality, and decision confidence.
         </p>
 
         <div className="ln-market-grid">
@@ -336,16 +310,16 @@ export default function Landing() {
             <p className="ln-market-card-label">Where value leaks today</p>
             <div className="ln-market-metric-list">
               <div className="ln-market-metric">
-                <strong>Siloed transaction intelligence</strong>
-                <span>Critical payment, escrow, and advisory signals are spread across tools and teams.</span>
+                <strong>Fragmented research and data infrastructure</strong>
+                <span>Critical signals across market data, internal platforms, and third-party sources sit in disconnected systems.</span>
               </div>
               <div className="ln-market-metric">
-                <strong>Manual decision loops</strong>
-                <span>Analysts spend too much time collecting context before acting.</span>
+                <strong>Manual analysis bottlenecks</strong>
+                <span>Analysts and portfolio teams spend too much time assembling context before reaching conviction.</span>
               </div>
               <div className="ln-market-metric">
-                <strong>Low decision confidence</strong>
-                <span>Teams lack explainable, auditable intelligence to automate with confidence.</span>
+                <strong>Low platform adoption</strong>
+                <span>Teams lack trusted, well-designed AI tools that integrate into existing workflows.</span>
               </div>
             </div>
           </article>
@@ -354,16 +328,16 @@ export default function Landing() {
             <p className="ln-market-card-label">What changes with our execution stack</p>
             <div className="ln-market-metric-list">
               <div className="ln-market-metric">
-                <strong>Faster transaction decisions</strong>
-                <span>Context-rich recommendations generated in real time for operations and risk teams.</span>
+                <strong>Unified research and analytics platforms</strong>
+                <span>One trusted layer connecting market data, proprietary models, and decision workflows.</span>
               </div>
               <div className="ln-market-metric">
-                <strong>Lower manual workload</strong>
-                <span>Pipeline-driven enrichment and summarization reduce repetitive analysis.</span>
+                <strong>AI-augmented analysis at scale</strong>
+                <span>LLM-powered summarization, extraction, and enrichment that teams actually adopt.</span>
               </div>
               <div className="ln-market-metric">
-                <strong>Controlled autonomy</strong>
-                <span>Rule + model orchestration with policy checks, human approval where required, and audit trails.</span>
+                <strong>Governed, auditable AI infrastructure</strong>
+                <span>Model orchestration with policy controls, human oversight, and enterprise-grade audit trails.</span>
               </div>
             </div>
           </article>
@@ -372,7 +346,7 @@ export default function Landing() {
 
       <section className="ln-logo-band" id="inspiration">
         <div className="ln-logo-band-inner">
-          <p className="ln-logo-band-title">Inspired by experts from leading financial institutions</p>
+          <p className="ln-logo-band-title">Built on standards set at the world&apos;s leading financial institutions</p>
           <div className="ln-logo-dial" role="list" aria-label="Industry inspiration institutions">
             <div className="ln-logo-track">
               {inspirationLogos.map((name) => (
@@ -407,18 +381,23 @@ export default function Landing() {
             <p>A focused 90-day engagement for FedNow, RTP, ACH, Faster Payments, and SWIFT operations. We reduce exception latency and improve control under live conditions.</p>
             <a className="ln-feature-link" href="/service-ai-payments-acceleration.html">Read breakdown</a>
           </article>
+          <article className="ln-feature-card">
+            <h3>Platform and Data Infrastructure Diagnostic</h3>
+            <p>A 4-week assessment of your research platforms, data pipelines, API architecture, and decision systems. We deliver a prioritized remediation roadmap with commercial impact estimates.</p>
+            <a className="ln-feature-link" href="/service-platform-diagnostic.html">Read breakdown</a>
+          </article>
         </div>
 
         <p className="ln-section-eyebrow" style={{ marginTop: 24 }}>Core</p>
         <div className="ln-features-grid ln-features-grid--three">
           <article className="ln-feature-card">
-            <h3>Intelligent Data Pipelines</h3>
-            <p>Streaming ingestion, entity resolution, feature pipelines, and high-quality decision context.</p>
+            <h3>Financial Data Infrastructure</h3>
+            <p>Unified data architecture for market feeds, internal systems, and third-party sources. Streaming ingestion, entity resolution, feature engineering, and decision-serving layers.</p>
             <a className="ln-feature-link" href="/service-intelligent-data-pipelines.html">Read breakdown</a>
           </article>
           <article className="ln-feature-card">
-            <h3>Agentic Operations</h3>
-            <p>Autonomous workflows with policy guards, approval checkpoints, escalation logic, and full auditability.</p>
+            <h3>Autonomous Operations</h3>
+            <p>Policy-governed workflows that execute operational decisions autonomously, with approval checkpoints, escalation logic, and full auditability.</p>
             <a className="ln-feature-link" href="/service-agentic-ai-operations.html">Read breakdown</a>
           </article>
           <article className="ln-feature-card">
@@ -428,7 +407,7 @@ export default function Landing() {
           </article>
           <article className="ln-feature-card">
             <h3>Escrow Intelligence Automation</h3>
-            <p>AI-assisted release logic for fiat and stablecoin escrow, plus dispute analysis and trust monitoring for multi-party transactions.</p>
+            <p>Automated release logic and dispute triage for multi-party escrow, covering fiat settlement, digital assets, and cross-border holding structures.</p>
             <a className="ln-feature-link" href="/service-escrow-intelligence-automation.html">Read breakdown</a>
           </article>
         </div>
@@ -436,18 +415,18 @@ export default function Landing() {
         <p className="ln-section-eyebrow" style={{ marginTop: 24 }}>Strategic</p>
         <div className="ln-features-grid ln-features-grid--three">
           <article className="ln-feature-card">
-            <h3>AI Due Diligence</h3>
-            <p>Independent review of AI/data stacks, controls, and execution risk for leadership and investors.</p>
+            <h3>Technology Due Diligence</h3>
+            <p>Independent review of technology, data, and AI stacks, including controls, architecture maturity, and execution risk, for leadership and investors.</p>
             <a className="ln-feature-link" href="/service-ai-due-diligence.html">Read breakdown</a>
           </article>
           <article className="ln-feature-card">
-            <h3>Fractional AI Leadership</h3>
-            <p>Hands-on AI program leadership, roadmap ownership, and implementation governance.</p>
+            <h3>Fractional CPO / CTO</h3>
+            <p>Embedded product and technology leadership. Roadmap ownership, cross-functional governance, and hands-on delivery acceleration.</p>
             <a className="ln-feature-link" href="/service-fractional-ai-leadership.html">Read breakdown</a>
           </article>
           <article className="ln-feature-card">
-            <h3>AI Product and Workflow Design</h3>
-            <p>Human-in-the-loop product flows that make autonomous intelligence usable and trusted.</p>
+            <h3>Product and Platform Design</h3>
+            <p>Decision interfaces, human-in-the-loop workflows, and platform experiences that make intelligent systems usable and trusted.</p>
             <a className="ln-feature-link" href="/service-ai-product-workflow-design.html">Read breakdown</a>
           </article>
           <article className="ln-feature-card">
@@ -461,7 +440,7 @@ export default function Landing() {
       <section className="ln-section ln-service-editorial" id="service-preview">
         <span className="ln-sec-num" aria-hidden="true">04</span>
         <p className="ln-section-eyebrow">Service Preview</p>
-        <h2 className="ln-section-heading">How we position execution in the boardroom and on the ground</h2>
+        <h2 className="ln-section-heading">How we deliver for leadership and on the ground</h2>
         <div className="ln-split-row">
           <div className="ln-split-media">
             <img src="https://images.unsplash.com/photo-1553877522-43269d4ea984?auto=format&fit=crop&w=1600&q=80" alt="Executive fintech planning session" />
@@ -478,8 +457,8 @@ export default function Landing() {
           </div>
           <div className="ln-split-copy">
             <h3>Operator-grade delivery in production</h3>
-            <p>We execute in live workflows with measurable controls: rail-aware payments, on/off-ramp crypto decisions, and M&A intelligence tied to CIM, QoE, TSA, and PMI milestones.</p>
-            <a className="ln-feature-link" href="/service-ai-payments-acceleration.html">See payments offer</a>
+            <p>We execute in live environments with measurable controls: research platform builds, API and data infrastructure, AI model deployment, and decision systems tied to real business outcomes.</p>
+            <a className="ln-feature-link" href="/service-ai-payments-acceleration.html">See delivery in action</a>
           </div>
         </div>
       </section>
@@ -487,9 +466,9 @@ export default function Landing() {
       <section className="ln-section ln-showcase" id="journey">
         <span className="ln-sec-num" aria-hidden="true">05</span>
         <p className="ln-section-eyebrow">Execution Impact</p>
-        <h2 className="ln-section-heading">Built for fintech execution where every decision has financial consequence</h2>
+        <h2 className="ln-section-heading">Built for financial institutions where every decision carries weight</h2>
         <p className="ln-section-sub">
-          We combine a decade of transaction-system delivery with modern decision engineering to build faster, safer, and commercially stronger operating models.
+          We combine a decade of platform delivery at top-tier banks with modern AI and data engineering to build faster, more reliable, and commercially stronger decision infrastructure.
         </p>
 
         <div className="ln-showcase-grid">
@@ -499,10 +478,10 @@ export default function Landing() {
               <span className="ln-network-pill">Execution-first</span>
             </header>
             <div className="ln-journey-points">
-              <p>Payment-speed optimization with intelligent routing and exception handling across SEPA, Faster Payments, FedNow, RTP, ACH, and SWIFT.</p>
-              <p>Crypto operating intelligence across on-chain signals, off-chain controls, and fiat/crypto on-ramp and off-ramp workflows.</p>
-              <p>M&amp;A and advisory pipelines covering CIM and VDR intake, QoE and NWC analysis, and SPA/TSA decision support through PMI.</p>
-              <p>Escrow and transaction orchestration with AI-assisted release logic, dispute workflows, explainability, governance, and human override.</p>
+              <p>Research and analytics platforms that unify market data, proprietary signals, and LLM-powered insight generation for investment and risk teams.</p>
+              <p>AI infrastructure including model governance, API platforms, data pipelines, and enterprise-grade deployment for regulated environments.</p>
+              <p>Financial data systems spanning real-time ingestion, entity resolution, feature engineering, and decision-serving architecture.</p>
+              <p>Product transformation that turns internal tools into high-adoption platforms through design discipline and measurable rollout governance.</p>
             </div>
           </article>
 
@@ -531,33 +510,11 @@ export default function Landing() {
         <p className="ln-section-eyebrow">Workflow</p>
         <h2 className="ln-section-heading">From raw signals to controlled decisions at scale</h2>
         <div className="ln-workflow-diagram">
-          <div><b>01</b><span>Capture</span><p>Rails, on-chain, off-chain events.</p></div>
-          <div><b>02</b><span>Enrich</span><p>Entity, risk, and context normalization.</p></div>
+          <div><b>01</b><span>Capture</span><p>Market data, internal systems, third-party feeds.</p></div>
+          <div><b>02</b><span>Enrich</span><p>Entity resolution, risk context, and signal normalization.</p></div>
           <div><b>03</b><span>Score</span><p>Model + policy prioritization.</p></div>
           <div><b>04</b><span>Decide</span><p>Recommend, approve, or auto-execute.</p></div>
           <div><b>05</b><span>Learn</span><p>Outcome telemetry and continuous tuning.</p></div>
-        </div>
-      </section>
-
-      <section className="ln-emotional ln-emotional--alt" id="about">
-        <div className="ln-emotional-inner">
-          <div className="ln-emotional-media">
-            <img
-              src="https://images.pexels.com/photos/6801648/pexels-photo-6801648.jpeg?auto=compress&cs=tinysrgb&w=1600"
-              alt="Professional team reviewing infrastructure plans"
-              className="ln-emotional-img"
-            />
-          </div>
-          <div className="ln-emotional-content">
-            <p className="ln-section-eyebrow">About</p>
-            <h2 className="ln-emotional-heading">Execution depth with business-level clarity</h2>
-            <p className="ln-emotional-body">
-              We implement decision systems that capture, structure, and operationalize fintech data so teams can act faster and automate high-value decisions safely.
-            </p>
-            <p className="ln-emotional-body" style={{ marginTop: 12 }}>
-              We focus on intelligent operating pipelines: decision-ready context, policy-bound workflow triggers, and resilient production controls.
-            </p>
-          </div>
         </div>
       </section>
 
@@ -566,7 +523,7 @@ export default function Landing() {
           <p className="ln-manifesto-kicker">Manifesto</p>
           <h2>Execution is the brand.</h2>
           <p>
-            We build fintech systems that decide faster, move cleaner, and hold up under pressure.
+            We build financial infrastructure that decides faster, scales cleaner, and holds up under institutional scrutiny.
             Strategy is useful. Production outcomes are what matter.
           </p>
         </div>
@@ -578,7 +535,7 @@ export default function Landing() {
         <div className="ln-footer-inner">
           <div>
             <div className="ln-logo-text ln-footer-brand"><BrandName /></div>
-            <p>Decision-systems implementation firm for fintech operators, based in London.</p>
+            <p>Decision infrastructure firm for banks, fintechs, and institutional operators. Based in London.</p>
           </div>
           <div className="ln-footer-cols">
             <div>
@@ -589,9 +546,9 @@ export default function Landing() {
             </div>
             <div>
               <h4>Deep Dives</h4>
-              <a href="/service-ai-payments-acceleration.html">AI Payments</a>
+              <a href="/service-ai-payments-acceleration.html">Payments Sprint</a>
               <a href="/service-ma-advisory-intelligence.html">M&amp;A Intelligence</a>
-              <a href="/service-agentic-ai-operations.html">Agentic Ops</a>
+              <a href="/service-agentic-ai-operations.html">Autonomous Ops</a>
             </div>
             <div>
               <h4>Legal</h4>
