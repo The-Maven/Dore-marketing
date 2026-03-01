@@ -11,7 +11,7 @@ function WaveMark({ className = "" }) {
 function BrandName({ className = "" }) {
   return (
     <span className={`brand-red brand-name ${className}`}>
-      <span className="brand-name-text">Stark<span className="brand-new"> Advisory</span></span>
+      <span className="brand-name-text">Rayleigh<span className="brand-new"> Stark</span></span>
       <WaveMark className="brand-ekg" />
     </span>
   );
@@ -346,7 +346,7 @@ export default function Landing() {
       <section className="ln-section ln-mandate-triggers" id="mandates">
         <span className="ln-sec-num" aria-hidden="true">02</span>
         <p className="ln-section-eyebrow">When to Call Us</p>
-        <h2 className="ln-section-heading">Bring Stark Advisory in when the mandate is real, not theoretical</h2>
+        <h2 className="ln-section-heading">Bring Rayleigh Stark in when the mandate is real, not theoretical</h2>
         <p className="ln-section-sub">
           The right moment is usually when the organisation already knows the cost of delay. These are the situations where operator-led advisory actually matters.
         </p>
@@ -834,6 +834,7 @@ export default function Landing() {
           <div>
             <div className="ln-logo-text ln-footer-brand"><BrandName /></div>
             <p>Operator-led advisory shaped in financial markets and applied to institutions, investors, and high-consequence teams navigating product, data, AI, and platform change. Based in London.</p>
+            <p>Rayleigh Stark is a trading name of Premium Network and Services Ltd.</p>
           </div>
           <div className="ln-footer-cols">
             <div>
@@ -852,7 +853,7 @@ export default function Landing() {
               <h4>Legal</h4>
               <a href="#contact">Contact</a>
               <a href="#">Terms</a>
-              <a href="#">Registered in England &amp; Wales</a>
+              <a href="#">Premium Network and Services Ltd</a>
             </div>
           </div>
         </div>
