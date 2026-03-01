@@ -3,8 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "parcel index.html about.html service-ai-payments-acceleration.html service-ma-advisory-intelligence.html service-escrow-intelligence-automation.html service-intelligent-data-pipelines.html service-agentic-ai-operations.html service-decision-reliability-engineering.html service-ai-due-diligence.html service-fractional-ai-leadership.html service-ai-product-workflow-design.html service-platform-diagnostic.html --port 1234",
-    "build": "parcel build index.html about.html service-ai-payments-acceleration.html service-ma-advisory-intelligence.html service-escrow-intelligence-automation.html service-intelligent-data-pipelines.html service-agentic-ai-operations.html service-decision-reliability-engineering.html service-ai-due-diligence.html service-fractional-ai-leadership.html service-ai-product-workflow-design.html service-platform-diagnostic.html --dist-dir dist && mkdir -p dist/src/images && cp src/images/* dist/src/images/"
+    "dev": "parcel index.html about.html service-product-workflow-sprint.html service-ai-payments-acceleration.html service-ma-advisory-intelligence.html service-escrow-intelligence-automation.html service-intelligent-data-pipelines.html service-agentic-ai-operations.html service-decision-reliability-engineering.html service-ai-due-diligence.html service-fractional-ai-leadership.html service-ai-product-workflow-design.html service-platform-diagnostic.html --port 1234",
+    "build": "parcel build index.html about.html service-product-workflow-sprint.html service-ai-payments-acceleration.html service-ma-advisory-intelligence.html service-escrow-intelligence-automation.html service-intelligent-data-pipelines.html service-agentic-ai-operations.html service-decision-reliability-engineering.html service-ai-due-diligence.html service-fractional-ai-leadership.html service-ai-product-workflow-design.html service-platform-diagnostic.html --dist-dir dist && mkdir -p dist/src/images && cp src/images/* dist/src/images/"
   },
   "dependencies": {
     "react": "^18.3.1",

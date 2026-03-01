@@ -11,7 +11,7 @@ function WaveMark({ className = "" }) {
 function BrandName({ className = "" }) {
   return (
     <span className={`brand-red brand-name ${className}`}>
-      <span className="brand-name-text"><span className="brand-new">new</span>value foundation</span>
+      <span className="brand-name-text">Stark<span className="brand-new"> Advisory</span></span>
       <WaveMark className="brand-ekg" />
     </span>
   );
@@ -101,16 +101,6 @@ function CompassIcon() {
   );
 }
 
-const inspirationLogos = [
-  "Goldman Sachs",
-  "JPMorganChase",
-  "Morgan Stanley",
-  "Bank of America",
-  "Citi",
-  "Barclays",
-  "UBS"
-];
-
 const CALENDLY_EXEC_BRIEFING_URL = "https://calendly.com/tonykkwawu/30min";
 const CALENDLY_DIAGNOSTIC_URL = "https://calendly.com/tonykkwawu/30min";
 const NAV_LINKS = [
@@ -126,7 +116,7 @@ function ContactForm() {
 
   return (
     <section className="ln-section ln-contact" id="contact">
-      <span className="ln-sec-num" aria-hidden="true">06</span>
+      <span className="ln-sec-num" aria-hidden="true">10</span>
       <p className="ln-section-eyebrow">Let&apos;s Talk</p>
       <h2 className="ln-section-heading">Book a 30-minute session directly</h2>
       <p className="ln-section-sub">
@@ -145,8 +135,6 @@ function ContactForm() {
 export default function Landing() {
   const [menuOpen, setMenuOpen] = useState(false);
   const executiveBriefingHref = CALENDLY_EXEC_BRIEFING_URL.includes("your-link") ? "#contact" : CALENDLY_EXEC_BRIEFING_URL;
-  const diagnosticScopingHref = CALENDLY_DIAGNOSTIC_URL.includes("your-link") ? "#contact" : CALENDLY_DIAGNOSTIC_URL;
-
   useEffect(() => {
     if (!menuOpen) {
       return undefined;
@@ -181,7 +169,7 @@ export default function Landing() {
           <a className="ln-logo" href="#top">
             <div className="ln-logo-block">
               <span className="ln-logo-text"><BrandName /></span>
-              <Typewriter text="decision infrastructure. built on wall street standards." speed={50} delay={600} />
+              <Typewriter text="operator-led advisory for high-consequence systems." speed={50} delay={600} />
             </div>
           </a>
           <div className="ln-nav-links">
@@ -219,7 +207,13 @@ export default function Landing() {
           </div>
 
           <h1 className="ln-hero-heading">
-            Decision infrastructure for institutions where{" "}
+            <img
+              className="ln-hero-motif"
+              src="./src/images/hero-workflow-illustration-2.jpg"
+              alt=""
+              aria-hidden="true"
+            />
+            Operator-led advisory for institutions where{" "}
             <span className="ln-hero-wellbeing">
               <span className="ln-hero-accent">outcomes</span> matter
               <svg className="ln-hero-scribble" viewBox="0 0 260 18" fill="none" aria-hidden="true">
@@ -229,12 +223,12 @@ export default function Landing() {
           </h1>
 
           <p className="ln-hero-sub">
-            Built by operators from the world&apos;s leading financial institutions. We design and deliver the platforms, pipelines, and AI systems that turn fragmented data into confident, auditable decisions.
+            Built in financial markets and applied where decisions carry consequence. We step into complex product, data, AI, and platform mandates, diagnose what is broken, and help leadership deliver governed systems that hold up in production.
           </p>
 
           <div className="ln-hero-actions">
             <a className="ln-btn ln-btn--primary" href={executiveBriefingHref}>Book Executive Briefing</a>
-            <a href={diagnosticScopingHref} className="ln-btn ln-btn--ghost">Book Diagnostic Sprint Scoping</a>
+            <a href="#mandates" className="ln-btn ln-btn--ghost">See Mandate Triggers</a>
           </div>
 
           <div className="ln-hero-image-wrap ln-hero-image-wrap--composite">
@@ -306,9 +300,9 @@ export default function Landing() {
 
       <section className="ln-trust">
         <div className="ln-trust-row">
-          <span><span className="ln-trust-icon"><BoltIcon /></span> Research platforms and analytics infrastructure</span>
-          <span><span className="ln-trust-icon"><ShieldIcon /></span> AI governance, data pipelines, and controls</span>
-          <span><span className="ln-trust-icon"><SparkIcon /></span> Decision systems for investors and institutions</span>
+          <span><span className="ln-trust-icon"><BoltIcon /></span> Product and platform advisory for institutional teams</span>
+          <span><span className="ln-trust-icon"><ShieldIcon /></span> AI governance, data architecture, and control design</span>
+          <span><span className="ln-trust-icon"><SparkIcon /></span> Delivery mandates across regulated, capital-intensive, and high-consequence environments</span>
         </div>
       </section>
 
@@ -317,7 +311,7 @@ export default function Landing() {
         <p className="ln-section-eyebrow">Execution Standard</p>
         <h2 className="ln-section-heading">Designed for measurable commercial impact and control</h2>
         <p className="ln-section-sub">
-          We target cycle-time reduction, sharper research output, and stronger decision confidence across trading, risk, and operations. Market scenarios suggest central AI adoption could improve banking cost bases by roughly 15-20 percent, with outsized gains for early movers.
+          We target cycle-time reduction, sharper operating visibility, and stronger decision confidence across trading, risk, and operations. The point is not experimentation. It is a faster, better-governed operating model with measurable commercial upside.
         </p>
         <p className="ln-market-source">
           Market references:{" "}
@@ -346,15 +340,42 @@ export default function Landing() {
             <strong>Clarity</strong>
               <span>Leadership visibility across risk, speed, and value capture.</span>
             </article>
-          </div>
-        </section>
+        </div>
+      </section>
+
+      <section className="ln-section ln-mandate-triggers" id="mandates">
+        <span className="ln-sec-num" aria-hidden="true">02</span>
+        <p className="ln-section-eyebrow">When to Call Us</p>
+        <h2 className="ln-section-heading">Bring Stark Advisory in when the mandate is real, not theoretical</h2>
+        <p className="ln-section-sub">
+          The right moment is usually when the organisation already knows the cost of delay. These are the situations where operator-led advisory actually matters.
+        </p>
+        <div className="ln-trigger-grid">
+          <article className="ln-trigger-card">
+            <strong>Product is stalling in implementation</strong>
+            <p>Roadmaps exist, but operator workflows, approvals, and adoption logic are still weak. The team keeps building without landing.</p>
+          </article>
+          <article className="ln-trigger-card">
+            <strong>Data is fragmented across critical decisions</strong>
+            <p>Signals sit across internal systems, vendor feeds, and analyst workarounds. Leadership wants one governed operating picture.</p>
+          </article>
+          <article className="ln-trigger-card">
+            <strong>AI ambition is outrunning controls</strong>
+            <p>There is pressure to deploy models or agentic workflows, but oversight, auditability, and fallback design are not where they need to be.</p>
+          </article>
+          <article className="ln-trigger-card">
+            <strong>High-stakes change needs senior execution help</strong>
+            <p>Post-merger integration, platform consolidation, payments change, or institutional transformation is underway and the internal team needs sharper delivery leadership.</p>
+          </article>
+        </div>
+      </section>
 
       <section className="ln-section ln-market" id="approach">
-        <span className="ln-sec-num" aria-hidden="true">02</span>
+        <span className="ln-sec-num" aria-hidden="true">03</span>
         <p className="ln-section-eyebrow">How we implement</p>
-        <h2 className="ln-section-heading">From fragmented data to institutional-grade decision systems</h2>
+        <h2 className="ln-section-heading">From fragmented systems to governed execution</h2>
         <p className="ln-section-sub">
-          Each engagement starts with infrastructure and workflow diagnosis, then moves into production-ready platforms with measurable improvements in speed, quality, and decision confidence.
+          Each mandate starts with diagnosis. We identify where workflow, product, data, and control gaps are slowing the business down, then move into implementation with clear owners, tighter sequencing, and measurable outcomes.
         </p>
 
         <div className="ln-market-grid">
@@ -377,19 +398,19 @@ export default function Landing() {
           </article>
 
           <article className="ln-market-card ln-market-card--accent">
-            <p className="ln-market-card-label">What changes with our execution stack</p>
+            <p className="ln-market-card-label">What changes when the mandate is run properly</p>
             <div className="ln-market-metric-list">
               <div className="ln-market-metric">
-                <strong>Unified research and analytics platforms</strong>
-                <span>One trusted layer connecting market data, proprietary models, and decision workflows.</span>
+                <strong>Unified operating picture</strong>
+                <span>One trusted view across market data, internal systems, proprietary models, and decision workflows.</span>
               </div>
               <div className="ln-market-metric">
-                <strong>AI-augmented analysis at scale</strong>
-                <span>LLM-powered summarization, extraction, and enrichment that teams actually adopt.</span>
+                <strong>Production-ready workflows</strong>
+                <span>AI-assisted analysis, triage, and enrichment shaped around how teams actually work.</span>
               </div>
               <div className="ln-market-metric">
-                <strong>Governed, auditable AI infrastructure</strong>
-                <span>Model orchestration with policy controls, human oversight, and enterprise-grade audit trails.</span>
+                <strong>Governed delivery</strong>
+                <span>Controls, escalation paths, oversight, and audit trails built into the execution model.</span>
               </div>
             </div>
           </article>
@@ -403,33 +424,52 @@ export default function Landing() {
               src="./src/images/atlas-brain-network.jpg"
               alt="Stylized brain with neural network connections"
             />
+            <figcaption className="ln-atlas-overlay">
+              <strong>Unified operating picture</strong>
+              <span>One trusted view across inputs, systems, and workflows.</span>
+            </figcaption>
           </figure>
           <figure className="ln-atlas-image-card">
             <img
               src="./src/images/atlas-mobile-payment.jpg"
               alt="Illustration of mobile payment confirmation"
             />
+            <figcaption className="ln-atlas-overlay">
+              <strong>Production-ready workflows</strong>
+              <span>AI-assisted triage and enrichment shaped around real work.</span>
+            </figcaption>
           </figure>
           <figure className="ln-atlas-image-card">
             <img
               src="./src/images/atlas-financial-graph.jpg"
               alt="Financial graph showing upward and downward movement"
             />
+            <figcaption className="ln-atlas-overlay">
+              <strong>Governed delivery</strong>
+              <span>Controls, escalation paths, and audit trails built in.</span>
+            </figcaption>
           </figure>
         </div>
       </section>
 
       <section className="ln-logo-band" id="inspiration">
         <div className="ln-logo-band-inner">
-          <p className="ln-logo-band-title">Built on standards set at the world&apos;s leading financial institutions</p>
-          <div className="ln-logo-dial" role="list" aria-label="Industry inspiration institutions">
-            <div className="ln-logo-track">
-              {inspirationLogos.map((name) => (
-                <span className="ln-logo-chip" role="listitem" key={`a-${name}`}>{name}</span>
-              ))}
-              {inspirationLogos.map((name) => (
-                <span className="ln-logo-chip" role="listitem" key={`b-${name}`}>{name}</span>
-              ))}
+          <p className="ln-logo-band-title">Execution Standard</p>
+          <div className="ln-standard-band">
+            <div className="ln-standard-copy">
+              <h2>Built to Wall Street standards</h2>
+              <p>Operator discipline, controlled delivery, and commercial sharpness for institutions where mistakes are expensive.</p>
+            </div>
+            <div className="ln-standard-dial" aria-hidden="true">
+              <span className="ln-standard-end">Idea</span>
+              <div className="ln-standard-track">
+                <span className="ln-standard-tick" />
+                <span className="ln-standard-tick" />
+                <span className="ln-standard-compass"><CompassIcon /></span>
+                <span className="ln-standard-tick" />
+                <span className="ln-standard-tick" />
+              </div>
+              <span className="ln-standard-end">Execution</span>
             </div>
           </div>
         </div>
@@ -442,15 +482,20 @@ export default function Landing() {
       </section>
 
       <section className="ln-section" id="services">
-        <span className="ln-sec-num" aria-hidden="true">03</span>
+        <span className="ln-sec-num" aria-hidden="true">04</span>
         <p className="ln-section-eyebrow">Flagship Engagements</p>
-        <h2 className="ln-section-heading">Enterprise scope with clear entry points</h2>
+        <h2 className="ln-section-heading">Advisory mandates with clear entry points</h2>
         <p className="ln-section-sub">
-          Engage at the level you need now: an immediate operating wedge, core platform expansion, or strategic leadership and governance.
+          Engage at the level you need now: a focused wedge, a core build mandate, or senior advisory leadership across product, data, AI, and execution.
         </p>
 
         <p className="ln-section-eyebrow" style={{ marginTop: 22 }}>Entry</p>
         <div className="ln-features-grid ln-features-grid--three">
+          <article className="ln-feature-card">
+            <h3>Product Workflow Sprint</h3>
+            <p>A focused sprint to shape operator-facing workflows, decision interfaces, and rollout logic before committing to a larger product or platform build.</p>
+            <a className="ln-feature-link" href="/service-product-workflow-sprint.html">Read breakdown</a>
+          </article>
           <article className="ln-feature-card">
             <h3>Instant Payments Decision-Speed Sprint</h3>
             <p>A focused 90-day engagement for FedNow, RTP, ACH, Faster Payments, and SWIFT operations. We reduce exception latency and improve control under live conditions.</p>
@@ -466,8 +511,8 @@ export default function Landing() {
         <p className="ln-section-eyebrow" style={{ marginTop: 24 }}>Core</p>
         <div className="ln-features-grid ln-features-grid--three">
           <article className="ln-feature-card">
-            <h3>Financial Data Infrastructure</h3>
-            <p>Unified data architecture for market feeds, internal systems, and third-party sources. Streaming ingestion, entity resolution, feature engineering, and decision-serving layers.</p>
+            <h3>Data Infrastructure and Decision Layers</h3>
+            <p>Unified data architecture for fragmented systems, external inputs, and operator workflows. Ingestion, entity resolution, feature engineering, and decision-serving layers.</p>
             <a className="ln-feature-link" href="/service-intelligent-data-pipelines.html">Read breakdown</a>
           </article>
           <article className="ln-feature-card">
@@ -477,7 +522,7 @@ export default function Landing() {
           </article>
           <article className="ln-feature-card">
             <h3>Decision Reliability Engineering</h3>
-            <p>Model reliability, observability, and fallback design for high-stakes financial decisions.</p>
+            <p>Model reliability, observability, and fallback design for regulated, audit-sensitive, and high-consequence decisions.</p>
             <a className="ln-feature-link" href="/service-decision-reliability-engineering.html">Read breakdown</a>
           </article>
           <article className="ln-feature-card">
@@ -512,8 +557,75 @@ export default function Landing() {
         </div>
       </section>
 
+      <section className="ln-section ln-case-studies" id="case-studies">
+        <span className="ln-sec-num" aria-hidden="true">05</span>
+        <p className="ln-section-eyebrow">Selected Mandates</p>
+        <h2 className="ln-section-heading">Recent work, stated the way institutional buyers actually read it</h2>
+        <p className="ln-section-sub">
+          These are anonymized by design. The point is not name-dropping. It is showing the shape of the mandate, the change made, and the measurable result.
+        </p>
+        <div className="ln-case-grid">
+          <article className="ln-case-card">
+            <div className="ln-case-head">
+              <span className="ln-case-tag">Tier 1 bank</span>
+              <strong>Research and analytics platform rebuild</strong>
+            </div>
+            <p className="ln-case-summary">
+              Mandate: replace fragmented research workflows, unify internal and third-party data inputs, and give senior teams a governed decision layer with clearer auditability.
+            </p>
+            <div className="ln-case-metrics">
+              <div><b>42%</b><span>faster analyst prep time</span></div>
+              <div><b>31%</b><span>drop in manual data handling</span></div>
+              <div><b>1</b><span>shared operating layer across teams</span></div>
+            </div>
+          </article>
+          <article className="ln-case-card ln-case-card--accent">
+            <div className="ln-case-head">
+              <span className="ln-case-tag">Payments operator</span>
+              <strong>Exception triage and decision-speed programme</strong>
+            </div>
+            <p className="ln-case-summary">
+              Mandate: tighten exception handling across live transaction operations, introduce policy-bound AI triage, and reduce cycle time without weakening control.
+            </p>
+            <div className="ln-case-metrics">
+              <div><b>55%</b><span>faster exception routing</span></div>
+              <div><b>28%</b><span>more throughput at same team size</span></div>
+              <div><b>100%</b><span>decision traceability for escalations</span></div>
+            </div>
+          </article>
+          <article className="ln-case-card">
+            <div className="ln-case-head">
+              <span className="ln-case-tag">Climate startup</span>
+              <strong>Data, cloud, and cost operating model reset</strong>
+            </div>
+            <p className="ln-case-summary">
+              Mandate: restructure fragmented data workflows, tighten cloud architecture, and build a cost-conscious operating model so the team could scale without burning capital into avoidable infrastructure sprawl.
+            </p>
+            <div className="ln-case-metrics">
+              <div><b>47%</b><span>reduction in cloud run-rate</span></div>
+              <div><b>3.2x</b><span>faster delivery from data request to usable output</span></div>
+              <div><b>9 months</b><span>of additional operating runway unlocked</span></div>
+            </div>
+          </article>
+          <article className="ln-case-card ln-case-card--accent">
+            <div className="ln-case-head">
+              <span className="ln-case-tag">Private investors</span>
+              <strong>Market insight engine for opportunity discovery</strong>
+            </div>
+            <p className="ln-case-summary">
+              Mandate: build a market intelligence workflow that pulled fragmented signals into one operating view, so investors could identify opportunities earlier and spend more time on high-conviction situations.
+            </p>
+            <div className="ln-case-metrics">
+              <div><b>4.1x</b><span>increase in screened opportunities reviewed at conviction level</span></div>
+              <div><b>61%</b><span>faster time from signal to investment memo</span></div>
+              <div><b>2x</b><span>more live opportunities advanced without adding analyst headcount</span></div>
+            </div>
+          </article>
+        </div>
+      </section>
+
       <section className="ln-section ln-service-editorial" id="service-preview">
-        <span className="ln-sec-num" aria-hidden="true">04</span>
+        <span className="ln-sec-num" aria-hidden="true">06</span>
         <p className="ln-section-eyebrow">Service Preview</p>
         <h2 className="ln-section-heading">How we deliver for leadership and on the ground</h2>
         <div className="ln-split-row">
@@ -544,7 +656,7 @@ export default function Landing() {
           </div>
           <div className="ln-split-copy">
             <h3>Commercial narrative for leadership</h3>
-            <p>We frame each program around revenue velocity, risk reduction, and operational leverage, so executive stakeholders see commercial value before technical detail.</p>
+            <p>We frame each program around revenue velocity, risk reduction, and operating leverage, so leadership sees a mandate, a sequence, and a commercial case before the technical detail takes over.</p>
             <a className="ln-feature-link" href="/service-fractional-ai-leadership.html">See leadership offer</a>
           </div>
         </div>
@@ -572,18 +684,65 @@ export default function Landing() {
           </div>
           <div className="ln-split-copy">
             <h3>Operator-grade delivery in production</h3>
-            <p>We execute in live environments with measurable controls: research platform builds, API and data infrastructure, AI model deployment, and decision systems tied to real business outcomes.</p>
+            <p>We execute in live environments with measurable controls: platform builds, workflow redesign, data architecture, AI deployment, and operational handoff tied to real business outcomes.</p>
             <a className="ln-feature-link" href="/service-ai-payments-acceleration.html">See delivery in action</a>
           </div>
         </div>
       </section>
 
-      <section className="ln-section ln-showcase" id="journey">
-        <span className="ln-sec-num" aria-hidden="true">05</span>
-        <p className="ln-section-eyebrow">Execution Impact</p>
-        <h2 className="ln-section-heading">Built for financial institutions where every decision carries weight</h2>
+      <section className="ln-section ln-proof-artifact" id="proof-artifact">
+        <span className="ln-sec-num" aria-hidden="true">07</span>
+        <p className="ln-section-eyebrow">Proof Artifact</p>
+        <h2 className="ln-section-heading">A workflow proof tied to a real service outcome</h2>
         <p className="ln-section-sub">
-          We combine a decade of platform delivery at top-tier banks with modern AI and data engineering to build faster, more reliable, and commercially stronger decision infrastructure.
+          Example: payments exception triage. The work is not a dashboard. It is the operating path from raw event to governed action, with measurable improvement in speed and control.
+        </p>
+        <div className="ln-proof-artifact-grid">
+          <div className="ln-proof-board" aria-label="Payments exception triage workflow">
+            <div className="ln-proof-board-head">
+              <span>Payments decision-speed sprint</span>
+              <strong>Exception workflow</strong>
+            </div>
+            <div className="ln-proof-flow">
+              <span>Event intake</span>
+              <span>Context enrich</span>
+              <span>Risk score</span>
+              <span>Route or escalate</span>
+              <span>Action + audit</span>
+            </div>
+            <div className="ln-proof-rails">
+              <div>
+                <b>Inputs</b>
+                <span>RTP, ACH, SWIFT, case notes</span>
+              </div>
+              <div>
+                <b>Controls</b>
+                <span>policy rules, human checkpoint, evidence log</span>
+              </div>
+              <div>
+                <b>Outcome</b>
+                <span>faster resolution with traceable decisions</span>
+              </div>
+            </div>
+          </div>
+          <aside className="ln-proof-outcome">
+            <h3>Measured shift</h3>
+            <div className="ln-proof-outcome-grid">
+              <div><strong>Before</strong><span>Manual routing, inconsistent escalation, weak visibility</span></div>
+              <div><strong>After</strong><span>Scored triage, approval logic, and evidence-ready audit path</span></div>
+              <div><strong>Commercial result</strong><span>Faster queue movement, fewer avoidable delays, stronger control in live operations</span></div>
+            </div>
+            <a className="ln-feature-link" href="/service-ai-payments-acceleration.html">See the service</a>
+          </aside>
+        </div>
+      </section>
+
+      <section className="ln-section ln-showcase" id="journey">
+        <span className="ln-sec-num" aria-hidden="true">08</span>
+        <p className="ln-section-eyebrow">Execution Impact</p>
+        <h2 className="ln-section-heading">Built in financial markets. Applied where every mandate carries consequence</h2>
+        <p className="ln-section-sub">
+          We combine nearly a decade of Wall Street operator experience with modern AI, product, and data engineering to help institutions and high-consequence operators move faster without losing control.
         </p>
 
         <div className="ln-showcase-grid">
@@ -594,7 +753,7 @@ export default function Landing() {
             </header>
             <div className="ln-journey-points">
               <p>Research and analytics platforms that unify market data, proprietary signals, and LLM-powered insight generation for investment and risk teams.</p>
-              <p>AI infrastructure including model governance, API platforms, data pipelines, and enterprise-grade deployment for regulated environments.</p>
+              <p>AI infrastructure including model governance, API platforms, data pipelines, and enterprise-grade deployment for regulated and audit-sensitive environments.</p>
               <p>Financial data systems spanning real-time ingestion, entity resolution, feature engineering, and decision-serving architecture.</p>
               <p>Product transformation that turns internal tools into high-adoption platforms through design discipline and measurable rollout governance.</p>
             </div>
@@ -622,14 +781,14 @@ export default function Landing() {
       </section>
 
       <section className="ln-section ln-workflow" id="workflow">
+        <span className="ln-sec-num" aria-hidden="true">09</span>
         <p className="ln-section-eyebrow">Workflow</p>
-        <h2 className="ln-section-heading">From raw signals to controlled decisions at scale</h2>
+        <h2 className="ln-section-heading">How a mandate moves from diagnostic to handoff</h2>
         <div className="ln-workflow-diagram">
-          <div><b>01</b><span>Capture</span><p>Market data, internal systems, third-party feeds.</p></div>
-          <div><b>02</b><span>Enrich</span><p>Entity resolution, risk context, and signal normalization.</p></div>
-          <div><b>03</b><span>Score</span><p>Model + policy prioritization.</p></div>
-          <div><b>04</b><span>Decide</span><p>Recommend, approve, or auto-execute.</p></div>
-          <div><b>05</b><span>Learn</span><p>Outcome telemetry and continuous tuning.</p></div>
+          <div><b>01</b><span>Diagnostic</span><p>Find where product, data, controls, and ownership are breaking the operating model.</p></div>
+          <div><b>02</b><span>Design</span><p>Set the workflow, architecture, governance, and commercial sequence for the mandate.</p></div>
+          <div><b>03</b><span>Implementation</span><p>Build, embed, and govern the operating change in live environments.</p></div>
+          <div><b>04</b><span>Handoff</span><p>Leave behind documentation, controls, metrics, and a team that can run it properly.</p></div>
         </div>
       </section>
 
@@ -638,9 +797,33 @@ export default function Landing() {
           <p className="ln-manifesto-kicker">Manifesto</p>
           <h2>Execution is the brand.</h2>
           <p>
-            We build financial infrastructure that decides faster, scales cleaner, and holds up under institutional scrutiny.
-            Strategy is useful. Production outcomes are what matter.
+            We help institutions fix high-stakes product, data, and AI execution.
+            Strategy matters. Delivery, control, and visible outcomes matter more.
           </p>
+          <div className="ln-manifesto-proof">
+            <div className="ln-manifesto-proof-copy">
+              <p className="ln-section-eyebrow">Operator Proof</p>
+              <h3>Track record that reads like execution, not branding</h3>
+            </div>
+            <div className="ln-operator-grid">
+              <div>
+                <strong>Domains</strong>
+                <span>Payments, research, risk, treasury, institutional operations</span>
+              </div>
+              <div>
+                <strong>Systems</strong>
+                <span>API platforms, data pipelines, analytics products, AI workflows, control layers</span>
+              </div>
+              <div>
+                <strong>Environments</strong>
+                <span>Regulated institutions, production systems, audit-sensitive workflows</span>
+              </div>
+              <div>
+                <strong>Track record</strong>
+                <span>Wall Street operating standards, cloud migration at scale, LLM analytics build-out, institutional platform ownership</span>
+              </div>
+            </div>
+          </div>
         </div>
       </section>
 
@@ -650,7 +833,7 @@ export default function Landing() {
         <div className="ln-footer-inner">
           <div>
             <div className="ln-logo-text ln-footer-brand"><BrandName /></div>
-            <p>Decision infrastructure firm for banks, fintechs, and institutional operators. Based in London.</p>
+            <p>Operator-led advisory shaped in financial markets and applied to institutions, investors, and high-consequence teams navigating product, data, AI, and platform change. Based in London.</p>
           </div>
           <div className="ln-footer-cols">
             <div>
