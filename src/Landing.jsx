@@ -431,8 +431,8 @@ export default function Landing() {
           </figure>
           <figure className="ln-atlas-image-card">
             <img
-              src="./src/images/atlas-mobile-payment.jpg"
-              alt="Illustration of mobile payment confirmation"
+              src="./src/images/service-product-platform-design-3.jpg"
+              alt="Abstract infrastructure illustration"
             />
             <figcaption className="ln-atlas-overlay">
               <strong>Production-ready workflows</strong>
@@ -462,12 +462,30 @@ export default function Landing() {
             </div>
             <div className="ln-standard-dial" aria-hidden="true">
               <span className="ln-standard-end">Idea</span>
-              <div className="ln-standard-track">
-                <span className="ln-standard-tick" />
-                <span className="ln-standard-tick" />
-                <span className="ln-standard-compass"><CompassIcon /></span>
-                <span className="ln-standard-tick" />
-                <span className="ln-standard-tick" />
+              <div className="ln-standard-instrument">
+                <div className="ln-standard-track">
+                  <span className="ln-standard-tick ln-standard-tick--short" />
+                  <span className="ln-standard-tick" />
+                  <span className="ln-standard-tick ln-standard-tick--tall" />
+                  <span className="ln-standard-tick" />
+                  <span className="ln-standard-tick ln-standard-tick--short" />
+                  <span className="ln-standard-tick" />
+                  <span className="ln-standard-tick ln-standard-tick--tall" />
+                  <span className="ln-standard-tick" />
+                  <span className="ln-standard-tick ln-standard-tick--short" />
+                </div>
+                <div className="ln-standard-marker">
+                  <span className="ln-standard-marker-core" />
+                  <span className="ln-standard-marker-stem" />
+                  <span className="ln-standard-marker-arm" />
+                  <span className="ln-standard-marker-weight ln-standard-marker-weight--left" />
+                  <span className="ln-standard-marker-weight ln-standard-marker-weight--right" />
+                </div>
+                <div className="ln-standard-scale">
+                  <span>01</span>
+                  <span>05</span>
+                  <span>10</span>
+                </div>
               </div>
               <span className="ln-standard-end">Execution</span>
             </div>
@@ -506,6 +524,11 @@ export default function Landing() {
             <p>A 4-week assessment of your research platforms, data pipelines, API architecture, and decision systems. We deliver a prioritized remediation roadmap with commercial impact estimates.</p>
             <a className="ln-feature-link" href="/service-platform-diagnostic.html">Read breakdown</a>
           </article>
+          <article className="ln-feature-card">
+            <h3>Fractional CPO / CTO</h3>
+            <p>Embedded product and technology leadership. Roadmap ownership, cross-functional governance, and hands-on delivery acceleration.</p>
+            <a className="ln-feature-link" href="/service-fractional-ai-leadership.html">Read breakdown</a>
+          </article>
         </div>
 
         <p className="ln-section-eyebrow" style={{ marginTop: 24 }}>Core</p>
@@ -538,11 +561,6 @@ export default function Landing() {
             <h3>Technology Due Diligence</h3>
             <p>Independent review of technology, data, and AI stacks, including controls, architecture maturity, and execution risk, for leadership and investors.</p>
             <a className="ln-feature-link" href="/service-ai-due-diligence.html">Read breakdown</a>
-          </article>
-          <article className="ln-feature-card">
-            <h3>Fractional CPO / CTO</h3>
-            <p>Embedded product and technology leadership. Roadmap ownership, cross-functional governance, and hands-on delivery acceleration.</p>
-            <a className="ln-feature-link" href="/service-fractional-ai-leadership.html">Read breakdown</a>
           </article>
           <article className="ln-feature-card">
             <h3>Product and Platform Design</h3>

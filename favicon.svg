@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Rayleigh Stark favicon">
+  <rect width="64" height="64" fill="#ffffff" />
+  <circle cx="32" cy="32" r="24" fill="none" stroke="#d1d5db" stroke-width="1.6" />
+  <text
+    x="23.5"
+    y="41"
+    text-anchor="middle"
+    fill="#38bdf8"
+    font-family="Georgia, 'Times New Roman', serif"
+    font-size="31"
+    font-style="italic"
+    font-weight="700"
+    letter-spacing="-1.2"
+  >
+    R
+  </text>
+  <text
+    x="40.5"
+    y="41"
+    text-anchor="middle"
+    fill="#111111"
+    font-family="Georgia, 'Times New Roman', serif"
+    font-size="31"
+    font-style="italic"
+    font-weight="700"
+    letter-spacing="-1.2"
+  >
+    S
+  </text>
+</svg>
