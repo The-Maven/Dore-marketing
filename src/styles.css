@@ -4667,7 +4667,7 @@ button {
   border-radius: 12px;
   border: 1px solid #e5edf3;
   aspect-ratio: 16 / 10;
-  filter: grayscale(100%) contrast(1.04);
+  filter: saturate(1.08) contrast(1.03);
 }
 
 .ln-hero-image-wrap--composite .ln-hero-image--left {
@@ -4676,6 +4676,7 @@ button {
 
 .ln-hero-image-wrap--composite .ln-hero-image--right {
   object-position: center;
+  filter: grayscale(100%) contrast(1.04);
 }
 
 .ln-feature-link {
@@ -4864,7 +4865,7 @@ button {
   display: grid;
   grid-template-columns: minmax(0, 1.45fr) minmax(260px, 0.75fr);
   border: 1px solid #dcdcdc;
-  background: #ffffff;
+  background: linear-gradient(180deg, #ffffff, #f5fbff);
 }
 
 .landing .ln-hero-proof-main,
@@ -4911,12 +4912,12 @@ button {
 .landing .ln-proof-column {
   border: 1px solid #dcdcdc;
   padding: 14px;
-  background: #fbfbfb;
+  background: linear-gradient(180deg, #ffffff, #f7fbfe);
 }
 
 .landing .ln-proof-column--accent {
-  background: rgba(56, 189, 248, 0.06);
-  border-color: rgba(56, 189, 248, 0.32);
+  background: linear-gradient(180deg, rgba(56, 189, 248, 0.18), rgba(56, 189, 248, 0.06));
+  border-color: rgba(56, 189, 248, 0.38);
 }
 
 .landing .ln-proof-label {
@@ -4954,7 +4955,7 @@ button {
   display: flex;
   flex-direction: column;
   gap: 12px;
-  background: #fcfcfc;
+  background: linear-gradient(180deg, #f8fcff, #eef8fd);
 }
 
 .landing .ln-proof-metric {
@@ -5087,7 +5088,7 @@ button {
   min-height: 260px;
   margin: 0;
   border: 1px solid #dcdcdc;
-  background: #f7f7f7;
+  background: #eef7fc;
   overflow: hidden;
 }
 
@@ -5097,10 +5098,12 @@ button {
   min-height: 260px;
   display: block;
   object-fit: cover;
+  filter: saturate(1.06) contrast(1.02);
 }
 
 .landing .ln-atlas-image-card--wide img {
   object-position: center;
+  filter: grayscale(100%) contrast(1.04);
 }
 
 .landing .ln-editorial-ribbon {
@@ -5117,6 +5120,7 @@ button {
   object-fit: cover;
   display: block;
   border-right: 1px solid #dbdbdb;
+  filter: grayscale(100%) contrast(1.04);
 }
 
 .landing .ln-editorial-ribbon img:last-child {
@@ -5277,7 +5281,7 @@ button {
 .landing .ln-service-diagram {
   width: 100%;
   padding: 18px;
-  background: #fafafa;
+  background: linear-gradient(180deg, #ffffff, #f7fbfe);
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -5336,7 +5340,7 @@ button {
 }
 
 .landing .ln-service-diagram--delivery {
-  background: rgba(56, 189, 248, 0.05);
+  background: linear-gradient(180deg, rgba(56, 189, 248, 0.12), rgba(56, 189, 248, 0.03));
 }
 
 .landing .ln-split-media img {

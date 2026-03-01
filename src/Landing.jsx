@@ -1,14 +1,5 @@
 import { useEffect, useState } from "react";
 
-import atlasBrainNetwork from "./images/atlas-brain-network.jpg";
-import atlasFinancialGraph from "./images/atlas-financial-graph.jpg";
-import atlasMobilePayment from "./images/atlas-mobile-payment.jpg";
-import heroMeeting from "./images/hero-meeting.jpg";
-import heroTradingDesk from "./images/hero-trading-desk.jpg";
-import ribbonAnalyticsWorkspace from "./images/ribbon-analytics-workspace.jpg";
-import ribbonControlRoom from "./images/ribbon-control-room.jpg";
-import ribbonStrategySession from "./images/ribbon-strategy-session.jpg";
-
 function WaveMark({ className = "" }) {
   return (
     <svg className={className} viewBox="0 0 44 12" fill="none" aria-hidden="true">
@@ -249,12 +240,12 @@ export default function Landing() {
           <div className="ln-hero-image-wrap ln-hero-image-wrap--composite">
             <img
               className="ln-hero-image ln-hero-image--left"
-              src={heroTradingDesk}
-              alt="Institutional trading desk with multiple market data screens"
+              src="./src/images/hero-clock-abstract.jpg"
+              alt="Abstract close-up of a clock with colored numbers"
             />
             <img
               className="ln-hero-image ln-hero-image--right"
-              src={heroMeeting}
+              src="./src/images/hero-meeting.jpg"
               alt="Professionals in a collaborative business meeting"
             />
           </div>
@@ -409,19 +400,19 @@ export default function Landing() {
         <div className="ln-implementation-atlas-grid">
           <figure className="ln-atlas-image-card ln-atlas-image-card--wide">
             <img
-              src={atlasBrainNetwork}
+              src="./src/images/atlas-brain-network.jpg"
               alt="Stylized brain with neural network connections"
             />
           </figure>
           <figure className="ln-atlas-image-card">
             <img
-              src={atlasMobilePayment}
+              src="./src/images/atlas-mobile-payment.jpg"
               alt="Illustration of mobile payment confirmation"
             />
           </figure>
           <figure className="ln-atlas-image-card">
             <img
-              src={atlasFinancialGraph}
+              src="./src/images/atlas-financial-graph.jpg"
               alt="Financial graph showing upward and downward movement"
             />
           </figure>
@@ -445,9 +436,9 @@ export default function Landing() {
       </section>
 
       <section className="ln-editorial-ribbon" aria-label="Execution visuals">
-        <img src={ribbonStrategySession} alt="Advisory team in strategic execution session" />
-        <img src={ribbonAnalyticsWorkspace} alt="Fintech analytics workspace" />
-        <img src={ribbonControlRoom} alt="High-performance product and engineering control room" />
+        <img src="./src/images/ribbon-strategy-session.jpg" alt="Advisory team in strategic execution session" />
+        <img src="./src/images/ribbon-analytics-workspace.jpg" alt="Fintech analytics workspace" />
+        <img src="./src/images/ribbon-control-room.jpg" alt="High-performance product and engineering control room" />
       </section>
 
       <section className="ln-section" id="services">
