@@ -135,6 +135,33 @@ function ContactForm() {
 export default function Landing() {
   const [menuOpen, setMenuOpen] = useState(false);
   const executiveBriefingHref = CALENDLY_EXEC_BRIEFING_URL.includes("your-link") ? "#contact" : CALENDLY_EXEC_BRIEFING_URL;
+
+  useEffect(() => {
+    const scrollToHashTarget = () => {
+      const hash = window.location.hash;
+      if (!hash) {
+        return;
+      }
+
+      const target = document.querySelector(hash);
+      if (!target) {
+        return;
+      }
+
+      requestAnimationFrame(() => {
+        target.scrollIntoView({ block: "start" });
+      });
+    };
+
+    const timeoutId = window.setTimeout(scrollToHashTarget, 80);
+    window.addEventListener("hashchange", scrollToHashTarget);
+
+    return () => {
+      window.clearTimeout(timeoutId);
+      window.removeEventListener("hashchange", scrollToHashTarget);
+    };
+  }, []);
+
   useEffect(() => {
     if (!menuOpen) {
       return undefined;
@@ -152,6 +179,7 @@ export default function Landing() {
 
   return (
     <div className="landing">
+      <div className="ln-page-frame">
       <nav className="ln-nav">
         <div className="ln-nav-inner">
           <button
@@ -227,7 +255,7 @@ export default function Landing() {
           </p>
 
           <div className="ln-hero-actions">
-            <a className="ln-btn ln-btn--primary" href={executiveBriefingHref}>Book Executive Briefing</a>
+            <a className="ln-btn ln-btn--primary" href="#services">View Services</a>
             <a href="#mandates" className="ln-btn ln-btn--ghost">See Mandate Triggers</a>
           </div>
 
@@ -243,6 +271,77 @@ export default function Landing() {
               alt="Professionals in a collaborative business meeting"
             />
           </div>
+
+          <section className="ln-hero-caseproof" aria-label="Research infrastructure proof point">
+            <div className="ln-hero-caseproof-copy">
+              <span className="ln-proof-kicker">Proof vignette</span>
+              <h2>From analyst-owned scripts to governed research infrastructure</h2>
+              <p>
+                Banking analysts and research teams were backtesting markets and testing index ideas through individually maintained scripts. Each desk had its own version. Results were not reproducible. Client simulations moved only as fast as the one analyst who knew the right script.
+              </p>
+              <div className="ln-hero-caseproof-notes">
+                <article>
+                  <strong>Intervention</strong>
+                  <span>Mapped the live script landscape, identified the 20% of workflows covering 80% of use cases, and productised them first into reusable AWS services.</span>
+                </article>
+                <article>
+                  <strong>Platform shift</strong>
+                  <span>Built shared libraries, governed data pipelines, compute services, and a client-facing simulation layer so scenarios no longer depended on one analyst.</span>
+                </article>
+                <article>
+                  <strong>Adoption</strong>
+                  <span>Did not force migration. Made the new platform the easier path and moved teams across with research-lead support.</span>
+                </article>
+              </div>
+              <div className="ln-hero-caseproof-actions">
+                <a className="ln-feature-link" href="/case-study-governed-research-infrastructure.html">Read full case study</a>
+                <span>Shared standard. Reusable services. Faster client simulations.</span>
+              </div>
+            </div>
+            <div className="ln-hero-caseproof-board">
+              <div className="ln-caseproof-flow">
+                <div>
+                  <b>Analyst scripts</b>
+                  <span>person-dependent logic</span>
+                </div>
+                <div>
+                  <b>Pattern mapping</b>
+                  <span>20% covering 80%</span>
+                </div>
+                <div>
+                  <b>Shared libraries</b>
+                  <span>versioned research logic</span>
+                </div>
+                <div>
+                  <b>AWS services</b>
+                  <span>governed compute + data</span>
+                </div>
+                <div>
+                  <b>Client simulation</b>
+                  <span>direct scenario testing</span>
+                </div>
+                <div>
+                  <b>Auditable outputs</b>
+                  <span>reproducible results</span>
+                </div>
+              </div>
+              <div className="ln-caseproof-visuals">
+                <figure className="ln-caseproof-panel">
+                  <img src="./src/images/atlas-financial-graph.jpg" alt="Financial chart illustration" />
+                  <figcaption>Research demand moved from desk-owned logic to reusable simulation infrastructure.</figcaption>
+                </figure>
+                <figure className="ln-caseproof-panel ln-caseproof-panel--accent">
+                  <img src="./src/images/service-data-infrastructure-2.jpg" alt="Data centre cabling and infrastructure" />
+                  <figcaption>Shared services, pipelines, controls, and compute replaced fragmented analyst scripts.</figcaption>
+                </figure>
+              </div>
+              <div className="ln-caseproof-results">
+                <div><strong>Faster turnaround</strong><span>Client simulation requests no longer waited on a specific analyst.</span></div>
+                <div><strong>Shared standard</strong><span>Teams stopped duplicating logic and started using versioned libraries.</span></div>
+                <div><strong>Leadership visibility</strong><span>Research activity became visible, attributable, and governable.</span></div>
+              </div>
+            </div>
+          </section>
 
           <div className="ln-hero-proof" aria-label="Decision infrastructure system map">
             <div className="ln-hero-proof-main">
@@ -553,6 +652,11 @@ export default function Landing() {
             <p>Automated release logic and dispute triage for multi-party escrow, covering fiat settlement, digital assets, and cross-border holding structures.</p>
             <a className="ln-feature-link" href="/service-escrow-intelligence-automation.html">Read breakdown</a>
           </article>
+          <article className="ln-feature-card">
+            <h3>Cloud Cost Control and Infrastructure Efficiency</h3>
+            <p>Cloud cost discipline across AWS, on-prem, and Kubernetes environments, with architectural fixes that reduce waste without weakening resilience.</p>
+            <a className="ln-feature-link" href="/service-cloud-cost-control.html">Read breakdown</a>
+          </article>
         </div>
 
         <p className="ln-section-eyebrow" style={{ marginTop: 24 }}>Strategic</p>
@@ -571,6 +675,11 @@ export default function Landing() {
             <h3>M&amp;A and Advisory Intelligence</h3>
             <p>Automated diligence extraction and deal signal scoring for CIM, QoE, NWC, TSA, SPA, carve-out, and PMI workflows.</p>
             <a className="ln-feature-link" href="/service-ma-advisory-intelligence.html">Read breakdown</a>
+          </article>
+          <article className="ln-feature-card">
+            <h3>Private Markets Technology, Diligence, and Research</h3>
+            <p>Technology diligence and research support for private markets teams evaluating platforms, operating risk, data maturity, and execution readiness.</p>
+            <a className="ln-feature-link" href="/service-private-markets-technology.html">Read breakdown</a>
           </article>
         </div>
       </section>
@@ -876,6 +985,7 @@ export default function Landing() {
           </div>
         </div>
       </footer>
+      </div>
     </div>
   );
 }

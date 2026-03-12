@@ -1,0 +1,373 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/svg+xml" href="./favicon.svg" />
+    <title>Case Study | Governed Research Infrastructure | Rayleigh Stark</title>
+    <link rel="stylesheet" href="./pages.css" />
+    <style>
+      :root {
+        --case-bg: #0a0a0a;
+        --case-surface: #111111;
+        --case-panel: #151515;
+        --case-ink: #f5f5f5;
+        --case-muted: rgba(245, 245, 245, 0.74);
+        --case-line: rgba(255, 255, 255, 0.1);
+        --case-accent: #38bdf8;
+        --case-danger: #b91c1c;
+      }
+
+      body {
+        background: var(--case-bg);
+        color: var(--case-ink);
+      }
+
+      .page {
+        max-width: 1220px;
+        padding-top: 28px;
+      }
+
+      .topbar {
+        border-bottom-color: var(--case-line);
+      }
+
+      .back {
+        border-color: rgba(56, 189, 248, 0.26);
+        color: var(--case-ink);
+      }
+
+      .back:hover {
+        background: rgba(255, 255, 255, 0.04);
+      }
+
+      .brand .brand-new {
+        color: #f5f5f5;
+      }
+
+      .lead,
+      .section p,
+      .card p {
+        color: var(--case-muted);
+      }
+
+      .hero-image,
+      .section,
+      .card {
+        border-color: var(--case-line);
+        background: var(--case-surface);
+      }
+
+      .hero-image img {
+        height: 440px;
+        object-position: center;
+      }
+
+      .case-intro {
+        display: grid;
+        grid-template-columns: minmax(0, 1.2fr) minmax(320px, 0.8fr);
+        gap: 22px;
+        margin-bottom: 18px;
+      }
+
+      .case-badges {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin: 14px 0 0;
+      }
+
+      .case-badges span {
+        padding: 7px 10px;
+        border: 1px solid var(--case-line);
+        color: var(--case-ink);
+        font-size: 12px;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+
+      .case-scoreboard {
+        display: grid;
+        gap: 12px;
+      }
+
+      .case-scoreboard div {
+        border: 1px solid var(--case-line);
+        background: var(--case-panel);
+        padding: 16px;
+      }
+
+      .case-scoreboard strong {
+        display: block;
+        margin-bottom: 4px;
+        font-size: 1.05rem;
+      }
+
+      .case-scoreboard span {
+        color: var(--case-muted);
+        font-size: 0.95rem;
+      }
+
+      .case-diagram {
+        display: grid;
+        gap: 14px;
+        margin-top: 12px;
+      }
+
+      .case-flow {
+        display: grid;
+        grid-template-columns: repeat(6, minmax(0, 1fr));
+        gap: 10px;
+      }
+
+      .case-flow article {
+        position: relative;
+        padding: 14px;
+        border: 1px solid var(--case-line);
+        background: linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.01));
+        min-height: 118px;
+      }
+
+      .case-flow article:not(:last-child)::after {
+        content: "";
+        position: absolute;
+        top: 50%;
+        right: -10px;
+        width: 10px;
+        height: 1px;
+        background: rgba(185, 28, 28, 0.8);
+      }
+
+      .case-flow b {
+        display: block;
+        margin-bottom: 8px;
+        color: var(--case-ink);
+      }
+
+      .case-flow span {
+        color: var(--case-muted);
+        font-size: 0.92rem;
+      }
+
+      .case-visual-grid {
+        display: grid;
+        grid-template-columns: 1.1fr 0.9fr;
+        gap: 14px;
+      }
+
+      .case-visual {
+        border: 1px solid var(--case-line);
+        background: var(--case-panel);
+        overflow: hidden;
+      }
+
+      .case-visual img {
+        width: 100%;
+        height: 260px;
+        object-fit: cover;
+        display: block;
+      }
+
+      .case-visual figcaption {
+        padding: 14px;
+        color: var(--case-muted);
+        font-size: 0.94rem;
+      }
+
+      .case-chart {
+        padding: 18px 16px 16px;
+      }
+
+      .case-chart h2 {
+        margin: 0 0 12px;
+      }
+
+      .case-chart-bars {
+        display: grid;
+        gap: 12px;
+      }
+
+      .case-chart-bars div {
+        display: grid;
+        gap: 6px;
+      }
+
+      .case-chart-bars span {
+        display: flex;
+        justify-content: space-between;
+        color: var(--case-muted);
+        font-size: 0.92rem;
+      }
+
+      .case-chart-bar {
+        height: 12px;
+        border: 1px solid var(--case-line);
+        background: #0c0c0c;
+        position: relative;
+      }
+
+      .case-chart-bar::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(90deg, var(--case-accent), rgba(185, 28, 28, 0.92));
+      }
+
+      .case-chart-bar--slow::after {
+        width: 32%;
+      }
+
+      .case-chart-bar--fast::after {
+        width: 82%;
+      }
+
+      .case-chart-bar--shared::after {
+        width: 88%;
+      }
+
+      .case-chart-bar--visibility::after {
+        width: 76%;
+      }
+
+      @media (max-width: 980px) {
+        .case-intro,
+        .case-visual-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .case-flow {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+
+        .case-flow article:not(:last-child)::after {
+          display: none;
+        }
+      }
+
+      @media (max-width: 720px) {
+        .hero-image img {
+          height: 280px;
+        }
+
+        .case-flow {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main class="page">
+      <div class="topbar">
+        <a class="brand" href="/">
+          <span class="brand-wordmark">Rayleigh<span class="brand-new"> Stark</span></span>
+          <svg class="brand-wave" viewBox="0 0 44 12" fill="none" aria-hidden="true"><path d="M1 6h7l3-4 4 8 4-6h6l3-3 3 6h10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" /></svg>
+        </a>
+        <a class="back" href="index.html">Back to main site</a>
+      </div>
+
+      <div class="case-intro">
+        <div>
+          <h1>From analyst-owned scripts to governed research infrastructure</h1>
+          <p class="lead">A research and simulation workflow used by banking analysts had become person-dependent, slow, and impossible to govern cleanly. We took ownership of standardising it into reusable AWS services, shared libraries, and a client-facing simulation layer that produced consistent, auditable outputs.</p>
+          <div class="case-badges">
+            <span>Research workflow</span>
+            <span>AWS services</span>
+            <span>Shared libraries</span>
+            <span>Client simulation</span>
+            <span>Auditability</span>
+          </div>
+        </div>
+        <div class="case-scoreboard">
+          <div><strong>Problem</strong><span>Fragmented scripts, analyst dependency, inconsistent results, and slow client turnaround.</span></div>
+          <div><strong>Task</strong><span>Turn person-dependent research tooling into a governed platform any team or client could use.</span></div>
+          <div><strong>Result</strong><span>Faster research turnaround, direct simulation access, shared standards, and leadership visibility.</span></div>
+        </div>
+      </div>
+
+      <div class="hero-image">
+        <img src="./src/images/service-data-infrastructure-2.jpg" alt="Structured cabling and governed infrastructure environment" />
+      </div>
+
+      <section class="section">
+        <h2>The starting point</h2>
+        <p>Analysts and in-house research teams were running backtesting and market research through individually maintained scripts. Each team had its own version. There was no shared standard, no reproducibility across desks, and client requests to simulate a new market opportunity or test an index methodology slowed down whenever the one person who knew the script was unavailable.</p>
+      </section>
+
+      <section class="section">
+        <h2>The operating move</h2>
+        <p>The first step was not replacing everything at once. We mapped the live landscape, identified who was running what, how often, where the common patterns sat, and which workflows were producing the most friction. Then we focused on the 20% of scripts driving 80% of the use cases and productised those first.</p>
+        <div class="case-diagram">
+          <div class="case-flow">
+            <article><b>Desk-owned scripts</b><span>Different copies, different logic, different results.</span></article>
+            <article><b>Pattern mapping</b><span>Usage, frequency, bottlenecks, and repeat demand surfaced.</span></article>
+            <article><b>Priority selection</b><span>20% of scripts covering 80% of live use cases.</span></article>
+            <article><b>Shared libraries</b><span>Versioned research logic callable across teams.</span></article>
+            <article><b>AWS services</b><span>Governed data, compute, and control layers replacing desk-local code.</span></article>
+            <article><b>Client simulation layer</b><span>Direct scenario testing without waiting for analyst mediation.</span></article>
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <h2>How it was built</h2>
+        <div class="grid">
+          <article class="card">
+            <h3>Productisation, not script clean-up</h3>
+            <p>The objective was not tidier code. It was a reusable service layer with clean interfaces, shared standards, and consistent outputs teams could trust.</p>
+          </article>
+          <article class="card">
+            <h3>Infrastructure with governance</h3>
+            <p>We worked with the technology team to build the data pipelines, compute layer, and governance controls needed to make the new services stable and auditable.</p>
+          </article>
+          <article class="card">
+            <h3>Research-led standards</h3>
+            <p>Research leads helped define what standard looked like so the platform reflected actual analytical practice instead of top-down theory.</p>
+          </article>
+          <article class="card">
+            <h3>Adoption by better path</h3>
+            <p>Migration was not forced. The new platform became the easier path, with support from research leads and operator-level guidance during the transition.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="section">
+        <h2>Visual proof</h2>
+        <div class="case-visual-grid">
+          <figure class="case-visual">
+            <img src="./src/images/atlas-financial-graph.jpg" alt="Financial graph illustration" />
+            <figcaption>Research demand shifted from analyst-owned script execution to a shared simulation and decision-support layer.</figcaption>
+          </figure>
+          <div class="case-visual case-chart">
+            <h2>What changed operationally</h2>
+            <div class="case-chart-bars">
+              <div>
+                <span><b>Client simulation access</b><i>direct rather than analyst-dependent</i></span>
+                <div class="case-chart-bar case-chart-bar--fast"></div>
+              </div>
+              <div>
+                <span><b>Shared research logic</b><i>versioned instead of duplicated</i></span>
+                <div class="case-chart-bar case-chart-bar--shared"></div>
+              </div>
+              <div>
+                <span><b>Leadership visibility</b><i>what was run, by whom, and why</i></span>
+                <div class="case-chart-bar case-chart-bar--visibility"></div>
+              </div>
+              <div>
+                <span><b>Old turnaround pattern</b><i>analyst bottleneck</i></span>
+                <div class="case-chart-bar case-chart-bar--slow"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <h2>Result</h2>
+        <p>Research turnaround dropped materially. Client simulation requests that previously required analyst involvement could now be handled directly. Teams stopped duplicating work because they were drawing from a shared, versioned library, and leadership gained visibility for the first time into what research was being run, by whom, and how the results were being used.</p>
+      </section>
+
+      <section class="section"><p>Rayleigh Stark is a trading name of Premium Network and Services Ltd.</p></section>
+      <a class="cta" href="index.html#contact">Book a conversation</a>
+    </main>
+  </body>
+</html>

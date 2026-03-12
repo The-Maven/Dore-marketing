@@ -3523,7 +3523,7 @@ button {
 
 /* ── Landing Editorial Override (Conde Nast-inspired) ── */
 .landing {
-  background: #ffffff;
+  background: #e3e3e3;
   color: #111111;
 }
 
@@ -3611,7 +3611,7 @@ button {
 
   .landing .ln-nav-drawer {
     display: block;
-    max-width: 1200px;
+    max-width: 1480px;
     margin: 0 auto;
     padding: 0 var(--site-margin);
     max-height: 0;
@@ -3646,9 +3646,35 @@ button {
   background: #ffffff;
 }
 
+.landing {
+  --page-frame-max: min(1720px, calc(100vw - 24px));
+  background: #e3e3e3;
+}
+
+.landing .ln-page-frame {
+  width: var(--page-frame-max);
+  margin: 0 auto;
+  min-height: 100vh;
+  background: #ffffff;
+  border-left: 1px solid #d0d0d0;
+  border-right: 1px solid #d0d0d0;
+}
+
+.landing .ln-nav-inner,
+.landing .ln-nav-drawer,
+.landing .ln-trust-row,
+.landing .ln-logo-band-inner,
+.landing .ln-footer-inner,
+.landing .ln-footer-bottom,
+.landing .ln-implementation-atlas,
+.landing .ln-manifesto-inner,
+.landing .ln-about-operator-inner {
+  max-width: 1480px;
+}
+
 .landing .ln-hero {
   text-align: left;
-  max-width: 1320px;
+  max-width: 1480px;
   padding: 72px var(--site-margin) 0;
 }
 
@@ -3755,7 +3781,7 @@ button {
 }
 
 .landing .ln-section {
-  max-width: 1320px;
+  max-width: 1480px;
   padding-top: 84px;
   padding-bottom: 84px;
 }
@@ -4882,7 +4908,7 @@ button {
 
 /* Editorial hardening: sharp, high-contrast, structured */
 .landing {
-  background: #ffffff;
+  background: #e3e3e3;
   color: #111111;
 }
 
@@ -5053,6 +5079,177 @@ button {
   grid-template-columns: minmax(0, 1.45fr) minmax(260px, 0.75fr);
   border: 1px solid #dcdcdc;
   background: linear-gradient(180deg, #ffffff, #f5fbff);
+}
+
+.landing .ln-hero-caseproof {
+  margin-top: 34px;
+  display: grid;
+  grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background:
+    radial-gradient(circle at top right, rgba(56, 189, 248, 0.12), transparent 36%),
+    linear-gradient(180deg, #0b0b0c, #121317);
+  color: #f4f4f4;
+}
+
+.landing .ln-hero-caseproof-copy,
+.landing .ln-hero-caseproof-board {
+  padding: 22px;
+}
+
+.landing .ln-hero-caseproof-copy {
+  border-right: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.landing .ln-hero-caseproof .ln-proof-kicker {
+  color: rgba(255, 255, 255, 0.56);
+}
+
+.landing .ln-hero-caseproof h2 {
+  margin: 8px 0 14px;
+  font-family: "Didot", "Bodoni MT", "Iowan Old Style", "Times New Roman", serif;
+  font-size: clamp(1.8rem, 1.2rem + 1.7vw, 2.7rem);
+  font-weight: 500;
+  line-height: 1.04;
+  letter-spacing: -0.02em;
+}
+
+.landing .ln-hero-caseproof-copy > p {
+  margin: 0;
+  color: rgba(244, 244, 244, 0.76);
+  font-size: 1rem;
+  line-height: 1.7;
+}
+
+.landing .ln-hero-caseproof-notes {
+  margin-top: 18px;
+  display: grid;
+  gap: 12px;
+}
+
+.landing .ln-hero-caseproof-notes article,
+.landing .ln-caseproof-results div {
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.03);
+  padding: 14px;
+}
+
+.landing .ln-hero-caseproof-notes strong,
+.landing .ln-caseproof-results strong {
+  display: block;
+  margin-bottom: 6px;
+  color: #ffffff;
+  font-size: 0.92rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.landing .ln-hero-caseproof-notes span,
+.landing .ln-caseproof-results span {
+  display: block;
+  color: rgba(244, 244, 244, 0.72);
+  font-size: 0.94rem;
+  line-height: 1.6;
+}
+
+.landing .ln-hero-caseproof-actions {
+  margin-top: 18px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px 18px;
+  align-items: center;
+}
+
+.landing .ln-hero-caseproof-actions .ln-feature-link {
+  color: #7dd3fc;
+}
+
+.landing .ln-hero-caseproof-actions span {
+  color: rgba(244, 244, 244, 0.55);
+  font-size: 0.82rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.landing .ln-caseproof-flow {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.landing .ln-caseproof-flow div {
+  position: relative;
+  min-height: 112px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.03);
+  padding: 14px;
+}
+
+.landing .ln-caseproof-flow b {
+  display: block;
+  margin-bottom: 8px;
+  color: #ffffff;
+  font-size: 0.95rem;
+}
+
+.landing .ln-caseproof-flow span {
+  display: block;
+  color: rgba(244, 244, 244, 0.68);
+  font-size: 0.88rem;
+  line-height: 1.55;
+}
+
+.landing .ln-caseproof-flow div::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  right: -6px;
+  width: 12px;
+  height: 1px;
+  background: rgba(185, 28, 28, 0.9);
+}
+
+.landing .ln-caseproof-flow div:nth-child(3n)::after {
+  display: none;
+}
+
+.landing .ln-caseproof-visuals {
+  margin-top: 14px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.landing .ln-caseproof-panel {
+  margin: 0;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.landing .ln-caseproof-panel img {
+  width: 100%;
+  height: 168px;
+  object-fit: cover;
+  display: block;
+  filter: saturate(0.92) contrast(1.02);
+}
+
+.landing .ln-caseproof-panel--accent img {
+  filter: saturate(0.84) contrast(1.05);
+}
+
+.landing .ln-caseproof-panel figcaption {
+  padding: 12px;
+  color: rgba(244, 244, 244, 0.68);
+  font-size: 0.86rem;
+  line-height: 1.5;
+}
+
+.landing .ln-caseproof-results {
+  margin-top: 14px;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
 }
 
 .landing .ln-hero-proof-main,
@@ -5332,6 +5529,9 @@ button {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 0;
+  max-width: 1480px;
+  margin-left: auto;
+  margin-right: auto;
   border-top: 1px solid #dbdbdb;
   border-bottom: 1px solid #dbdbdb;
 }
@@ -5959,17 +6159,42 @@ button {
     grid-template-columns: 1fr;
   }
 
+  .landing .ln-hero-caseproof {
+    grid-template-columns: 1fr;
+  }
+
+  .landing .ln-hero-caseproof-copy {
+    border-right: 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  }
+
   .landing .ln-hero-proof-main {
     border-right: 0;
     border-bottom: 1px solid #dcdcdc;
   }
 
-  .landing .ln-hero-proof-grid,
+  .landing .ln-caseproof-results,
   .landing .ln-implementation-atlas-grid,
   .landing .ln-service-lanes,
   .landing .ln-delivery-loop,
   .landing .ln-delivery-controls {
     grid-template-columns: 1fr;
+  }
+
+  .landing .ln-hero-proof-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .landing .ln-proof-column:first-child {
+    grid-column: 1 / -1;
+  }
+
+  .landing .ln-caseproof-flow {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .landing .ln-caseproof-flow div::after {
+    display: none;
   }
 }
 
@@ -6187,9 +6412,34 @@ button {
     overflow-x: hidden;
   }
 
+  .landing {
+    --page-frame-max: 100vw;
+    --site-margin: 8px;
+  }
+
+  .landing .ln-nav {
+    position: fixed;
+    top: 0;
+    left: 50%;
+    right: auto;
+    width: var(--page-frame-max);
+    transform: translateX(-50%);
+    z-index: 140;
+  }
+
+  .landing .ln-page-frame {
+    width: 100%;
+    border-left: 0;
+    border-right: 0;
+  }
+
+  .landing .ln-hero-area {
+    padding-top: 112px;
+  }
+
   .landing .ln-section,
   .landing .ln-contact {
-    scroll-margin-top: 112px;
+    scroll-margin-top: 140px;
   }
 
   .landing .ln-nav-inner {
@@ -6197,7 +6447,9 @@ button {
     min-height: 0;
     display: grid;
     grid-template-columns: auto minmax(0, 1fr);
-    gap: 10px;
+    gap: 8px;
+    padding-left: var(--site-margin);
+    padding-right: var(--site-margin);
     padding-top: 10px;
     padding-bottom: 12px;
   }
@@ -6290,6 +6542,42 @@ button {
   .landing .ln-hero-proof {
     margin-left: 0;
     margin-right: 0;
+  }
+
+  .landing .ln-hero-caseproof {
+    margin-left: 0;
+    margin-right: 0;
+  }
+
+  .landing .ln-caseproof-visuals {
+    grid-template-columns: 1fr;
+  }
+
+  .landing .ln-hero-proof-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 8px;
+  }
+
+  .landing .ln-proof-column {
+    padding: 12px;
+  }
+
+  .landing .ln-proof-column:first-child {
+    grid-column: 1 / -1;
+  }
+
+  .landing .ln-caseproof-flow {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 8px;
+  }
+
+  .landing .ln-caseproof-flow div {
+    min-height: 0;
+  }
+
+  .landing .ln-proof-stack span {
+    padding: 8px 10px;
+    font-size: 12px;
   }
 
   .landing .ln-trust-row {
