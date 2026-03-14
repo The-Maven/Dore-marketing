@@ -4,3 +4,33 @@
 
 [build.environment]
   NODE_VERSION = "20"
+
+[[redirects]]
+  from = "/contact"
+  to = "/contact.html"
+  status = 301
+
+[[redirects]]
+  from = "/terms"
+  to = "/terms.html"
+  status = 301
+
+[[redirects]]
+  from = "/contact/"
+  to = "/contact.html"
+  status = 301
+
+[[redirects]]
+  from = "/terms/"
+  to = "/terms.html"
+  status = 301
+
+[[redirects]]
+  from = "/operator-notes"
+  to = "/operator-notes.html"
+  status = 301
+
+[[redirects]]
+  from = "/operator-notes/"
+  to = "/operator-notes.html"
+  status = 301

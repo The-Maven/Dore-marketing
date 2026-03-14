@@ -5,6 +5,10 @@
   --muted: #4a4a4a;
   --line: #dddddd;
   --accent: #111111;
+  --site-margin: clamp(2rem, 1.08rem + 3.92vw, 5rem);
+  --page-frame-max: min(1720px, calc(100vw - 24px));
+  --page-topbar-height: 80px;
+  --page-topbar-height-mobile: 72px;
 }
 
 * {
@@ -13,7 +17,7 @@
 
 body {
   margin: 0;
-  background: var(--bg);
+  background: #e3e3e3;
   color: var(--ink);
   font-family: "Inter", "Helvetica Neue", Arial, sans-serif;
   line-height: 1.55;
@@ -25,24 +29,40 @@ a {
 }
 
 .page {
-  max-width: 1160px;
+  width: var(--page-frame-max);
   margin: 0 auto;
-  padding: 26px 20px 60px;
+  min-height: 100vh;
+  background: #ffffff;
+  border-left: 1px solid #d0d0d0;
+  border-right: 1px solid #d0d0d0;
+  padding: calc(26px + var(--page-topbar-height) + 26px) var(--site-margin) 60px;
 }
 
 .topbar {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  gap: 16px;
+  min-height: var(--page-topbar-height);
   border-bottom: 1px solid var(--line);
-  padding-bottom: 12px;
-  margin-bottom: 26px;
+  padding: 0 var(--site-margin);
+  margin-bottom: 0;
+  position: fixed;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: var(--page-frame-max);
+  border-left: 1px solid #d0d0d0;
+  border-right: 1px solid #d0d0d0;
+  z-index: 220;
+  background: #ffffff;
 }
 
 .brand {
   display: inline-flex;
   align-items: center;
   gap: 7px;
+  min-width: 0;
   font-weight: 700;
   letter-spacing: 0.01em;
   color: #38bdf8;
@@ -82,6 +102,7 @@ a {
   border: 1px solid var(--line);
   padding: 8px 12px;
   font-size: 14px;
+  white-space: nowrap;
 }
 
 .back:hover {
@@ -199,6 +220,54 @@ h1 {
 
   .grid {
     grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 640px) {
+  .page {
+    padding-top: calc(26px + var(--page-topbar-height-mobile) + 22px);
+  }
+
+  .topbar {
+    min-height: var(--page-topbar-height-mobile);
+  }
+
+  .back {
+    font-size: 12px;
+    padding: 7px 10px;
+  }
+}
+
+@media (max-width: 760px) {
+  :root {
+    --page-frame-max: 100vw;
+    --site-margin: 10px;
+  }
+
+  .page {
+    border-left: 0;
+    border-right: 0;
+    width: 100%;
+  }
+
+  .topbar {
+    border-left: 0;
+    border-right: 0;
+    width: 100%;
+    gap: 10px;
+  }
+
+  .brand {
+    font-size: 15px;
+  }
+
+  .brand-wave {
+    width: 38px;
+  }
+
+  .back {
+    font-size: 11px;
+    padding: 7px 9px;
   }
 }
 

@@ -3,6 +3,17 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Rayleigh Stark case study showing operator-led execution across AI, data platforms, and financial infrastructure workflows." />
+    <link rel="canonical" href="https://rayleighstark.com/case-study-governed-research-infrastructure" />
+    <meta property="og:title" content="Case Study | Governed Research Infrastructure | Rayleigh Stark" />
+    <meta property="og:description" content="Rayleigh Stark case study showing operator-led execution across AI, data platforms, and financial infrastructure workflows." />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://rayleighstark.com/case-study-governed-research-infrastructure" />
+    <meta property="og:image" content="https://rayleighstark.com/og-image.png" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Case Study | Governed Research Infrastructure | Rayleigh Stark" />
+    <meta name="twitter:description" content="Rayleigh Stark case study showing operator-led execution across AI, data platforms, and financial infrastructure workflows." />
+    <meta name="twitter:image" content="https://rayleighstark.com/og-image.png" />
     <link rel="icon" type="image/svg+xml" href="./favicon.svg" />
     <title>Case Study | Governed Research Infrastructure | Rayleigh Stark</title>
     <link rel="stylesheet" href="./pages.css" />
@@ -24,12 +35,17 @@
       }
 
       .page {
-        max-width: 1220px;
-        padding-top: 28px;
+        background: var(--case-bg);
+        border-left-color: var(--case-line);
+        border-right-color: var(--case-line);
+        padding-top: calc(26px + var(--page-topbar-height) + 26px);
       }
 
       .topbar {
         border-bottom-color: var(--case-line);
+        background: var(--case-bg);
+        border-left-color: var(--case-line);
+        border-right-color: var(--case-line);
       }
 
       .back {
@@ -245,6 +261,10 @@
       }
 
       @media (max-width: 720px) {
+        .page {
+          padding-top: calc(26px + var(--page-topbar-height-mobile) + 22px);
+        }
+
         .hero-image img {
           height: 280px;
         }
@@ -268,7 +288,7 @@
       <div class="case-intro">
         <div>
           <h1>From analyst-owned scripts to governed research infrastructure</h1>
-          <p class="lead">A research and simulation workflow used by banking analysts had become person-dependent, slow, and impossible to govern cleanly. We took ownership of standardising it into reusable AWS services, shared libraries, and a client-facing simulation layer that produced consistent, auditable outputs.</p>
+          <p class="lead">A research and simulation workflow used by analysts had become person-dependent, slow, and impossible to govern cleanly. We took ownership of standardising it into reusable AWS services, shared libraries, and a client-facing simulation layer that produced consistent, auditable outputs.</p>
           <div class="case-badges">
             <span>Research workflow</span>
             <span>AWS services</span>
@@ -366,8 +386,8 @@
         <p>Research turnaround dropped materially. Client simulation requests that previously required analyst involvement could now be handled directly. Teams stopped duplicating work because they were drawing from a shared, versioned library, and leadership gained visibility for the first time into what research was being run, by whom, and how the results were being used.</p>
       </section>
 
-      <section class="section"><p>Rayleigh Stark is a trading name of Premium Network and Services Ltd.</p></section>
-      <a class="cta" href="index.html#contact">Book a conversation</a>
+      <section class="section"><p>Rayleigh Stark is a trading name of Premium Services & Network UK Ltd.</p></section>
+      <a class="cta" href="index.html#contact">Discuss a mandate</a>
     </main>
   </body>
 </html>

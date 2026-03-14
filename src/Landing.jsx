@@ -102,10 +102,11 @@ function CompassIcon() {
 }
 
 const CALENDLY_EXEC_BRIEFING_URL = "https://calendly.com/tonykkwawu/30min";
-const CALENDLY_DIAGNOSTIC_URL = "https://calendly.com/tonykkwawu/30min";
+const CONTACT_EMAIL = "contact@rayleighstark.com";
 const NAV_LINKS = [
   { href: "/about.html", label: "About" },
   { href: "#services", label: "Services" },
+  { href: "/operator-notes.html", label: "Operator Notes" },
   { href: "#approach", label: "Approach" },
   { href: "#journey", label: "Impact" },
   { href: "#contact", label: "Contact" }
@@ -118,22 +119,26 @@ function ContactForm() {
     <section className="ln-section ln-contact" id="contact">
       <span className="ln-sec-num" aria-hidden="true">10</span>
       <p className="ln-section-eyebrow">Let&apos;s Talk</p>
-      <h2 className="ln-section-heading">Book a 30-minute session directly</h2>
+      <h2 className="ln-section-heading">Schedule a conversation</h2>
       <p className="ln-section-sub">
         Pick a time and we&apos;ll discuss your priorities across research platforms, data infrastructure, AI systems, and fintech execution.
       </p>
 
       <div className="ln-contact-actions">
         <a className="ln-btn ln-btn--primary" href={bookingHref} target="_blank" rel="noopener noreferrer">
-          Book Directly
+          Discuss a Mandate
         </a>
       </div>
+      <p className="ln-contact-email">
+        <a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a>
+      </p>
     </section>
   );
 }
 
 export default function Landing() {
   const [menuOpen, setMenuOpen] = useState(false);
+  const [openServiceGroup, setOpenServiceGroup] = useState("entry");
   const executiveBriefingHref = CALENDLY_EXEC_BRIEFING_URL.includes("your-link") ? "#contact" : CALENDLY_EXEC_BRIEFING_URL;
 
   useEffect(() => {
@@ -206,7 +211,7 @@ export default function Landing() {
             ))}
           </div>
           <a className="ln-btn ln-btn--outline ln-btn--sm" href={executiveBriefingHref}>
-            Book Executive Briefing
+            Discuss a Mandate
           </a>
         </div>
         <div
@@ -251,12 +256,12 @@ export default function Landing() {
           </h1>
 
           <p className="ln-hero-sub">
-            Built in financial markets and applied where decisions carry consequence. We step into complex product, data, AI, and platform mandates, diagnose what is broken, and help leadership deliver governed systems that hold up in production.
+            Operator-led advisory on AI, data platforms, product systems, and financial infrastructure. Built on Wall Street and applied to fintech, research, and complex operating environments.
           </p>
 
           <div className="ln-hero-actions">
             <a className="ln-btn ln-btn--primary" href="#services">View Services</a>
-            <a href="#mandates" className="ln-btn ln-btn--ghost">See Mandate Triggers</a>
+            <a href="#approach" className="ln-btn ln-btn--ghost">How We Work</a>
           </div>
 
           <div className="ln-hero-image-wrap ln-hero-image-wrap--composite">
@@ -271,129 +276,6 @@ export default function Landing() {
               alt="Professionals in a collaborative business meeting"
             />
           </div>
-
-          <section className="ln-hero-caseproof" aria-label="Research infrastructure proof point">
-            <div className="ln-hero-caseproof-copy">
-              <span className="ln-proof-kicker">Proof vignette</span>
-              <h2>From analyst-owned scripts to governed research infrastructure</h2>
-              <p>
-                Banking analysts and research teams were backtesting markets and testing index ideas through individually maintained scripts. Each desk had its own version. Results were not reproducible. Client simulations moved only as fast as the one analyst who knew the right script.
-              </p>
-              <div className="ln-hero-caseproof-notes">
-                <article>
-                  <strong>Intervention</strong>
-                  <span>Mapped the live script landscape, identified the 20% of workflows covering 80% of use cases, and productised them first into reusable AWS services.</span>
-                </article>
-                <article>
-                  <strong>Platform shift</strong>
-                  <span>Built shared libraries, governed data pipelines, compute services, and a client-facing simulation layer so scenarios no longer depended on one analyst.</span>
-                </article>
-                <article>
-                  <strong>Adoption</strong>
-                  <span>Did not force migration. Made the new platform the easier path and moved teams across with research-lead support.</span>
-                </article>
-              </div>
-              <div className="ln-hero-caseproof-actions">
-                <a className="ln-feature-link" href="/case-study-governed-research-infrastructure.html">Read full case study</a>
-                <span>Shared standard. Reusable services. Faster client simulations.</span>
-              </div>
-            </div>
-            <div className="ln-hero-caseproof-board">
-              <div className="ln-caseproof-flow">
-                <div>
-                  <b>Analyst scripts</b>
-                  <span>person-dependent logic</span>
-                </div>
-                <div>
-                  <b>Pattern mapping</b>
-                  <span>20% covering 80%</span>
-                </div>
-                <div>
-                  <b>Shared libraries</b>
-                  <span>versioned research logic</span>
-                </div>
-                <div>
-                  <b>AWS services</b>
-                  <span>governed compute + data</span>
-                </div>
-                <div>
-                  <b>Client simulation</b>
-                  <span>direct scenario testing</span>
-                </div>
-                <div>
-                  <b>Auditable outputs</b>
-                  <span>reproducible results</span>
-                </div>
-              </div>
-              <div className="ln-caseproof-visuals">
-                <figure className="ln-caseproof-panel">
-                  <img src="./src/images/atlas-financial-graph.jpg" alt="Financial chart illustration" />
-                  <figcaption>Research demand moved from desk-owned logic to reusable simulation infrastructure.</figcaption>
-                </figure>
-                <figure className="ln-caseproof-panel ln-caseproof-panel--accent">
-                  <img src="./src/images/service-data-infrastructure-2.jpg" alt="Data centre cabling and infrastructure" />
-                  <figcaption>Shared services, pipelines, controls, and compute replaced fragmented analyst scripts.</figcaption>
-                </figure>
-              </div>
-              <div className="ln-caseproof-results">
-                <div><strong>Faster turnaround</strong><span>Client simulation requests no longer waited on a specific analyst.</span></div>
-                <div><strong>Shared standard</strong><span>Teams stopped duplicating logic and started using versioned libraries.</span></div>
-                <div><strong>Leadership visibility</strong><span>Research activity became visible, attributable, and governable.</span></div>
-              </div>
-            </div>
-          </section>
-
-          <div className="ln-hero-proof" aria-label="Decision infrastructure system map">
-            <div className="ln-hero-proof-main">
-              <div className="ln-hero-proof-head">
-                <span className="ln-proof-kicker">Operator system map</span>
-                <span className="ln-proof-status">Policy-bound</span>
-              </div>
-              <div className="ln-hero-proof-grid">
-                <article className="ln-proof-column">
-                  <span className="ln-proof-label">Signals</span>
-                  <div className="ln-proof-stack">
-                    <span>Market data</span>
-                    <span>Internal systems</span>
-                    <span>Third-party inputs</span>
-                  </div>
-                </article>
-                <article className="ln-proof-column ln-proof-column--accent">
-                  <span className="ln-proof-label">Decision core</span>
-                  <div className="ln-proof-stack">
-                    <span>Entity resolution</span>
-                    <span>LLM + rules orchestration</span>
-                    <span>Human approval gates</span>
-                  </div>
-                </article>
-                <article className="ln-proof-column">
-                  <span className="ln-proof-label">Execution</span>
-                  <div className="ln-proof-stack">
-                    <span>Recommended action</span>
-                    <span>Audit trail</span>
-                    <span>Outcome telemetry</span>
-                  </div>
-                </article>
-              </div>
-            </div>
-            <aside className="ln-hero-proof-side">
-              <div className="ln-proof-metric">
-                <strong>Control surface</strong>
-                <span>Approvals, policy, escalation, evidence</span>
-              </div>
-              <div className="ln-proof-metric">
-                <strong>Delivery model</strong>
-                <span>Platform build, governance layer, operating rhythm</span>
-              </div>
-              <div className="ln-proof-trace">
-                <span>Capture</span>
-                <span>Enrich</span>
-                <span>Score</span>
-                <span>Decide</span>
-                <span>Learn</span>
-              </div>
-            </aside>
-          </div>
         </section>
       </div>
 
@@ -406,152 +288,62 @@ export default function Landing() {
       </section>
 
       <section className="ln-section ln-exec-stats" id="execution">
-        <span className="ln-sec-num" aria-hidden="true">01</span>
         <p className="ln-section-eyebrow">Execution Standard</p>
         <h2 className="ln-section-heading">Designed for measurable commercial impact and control</h2>
         <p className="ln-section-sub">
-          We target cycle-time reduction, sharper operating visibility, and stronger decision confidence across trading, risk, and operations. The point is not experimentation. It is a faster, better-governed operating model with measurable commercial upside.
-        </p>
-        <p className="ln-market-source">
-          Market references:{" "}
-          <a href="https://www.mckinsey.com/featured-insights/week-in-charts/bankings-agentic-ai-opportunity" target="_blank" rel="noopener noreferrer">Banking&apos;s agentic AI opportunity</a>
-          {" "}and{" "}
-          <a href="https://www.mckinsey.com/industries/financial-services/our-insights/global-banking-annual-review" target="_blank" rel="noopener noreferrer">Global Banking Annual Review</a>.
+          Built on Wall Street operating discipline, we focus on faster cycle time, stronger visibility, and tighter control in live systems.
         </p>
         <div className="ln-exec-grid">
           <article>
             <i><PulseIcon /></i>
             <strong>Cycle time</strong>
-            <span>Shortened decision loops from signal to action.</span>
+            <span>Shorter decision loops from signal to action.</span>
           </article>
           <article>
             <i><GraphIcon /></i>
             <strong>Throughput</strong>
-            <span>More operational decisions handled at the same team size.</span>
+            <span>More decisions handled without expanding team size.</span>
           </article>
           <article>
             <i><LinkIcon /></i>
             <strong>Control</strong>
-              <span>Policy-bound execution with evidence-ready audit trails.</span>
-            </article>
+            <span>Policy-bound execution with evidence-ready audit trails.</span>
+          </article>
           <article>
             <i><CompassIcon /></i>
             <strong>Clarity</strong>
-              <span>Leadership visibility across risk, speed, and value capture.</span>
-            </article>
+            <span>Leadership visibility across risk, speed, and value.</span>
+          </article>
         </div>
       </section>
 
-      <section className="ln-section ln-mandate-triggers" id="mandates">
-        <span className="ln-sec-num" aria-hidden="true">02</span>
-        <p className="ln-section-eyebrow">When to Call Us</p>
-        <h2 className="ln-section-heading">Bring Rayleigh Stark in when the mandate is real, not theoretical</h2>
+      <section className="ln-section" id="services">
+        <span className="ln-sec-num" aria-hidden="true">01</span>
+        <p className="ln-section-eyebrow">Ways to Engage</p>
+        <h2 className="ln-section-heading">Three clear entry points</h2>
         <p className="ln-section-sub">
-          The right moment is usually when the organisation already knows the cost of delay. These are the situations where operator-led advisory actually matters.
+          Choose the level of support that matches your current mandate.
         </p>
-        <div className="ln-trigger-grid">
-          <article className="ln-trigger-card">
-            <strong>Product is stalling in implementation</strong>
-            <p>Roadmaps exist, but operator workflows, approvals, and adoption logic are still weak. The team keeps building without landing.</p>
+        <div className="ln-features-grid ln-features-grid--three">
+          <article className="ln-feature-card">
+            <h3>Diagnostic</h3>
+            <p>A focused review of product, platform, data, or operating constraints with clear recommendations and decision support.</p>
+            <a className="ln-feature-link" href="/service-platform-diagnostic.html">View diagnostic</a>
           </article>
-          <article className="ln-trigger-card">
-            <strong>Data is fragmented across critical decisions</strong>
-            <p>Signals sit across internal systems, vendor feeds, and analyst workarounds. Leadership wants one governed operating picture.</p>
+          <article className="ln-feature-card">
+            <h3>Sprint</h3>
+            <p>A short, high-intensity engagement to unblock a specific strategic or technical priority and move it into execution.</p>
+            <a className="ln-feature-link" href="/service-product-workflow-sprint.html">View sprint</a>
           </article>
-          <article className="ln-trigger-card">
-            <strong>AI ambition is outrunning controls</strong>
-            <p>There is pressure to deploy models or agentic workflows, but oversight, auditability, and fallback design are not where they need to be.</p>
-          </article>
-          <article className="ln-trigger-card">
-            <strong>High-stakes change needs senior execution help</strong>
-            <p>Post-merger integration, platform consolidation, payments change, or institutional transformation is underway and the internal team needs sharper delivery leadership.</p>
-          </article>
-        </div>
-      </section>
-
-      <section className="ln-section ln-market" id="approach">
-        <span className="ln-sec-num" aria-hidden="true">03</span>
-        <p className="ln-section-eyebrow">How we implement</p>
-        <h2 className="ln-section-heading">From fragmented systems to governed execution</h2>
-        <p className="ln-section-sub">
-          Each mandate starts with diagnosis. We identify where workflow, product, data, and control gaps are slowing the business down, then move into implementation with clear owners, tighter sequencing, and measurable outcomes.
-        </p>
-
-        <div className="ln-market-grid">
-          <article className="ln-market-card">
-            <p className="ln-market-card-label">Where value leaks today</p>
-            <div className="ln-market-metric-list">
-              <div className="ln-market-metric">
-                <strong>Fragmented research and data infrastructure</strong>
-                <span>Critical signals across market data, internal platforms, and third-party sources sit in disconnected systems.</span>
-              </div>
-              <div className="ln-market-metric">
-                <strong>Manual analysis bottlenecks</strong>
-                <span>Analysts and portfolio teams spend too much time assembling context before reaching conviction.</span>
-              </div>
-              <div className="ln-market-metric">
-                <strong>Low platform adoption</strong>
-                <span>Teams lack trusted, well-designed AI tools that integrate into existing workflows.</span>
-              </div>
-            </div>
-          </article>
-
-          <article className="ln-market-card ln-market-card--accent">
-            <p className="ln-market-card-label">What changes when the mandate is run properly</p>
-            <div className="ln-market-metric-list">
-              <div className="ln-market-metric">
-                <strong>Unified operating picture</strong>
-                <span>One trusted view across market data, internal systems, proprietary models, and decision workflows.</span>
-              </div>
-              <div className="ln-market-metric">
-                <strong>Production-ready workflows</strong>
-                <span>AI-assisted analysis, triage, and enrichment shaped around how teams actually work.</span>
-              </div>
-              <div className="ln-market-metric">
-                <strong>Governed delivery</strong>
-                <span>Controls, escalation paths, oversight, and audit trails built into the execution model.</span>
-              </div>
-            </div>
+          <article className="ln-feature-card">
+            <h3>Fractional Leadership</h3>
+            <p>Senior product, platform, and AI leadership for teams navigating complex builds, operating change, or critical transitions.</p>
+            <a className="ln-feature-link" href="/service-fractional-ai-leadership.html">View leadership model</a>
           </article>
         </div>
       </section>
 
-      <section className="ln-implementation-atlas" aria-label="Implementation illustrations">
-        <div className="ln-implementation-atlas-grid">
-          <figure className="ln-atlas-image-card ln-atlas-image-card--wide">
-            <img
-              src="./src/images/atlas-brain-network.jpg"
-              alt="Stylized brain with neural network connections"
-            />
-            <figcaption className="ln-atlas-overlay">
-              <strong>Unified operating picture</strong>
-              <span>One trusted view across inputs, systems, and workflows.</span>
-            </figcaption>
-          </figure>
-          <figure className="ln-atlas-image-card">
-            <img
-              src="./src/images/service-product-platform-design-3.jpg"
-              alt="Abstract infrastructure illustration"
-            />
-            <figcaption className="ln-atlas-overlay">
-              <strong>Production-ready workflows</strong>
-              <span>AI-assisted triage and enrichment shaped around real work.</span>
-            </figcaption>
-          </figure>
-          <figure className="ln-atlas-image-card">
-            <img
-              src="./src/images/atlas-financial-graph.jpg"
-              alt="Financial graph showing upward and downward movement"
-            />
-            <figcaption className="ln-atlas-overlay">
-              <strong>Governed delivery</strong>
-              <span>Controls, escalation paths, and audit trails built in.</span>
-            </figcaption>
-          </figure>
-        </div>
-      </section>
-
-      <section className="ln-logo-band" id="inspiration">
+      <section className="ln-logo-band" id="execution">
         <div className="ln-logo-band-inner">
           <p className="ln-logo-band-title">Execution Standard</p>
           <div className="ln-standard-band">
@@ -592,104 +384,253 @@ export default function Landing() {
         </div>
       </section>
 
+      <section className="ln-section ln-mandate-triggers" id="mandates">
+        <span className="ln-sec-num" aria-hidden="true">02</span>
+        <p className="ln-section-eyebrow">Selected Capabilities</p>
+        <h2 className="ln-section-heading">Mandate areas we are brought in to solve</h2>
+        <p className="ln-section-sub">
+          Structured around the decisions and systems that move commercial outcomes.
+        </p>
+        <div className="ln-trigger-grid">
+          <article className="ln-trigger-card">
+            <strong>Product and operating design</strong>
+            <p>Decision workflows, platform adoption, rollout sequencing, and operating cadence for teams under pressure.</p>
+          </article>
+          <article className="ln-trigger-card">
+            <strong>Data and platform architecture</strong>
+            <p>Data models, integration design, APIs, and decision-serving layers that work in production.</p>
+          </article>
+          <article className="ln-trigger-card">
+            <strong>AI and research systems</strong>
+            <p>Model-enabled workflows with oversight, escalation, and clear evidence paths for high-trust teams.</p>
+          </article>
+          <article className="ln-trigger-card">
+            <strong>Payments and financial infrastructure</strong>
+            <p>Exception triage, control design, and speed improvements in transaction-intensive environments.</p>
+          </article>
+        </div>
+      </section>
+
+      <section className="ln-section ln-showcase" id="journey">
+        <span className="ln-sec-num" aria-hidden="true">03</span>
+        <p className="ln-section-eyebrow">Who We Help</p>
+        <h2 className="ln-section-heading">Teams with complex systems and expensive mistakes</h2>
+        <p className="ln-section-sub">
+          We work with teams that need operator judgment, not presentation-only advice.
+        </p>
+        <div className="ln-trigger-grid">
+          <article className="ln-trigger-card">
+            <strong>Fintech and payments platforms</strong>
+            <p>Operators modernizing transaction workflows, controls, and platform reliability.</p>
+          </article>
+          <article className="ln-trigger-card">
+            <strong>Research and data product teams</strong>
+            <p>Organizations turning fragmented analysis into reusable decision systems.</p>
+          </article>
+          <article className="ln-trigger-card">
+            <strong>Internal platform teams</strong>
+            <p>Large organizations with operational complexity across products, data, and governance.</p>
+          </article>
+          <article className="ln-trigger-card">
+            <strong>Leadership in live transformation</strong>
+            <p>Founders and senior operators carrying high-stakes delivery mandates with limited room for drift.</p>
+          </article>
+        </div>
+      </section>
+
+      <section className="ln-section ln-workflow" id="approach">
+        <span className="ln-sec-num" aria-hidden="true">04</span>
+        <p className="ln-section-eyebrow">How We Work</p>
+        <h2 className="ln-section-heading">Diagnostic, design, implementation, handoff</h2>
+        <p className="ln-section-sub">
+          Clear operator judgment, technical depth, and execution realism from first assessment through live handoff.
+        </p>
+        <div className="ln-workflow-diagram">
+          <div><b>01</b><span>Diagnostic</span><p>Find where product, data, controls, and ownership are breaking performance.</p></div>
+          <div><b>02</b><span>Design</span><p>Set the workflow, architecture, and decision model needed to execute.</p></div>
+          <div><b>03</b><span>Implementation</span><p>Build and embed changes in production with weekly decision support.</p></div>
+          <div><b>04</b><span>Handoff</span><p>Transfer controls, documentation, and operating cadence to internal teams.</p></div>
+        </div>
+      </section>
+
+      <section className="ln-implementation-atlas" aria-label="Implementation illustrations">
+        <div className="ln-implementation-atlas-grid">
+          <figure className="ln-atlas-image-card ln-atlas-image-card--wide">
+            <img
+              src="./src/images/atlas-brain-network.jpg"
+              alt="Stylized brain with neural network connections"
+            />
+            <figcaption className="ln-atlas-overlay">
+              <strong>Unified operating picture</strong>
+              <span>One trusted view across inputs, systems, and workflows.</span>
+            </figcaption>
+          </figure>
+          <figure className="ln-atlas-image-card">
+            <img
+              src="./src/images/service-product-platform-design-3.jpg"
+              alt="Abstract infrastructure illustration"
+            />
+            <figcaption className="ln-atlas-overlay">
+              <strong>Production-ready workflows</strong>
+              <span>AI-assisted triage and enrichment shaped around real work.</span>
+            </figcaption>
+          </figure>
+          <figure className="ln-atlas-image-card">
+            <img
+              src="./src/images/atlas-financial-graph.jpg"
+              alt="Financial graph showing upward and downward movement"
+            />
+            <figcaption className="ln-atlas-overlay">
+              <strong>Governed delivery</strong>
+              <span>Controls, escalation paths, and audit trails built in.</span>
+            </figcaption>
+          </figure>
+        </div>
+      </section>
+
+      <section className="ln-section" id="service-library">
+        <span className="ln-sec-num" aria-hidden="true">05</span>
+        <p className="ln-section-eyebrow">Service Library</p>
+        <h2 className="ln-section-heading">Detailed mandates and service pages</h2>
+        <p className="ln-section-sub">
+          Deeper service descriptions, scope examples, and use-case detail.
+        </p>
+
+        <div className={`ln-service-group ${openServiceGroup === "entry" ? "is-open" : ""}`}>
+          <button
+            type="button"
+            className="ln-service-group-toggle"
+            aria-expanded={openServiceGroup === "entry"}
+            aria-controls="service-group-entry"
+            onClick={() => setOpenServiceGroup((current) => current === "entry" ? "" : "entry")}
+          >
+            <span>Entry</span>
+            <span className="ln-service-group-meta">4 services</span>
+          </button>
+          <div className="ln-service-group-panel" id="service-group-entry">
+            <div className="ln-service-group-panel-inner">
+              <div className="ln-features-grid ln-features-grid--three">
+                <article className="ln-feature-card">
+                  <h3>Product Workflow Sprint</h3>
+                  <p>A focused sprint to shape operator-facing workflows, decision interfaces, and rollout logic before committing to a larger product or platform build.</p>
+                  <a className="ln-feature-link" href="/service-product-workflow-sprint.html">Read breakdown</a>
+                </article>
+                <article className="ln-feature-card">
+                  <h3>Instant Payments Decision-Speed Sprint</h3>
+                  <p>A focused 90-day engagement for FedNow, RTP, ACH, Faster Payments, and SWIFT operations. We reduce exception latency and improve control under live conditions.</p>
+                  <a className="ln-feature-link" href="/service-ai-payments-acceleration.html">Read breakdown</a>
+                </article>
+                <article className="ln-feature-card">
+                  <h3>Platform and Data Infrastructure Diagnostic</h3>
+                  <p>A 4-week assessment of your research platforms, data pipelines, API architecture, and decision systems. We deliver a prioritized remediation roadmap with commercial impact estimates.</p>
+                  <a className="ln-feature-link" href="/service-platform-diagnostic.html">Read breakdown</a>
+                </article>
+                <article className="ln-feature-card">
+                  <h3>Fractional CPO / CTO</h3>
+                  <p>Embedded product and technology leadership. Roadmap ownership, cross-functional governance, and hands-on delivery acceleration.</p>
+                  <a className="ln-feature-link" href="/service-fractional-ai-leadership.html">Read breakdown</a>
+                </article>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div className={`ln-service-group ${openServiceGroup === "core" ? "is-open" : ""}`}>
+          <button
+            type="button"
+            className="ln-service-group-toggle"
+            aria-expanded={openServiceGroup === "core"}
+            aria-controls="service-group-core"
+            onClick={() => setOpenServiceGroup((current) => current === "core" ? "" : "core")}
+          >
+            <span>Core</span>
+            <span className="ln-service-group-meta">5 services</span>
+          </button>
+          <div className="ln-service-group-panel" id="service-group-core">
+            <div className="ln-service-group-panel-inner">
+              <div className="ln-features-grid ln-features-grid--three">
+                <article className="ln-feature-card">
+                  <h3>Data Infrastructure and Decision Layers</h3>
+                  <p>Unified data architecture for fragmented systems, external inputs, and operator workflows. Ingestion, entity resolution, feature engineering, and decision-serving layers.</p>
+                  <a className="ln-feature-link" href="/service-intelligent-data-pipelines.html">Read breakdown</a>
+                </article>
+                <article className="ln-feature-card">
+                  <h3>Autonomous Operations</h3>
+                  <p>Policy-governed workflows that execute operational decisions autonomously, with approval checkpoints, escalation logic, and full auditability.</p>
+                  <a className="ln-feature-link" href="/service-agentic-ai-operations.html">Read breakdown</a>
+                </article>
+                <article className="ln-feature-card">
+                  <h3>Decision Reliability Engineering</h3>
+                  <p>Model reliability, observability, and fallback design for regulated, audit-sensitive, and high-consequence decisions.</p>
+                  <a className="ln-feature-link" href="/service-decision-reliability-engineering.html">Read breakdown</a>
+                </article>
+                <article className="ln-feature-card">
+                  <h3>Escrow Intelligence Automation</h3>
+                  <p>Automated release logic and dispute triage for multi-party escrow, covering fiat settlement, digital assets, and cross-border holding structures.</p>
+                  <a className="ln-feature-link" href="/service-escrow-intelligence-automation.html">Read breakdown</a>
+                </article>
+                <article className="ln-feature-card">
+                  <h3>Cloud Cost Control and Infrastructure Efficiency</h3>
+                  <p>Cloud cost discipline across AWS, on-prem, and Kubernetes environments, with architectural fixes that reduce waste without weakening resilience.</p>
+                  <a className="ln-feature-link" href="/service-cloud-cost-control.html">Read breakdown</a>
+                </article>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div className={`ln-service-group ${openServiceGroup === "strategic" ? "is-open" : ""}`}>
+          <button
+            type="button"
+            className="ln-service-group-toggle"
+            aria-expanded={openServiceGroup === "strategic"}
+            aria-controls="service-group-strategic"
+            onClick={() => setOpenServiceGroup((current) => current === "strategic" ? "" : "strategic")}
+          >
+            <span>Strategic</span>
+            <span className="ln-service-group-meta">4 services</span>
+          </button>
+          <div className="ln-service-group-panel" id="service-group-strategic">
+            <div className="ln-service-group-panel-inner">
+              <div className="ln-features-grid ln-features-grid--three">
+                <article className="ln-feature-card">
+                  <h3>Technology Due Diligence</h3>
+                  <p>Independent review of technology, data, and AI stacks, including controls, architecture maturity, and execution risk, for leadership and investors.</p>
+                  <a className="ln-feature-link" href="/service-ai-due-diligence.html">Read breakdown</a>
+                </article>
+                <article className="ln-feature-card">
+                  <h3>Product and Platform Design</h3>
+                  <p>Decision interfaces, human-in-the-loop workflows, and platform experiences that make intelligent systems usable and trusted.</p>
+                  <a className="ln-feature-link" href="/service-ai-product-workflow-design.html">Read breakdown</a>
+                </article>
+                <article className="ln-feature-card">
+                  <h3>M&amp;A and Advisory Intelligence</h3>
+                  <p>Automated diligence extraction and deal signal scoring for CIM, QoE, NWC, TSA, SPA, carve-out, and PMI workflows.</p>
+                  <a className="ln-feature-link" href="/service-ma-advisory-intelligence.html">Read breakdown</a>
+                </article>
+                <article className="ln-feature-card">
+                  <h3>Private Markets Technology, Diligence, and Research</h3>
+                  <p>Technology diligence and research support for private markets teams evaluating platforms, operating risk, data maturity, and execution readiness.</p>
+                  <a className="ln-feature-link" href="/service-private-markets-technology.html">Read breakdown</a>
+                </article>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       <section className="ln-editorial-ribbon" aria-label="Execution visuals">
         <img src="./src/images/ribbon-strategy-session.jpg" alt="Advisory team in strategic execution session" />
         <img src="./src/images/ribbon-analytics-workspace.jpg" alt="Fintech analytics workspace" />
         <img src="./src/images/ribbon-control-room.jpg" alt="High-performance product and engineering control room" />
       </section>
 
-      <section className="ln-section" id="services">
-        <span className="ln-sec-num" aria-hidden="true">04</span>
-        <p className="ln-section-eyebrow">Flagship Engagements</p>
-        <h2 className="ln-section-heading">Advisory mandates with clear entry points</h2>
-        <p className="ln-section-sub">
-          Engage at the level you need now: a focused wedge, a core build mandate, or senior advisory leadership across product, data, AI, and execution.
-        </p>
-
-        <p className="ln-section-eyebrow" style={{ marginTop: 22 }}>Entry</p>
-        <div className="ln-features-grid ln-features-grid--three">
-          <article className="ln-feature-card">
-            <h3>Product Workflow Sprint</h3>
-            <p>A focused sprint to shape operator-facing workflows, decision interfaces, and rollout logic before committing to a larger product or platform build.</p>
-            <a className="ln-feature-link" href="/service-product-workflow-sprint.html">Read breakdown</a>
-          </article>
-          <article className="ln-feature-card">
-            <h3>Instant Payments Decision-Speed Sprint</h3>
-            <p>A focused 90-day engagement for FedNow, RTP, ACH, Faster Payments, and SWIFT operations. We reduce exception latency and improve control under live conditions.</p>
-            <a className="ln-feature-link" href="/service-ai-payments-acceleration.html">Read breakdown</a>
-          </article>
-          <article className="ln-feature-card">
-            <h3>Platform and Data Infrastructure Diagnostic</h3>
-            <p>A 4-week assessment of your research platforms, data pipelines, API architecture, and decision systems. We deliver a prioritized remediation roadmap with commercial impact estimates.</p>
-            <a className="ln-feature-link" href="/service-platform-diagnostic.html">Read breakdown</a>
-          </article>
-          <article className="ln-feature-card">
-            <h3>Fractional CPO / CTO</h3>
-            <p>Embedded product and technology leadership. Roadmap ownership, cross-functional governance, and hands-on delivery acceleration.</p>
-            <a className="ln-feature-link" href="/service-fractional-ai-leadership.html">Read breakdown</a>
-          </article>
-        </div>
-
-        <p className="ln-section-eyebrow" style={{ marginTop: 24 }}>Core</p>
-        <div className="ln-features-grid ln-features-grid--three">
-          <article className="ln-feature-card">
-            <h3>Data Infrastructure and Decision Layers</h3>
-            <p>Unified data architecture for fragmented systems, external inputs, and operator workflows. Ingestion, entity resolution, feature engineering, and decision-serving layers.</p>
-            <a className="ln-feature-link" href="/service-intelligent-data-pipelines.html">Read breakdown</a>
-          </article>
-          <article className="ln-feature-card">
-            <h3>Autonomous Operations</h3>
-            <p>Policy-governed workflows that execute operational decisions autonomously, with approval checkpoints, escalation logic, and full auditability.</p>
-            <a className="ln-feature-link" href="/service-agentic-ai-operations.html">Read breakdown</a>
-          </article>
-          <article className="ln-feature-card">
-            <h3>Decision Reliability Engineering</h3>
-            <p>Model reliability, observability, and fallback design for regulated, audit-sensitive, and high-consequence decisions.</p>
-            <a className="ln-feature-link" href="/service-decision-reliability-engineering.html">Read breakdown</a>
-          </article>
-          <article className="ln-feature-card">
-            <h3>Escrow Intelligence Automation</h3>
-            <p>Automated release logic and dispute triage for multi-party escrow, covering fiat settlement, digital assets, and cross-border holding structures.</p>
-            <a className="ln-feature-link" href="/service-escrow-intelligence-automation.html">Read breakdown</a>
-          </article>
-          <article className="ln-feature-card">
-            <h3>Cloud Cost Control and Infrastructure Efficiency</h3>
-            <p>Cloud cost discipline across AWS, on-prem, and Kubernetes environments, with architectural fixes that reduce waste without weakening resilience.</p>
-            <a className="ln-feature-link" href="/service-cloud-cost-control.html">Read breakdown</a>
-          </article>
-        </div>
-
-        <p className="ln-section-eyebrow" style={{ marginTop: 24 }}>Strategic</p>
-        <div className="ln-features-grid ln-features-grid--three">
-          <article className="ln-feature-card">
-            <h3>Technology Due Diligence</h3>
-            <p>Independent review of technology, data, and AI stacks, including controls, architecture maturity, and execution risk, for leadership and investors.</p>
-            <a className="ln-feature-link" href="/service-ai-due-diligence.html">Read breakdown</a>
-          </article>
-          <article className="ln-feature-card">
-            <h3>Product and Platform Design</h3>
-            <p>Decision interfaces, human-in-the-loop workflows, and platform experiences that make intelligent systems usable and trusted.</p>
-            <a className="ln-feature-link" href="/service-ai-product-workflow-design.html">Read breakdown</a>
-          </article>
-          <article className="ln-feature-card">
-            <h3>M&amp;A and Advisory Intelligence</h3>
-            <p>Automated diligence extraction and deal signal scoring for CIM, QoE, NWC, TSA, SPA, carve-out, and PMI workflows.</p>
-            <a className="ln-feature-link" href="/service-ma-advisory-intelligence.html">Read breakdown</a>
-          </article>
-          <article className="ln-feature-card">
-            <h3>Private Markets Technology, Diligence, and Research</h3>
-            <p>Technology diligence and research support for private markets teams evaluating platforms, operating risk, data maturity, and execution readiness.</p>
-            <a className="ln-feature-link" href="/service-private-markets-technology.html">Read breakdown</a>
-          </article>
-        </div>
-      </section>
-
       <section className="ln-section ln-case-studies" id="case-studies">
-        <span className="ln-sec-num" aria-hidden="true">05</span>
+        <span className="ln-sec-num" aria-hidden="true">06</span>
         <p className="ln-section-eyebrow">Selected Mandates</p>
-        <h2 className="ln-section-heading">Recent work, stated the way institutional buyers actually read it</h2>
+        <h2 className="ln-section-heading">Recent work, framed for institutional buyers</h2>
         <p className="ln-section-sub">
-          These are anonymized by design. The point is not name-dropping. It is showing the shape of the mandate, the change made, and the measurable result.
+          These examples are anonymized by design. The goal is to show mandate shape, intervention, and measurable result.
         </p>
         <div className="ln-case-grid">
           <article className="ln-case-card">
@@ -751,72 +692,6 @@ export default function Landing() {
         </div>
       </section>
 
-      <section className="ln-section ln-service-editorial" id="service-preview">
-        <span className="ln-sec-num" aria-hidden="true">06</span>
-        <p className="ln-section-eyebrow">Service Preview</p>
-        <h2 className="ln-section-heading">How we deliver for leadership and on the ground</h2>
-        <div className="ln-split-row">
-          <div className="ln-split-media ln-split-media--diagram">
-            <div className="ln-service-diagram ln-service-diagram--leadership" aria-label="Leadership decision program structure">
-              <div className="ln-service-diagram-head">
-                <span>Leadership operating frame</span>
-                <strong>Commercial view</strong>
-              </div>
-              <div className="ln-service-lanes">
-                <div>
-                  <b>Value</b>
-                  <span>Revenue velocity</span>
-                  <span>Adoption wedge</span>
-                </div>
-                <div>
-                  <b>Risk</b>
-                  <span>Controls</span>
-                  <span>Model oversight</span>
-                </div>
-                <div>
-                  <b>Execution</b>
-                  <span>Owner cadence</span>
-                  <span>90-day roadmap</span>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div className="ln-split-copy">
-            <h3>Commercial narrative for leadership</h3>
-            <p>We frame each program around revenue velocity, risk reduction, and operating leverage, so leadership sees a mandate, a sequence, and a commercial case before the technical detail takes over.</p>
-            <a className="ln-feature-link" href="/service-fractional-ai-leadership.html">See leadership offer</a>
-          </div>
-        </div>
-        <div className="ln-split-row ln-split-row--reverse">
-          <div className="ln-split-media ln-split-media--diagram">
-            <div className="ln-service-diagram ln-service-diagram--delivery" aria-label="Operator delivery loop">
-              <div className="ln-service-diagram-head">
-                <span>Operator loop</span>
-                <strong>Production path</strong>
-              </div>
-              <div className="ln-delivery-loop">
-                <span>Signal</span>
-                <span>Prioritise</span>
-                <span>Approve</span>
-                <span>Execute</span>
-                <span>Measure</span>
-              </div>
-              <div className="ln-delivery-controls">
-                <span>API layer</span>
-                <span>Data pipeline</span>
-                <span>Audit log</span>
-                <span>Fallback path</span>
-              </div>
-            </div>
-          </div>
-          <div className="ln-split-copy">
-            <h3>Operator-grade delivery in production</h3>
-            <p>We execute in live environments with measurable controls: platform builds, workflow redesign, data architecture, AI deployment, and operational handoff tied to real business outcomes.</p>
-            <a className="ln-feature-link" href="/service-ai-payments-acceleration.html">See delivery in action</a>
-          </div>
-        </div>
-      </section>
-
       <section className="ln-section ln-proof-artifact" id="proof-artifact">
         <span className="ln-sec-num" aria-hidden="true">07</span>
         <p className="ln-section-eyebrow">Proof Artifact</p>
@@ -864,58 +739,134 @@ export default function Landing() {
         </div>
       </section>
 
-      <section className="ln-section ln-showcase" id="journey">
+      <section className="ln-section" id="research-proof">
         <span className="ln-sec-num" aria-hidden="true">08</span>
-        <p className="ln-section-eyebrow">Execution Impact</p>
-        <h2 className="ln-section-heading">Built in financial markets. Applied where every mandate carries consequence</h2>
-        <p className="ln-section-sub">
-          We combine nearly a decade of Wall Street operator experience with modern AI, product, and data engineering to help institutions and high-consequence operators move faster without losing control.
-        </p>
-
-        <div className="ln-showcase-grid">
-          <article className="ln-network-panel">
-            <header className="ln-network-head">
-              <h3>Where we focus</h3>
-              <span className="ln-network-pill">Execution-first</span>
-            </header>
-            <div className="ln-journey-points">
-              <p>Research and analytics platforms that unify market data, proprietary signals, and LLM-powered insight generation for investment and risk teams.</p>
-              <p>AI infrastructure including model governance, API platforms, data pipelines, and enterprise-grade deployment for regulated and audit-sensitive environments.</p>
-              <p>Financial data systems spanning real-time ingestion, entity resolution, feature engineering, and decision-serving architecture.</p>
-              <p>Product transformation that turns internal tools into high-adoption platforms through design discipline and measurable rollout governance.</p>
+        <p className="ln-section-eyebrow">Proof Vignette</p>
+        <h2 className="ln-section-heading">From analyst-owned scripts to governed research infrastructure</h2>
+        <section className="ln-hero-caseproof" aria-label="Research infrastructure proof point">
+          <div className="ln-hero-caseproof-copy">
+            <p>
+              Analysts and research teams were backtesting markets and testing index ideas through individually maintained scripts. Each desk had its own version. Results were not reproducible. Client simulations moved only as fast as the one analyst who knew the right script.
+            </p>
+            <div className="ln-hero-caseproof-notes">
+              <article>
+                <strong>Intervention</strong>
+                <span>Mapped the live script landscape, identified the 20% of workflows covering 80% of use cases, and productised them first into reusable AWS services.</span>
+              </article>
+              <article>
+                <strong>Platform shift</strong>
+                <span>Built shared libraries, governed data pipelines, compute services, and a client-facing simulation layer so scenarios no longer depended on one analyst.</span>
+              </article>
+              <article>
+                <strong>Adoption</strong>
+                <span>Did not force migration. Made the new platform the easier path and moved teams across with research-lead support.</span>
+              </article>
             </div>
-          </article>
-
-          <aside className="ln-showcase-metrics">
-            <article className="ln-metric-card">
-              <header><h3>Representative outcomes</h3><span>Execution</span></header>
-              <div className="ln-delay-grid">
-                <div><strong>Faster</strong><span>transaction triage and action cycles</span></div>
-                <div><strong>Higher</strong><span>decision confidence with richer context</span></div>
-                <div><strong>Lower</strong><span>manual operational overhead and cost drag</span></div>
+            <div className="ln-hero-caseproof-actions">
+              <a className="ln-feature-link" href="/case-study-governed-research-infrastructure.html">Read full case study</a>
+              <span>Shared standard. Reusable services. Faster client simulations.</span>
+            </div>
+          </div>
+          <div className="ln-hero-caseproof-board">
+            <div className="ln-caseproof-flow">
+              <div>
+                <b>Analyst scripts</b>
+                <span>person-dependent logic</span>
               </div>
-            </article>
-            <article className="ln-metric-card">
-              <header><h3>Delivery model</h3><span>How we work</span></header>
-              <div className="ln-delay-grid">
-                <div><strong>Hands-on</strong><span>pipeline and model implementation</span></div>
-                <div><strong>Pragmatic</strong><span>focused on production outcomes</span></div>
-                <div><strong>Transparent</strong><span>weekly metrics and risks</span></div>
+              <div>
+                <b>Pattern mapping</b>
+                <span>20% covering 80%</span>
               </div>
-            </article>
-          </aside>
-        </div>
+              <div>
+                <b>Shared libraries</b>
+                <span>versioned research logic</span>
+              </div>
+              <div>
+                <b>AWS services</b>
+                <span>governed compute + data</span>
+              </div>
+              <div>
+                <b>Client simulation</b>
+                <span>direct scenario testing</span>
+              </div>
+              <div>
+                <b>Auditable outputs</b>
+                <span>reproducible results</span>
+              </div>
+            </div>
+            <div className="ln-caseproof-visuals">
+              <figure className="ln-caseproof-panel">
+                <img src="./src/images/atlas-financial-graph.jpg" alt="Financial chart illustration" />
+                <figcaption>Research demand moved from desk-owned logic to reusable simulation infrastructure.</figcaption>
+              </figure>
+              <figure className="ln-caseproof-panel ln-caseproof-panel--accent">
+                <img src="./src/images/service-data-infrastructure-2.jpg" alt="Data centre cabling and infrastructure" />
+                <figcaption>Shared services, pipelines, controls, and compute replaced fragmented analyst scripts.</figcaption>
+              </figure>
+            </div>
+            <div className="ln-caseproof-results">
+              <div><strong>Faster turnaround</strong><span>Client simulation requests no longer waited on a specific analyst.</span></div>
+              <div><strong>Shared standard</strong><span>Teams stopped duplicating logic and started using versioned libraries.</span></div>
+              <div><strong>Leadership visibility</strong><span>Research activity became visible, attributable, and governable.</span></div>
+            </div>
+          </div>
+        </section>
       </section>
 
-      <section className="ln-section ln-workflow" id="workflow">
+      <section className="ln-section" id="operator-map">
         <span className="ln-sec-num" aria-hidden="true">09</span>
-        <p className="ln-section-eyebrow">Workflow</p>
-        <h2 className="ln-section-heading">How a mandate moves from diagnostic to handoff</h2>
-        <div className="ln-workflow-diagram">
-          <div><b>01</b><span>Diagnostic</span><p>Find where product, data, controls, and ownership are breaking the operating model.</p></div>
-          <div><b>02</b><span>Design</span><p>Set the workflow, architecture, governance, and commercial sequence for the mandate.</p></div>
-          <div><b>03</b><span>Implementation</span><p>Build, embed, and govern the operating change in live environments.</p></div>
-          <div><b>04</b><span>Handoff</span><p>Leave behind documentation, controls, metrics, and a team that can run it properly.</p></div>
+        <p className="ln-section-eyebrow">Operator System Map</p>
+        <h2 className="ln-section-heading">How decision infrastructure is structured in production</h2>
+        <div className="ln-hero-proof" aria-label="Decision infrastructure system map">
+          <div className="ln-hero-proof-main">
+            <div className="ln-hero-proof-head">
+              <span className="ln-proof-kicker">System map</span>
+              <span className="ln-proof-status">Policy-bound</span>
+            </div>
+            <div className="ln-hero-proof-grid">
+              <article className="ln-proof-column">
+                <span className="ln-proof-label">Signals</span>
+                <div className="ln-proof-stack">
+                  <span>Market data</span>
+                  <span>Internal systems</span>
+                  <span>Third-party inputs</span>
+                </div>
+              </article>
+              <article className="ln-proof-column ln-proof-column--accent">
+                <span className="ln-proof-label">Decision core</span>
+                <div className="ln-proof-stack">
+                  <span>Entity resolution</span>
+                  <span>LLM + rules orchestration</span>
+                  <span>Human approval gates</span>
+                </div>
+              </article>
+              <article className="ln-proof-column">
+                <span className="ln-proof-label">Execution</span>
+                <div className="ln-proof-stack">
+                  <span>Recommended action</span>
+                  <span>Audit trail</span>
+                  <span>Outcome telemetry</span>
+                </div>
+              </article>
+            </div>
+          </div>
+          <aside className="ln-hero-proof-side">
+            <div className="ln-proof-metric">
+              <strong>Control surface</strong>
+              <span>Approvals, policy, escalation, evidence</span>
+            </div>
+            <div className="ln-proof-metric">
+              <strong>Delivery model</strong>
+              <span>Platform build, governance layer, operating rhythm</span>
+            </div>
+            <div className="ln-proof-trace">
+              <span>Capture</span>
+              <span>Enrich</span>
+              <span>Score</span>
+              <span>Decide</span>
+              <span>Learn</span>
+            </div>
+          </aside>
         </div>
       </section>
 
@@ -961,7 +912,8 @@ export default function Landing() {
           <div>
             <div className="ln-logo-text ln-footer-brand"><BrandName /></div>
             <p>Operator-led advisory shaped in financial markets and applied to institutions, investors, and high-consequence teams navigating product, data, AI, and platform change. Based in London.</p>
-            <p>Rayleigh Stark is a trading name of Premium Network and Services Ltd.</p>
+            <p>Rayleigh Stark is a trading name of Premium Services & Network UK Ltd.</p>
+            <p><a className="ln-feature-link" href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a></p>
           </div>
           <div className="ln-footer-cols">
             <div>
@@ -978,9 +930,9 @@ export default function Landing() {
             </div>
             <div>
               <h4>Legal</h4>
-              <a href="#contact">Contact</a>
-              <a href="#">Terms</a>
-              <a href="#">Premium Network and Services Ltd</a>
+              <a href="/contact.html">Contact</a>
+              <a href="/terms.html">Terms</a>
+              <span>Premium Services & Network UK Ltd</span>
             </div>
           </div>
         </div>
