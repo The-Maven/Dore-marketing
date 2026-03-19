@@ -101,6 +101,91 @@ function CompassIcon() {
   );
 }
 
+function IngestIcon() {
+  return (
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+      <path d="M4 7h16M4 12h11M4 17h8" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
+    </svg>
+  );
+}
+
+function ModelCoreIcon() {
+  return (
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+      <rect x="5" y="5" width="14" height="14" rx="2" stroke="currentColor" strokeWidth="1.8" />
+      <path d="M9 9h6v6H9z" stroke="currentColor" strokeWidth="1.8" />
+    </svg>
+  );
+}
+
+function DecisionLayerIcon() {
+  return (
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+      <path d="M6 7h12M6 12h8M6 17h12" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
+    </svg>
+  );
+}
+
+function ControlGateIcon() {
+  return (
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+      <path d="M12 4 6 7v5c0 4.4 2.8 7.4 6 8 3.2-.6 6-3.6 6-8V7l-6-3Z" stroke="currentColor" strokeWidth="1.8" />
+    </svg>
+  );
+}
+
+function OutputIcon() {
+  return (
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+      <path d="M12 4v11M8 11l4 4 4-4M5 20h14" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+  );
+}
+
+function AuditTrailIcon() {
+  return (
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+      <path d="M8 6h8M8 11h8M8 16h5" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
+      <path d="M6 4h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2Z" stroke="currentColor" strokeWidth="1.8" />
+    </svg>
+  );
+}
+
+function CloudShapeIcon() {
+  return (
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+      <path d="M7 18a4 4 0 1 1 .5-7.9A5 5 0 0 1 17 11h1a3 3 0 1 1 0 6H7Z" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+  );
+}
+
+function FileShapeIcon() {
+  return (
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+      <path d="M8 3h7l5 5v13H8z" stroke="currentColor" strokeWidth="1.8" />
+      <path d="M15 3v5h5M11 13h6M11 17h6" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
+    </svg>
+  );
+}
+
+function DatabaseShapeIcon() {
+  return (
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+      <ellipse cx="12" cy="6" rx="7" ry="3" stroke="currentColor" strokeWidth="1.8" />
+      <path d="M5 6v8c0 1.7 3.1 3 7 3s7-1.3 7-3V6" stroke="currentColor" strokeWidth="1.8" />
+    </svg>
+  );
+}
+
+function LockShapeIcon() {
+  return (
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+      <rect x="6" y="11" width="12" height="9" rx="1.8" stroke="currentColor" strokeWidth="1.8" />
+      <path d="M9 11V8a3 3 0 0 1 6 0v3" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
+    </svg>
+  );
+}
+
 const CALENDLY_EXEC_BRIEFING_URL = "https://calendly.com/tonykkwawu/30min";
 const CONTACT_EMAIL = "contact@rayleighstark.com";
 const NAV_LINKS = [
@@ -117,7 +202,6 @@ function ContactForm() {
 
   return (
     <section className="ln-section ln-contact" id="contact">
-      <span className="ln-sec-num" aria-hidden="true">10</span>
       <p className="ln-section-eyebrow">Let&apos;s Talk</p>
       <h2 className="ln-section-heading">Schedule a conversation</h2>
       <p className="ln-section-sub">
@@ -138,9 +222,23 @@ function ContactForm() {
 
 export default function Landing() {
   const [menuOpen, setMenuOpen] = useState(false);
-  const [openServiceGroup, setOpenServiceGroup] = useState("entry");
+  const [openServiceGroup, setOpenServiceGroup] = useState("");
+  const [mobileSectionOpen, setMobileSectionOpen] = useState({
+    mandates: false,
+    journey: false,
+    approach: false,
+    serviceLibrary: false,
+    proofArtifact: false,
+    researchProof: false,
+    operatorMap: false
+  });
+  const [selectedMandatesOpen, setSelectedMandatesOpen] = useState(false);
+  const [proofArtifactOpen, setProofArtifactOpen] = useState(false);
+  const [proofVignetteOpen, setProofVignetteOpen] = useState(false);
   const executiveBriefingHref = CALENDLY_EXEC_BRIEFING_URL.includes("your-link") ? "#contact" : CALENDLY_EXEC_BRIEFING_URL;
-
+  const toggleMobileSection = (key) => {
+    setMobileSectionOpen((current) => ({ ...current, [key]: !current[key] }));
+  };
   useEffect(() => {
     const scrollToHashTarget = () => {
       const hash = window.location.hash;
@@ -317,8 +415,86 @@ export default function Landing() {
         </div>
       </section>
 
+      <section className="ln-section ln-ai-systems" id="ai-systems">
+        <div className="ln-ai-systems-inner">
+          <span className="ln-sec-num" aria-hidden="true">01</span>
+          <p className="ln-section-eyebrow">DECISIONS, ENGINEERED</p>
+          <h2 className="ln-section-heading">AI that runs in production. Not in slides.</h2>
+          <p className="ln-section-sub">
+            Decision infrastructure spans data pipelines, workflow design, human controls, and model integration. AI is one layer in a governed production system, not the system itself.
+          </p>
+
+          <div className="ln-ai-layout">
+            <div className="ln-ai-copy">
+              <p>
+                We design and implement decision systems for regulated, high-consequence environments. The work covers the full stack: how data is captured and enriched, how decisions are structured and controlled, where models are integrated, and how outputs are evaluated, logged, and audited.
+              </p>
+              <p>
+                In these environments, incorrect decisions carry financial cost. Unexplainable decisions carry regulatory risk. The answer is not better models. It is better infrastructure around them.
+              </p>
+              <p className="ln-ai-close">This is not experimentation. It is production architecture.</p>
+            </div>
+
+            <div className="ln-ai-diagram" aria-label="Governed decision infrastructure flow">
+              <p className="ln-ai-bridge">Most systems stop at the model. Ours start where decisions are made.</p>
+              <div className="ln-ai-diagram-canvas">
+                <div className="ln-ai-circuit-motif" aria-hidden="true" />
+                <svg className="ln-ai-diagram-links" viewBox="0 0 1000 620" preserveAspectRatio="none" aria-hidden="true">
+                  <defs>
+                    <marker id="lnAiArrow" markerUnits="userSpaceOnUse" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto">
+                      <path d="M0,0 L8,4 L0,8 Z" fill="rgba(56, 189, 248, 0.86)" />
+                    </marker>
+                  </defs>
+                  <path d="M206 94 H407" markerEnd="url(#lnAiArrow)" />
+                  <path d="M593 94 H794" markerEnd="url(#lnAiArrow)" />
+                  <path d="M500 132 V392" markerEnd="url(#lnAiArrow)" />
+                  <path d="M206 526 H407" markerEnd="url(#lnAiArrow)" />
+                  <path d="M593 526 H794" markerEnd="url(#lnAiArrow)" />
+                </svg>
+
+                <article className="ln-ai-node ln-ai-node--input"><i><IngestIcon /></i><strong>Input</strong><span>Data Capture &amp; Enrichment</span></article>
+                <article className="ln-ai-node ln-ai-node--decision"><i><DecisionLayerIcon /></i><strong>Decision Layer</strong><span>Policy Engine &amp; Routing Logic</span></article>
+                <article className="ln-ai-node ln-ai-node--model"><i><ModelCoreIcon /></i><strong>Model Integration</strong><span>Inference &amp; Evaluation</span></article>
+                <article className="ln-ai-node ln-ai-node--controls"><i><ControlGateIcon /></i><strong>Controls</strong><span>Governance, Approval Gates &amp; Escalation</span></article>
+                <article className="ln-ai-node ln-ai-node--output"><i><OutputIcon /></i><strong>Output</strong><span>Action Execution</span></article>
+                <article className="ln-ai-node ln-ai-node--audit"><i><AuditTrailIcon /></i><strong>Audit Trail</strong><span>Evidence, Logging &amp; Traceability</span></article>
+              </div>
+              <div className="ln-ai-diagram-annotations" aria-label="AI system capabilities">
+                <article>
+                  <strong>Decision workflow design</strong>
+                  <span>Structured decision paths with policy rules, approval gates, and escalation logic built for live operations.</span>
+                </article>
+                <article>
+                  <strong>Model integration &amp; evaluation</strong>
+                  <span>LLM and model integration with output evaluation, reliability monitoring, and drift visibility.</span>
+                </article>
+                <article>
+                  <strong>Data and prompt governance</strong>
+                  <span>Control boundaries for sensitive contexts, access management, and reproducible system behaviour.</span>
+                </article>
+                <article>
+                  <strong>Research and analytics infrastructure</strong>
+                  <span>Analytics workflows with decision lineage, source traceability, and governed output.</span>
+                </article>
+                <article>
+                  <strong>Operational resilience</strong>
+                  <span>Logging, fallback logic, and degraded-mode response paths for production environments.</span>
+                </article>
+              </div>
+              <p className="ln-ai-diagram-caption">Decisions are governed, not generated.</p>
+            </div>
+          </div>
+
+          <aside className="ln-ai-proof">
+            <p className="ln-ai-proof-kicker">designed for teams operating in regulated, high-consequence environments.</p>
+            <p>Governed LLM analytics platforms in critical workflows: 85% analyst adoption, production controls, full auditability.</p>
+          </aside>
+        </div>
+        <div className="ln-ai-nerve-lines" aria-hidden="true" />
+      </section>
+
       <section className="ln-section" id="services">
-        <span className="ln-sec-num" aria-hidden="true">01</span>
+        <span className="ln-sec-num" aria-hidden="true">02</span>
         <p className="ln-section-eyebrow">Ways to Engage</p>
         <h2 className="ln-section-heading">Three clear entry points</h2>
         <p className="ln-section-sub">
@@ -384,72 +560,98 @@ export default function Landing() {
         </div>
       </section>
 
-      <section className="ln-section ln-mandate-triggers" id="mandates">
-        <span className="ln-sec-num" aria-hidden="true">02</span>
-        <p className="ln-section-eyebrow">Selected Capabilities</p>
-        <h2 className="ln-section-heading">Mandate areas we are brought in to solve</h2>
-        <p className="ln-section-sub">
-          Structured around the decisions and systems that move commercial outcomes.
-        </p>
-        <div className="ln-trigger-grid">
-          <article className="ln-trigger-card">
-            <strong>Product and operating design</strong>
-            <p>Decision workflows, platform adoption, rollout sequencing, and operating cadence for teams under pressure.</p>
-          </article>
-          <article className="ln-trigger-card">
-            <strong>Data and platform architecture</strong>
-            <p>Data models, integration design, APIs, and decision-serving layers that work in production.</p>
-          </article>
-          <article className="ln-trigger-card">
-            <strong>AI and research systems</strong>
-            <p>Model-enabled workflows with oversight, escalation, and clear evidence paths for high-trust teams.</p>
-          </article>
-          <article className="ln-trigger-card">
-            <strong>Payments and financial infrastructure</strong>
-            <p>Exception triage, control design, and speed improvements in transaction-intensive environments.</p>
-          </article>
+      <section className={`ln-section ln-mandate-triggers ln-mobile-shell ${mobileSectionOpen.mandates ? "is-open" : ""}`} id="mandates">
+        <button type="button" className="ln-mobile-toggle" aria-expanded={mobileSectionOpen.mandates} onClick={() => toggleMobileSection("mandates")}>
+          <span>Selected Capabilities</span>
+          <small>Mandate areas structured around decisions, controls, and production execution.</small>
+        </button>
+        <div className="ln-mobile-panel">
+          <span className="ln-sec-num" aria-hidden="true">03</span>
+          <p className="ln-section-eyebrow">Selected Capabilities</p>
+          <h2 className="ln-section-heading">Mandate areas we are brought in to solve</h2>
+          <p className="ln-section-sub">
+            Structured around the decisions and systems that move commercial outcomes.
+          </p>
+          <div className="ln-trigger-grid">
+            <article className="ln-trigger-card">
+              <strong>Product and operating design</strong>
+              <p>Decision workflows, platform adoption, rollout sequencing, and operating cadence for teams under pressure.</p>
+            </article>
+            <article className="ln-trigger-card">
+              <strong>Data and platform architecture</strong>
+              <p>Data models, integration design, APIs, and decision-serving layers that work in production.</p>
+            </article>
+            <article className="ln-trigger-card">
+              <strong>AI and research systems</strong>
+              <p>Model-enabled workflows with oversight, escalation, and clear evidence paths for high-trust teams.</p>
+            </article>
+            <article className="ln-trigger-card">
+              <strong>Payments and financial infrastructure</strong>
+              <p>Exception triage, control design, and speed improvements in transaction-intensive environments.</p>
+            </article>
+            <article className="ln-trigger-card">
+              <strong>Trading Operations &amp; Market Infrastructure</strong>
+              <p>Execution quality, multi-venue connectivity, order book analytics, and operational controls for trading firms and liquidity providers operating across fragmented venue infrastructure.</p>
+            </article>
+          </div>
         </div>
       </section>
 
-      <section className="ln-section ln-showcase" id="journey">
-        <span className="ln-sec-num" aria-hidden="true">03</span>
-        <p className="ln-section-eyebrow">Who We Help</p>
-        <h2 className="ln-section-heading">Teams with complex systems and expensive mistakes</h2>
-        <p className="ln-section-sub">
-          We work with teams that need operator judgment, not presentation-only advice.
-        </p>
-        <div className="ln-trigger-grid">
-          <article className="ln-trigger-card">
-            <strong>Fintech and payments platforms</strong>
-            <p>Operators modernizing transaction workflows, controls, and platform reliability.</p>
-          </article>
-          <article className="ln-trigger-card">
-            <strong>Research and data product teams</strong>
-            <p>Organizations turning fragmented analysis into reusable decision systems.</p>
-          </article>
-          <article className="ln-trigger-card">
-            <strong>Internal platform teams</strong>
-            <p>Large organizations with operational complexity across products, data, and governance.</p>
-          </article>
-          <article className="ln-trigger-card">
-            <strong>Leadership in live transformation</strong>
-            <p>Founders and senior operators carrying high-stakes delivery mandates with limited room for drift.</p>
-          </article>
+      <section className={`ln-section ln-showcase ln-mobile-shell ${mobileSectionOpen.journey ? "is-open" : ""}`} id="journey">
+        <button type="button" className="ln-mobile-toggle" aria-expanded={mobileSectionOpen.journey} onClick={() => toggleMobileSection("journey")}>
+          <span>Who We Help</span>
+          <small>Teams with complex systems, expensive mistakes, and live transformation pressure.</small>
+        </button>
+        <div className="ln-mobile-panel">
+          <span className="ln-sec-num" aria-hidden="true">04</span>
+          <p className="ln-section-eyebrow">Who We Help</p>
+          <h2 className="ln-section-heading">Teams with complex systems and expensive mistakes</h2>
+          <p className="ln-section-sub">
+            We work with teams that need operator judgment, not presentation-only advice.
+          </p>
+          <div className="ln-trigger-grid">
+            <article className="ln-trigger-card">
+              <strong>Fintech and payments platforms</strong>
+              <p>Operators modernizing transaction workflows, controls, and platform reliability.</p>
+            </article>
+            <article className="ln-trigger-card">
+              <strong>Research and data product teams</strong>
+              <p>Organizations turning fragmented analysis into reusable decision systems.</p>
+            </article>
+            <article className="ln-trigger-card">
+              <strong>Internal platform teams</strong>
+              <p>Large organizations with operational complexity across products, data, and governance.</p>
+            </article>
+            <article className="ln-trigger-card">
+              <strong>Leadership in live transformation</strong>
+              <p>Founders and senior operators carrying high-stakes delivery mandates with limited room for drift.</p>
+            </article>
+            <article className="ln-trigger-card">
+              <strong>Trading firms and liquidity providers</strong>
+              <p>Market makers, prop traders, and liquidity providers operating across fragmented CEX and DEX infrastructure where execution quality, spread reliability, and operational control are the business.</p>
+            </article>
+          </div>
         </div>
       </section>
 
-      <section className="ln-section ln-workflow" id="approach">
-        <span className="ln-sec-num" aria-hidden="true">04</span>
-        <p className="ln-section-eyebrow">How We Work</p>
-        <h2 className="ln-section-heading">Diagnostic, design, implementation, handoff</h2>
-        <p className="ln-section-sub">
-          Clear operator judgment, technical depth, and execution realism from first assessment through live handoff.
-        </p>
-        <div className="ln-workflow-diagram">
-          <div><b>01</b><span>Diagnostic</span><p>Find where product, data, controls, and ownership are breaking performance.</p></div>
-          <div><b>02</b><span>Design</span><p>Set the workflow, architecture, and decision model needed to execute.</p></div>
-          <div><b>03</b><span>Implementation</span><p>Build and embed changes in production with weekly decision support.</p></div>
-          <div><b>04</b><span>Handoff</span><p>Transfer controls, documentation, and operating cadence to internal teams.</p></div>
+      <section className={`ln-section ln-workflow ln-mobile-shell ${mobileSectionOpen.approach ? "is-open" : ""}`} id="approach">
+        <button type="button" className="ln-mobile-toggle" aria-expanded={mobileSectionOpen.approach} onClick={() => toggleMobileSection("approach")}>
+          <span>How We Work</span>
+          <small>Diagnostic, design, implementation, and handoff in one governed delivery loop.</small>
+        </button>
+        <div className="ln-mobile-panel">
+          <span className="ln-sec-num" aria-hidden="true">05</span>
+          <p className="ln-section-eyebrow">How We Work</p>
+          <h2 className="ln-section-heading">Diagnostic, design, implementation, handoff</h2>
+          <p className="ln-section-sub">
+            Clear operator judgment, technical depth, and execution realism from first assessment through live handoff.
+          </p>
+          <div className="ln-workflow-diagram">
+            <div><b>01</b><span>Diagnostic</span><p>Find where product, data, controls, and ownership are breaking performance.</p></div>
+            <div><b>02</b><span>Design</span><p>Set the workflow, architecture, and decision model needed to execute.</p></div>
+            <div><b>03</b><span>Implementation</span><p>Build and embed changes in production with weekly decision support.</p></div>
+            <div><b>04</b><span>Handoff</span><p>Transfer controls, documentation, and operating cadence to internal teams.</p></div>
+          </div>
         </div>
       </section>
 
@@ -488,13 +690,18 @@ export default function Landing() {
         </div>
       </section>
 
-      <section className="ln-section" id="service-library">
-        <span className="ln-sec-num" aria-hidden="true">05</span>
-        <p className="ln-section-eyebrow">Service Library</p>
-        <h2 className="ln-section-heading">Detailed mandates and service pages</h2>
-        <p className="ln-section-sub">
-          Deeper service descriptions, scope examples, and use-case detail.
-        </p>
+      <section className={`ln-section ln-mobile-shell ${mobileSectionOpen.serviceLibrary ? "is-open" : ""}`} id="service-library">
+        <button type="button" className="ln-mobile-toggle" aria-expanded={mobileSectionOpen.serviceLibrary} onClick={() => toggleMobileSection("serviceLibrary")}>
+          <span>Service Library</span>
+          <small>Detailed mandates, scoped offers, and service-specific implementation breakdowns.</small>
+        </button>
+        <div className="ln-mobile-panel">
+          <span className="ln-sec-num" aria-hidden="true">06</span>
+          <p className="ln-section-eyebrow">Service Library</p>
+          <h2 className="ln-section-heading">Detailed mandates and service pages</h2>
+          <p className="ln-section-sub">
+            Deeper service descriptions, scope examples, and use-case detail.
+          </p>
 
         <div className={`ln-service-group ${openServiceGroup === "entry" ? "is-open" : ""}`}>
           <button
@@ -544,7 +751,7 @@ export default function Landing() {
             onClick={() => setOpenServiceGroup((current) => current === "core" ? "" : "core")}
           >
             <span>Core</span>
-            <span className="ln-service-group-meta">5 services</span>
+            <span className="ln-service-group-meta">6 services</span>
           </button>
           <div className="ln-service-group-panel" id="service-group-core">
             <div className="ln-service-group-panel-inner">
@@ -560,6 +767,11 @@ export default function Landing() {
                   <a className="ln-feature-link" href="/service-agentic-ai-operations.html">Read breakdown</a>
                 </article>
                 <article className="ln-feature-card">
+                  <h3>Decision Systems &amp; AI Infrastructure</h3>
+                  <p>Design and implementation of governed decision systems across data, models, workflows, and controls for regulated teams that need control, auditability, and production readiness.</p>
+                  <a className="ln-feature-link" href="/service-decision-systems-ai-infrastructure.html">Read breakdown</a>
+                </article>
+                <article className="ln-feature-card">
                   <h3>Decision Reliability Engineering</h3>
                   <p>Model reliability, observability, and fallback design for regulated, audit-sensitive, and high-consequence decisions.</p>
                   <a className="ln-feature-link" href="/service-decision-reliability-engineering.html">Read breakdown</a>
@@ -573,6 +785,61 @@ export default function Landing() {
                   <h3>Cloud Cost Control and Infrastructure Efficiency</h3>
                   <p>Cloud cost discipline across AWS, on-prem, and Kubernetes environments, with architectural fixes that reduce waste without weakening resilience.</p>
                   <a className="ln-feature-link" href="/service-cloud-cost-control.html">Read breakdown</a>
+                </article>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div className={`ln-service-group ${openServiceGroup === "trading" ? "is-open" : ""}`}>
+          <button
+            type="button"
+            className="ln-service-group-toggle"
+            aria-expanded={openServiceGroup === "trading"}
+            aria-controls="service-group-trading"
+            onClick={() => setOpenServiceGroup((current) => current === "trading" ? "" : "trading")}
+          >
+            <span>Trading</span>
+            <span className="ln-service-group-meta">3 services</span>
+          </button>
+          <div className="ln-service-group-panel" id="service-group-trading">
+            <div className="ln-service-group-panel-inner">
+              <div className="ln-features-grid ln-features-grid--three">
+                <article className="ln-feature-card">
+                  <h3>Execution Intelligence Diagnostic</h3>
+                  <p>A focused assessment of execution quality, order book analytics infrastructure, and spread monitoring across your active venues. Delivered as a prioritised improvement roadmap with commercial impact estimates.</p>
+                  <ul className="ln-feature-scope-list">
+                    <li>Execution quality measurement across CEX and DEX venues</li>
+                    <li>Order book depth and spread analytics infrastructure</li>
+                    <li>Latency profiling and venue performance benchmarking</li>
+                    <li>Data pipeline assessment for real-time market data ingestion</li>
+                    <li>Recommendations for execution monitoring and alerting systems</li>
+                  </ul>
+                  <a className="ln-feature-link" href="/service-execution-intelligence-diagnostic.html">Read breakdown</a>
+                </article>
+                <article className="ln-feature-card">
+                  <h3>Multi-Venue Connectivity &amp; API Layer</h3>
+                  <p>Architecture and operational design for firms managing fragmented exchange connectivity across 20+ venues. Covers unified execution layer design, latency controls, reliability monitoring, and failover logic.</p>
+                  <ul className="ln-feature-scope-list">
+                    <li>Unified API layer design across CEX and DEX connectivity</li>
+                    <li>Latency monitoring and performance observability</li>
+                    <li>Failover and degraded-mode handling across venues</li>
+                    <li>Rate limit management and connection reliability controls</li>
+                    <li>Operational runbook design for connectivity incidents</li>
+                  </ul>
+                  <a className="ln-feature-link" href="/service-multi-venue-connectivity-api-layer.html">Read breakdown</a>
+                </article>
+                <article className="ln-feature-card">
+                  <h3>Trading Risk &amp; Inventory Operations</h3>
+                  <p>Decision infrastructure for inventory management, position risk visibility, and liquidity allocation across spot and derivatives. Policy-bound controls with real-time operational visibility for trading desks under live market conditions.</p>
+                  <ul className="ln-feature-scope-list">
+                    <li>Inventory and position risk decision workflows</li>
+                    <li>Liquidity allocation controls across venues and instruments</li>
+                    <li>Real-time risk visibility and escalation logic</li>
+                    <li>Policy-bound limits with human approval gates</li>
+                    <li>Operational controls for derivatives and structured exposure</li>
+                  </ul>
+                  <a className="ln-feature-link" href="/service-trading-risk-inventory-operations.html">Read breakdown</a>
                 </article>
               </div>
             </div>
@@ -617,6 +884,7 @@ export default function Landing() {
             </div>
           </div>
         </div>
+        </div>
       </section>
 
       <section className="ln-editorial-ribbon" aria-label="Execution visuals">
@@ -626,12 +894,21 @@ export default function Landing() {
       </section>
 
       <section className="ln-section ln-case-studies" id="case-studies">
-        <span className="ln-sec-num" aria-hidden="true">06</span>
+        <span className="ln-sec-num" aria-hidden="true">07</span>
         <p className="ln-section-eyebrow">Selected Mandates</p>
         <h2 className="ln-section-heading">Recent work, framed for institutional buyers</h2>
         <p className="ln-section-sub">
           These examples are anonymized by design. The goal is to show mandate shape, intervention, and measurable result.
         </p>
+        <button
+          type="button"
+          className="ln-case-grid-toggle"
+          aria-expanded={selectedMandatesOpen}
+          onClick={() => setSelectedMandatesOpen((current) => !current)}
+        >
+          <span>{selectedMandatesOpen ? "Hide mandates" : "View mandates"}</span>
+        </button>
+        <div className={`ln-case-grid-shell ${selectedMandatesOpen ? "is-open" : ""}`}>
         <div className="ln-case-grid">
           <article className="ln-case-card">
             <div className="ln-case-head">
@@ -690,60 +967,121 @@ export default function Landing() {
             </div>
           </article>
         </div>
+        </div>
       </section>
 
       <section className="ln-section ln-proof-artifact" id="proof-artifact">
-        <span className="ln-sec-num" aria-hidden="true">07</span>
+        <span className="ln-sec-num" aria-hidden="true">08</span>
         <p className="ln-section-eyebrow">Proof Artifact</p>
         <h2 className="ln-section-heading">A workflow proof tied to a real service outcome</h2>
         <p className="ln-section-sub">
           Example: payments exception triage. The work is not a dashboard. It is the operating path from raw event to governed action, with measurable improvement in speed and control.
         </p>
-        <div className="ln-proof-artifact-grid">
-          <div className="ln-proof-board" aria-label="Payments exception triage workflow">
-            <div className="ln-proof-board-head">
-              <span>Payments decision-speed sprint</span>
-              <strong>Exception workflow</strong>
+        <button
+          type="button"
+          className="ln-section-content-toggle"
+          aria-expanded={proofArtifactOpen}
+          onClick={() => setProofArtifactOpen((current) => !current)}
+        >
+          <span>{proofArtifactOpen ? "Hide proof artifact" : "View proof artifact"}</span>
+        </button>
+        <div className={`ln-section-content-shell ${proofArtifactOpen ? "is-open" : ""}`}>
+          <div className="ln-proof-artifact-stack">
+            <div className="ln-proof-artifact-grid">
+              <div className="ln-proof-board" aria-label="Execution intelligence workflow">
+                <div className="ln-proof-board-head">
+                  <span>Execution intelligence diagnostic</span>
+                  <strong>Venue execution workflow</strong>
+                </div>
+                <div className="ln-proof-flow">
+                  <span>Venue feeds</span>
+                  <span>Data normalize</span>
+                  <span>Quality score</span>
+                  <span>Routing guidance</span>
+                  <span>Action + audit</span>
+                </div>
+                <div className="ln-proof-rails">
+                  <div>
+                    <b>Inputs</b>
+                    <span>CEX and DEX order books, fills, spread states, latency traces</span>
+                  </div>
+                  <div>
+                    <b>Controls</b>
+                    <span>policy thresholds, escalation rules, operator approval paths</span>
+                  </div>
+                  <div>
+                    <b>Outcome</b>
+                    <span>faster quality detection with consistent routing decisions</span>
+                  </div>
+                </div>
+              </div>
+              <aside className="ln-proof-outcome">
+                <h3>Measured shift</h3>
+                <div className="ln-proof-outcome-grid">
+                  <div><strong>Before</strong><span>Desk-specific views, inconsistent venue baselines, delayed response to quality drift</span></div>
+                  <div><strong>After</strong><span>Unified execution surface with live scoring and policy-informed routing guidance</span></div>
+                  <div><strong>Commercial result</strong><span>Faster issue detection, tighter spread control, and fewer avoidable execution losses</span></div>
+                </div>
+                <a className="ln-feature-link" href="/service-execution-intelligence-diagnostic.html">See the service</a>
+              </aside>
             </div>
-            <div className="ln-proof-flow">
-              <span>Event intake</span>
-              <span>Context enrich</span>
-              <span>Risk score</span>
-              <span>Route or escalate</span>
-              <span>Action + audit</span>
-            </div>
-            <div className="ln-proof-rails">
-              <div>
-                <b>Inputs</b>
-                <span>RTP, ACH, SWIFT, case notes</span>
+
+            <div className="ln-proof-artifact-grid">
+              <div className="ln-proof-board" aria-label="Payments exception triage workflow">
+                <div className="ln-proof-board-head">
+                  <span>Payments decision-speed sprint</span>
+                  <strong>Exception workflow</strong>
+                </div>
+                <div className="ln-proof-flow">
+                  <span>Event intake</span>
+                  <span>Context enrich</span>
+                  <span>Risk score</span>
+                  <span>Route or escalate</span>
+                  <span>Action + audit</span>
+                </div>
+                <div className="ln-proof-rails">
+                  <div>
+                    <b>Inputs</b>
+                    <span>RTP, ACH, SWIFT, case notes</span>
+                  </div>
+                  <div>
+                    <b>Controls</b>
+                    <span>policy rules, human checkpoint, evidence log</span>
+                  </div>
+                  <div>
+                    <b>Outcome</b>
+                    <span>faster resolution with traceable decisions</span>
+                  </div>
+                </div>
               </div>
-              <div>
-                <b>Controls</b>
-                <span>policy rules, human checkpoint, evidence log</span>
-              </div>
-              <div>
-                <b>Outcome</b>
-                <span>faster resolution with traceable decisions</span>
-              </div>
+              <aside className="ln-proof-outcome">
+                <h3>Measured shift</h3>
+                <div className="ln-proof-outcome-grid">
+                  <div><strong>Before</strong><span>Manual routing, inconsistent escalation, weak visibility</span></div>
+                  <div><strong>After</strong><span>Scored triage, approval logic, and evidence-ready audit path</span></div>
+                  <div><strong>Commercial result</strong><span>Faster queue movement, fewer avoidable delays, stronger control in live operations</span></div>
+                </div>
+                <a className="ln-feature-link" href="/service-ai-payments-acceleration.html">See the service</a>
+              </aside>
             </div>
           </div>
-          <aside className="ln-proof-outcome">
-            <h3>Measured shift</h3>
-            <div className="ln-proof-outcome-grid">
-              <div><strong>Before</strong><span>Manual routing, inconsistent escalation, weak visibility</span></div>
-              <div><strong>After</strong><span>Scored triage, approval logic, and evidence-ready audit path</span></div>
-              <div><strong>Commercial result</strong><span>Faster queue movement, fewer avoidable delays, stronger control in live operations</span></div>
-            </div>
-            <a className="ln-feature-link" href="/service-ai-payments-acceleration.html">See the service</a>
-          </aside>
         </div>
       </section>
 
       <section className="ln-section" id="research-proof">
-        <span className="ln-sec-num" aria-hidden="true">08</span>
+        <span className="ln-sec-num" aria-hidden="true">09</span>
         <p className="ln-section-eyebrow">Proof Vignette</p>
-        <h2 className="ln-section-heading">From analyst-owned scripts to governed research infrastructure</h2>
-        <section className="ln-hero-caseproof" aria-label="Research infrastructure proof point">
+        <h2 className="ln-section-heading">From analyst-owned scripts to governed infrastructure</h2>
+        <button
+          type="button"
+          className="ln-section-content-toggle"
+          aria-expanded={proofVignetteOpen}
+          onClick={() => setProofVignetteOpen((current) => !current)}
+        >
+          <span>{proofVignetteOpen ? "Hide proof vignette" : "View proof vignette"}</span>
+        </button>
+        <div className={`ln-section-content-shell ${proofVignetteOpen ? "is-open" : ""}`}>
+          <section className="ln-hero-caseproof ln-hero-caseproof--research" aria-label="Governed infrastructure proof point">
           <div className="ln-hero-caseproof-copy">
             <p>
               Analysts and research teams were backtesting markets and testing index ideas through individually maintained scripts. Each desk had its own version. Results were not reproducible. Client simulations moved only as fast as the one analyst who knew the right script.
@@ -810,14 +1148,63 @@ export default function Landing() {
               <div><strong>Leadership visibility</strong><span>Research activity became visible, attributable, and governable.</span></div>
             </div>
           </div>
-        </section>
+          </section>
+          <section className="ln-hero-caseproof ln-hero-caseproof--trading" aria-label="Trading execution intelligence proof point">
+          <div className="ln-hero-caseproof-copy">
+            <p className="ln-proof-kicker">Proof Vignette</p>
+            <h2>From fragmented venue data to unified execution intelligence</h2>
+            <p>
+              A trading firm operating across 20+ centralised and decentralised exchanges was running execution decisions on fragmented, venue-specific data. Each desk had its own view. There was no unified order book picture, no consistent latency baseline, and no way to compare execution quality across venues at the speed the business required.
+            </p>
+            <div className="ln-hero-caseproof-notes">
+              <article>
+                <strong>Intervention</strong>
+                <span>Mapped the full venue connectivity landscape. Identified the highest-volume execution corridors and the data gaps producing the worst decision latency. Built a unified ingestion layer pulling normalised order book and execution data across all active venues into a single operational view.</span>
+              </article>
+              <article>
+                <strong>Platform shift</strong>
+                <span>Replaced desk-specific scripts and manual venue comparisons with a governed data layer. Execution quality metrics, spread, fill rate, latency, and slippage, became visible across all venues simultaneously. Routing decisions moved from analyst judgment to policy-informed, data-backed recommendations.</span>
+              </article>
+              <article>
+                <strong>Adoption</strong>
+                <span>Did not force a workflow change. Made the unified view the easier path and let desk leads pull their teams across organically as execution quality improved.</span>
+              </article>
+            </div>
+            <div className="ln-hero-caseproof-actions">
+              <span>Fragmented venue data produces fragmented decisions. Unified execution intelligence produces consistent, policy-aligned outcomes.</span>
+            </div>
+          </div>
+          <div className="ln-hero-caseproof-board">
+            <div className="ln-caseproof-visuals">
+              <figure className="ln-caseproof-panel">
+                <img src="./src/images/proof-unified-venue-ingestion.jpg" alt="Unified venue ingestion interface and trading infrastructure" />
+                <figcaption>Unified venue ingestion replaced disconnected desk-level market views.</figcaption>
+              </figure>
+              <figure className="ln-caseproof-panel ln-caseproof-panel--accent">
+                <img src="./src/images/ai-circuit-internals.jpg" alt="Market data density visual" />
+                <figcaption>Execution metrics became comparable across venues in one operating surface.</figcaption>
+              </figure>
+            </div>
+            <div className="ln-caseproof-results">
+              <div><strong>60%</strong><span>reduction in time to identify execution quality degradation across venues</span></div>
+              <div><strong>20+ venues</strong><span>unified real-time view across CEX and DEX connections replacing fragmented desk-level data</span></div>
+              <div><strong>Routing shift</strong><span>routing decisions backed by live execution data rather than analyst memory</span></div>
+            </div>
+          </div>
+          </section>
+        </div>
       </section>
 
-      <section className="ln-section" id="operator-map">
-        <span className="ln-sec-num" aria-hidden="true">09</span>
-        <p className="ln-section-eyebrow">Operator System Map</p>
-        <h2 className="ln-section-heading">How decision infrastructure is structured in production</h2>
-        <div className="ln-hero-proof" aria-label="Decision infrastructure system map">
+      <section className={`ln-section ln-mobile-shell ${mobileSectionOpen.operatorMap ? "is-open" : ""}`} id="operator-map">
+        <button type="button" className="ln-mobile-toggle" aria-expanded={mobileSectionOpen.operatorMap} onClick={() => toggleMobileSection("operatorMap")}>
+          <span>Operator System Map</span>
+          <small>Signals, decision core, and execution controls in one production model.</small>
+        </button>
+        <div className="ln-mobile-panel">
+          <span className="ln-sec-num" aria-hidden="true">10</span>
+          <p className="ln-section-eyebrow">Operator System Map</p>
+          <h2 className="ln-section-heading">How decision infrastructure is structured in production</h2>
+          <div className="ln-hero-proof" aria-label="Decision infrastructure system map">
           <div className="ln-hero-proof-main">
             <div className="ln-hero-proof-head">
               <span className="ln-proof-kicker">System map</span>
@@ -867,6 +1254,7 @@ export default function Landing() {
               <span>Learn</span>
             </div>
           </aside>
+          </div>
         </div>
       </section>
 
@@ -885,19 +1273,19 @@ export default function Landing() {
             </div>
             <div className="ln-operator-grid">
               <div>
-                <strong>Domains</strong>
+                <strong className="ln-operator-heading">Domains</strong>
                 <span>Payments, research, risk, treasury, institutional operations</span>
               </div>
               <div>
-                <strong>Systems</strong>
+                <strong className="ln-operator-heading">Systems</strong>
                 <span>API platforms, data pipelines, analytics products, AI workflows, control layers</span>
               </div>
               <div>
-                <strong>Environments</strong>
+                <strong className="ln-operator-heading">Environments</strong>
                 <span>Regulated institutions, production systems, audit-sensitive workflows</span>
               </div>
               <div>
-                <strong>Track record</strong>
+                <strong className="ln-operator-heading">Track record</strong>
                 <span>Wall Street operating standards, cloud migration at scale, LLM analytics build-out, institutional platform ownership</span>
               </div>
             </div>
