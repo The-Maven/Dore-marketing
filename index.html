@@ -868,9 +868,20 @@
     .nav-link.is-current{color:var(--paper);border-bottom:1px solid var(--accent);padding-bottom:3px}
     .nav-cta{display:none}
 
-    /* Hero · log was bleeding monospace through the headline at .22 opacity
-       on narrow screens. Drop it entirely — pure dark hero reads cleaner. */
-    .hero-log,.hero::after{display:none}
+    /* Hero · log is a working artifact, must actually read on mobile.
+       Compressed font, fewer columns, mask keeps it from bleeding through
+       the headline. The radial dim behind the headline core stays to
+       reinforce contrast where headline and log overlap. */
+    .hero-log{
+      opacity:.42;font-size:9.5px;line-height:1.85;
+      height:min(54%,420px);
+      mask-image:linear-gradient(180deg,transparent 0%,#000 12%,#000 58%,transparent 100%);
+      -webkit-mask-image:linear-gradient(180deg,transparent 0%,#000 12%,#000 58%,transparent 100%);
+    }
+    .hero-log-list{padding:14px 16px}
+    .logline{grid-template-columns:50px 56px 0 60px minmax(0,1fr);column-gap:8px}
+    .logline .agt{display:none}
+    .logline .surf{font-size:9px}
     .hero{padding:36px 16px 56px}
     h1.hero-h{font-size:clamp(40px,12vw,72px);line-height:1;letter-spacing:-.035em;margin:0 0 22px}
     .hero-sub{font-size:15px;line-height:1.5;margin:0 0 24px}
