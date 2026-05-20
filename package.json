@@ -1,16 +1,17 @@
 {
-  "name": "consultancy-website",
-  "version": "0.1.0",
+  "name": "rayleigh-stark-site",
+  "version": "1.0.0",
   "private": true,
+  "description": "Rayleigh Stark · Always-on monitoring for institutional books",
   "scripts": {
-    "dev": "parcel index.html about.html contact.html terms.html operator-notes.html contact/index.html terms/index.html digital-assets-infrastructure.html payments-infrastructure.html platform-reliability.html service-product-workflow-sprint.html service-ai-payments-acceleration.html service-ma-advisory-intelligence.html service-escrow-intelligence-automation.html service-intelligent-data-pipelines.html service-agentic-ai-operations.html service-decision-reliability-engineering.html service-decision-systems-ai-infrastructure.html service-execution-intelligence-diagnostic.html service-multi-venue-connectivity-api-layer.html service-trading-risk-inventory-operations.html service-ai-due-diligence.html service-fractional-ai-leadership.html service-ai-product-workflow-design.html service-platform-diagnostic.html service-private-markets-technology.html service-cloud-cost-control.html case-study-governed-research-infrastructure.html --port 1234",
-    "build": "parcel build index.html about.html contact.html terms.html operator-notes.html contact/index.html terms/index.html digital-assets-infrastructure.html payments-infrastructure.html platform-reliability.html service-product-workflow-sprint.html service-ai-payments-acceleration.html service-ma-advisory-intelligence.html service-escrow-intelligence-automation.html service-intelligent-data-pipelines.html service-agentic-ai-operations.html service-decision-reliability-engineering.html service-decision-systems-ai-infrastructure.html service-execution-intelligence-diagnostic.html service-multi-venue-connectivity-api-layer.html service-trading-risk-inventory-operations.html service-ai-due-diligence.html service-fractional-ai-leadership.html service-ai-product-workflow-design.html service-platform-diagnostic.html service-private-markets-technology.html service-cloud-cost-control.html case-study-governed-research-infrastructure.html --dist-dir dist && mkdir -p dist/src/images && cp src/images/* dist/src/images/ && cp og-image.png dist/ && cp _headers dist/ && node scripts/ensure-head-tags.mjs dist"
-  },
-  "dependencies": {
-    "react": "^18.3.1",
-    "react-dom": "^18.3.1"
+    "dev": "parcel index.html approach.html about.html contact.html terms.html --port 1234",
+    "build": "rm -rf dist .parcel-cache && parcel build index.html approach.html about.html contact.html terms.html --dist-dir dist --public-url / && node scripts/postbuild.mjs",
+    "preview": "python3 scripts/preview.py",
+    "clean": "rm -rf dist .parcel-cache"
   },
   "devDependencies": {
+    "@parcel/packager-raw-url": "^2.16.4",
+    "@parcel/transformer-jsonld": "^2.16.4",
     "parcel": "^2.14.0"
   },
   "overrides": {

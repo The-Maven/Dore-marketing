@@ -3,24 +3,24 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>About · Rayleigh Stark</title>
-    <meta name="description" content="Anthony Kwawu, founder. Almost a decade inside a global investment bank. Now running always-on agents for stablecoin operations on Hermes, the Rayleigh Stark runtime." />
-    <link rel="canonical" href="https://rayleighstark.com/about" />
+<title>Approach · Rayleigh Stark</title>
+    <meta name="description" content="How a Rayleigh Stark deployment runs: from operations audit, to design partner programme, to always-on agents in production." />
+    <link rel="canonical" href="https://rayleighstark.com/approach" />
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png" />
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
     <link rel="icon" type="image/png" sizes="192x192" href="/favicon-192.png" />
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
     <meta name="robots" content="index,follow" />
     <meta name="author" content="Rayleigh Stark" />
-    <meta property="og:title" content="About · Rayleigh Stark" />
-    <meta property="og:description" content="Anthony Kwawu, founder. Almost a decade inside a global investment bank. Now running always-on agents for stablecoin operations on Hermes, the Rayleigh Stark runtime." />
+    <meta property="og:title" content="Approach · Rayleigh Stark" />
+    <meta property="og:description" content="How a Rayleigh Stark deployment runs: from operations audit, to design partner, to always-on in production." />
     <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://rayleighstark.com/about" />
+    <meta property="og:url" content="https://rayleighstark.com/approach" />
     <meta property="og:site_name" content="Rayleigh Stark" />
     <meta property="og:image" content="https://rayleighstark.com/og-image.png?v=26.05b" />
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="About · Rayleigh Stark" />
-    <meta name="twitter:description" content="Anthony Kwawu, founder. Almost a decade inside a global investment bank. Now running always-on agents for stablecoin operations on Hermes, the Rayleigh Stark runtime." />
+    <meta name="twitter:title" content="Approach · Rayleigh Stark" />
+    <meta name="twitter:description" content="How a Rayleigh Stark deployment runs: from operations audit, to design partner, to always-on in production." />
     <meta name="twitter:image" content="https://rayleighstark.com/og-image.png?v=26.05b" />
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -38,7 +38,7 @@
     --gold:#D4A24A;
   }
   .outline-gold{color:transparent;-webkit-text-stroke:1.5px var(--gold);text-stroke:1.5px var(--gold);paint-order:stroke fill}
-  .bio-body .outline-gold,.role .outline-gold,p .outline-gold,.firm .outline-gold{-webkit-text-stroke-width:1px;text-stroke-width:1px}
+  .lede .outline-gold,p .outline-gold,.firm-note .outline-gold{-webkit-text-stroke-width:1px;text-stroke-width:1px}
   *{box-sizing:border-box}
   html,body{margin:0;padding:0;background:var(--ink);color:var(--paper);font-family:'Inter',sans-serif;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;overflow-wrap:break-word}
   body{min-height:100vh;overflow-x:hidden}
@@ -79,105 +79,58 @@
   .crumb .sep{color:var(--muted-2)}
   .crumb .current{color:var(--paper)}
 
-  /* HERO with avatar */
-  .hero{
-    padding:64px 24px 56px;max-width:1180px;margin:0 auto;
-    display:grid;grid-template-columns:320px 1fr;gap:64px;align-items:start;
-    position:relative;z-index:2;
-  }
-  .avatar-wrap{
-    position:relative;
-  }
-  .avatar-label{
-    font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:.18em;
-    text-transform:uppercase;color:var(--accent);margin-bottom:14px;
-    display:inline-flex;align-items:center;gap:10px;
-  }
-  .avatar-label::before{content:'';width:24px;height:1px;background:var(--accent)}
-  .avatar{
-    width:320px;height:320px;
-    border:1px solid var(--line-strong);
-    background:#08090c;
-    overflow:hidden;
-    position:relative;
-  }
-  .avatar img{
-    width:100%;height:100%;object-fit:cover;object-position:center 8%;
-    display:block;
-    /* gentle treatment to fit terminal aesthetic without losing the human */
-    filter:contrast(1.02) saturate(.86);
-  }
-  /* corner ticks · terminal frame */
-  .avatar::before,.avatar::after{
-    content:'';position:absolute;width:14px;height:14px;border-color:var(--accent);
-    border-style:solid;border-width:0;pointer-events:none;
-  }
-  .avatar::before{top:6px;left:6px;border-top-width:1.5px;border-left-width:1.5px}
-  .avatar::after{bottom:6px;right:6px;border-bottom-width:1.5px;border-right-width:1.5px}
-  .avatar-id{
-    margin-top:14px;
-    font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.08em;
-    color:var(--muted);text-transform:uppercase;line-height:1.7;
-  }
-  .avatar-id b{color:var(--paper);font-weight:500}
-  .avatar-link{
-    color:var(--accent);text-decoration:none;
-    border-bottom:1px solid var(--accent);padding-bottom:1px;
-    transition:color .2s,border-color .2s;
-  }
-  .avatar-link:hover{color:var(--paper);border-bottom-color:var(--paper)}
-
-  .bio{padding-top:8px}
+  .hero{padding:80px 24px 56px;max-width:1180px;margin:0 auto;position:relative;z-index:2}
   .eyebrow{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);margin-bottom:22px;display:inline-flex;align-items:center;gap:12px}
   .eyebrow::after{content:'';width:36px;height:1px;background:var(--accent)}
-  h1.h{font-family:'Inter Tight',sans-serif;font-weight:700;font-size:clamp(40px,5.6vw,80px);line-height:.98;letter-spacing:-.03em;margin:0 0 8px;color:var(--paper);max-width:18ch}
+  h1.h{font-family:'Inter Tight',sans-serif;font-weight:700;font-size:clamp(40px,5.6vw,84px);line-height:.98;letter-spacing:-.03em;margin:0 0 32px;color:var(--paper);max-width:22ch}
   h1.h .accent{color:var(--accent)}
-  .role{font-family:'IBM Plex Mono',monospace;font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin:0 0 32px;padding-bottom:24px;border-bottom:1px solid var(--line)}
-  .role b{color:var(--paper);font-weight:500}
+  .lede{font-size:19px;line-height:1.55;color:var(--muted);max-width:62ch;margin:0}
+  .lede b{color:var(--paper);font-weight:500}
 
-  .bio-body{display:flex;flex-direction:column;gap:18px}
-  .bio-body p{font-size:17px;line-height:1.6;color:var(--muted);margin:0;max-width:62ch}
-  .bio-body p b{color:var(--paper);font-weight:500}
-  .bio-body p .accent{color:var(--accent);font-weight:500}
-
-  /* What I built strip */
-  .built{
-    margin:72px 24px 0;padding:0;max-width:1180px;
-    margin-left:auto;margin-right:auto;position:relative;z-index:2;
+  .stages{
+    max-width:1180px;margin:48px auto 0;padding:0 24px;position:relative;z-index:2;
   }
-  .built-head{
-    display:flex;justify-content:space-between;align-items:end;
-    padding-bottom:18px;margin-bottom:0;border-bottom:1px solid var(--line);
+  .stage{
+    border-top:1px solid var(--line);padding:48px 0;
+    display:grid;grid-template-columns:200px 1fr;gap:48px;
   }
-  .built-head h2{
+  .stage:last-of-type{border-bottom:1px solid var(--line)}
+  .stage-meta{
+    font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.12em;
+    text-transform:uppercase;color:var(--muted);line-height:1.7;
+  }
+  .stage-meta .num{
+    display:inline-block;background:var(--accent);color:var(--ink);
+    padding:4px 8px;letter-spacing:.06em;font-weight:600;margin-bottom:12px;
+  }
+  .stage-meta .duration{color:var(--paper);margin-top:8px}
+  .stage h2{
     font-family:'Inter Tight',sans-serif;font-weight:600;
-    font-size:28px;letter-spacing:-.02em;color:var(--paper);margin:0;
+    font-size:32px;letter-spacing:-.02em;color:var(--paper);
+    margin:0 0 18px;line-height:1.1;
   }
-  .built-head h2 .accent{color:var(--accent)}
-  .built-head .meta{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
-  .built-list{
-    display:grid;grid-template-columns:repeat(4,1fr);gap:0;
-    border:1px solid var(--line-strong);border-top:none;
-  }
-  .built-item{
-    padding:24px 22px 28px;border-right:1px solid var(--line);position:relative;
+  .stage h2 .accent{color:var(--accent)}
+  .stage p{font-size:16.5px;line-height:1.6;color:var(--muted);margin:0 0 14px;max-width:62ch}
+  .stage p b{color:var(--paper);font-weight:500}
+
+  .refuse{
+    margin:64px 24px 0;padding:36px 36px;border:1px solid var(--line-strong);
+    max-width:1180px;margin-left:auto;margin-right:auto;position:relative;z-index:2;
     background:linear-gradient(180deg,rgba(255,255,255,.014),rgba(255,255,255,0));
   }
-  .built-item:last-child{border-right:none}
-  .built-item::before{content:'';position:absolute;left:22px;top:0;width:32px;height:2px;background:var(--accent)}
-  .built-item .num{font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:.16em;color:var(--muted);text-transform:uppercase;margin-top:18px;margin-bottom:10px}
-  .built-item h3{font-family:'Inter Tight',sans-serif;font-weight:600;font-size:17px;letter-spacing:-.01em;color:var(--paper);margin:0 0 8px;line-height:1.2}
-  .built-item p{font-size:13.5px;line-height:1.5;color:var(--muted);margin:0}
+  .refuse-eyebrow{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);margin-bottom:18px}
+  .refuse h3{font-family:'Inter Tight',sans-serif;font-weight:600;font-size:26px;letter-spacing:-.015em;color:var(--paper);margin:0 0 14px}
+  .refuse p{font-size:16px;line-height:1.6;color:var(--muted);margin:0 0 10px;max-width:64ch}
+  .refuse p b{color:var(--paper);font-weight:500}
 
-  /* Firm strip */
-  .firm{
-    margin:72px 24px 0;padding:40px 48px;border:1px solid var(--line-strong);
+  .credibility{
+    margin:80px 24px 0;padding:48px 56px;border:1px solid var(--line-strong);
     max-width:1180px;margin-left:auto;margin-right:auto;position:relative;z-index:2;
     background:linear-gradient(180deg,rgba(255,255,255,.018),rgba(255,255,255,0));
   }
-  .firm-eyebrow{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);margin-bottom:18px}
-  .firm h2{font-family:'Inter Tight',sans-serif;font-weight:500;font-size:24px;line-height:1.4;letter-spacing:-.01em;color:var(--paper);margin:0;max-width:72ch}
-  .firm h2 b{color:var(--accent);font-weight:500}
+  .credibility-eyebrow{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);margin-bottom:18px}
+  .credibility p{font-family:'Inter Tight',sans-serif;font-weight:400;font-size:21px;line-height:1.45;letter-spacing:-.005em;color:var(--paper);margin:0;max-width:72ch}
+  .credibility p b{color:var(--accent);font-weight:500}
 
   .contact-block{
     padding:96px 24px 80px;max-width:1180px;margin:0 auto;position:relative;z-index:2;
@@ -192,14 +145,6 @@
   .foot-legal a{color:var(--muted);text-decoration:none;border-bottom:1px solid var(--line-strong);padding-bottom:1px;margin-right:18px}
   .foot-legal a:hover{color:var(--paper);border-bottom-color:var(--paper)}
   .foot-legal-links{display:flex;align-items:center;gap:18px}
-
-  @media(max-width:880px){
-    .hero{grid-template-columns:1fr;gap:36px}
-    .avatar{width:240px;height:240px}
-    .built-list{grid-template-columns:1fr 1fr}
-    .built-item:nth-child(2){border-right:none}
-    .built-item:nth-child(1),.built-item:nth-child(2){border-bottom:1px solid var(--line)}
-  }
 @media(max-width:760px){
     /* Phones · only brand + CTA in the header; nav links accessible via /about, /contact, /approach pages.
        The header stays compact and never wraps text. */
@@ -221,21 +166,20 @@
     .brand-mark{width:22px;height:22px;font-size:9px}
 
     
-    .hero{padding:40px 16px 32px}
+    .hero{padding:48px 16px 32px}
     h1.h{font-size:clamp(32px,9vw,56px)}
-    .built,.firm{margin:48px 16px 0}
-    .firm{padding:28px 24px}
-    .firm h2{font-size:19px}
-    .built-list{grid-template-columns:1fr}
-    .built-item{border-right:none;border-bottom:1px solid var(--line)}
-    .built-item:last-child{border-bottom:none}
+    .stages{padding:0 16px}
+    .stage{grid-template-columns:1fr;gap:18px;padding:32px 0}
+    .stage h2{font-size:24px}
+    .refuse,.credibility{margin:48px 16px 0;padding:28px 22px}
+    .credibility p{font-size:17px}
     .contact-block{padding:56px 16px}
     .foot-strip{flex-direction:column;gap:10px;align-items:flex-start}
     .foot-legal{flex-direction:column;gap:10px;align-items:flex-start}
   }
 
   @media print{
-    @page{size:1440px 3600px;margin:0}
+    @page{size:1440px 3200px;margin:0}
     html,body{width:1440px}
     body::before{display:none}
     .statusbar{position:relative}
@@ -257,30 +201,21 @@
     .nav-link.is-current{color:var(--paper);border-bottom:1px solid var(--accent);padding-bottom:3px}
     .nav-cta{display:none}
 
-    /* Content rhythm · tighter, editorial */
+    /* Content rhythm · tighter, less wasted vertical space */
     .crumb{padding:18px 16px 0}
-    .hero{padding:28px 16px 24px;gap:24px}
-    .avatar-label{font-size:10px;margin-bottom:10px}
-    .avatar{width:100%;max-width:280px;height:auto;aspect-ratio:1/1}
-    .avatar-id{font-size:10.5px;margin-top:12px;line-height:1.7}
-    .bio{padding-top:0}
-    .eyebrow{font-size:10px;margin-bottom:14px}
-    h1.h{font-size:clamp(34px,10vw,52px);line-height:1;letter-spacing:-.025em;margin:0 0 6px}
-    .role{font-size:11px;letter-spacing:.04em;margin:0 0 22px;padding-bottom:18px}
-    .bio-body{gap:14px}
-    .bio-body p{font-size:15px;line-height:1.55}
-    .built{margin:32px 16px 0}
-    .built-head{padding-bottom:14px;flex-wrap:wrap;gap:8px}
-    .built-head h2{font-size:22px}
-    .built-head .meta{font-size:10px}
-    .built-item{padding:18px 18px 22px}
-    .built-item::before{left:18px;width:28px}
-    .built-item .num{font-size:10px;margin-top:14px;margin-bottom:8px}
-    .built-item h3{font-size:15.5px}
-    .built-item p{font-size:13px;line-height:1.5}
-    .firm{margin:32px 16px 0;padding:22px 20px}
-    .firm-eyebrow{font-size:10px;margin-bottom:12px}
-    .firm h2{font-size:17px;line-height:1.4}
+    .hero{padding:32px 16px 28px}
+    h1.h{font-size:clamp(30px,8.4vw,46px);line-height:1.02;letter-spacing:-.028em;margin:0 0 22px}
+    .lede{font-size:15.5px;line-height:1.5}
+    .stages{margin:32px auto 0}
+    .stage{padding:24px 0;gap:14px}
+    .stage h2{font-size:21px;line-height:1.1;margin:0 0 12px}
+    .stage p{font-size:14.5px;line-height:1.55;margin:0 0 10px}
+    .stage-meta{font-size:10.5px;line-height:1.6}
+    .stage-meta .num{padding:3px 7px;font-size:10px;margin-bottom:8px}
+    .refuse,.credibility{margin:32px 16px 0;padding:22px 18px}
+    .refuse h3{font-size:21px}
+    .refuse p{font-size:14.5px;line-height:1.55}
+    .credibility p{font-size:16px;line-height:1.45}
     .contact-block{padding:48px 16px 32px}
     .contact-line{font-size:clamp(22px,6vw,30px);margin:0 0 18px}
     .contact-email{font-size:16px}
@@ -314,8 +249,8 @@
     <span class="brand-text">Rayleigh Stark</span>
   </a>
   <div class="nav-right">
-    <a class="nav-link" href="/approach">Approach</a>
-    <a class="nav-link is-current" href="/about">About</a>
+    <a class="nav-link is-current" href="/approach">Approach</a>
+    <a class="nav-link" href="/about">About</a>
     <a class="nav-link" href="/contact">Contact</a>
     <a class="nav-cta" href="/#use-cases">See use cases →</a>
   </div>
@@ -324,94 +259,113 @@
 <div class="crumb">
   <a href="/">RS</a>
   <span class="sep">/</span>
-  <span class="current">about</span>
+  <span class="current">approach</span>
 </div>
 
 <section class="hero">
-
-  <div class="avatar-wrap">
-    <div class="avatar-label">Operator · 01</div>
-    <div class="avatar">
-      <img src="./src/images/anthony-kwawu-portrait.png" alt="Anthony Kwawu" />
-    </div>
-    <div class="avatar-id">
-      <b>ID</b> &nbsp;&nbsp;&nbsp;01 / FOUNDER<br>
-      <b>BASE</b> &nbsp;London / New York<br>
-      <b>TENURE</b> &nbsp;Almost a decade inside a global investment bank<br>
-      <b>LINK</b> &nbsp;<a class="avatar-link" href="https://linkedin.com/in/anthony-kwawu" target="_blank" rel="noopener">linkedin.com/in/anthony-kwawu →</a>
-    </div>
-  </div>
-
-  <div class="bio">
-    <div class="eyebrow">Who builds the agents</div>
-    <h1 class="h">Anthony <span class="accent">Kwawu.</span></h1>
-    <p class="role"><b>Founder, Rayleigh Stark.</b> &nbsp;Always-on agents for stablecoin operations.</p>
-
-    <div class="bio-body">
-      <p>
-        <b>Almost a decade inside a global investment bank,</b> building LLM analytics platforms,
-        decision systems, and transaction monitoring infrastructure for institutional teams.
-        Direct work across high-value payments, cross-border settlement, and operational risk.
-      </p>
-      <p>
-        The work included taking an LLM-powered analytics platform from blank page to
-        executive-level visibility. Leading API platform development. Running cloud migration
-        at scale. Building infrastructure for institutional operations and risk teams. Each one
-        a system that had to perform under real load, with regulators looking on, and operators
-        in step.
-      </p>
-      <p>
-        <span class="accent">Now running it as always-on agents</span> for stablecoin issuers
-        and the infrastructure layer they operate on. Reserves, redemptions, sanctions, KYT,
-        cross-chain reconciliation, regulatory reporting. Hermes runtime in production.
-      </p>
-    </div>
-  </div>
-
+  <div class="eyebrow">How the agents land</div>
+  <h1 class="h">
+    From operations audit, to design partner, to <span class="accent">always-on in production.</span>
+  </h1>
+  <p class="lede">
+    Two ways in. <b>The artifact is a deployed agent watching reserves, redemptions, or sanctions,</b>
+    not a deck. Hermes runtime, your operational surface, regulator-ready evidence.
+  </p>
 </section>
 
-<section class="built">
-  <div class="built-head">
-    <h2>What got <span class="accent">shipped.</span></h2>
-    <div class="meta">Inside the global investment bank · 2017–2025</div>
-  </div>
-  <div class="built-list">
-    <article class="built-item">
-      <div class="num">01 · ANALYTICS</div>
-      <h3>LLM analytics platform</h3>
-      <p>From blank page to executive-level visibility for institutional teams.</p>
-    </article>
-    <article class="built-item">
-      <div class="num">02 · DECISION SYSTEMS</div>
-      <h3>Decision and monitoring infrastructure</h3>
-      <p>Production systems supporting high-value payments and operational risk.</p>
-    </article>
-    <article class="built-item">
-      <div class="num">03 · PLATFORM</div>
-      <h3>API platform development</h3>
-      <p>Led platform work supporting institutional operations and risk teams.</p>
-    </article>
-    <article class="built-item">
-      <div class="num">04 · INFRA</div>
-      <h3>Cloud migration at scale</h3>
-      <p>Ran institutional workloads through a regulated cloud migration.</p>
-    </article>
-  </div>
+<div class="stages">
+
+  <section class="stage">
+    <div class="stage-meta">
+      <span class="num">01</span><br>
+      Operations audit
+      <span class="duration">Two weeks</span>
+    </div>
+    <div>
+      <h2>We map your stablecoin operations against the <span class="accent">surfaces we cover.</span></h2>
+      <p>
+        Reserves coverage. Redemption flow. Sanctions and KYT. Cross-chain reconciliation.
+        Regulatory reporting. We walk the surfaces with your treasury, ops, and compliance
+        leads, and look at what is already watched and where the picture goes dark.
+      </p>
+      <p>
+        <b>The output is a deployment plan</b> with measurable targets and the surfaces where
+        always-on coverage adds the most value. Bridges into a design partner engagement or
+        stands alone.
+      </p>
+    </div>
+  </section>
+
+  <section class="stage">
+    <div class="stage-meta">
+      <span class="num">02</span><br>
+      Design partner
+      <span class="duration">Six to eight weeks to first production</span>
+    </div>
+    <div>
+      <h2>We deploy always-on agents inside <span class="accent">one operational surface.</span></h2>
+      <p>
+        For stablecoin issuers and infrastructure firms running production today. The agents
+        run on Hermes, our runtime, governed by your policy, integrated with your custody
+        feeds, ledger, sanctions screening, and ticketing.
+      </p>
+      <p>
+        <b>The agents ship into production with measurable improvement</b> in coverage, time
+        to escalation, or evidence-ready output, with a named operator on your side
+        accountable for them.
+      </p>
+    </div>
+  </section>
+
+  <section class="stage">
+    <div class="stage-meta">
+      <span class="num">03</span><br>
+      Live operation
+      <span class="duration">Subscription thereafter</span>
+    </div>
+    <div>
+      <h2>Policy versioned. Kill switches in place. <span class="accent">Evidence ready.</span></h2>
+      <p>
+        Dual approval gates on policy changes. Policy versioned. Kill switches configured
+        for the head of compliance and the CFO. Evidence retention configured per MiCA, the
+        GENIUS Act, and equivalent regimes.
+      </p>
+      <p>
+        Monthly subscription covers the runtime, policy reviews, and human escalation on
+        edge cases. The agents stay deployed. Your team owns the surface.
+      </p>
+    </div>
+  </section>
+
+</div>
+
+<section class="refuse">
+  <div class="refuse-eyebrow">What we refuse</div>
+  <h3>The artifact is the agent. Not a deck.</h3>
+  <p>
+    We do not hand back a slide deck. We do not write a strategy paper. We do not run a
+    multi-year programme.
+  </p>
+  <p>
+    <b>If the agents are not watching reserves, redemptions, or sanctions better than your
+    team can on day one, the deployment failed.</b>
+  </p>
 </section>
 
-<section class="firm">
-  <div class="firm-eyebrow">The firm, plainly</div>
-  <h2>
-    Rayleigh Stark builds always-on agents for stablecoin operations. The agents run on
-    <b>Hermes</b>, our runtime, deployed inside regulated stablecoin programmes. Two ways in:
-    an <b>Operations Audit</b>, two weeks. A <b>Design Partner Programme</b>, six to eight
-    weeks to first production, then monthly subscription. London and New York.
-  </h2>
+<section class="credibility">
+  <div class="credibility-eyebrow">Who builds the agent</div>
+  <p>
+    <b>Almost a decade inside a global investment bank,</b> building LLM analytics platforms,
+    decision systems, and transaction monitoring infrastructure for institutional teams.
+    Direct work across high-value payments, cross-border settlement, and operational risk.
+    Now running it as always-on agents for stablecoin issuers and the infrastructure layer
+    they operate on.
+  </p>
 </section>
 
 <section class="contact-block">
   <h2 class="contact-line">Email a short note about the stablecoin operation you'd want watched.</h2>
-  <a class="contact-email" href="mailto:anthony@rayleighstark.com?subject=Stablecoin operation I'd want watched">anthony@rayleighstark.com</a>
+  <a class="contact-email" href="mailto:anthony@rayleighstark.com">anthony@rayleighstark.com</a>
 </section>
 
 <footer class="foot">

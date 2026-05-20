@@ -1,27 +1,1475 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="Rayleigh Stark provides operator-led advisory on AI, data platforms, and financial infrastructure. Built on Wall Street and applied to fintech, research, and complex product systems." />
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Rayleigh Stark · The always-on operations layer for stablecoins</title>
+    <meta name="description" content="Production agents for stablecoin operations. Reserves, redemptions, sanctions, KYT, reconciliation, reporting. Always-on, policy-bound, deployed inside regulated programmes. Built on Wall Street." />
     <link rel="canonical" href="https://rayleighstark.com/" />
-    <meta property="og:title" content="Rayleigh Stark - Operator-Led Advisory" />
-    <meta property="og:description" content="Operator-led advisory across AI, data platforms and financial infrastructure. Built on Wall Street and applied to complex product systems." />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
+    <link rel="icon" type="image/png" sizes="192x192" href="/favicon-192.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <meta name="robots" content="index,follow" />
+    <meta name="author" content="Rayleigh Stark" />
+    <meta property="og:title" content="Rayleigh Stark · The always-on operations layer for stablecoins" />
+    <meta property="og:description" content="Production agents for stablecoin operations. Reserves, redemptions, sanctions, KYT, reconciliation, reporting. Always-on, policy-bound, deployed inside regulated programmes. Built on Wall Street." />
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://rayleighstark.com/" />
-    <meta property="og:image" content="https://rayleighstark.com/og-image.png" />
+    <meta property="og:site_name" content="Rayleigh Stark" />
+    <meta property="og:image" content="https://rayleighstark.com/og-image.png?v=26.05b" />
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Rayleigh Stark - Operator-Led Advisory" />
-    <meta name="twitter:description" content="Operator-led advisory across AI, data platforms and financial infrastructure. Built on Wall Street and applied to complex product systems." />
-    <meta name="twitter:image" content="https://rayleighstark.com/og-image.png" />
-    <link rel="icon" type="image/svg+xml" href="./favicon.svg" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;500;600&display=swap" rel="stylesheet" />
-    <title>Rayleigh Stark | Operator-Led Advisory for AI, Data Platforms, and Financial Infrastructure</title>
-  </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="./src/main.jsx"></script>
-  </body>
+    <meta name="twitter:title" content="Rayleigh Stark · The always-on operations layer for stablecoins" />
+    <meta name="twitter:description" content="Production agents for stablecoin operations. Reserves, redemptions, sanctions, KYT, reconciliation, reporting. Always-on, policy-bound, deployed inside regulated programmes. Built on Wall Street." />
+    <meta name="twitter:image" content="https://rayleighstark.com/og-image.png?v=26.05b" />
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "Rayleigh Stark",
+      "url": "https://rayleighstark.com/",
+      "logo": "https://rayleighstark.com/favicon.svg",
+      "description": "Always-on agents for stablecoin operations. Reserves, redemptions, sanctions, KYT, cross-chain reconciliation, and regulatory reporting. Policy-bound escalation when something needs human eyes. Hermes runtime in production.",
+      "founder": {
+        "@type": "Person",
+        "name": "Anthony Kwawu",
+        "sameAs": "https://linkedin.com/in/anthony-kwawu"
+      },
+      "address": [
+        {"@type": "PostalAddress", "addressLocality": "London", "addressCountry": "GB"},
+        {"@type": "PostalAddress", "addressLocality": "New York", "addressCountry": "US"}
+      ],
+      "email": "anthony@rayleighstark.com",
+      "knowsAbout": [
+        "Stablecoin operations",
+        "Reserves monitoring",
+        "Redemption flow",
+        "KYT and sanctions screening",
+        "Cross-chain reconciliation",
+        "MiCA Article 36",
+        "GENIUS Act"
+      ],
+      "legalName": "Premium Services & Network UK Ltd"
+    }
+    </script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@300;400;500;600&family=Inter+Tight:wght@500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#0A0B0E;
+    --ink-2:#111317;
+    --line:rgba(255,255,255,.07);
+    --line-strong:rgba(255,255,255,.16);
+    --paper:#EFEAE0;
+    --muted:rgba(239,234,224,.72);
+    --muted-2:rgba(239,234,224,.54);
+    --accent:#38bdf8;
+    --green:#7FE0A6;
+    --amber:#F7B955;
+    --gold:#D4A24A;
+  }
+  /* Outlined gold word treatment · brand callout, dark interior */
+  .outline-gold{
+    color:transparent;
+    -webkit-text-stroke:1.5px var(--gold);
+    text-stroke:1.5px var(--gold);
+    paint-order:stroke fill;
+  }
+  /* Smaller occurrences (body, eyebrows) get a thinner stroke so the letters stay legible */
+  .hero-sub .outline-gold,
+  .section-side .outline-gold,
+  p .outline-gold{
+    -webkit-text-stroke-width:1px;
+    text-stroke-width:1px;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0;background:var(--ink);color:var(--paper);font-family:'Inter',sans-serif;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;overflow-wrap:break-word}
+  body{min-height:100vh;overflow-x:hidden}
+  ::selection{background:var(--accent);color:var(--ink)}
+  a{color:inherit}
+
+  body::before{
+    content:'';position:fixed;inset:0;pointer-events:none;z-index:1;opacity:.45;
+    background-image:
+      linear-gradient(rgba(255,255,255,.022) 1px,transparent 1px),
+      linear-gradient(90deg,rgba(255,255,255,.022) 1px,transparent 1px);
+    background-size:56px 56px;
+  }
+
+  /* STATUS BAR */
+  /* Unified sticky header · statusbar + nav scroll together as one block */
+  .site-header{
+    position:sticky;top:0;z-index:60;
+    background:rgba(10,11,14,.92);
+    backdrop-filter:saturate(140%) blur(10px);
+    -webkit-backdrop-filter:saturate(140%) blur(10px);
+    border-bottom:1px solid var(--line);
+  }
+  .site-header .nav{border-bottom:none;background:transparent}
+  .site-header .statusbar{background:transparent;backdrop-filter:none;-webkit-backdrop-filter:none}
+
+  .statusbar{
+    position:relative;z-index:1;
+    border-bottom:1px solid var(--line);
+    background:rgba(10,11,14,.88);backdrop-filter:saturate(140%) blur(10px);
+    font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.1em;
+    text-transform:uppercase;color:var(--muted);
+  }
+  .statusbar-inner{display:flex;align-items:center;justify-content:space-between;padding:10px 24px;gap:24px}
+  .status-cluster{display:flex;gap:18px;align-items:center}
+  .status-pill{display:inline-flex;align-items:center;gap:8px}
+  .dot{width:7px;height:7px;border-radius:50%;background:var(--green);box-shadow:0 0 8px rgba(127,224,166,.7);display:inline-block}
+
+  /* NAV */
+  .nav{
+    position:relative;z-index:5;border-bottom:1px solid var(--line);
+    display:flex;align-items:center;justify-content:space-between;padding:18px 24px;
+  }
+  .brand{font-family:'Inter Tight',sans-serif;font-weight:700;font-size:15px;letter-spacing:-.01em;display:flex;align-items:center;gap:10px;color:var(--paper);text-decoration:none}
+  .brand-mark{width:24px;height:24px;border:1.5px solid var(--paper);display:inline-flex;align-items:center;justify-content:center;font-family:'IBM Plex Mono',monospace;font-size:10px;font-weight:600}
+  .nav-right{display:flex;gap:22px;align-items:center}
+  .nav-link{font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);text-decoration:none}
+  .nav-link:hover{color:var(--paper)}
+  .nav-cta{font-family:'IBM Plex Mono',monospace;font-size:12px;text-transform:uppercase;letter-spacing:.06em;background:var(--accent);color:var(--ink);text-decoration:none;padding:10px 14px;border:1px solid var(--accent);transition:transform .15s,box-shadow .15s;font-weight:600}
+  .nav-cta:hover{transform:translate(-1px,-1px);box-shadow:2px 2px 0 var(--paper)}
+
+  /* HERO */
+  .hero{padding:80px 24px 120px;max-width:1440px;margin:0 auto;position:relative;z-index:2}
+  h1.hero-h{
+    font-family:'Inter Tight',sans-serif;font-weight:700;
+    font-size:clamp(48px,8vw,118px);line-height:.95;letter-spacing:-.038em;
+    margin:0 0 36px;color:var(--paper);max-width:22ch;
+  }
+  h1.hero-h .accent{color:var(--accent)}
+  .hero-sub{
+    font-family:'Inter',sans-serif;font-size:19px;line-height:1.55;
+    color:rgba(239,234,224,.9);
+    max-width:64ch;margin:0 0 44px;
+  }
+  .hero-sub b{color:var(--paper);font-weight:500}
+  .hero-cta{
+    background:var(--accent);color:var(--ink);
+    font-family:'Inter Tight',sans-serif;font-weight:600;font-size:15px;
+    padding:18px 26px;text-decoration:none;
+    display:inline-flex;align-items:center;gap:12px;
+    border:1px solid var(--accent);
+    transition:transform .15s,box-shadow .15s;
+  }
+  .hero-cta:hover{transform:translate(-2px,-2px);box-shadow:4px 4px 0 var(--paper)}
+  .hero-mark{
+    margin-top:64px;
+    font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.16em;
+    color:var(--muted-2);text-transform:uppercase;
+    display:inline-flex;align-items:center;gap:12px;
+  }
+  .hero-mark::before{content:'';width:32px;height:1px;background:var(--line-strong);display:inline-block}
+
+  /* LIVE MONITORING LOG · backdrop behind the HEADLINE area only.
+     Lives in the upper portion of the hero so the sub-line and CTA below get
+     full clean dark backgrounds. Fades in at top, fades out before reaching
+     the sub-line so there's no visual competition. */
+  .hero-log{
+    position:absolute;top:0;left:0;right:0;bottom:auto;margin:0;max-width:none;
+    height:min(56%,500px);
+    font-family:'IBM Plex Mono',monospace;
+    font-size:12.5px;line-height:1.95;
+    color:var(--muted);
+    overflow:hidden;pointer-events:none;z-index:1;
+    opacity:.6;
+    mask-image:linear-gradient(180deg,transparent 0%,#000 8%,#000 62%,transparent 100%);
+    -webkit-mask-image:linear-gradient(180deg,transparent 0%,#000 8%,#000 62%,transparent 100%);
+  }
+  /* Soft radial dim behind the headline core — keeps headline pop high without
+     killing the log around it. */
+  .hero::after{
+    content:'';position:absolute;left:0;right:0;top:0;height:min(56%,500px);
+    pointer-events:none;z-index:1;
+    background:radial-gradient(
+      ellipse 60% 70% at 22% 50%,
+      rgba(10,11,14,.55) 0%,
+      rgba(10,11,14,.18) 50%,
+      rgba(10,11,14,0) 80%
+    );
+  }
+  .hero-log-list{
+    list-style:none;margin:0;padding:24px 24px 24px 24px;
+    display:flex;flex-direction:column;justify-content:flex-end;
+    min-height:100%;gap:0;
+  }
+  .logline{
+    display:grid;
+    grid-template-columns:74px 90px 60px 90px minmax(0,1fr);
+    column-gap:14px;align-items:baseline;
+    white-space:nowrap;overflow:hidden;
+    font-variant-numeric:tabular-nums;
+    animation:logline-in 200ms ease-out;
+  }
+  .logline .t{color:var(--muted-2)}
+  .logline .sev{color:var(--muted);font-weight:600;letter-spacing:.02em}
+  .logline.s-watch .sev{color:var(--amber)}
+  .logline.s-escalate .sev{color:#F87171}
+  .logline.s-resolve .sev{color:var(--green)}
+  .logline.s-override .sev{color:var(--accent)}
+  .logline .agt{color:var(--muted-2)}
+  .logline .surf{color:var(--paper);opacity:.85}
+  .logline .msg{color:var(--paper);opacity:.78;overflow:hidden;text-overflow:ellipsis;min-width:0}
+  @keyframes logline-in{
+    from{opacity:0;transform:translateY(2px)}
+    to{opacity:1;transform:none}
+  }
+  @media (prefers-reduced-motion:reduce){
+    .logline{animation:none}
+  }
+
+  /* Hero text sits ABOVE the backdrop log. */
+  .hero > h1.hero-h,
+  .hero > .hero-sub,
+  .hero > .hero-cta,
+  .hero > .hero-mark{position:relative;z-index:2}
+
+  /* SECTION SHELLS */
+  .section{padding:96px 24px;border-bottom:1px solid var(--line);max-width:1440px;margin:0 auto;position:relative;z-index:2}
+  .section-head{display:grid;grid-template-columns:auto 1fr auto;gap:40px;padding-bottom:36px;margin-bottom:44px;border-bottom:1px solid var(--line);align-items:end}
+  .section-num{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);border:1px solid var(--accent);padding:8px 12px;align-self:start}
+  .section-eyebrow{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-bottom:14px}
+  .section-heading{font-family:'Inter Tight',sans-serif;font-weight:700;font-size:clamp(34px,4.6vw,68px);line-height:1;letter-spacing:-.028em;margin:0;color:var(--paper);max-width:22ch}
+  .section-heading .accent{color:var(--accent)}
+  .section-side{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.06em;color:var(--muted);text-align:right;text-transform:uppercase;line-height:1.7}
+
+  /* OFFERS */
+  .offers{display:grid;grid-template-columns:1fr 1fr;gap:0;border:1px solid var(--line-strong)}
+  .offer{padding:40px 36px 44px;border-right:1px solid var(--line);background:linear-gradient(180deg,rgba(255,255,255,.014),rgba(255,255,255,0));position:relative}
+  .offer:last-child{border-right:none}
+  .offer::before{content:'';position:absolute;left:36px;top:0;width:48px;height:2px;background:var(--accent)}
+  .offer-meta{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);margin-top:24px;margin-bottom:18px}
+  .offer-name{font-family:'Inter Tight',sans-serif;font-weight:700;font-size:30px;letter-spacing:-.02em;color:var(--paper);margin:0 0 8px;line-height:1.1}
+  .offer-duration{font-family:'IBM Plex Mono',monospace;font-size:13px;letter-spacing:.06em;color:var(--accent);margin-bottom:22px}
+  .offer p{font-size:15.5px;line-height:1.6;color:var(--muted);margin:0 0 16px}
+  .offer .terms{font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--paper);margin-top:24px;padding-top:18px;border-top:1px dashed var(--line)}
+
+  /* STANDARD (four pillars) */
+  .pillars{display:grid;grid-template-columns:repeat(4,1fr);gap:0;border:1px solid var(--line-strong)}
+  .pillar{padding:32px 28px 36px;border-right:1px solid var(--line);position:relative;background:linear-gradient(180deg,rgba(255,255,255,.014),rgba(255,255,255,0))}
+  .pillar:last-child{border-right:none}
+  .pillar::before{content:'';position:absolute;left:28px;top:0;width:36px;height:2px;background:var(--accent)}
+  .pillar-label{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.16em;color:var(--muted);text-transform:uppercase;margin-top:22px;margin-bottom:14px}
+  .pillar-h{font-family:'Inter Tight',sans-serif;font-weight:600;font-size:22px;letter-spacing:-.015em;color:var(--paper);margin:0 0 12px;line-height:1.15}
+  .pillar-body{font-size:14.5px;line-height:1.55;color:var(--muted);margin:0}
+
+  /* CREDIBILITY */
+  .cred-block{
+    border:1px solid var(--line-strong);padding:56px 56px;
+    background:linear-gradient(180deg,rgba(255,255,255,.018),rgba(255,255,255,0));
+    max-width:1180px;
+  }
+  .cred-body{
+    font-family:'Inter Tight',sans-serif;font-weight:400;
+    font-size:24px;line-height:1.45;letter-spacing:-.01em;
+    color:var(--paper);margin:0;
+  }
+  .cred-body b{color:var(--accent);font-weight:500}
+
+  /* ═══ USE CASE 01 · editorial treatment ═══ */
+  .case01{
+    position:relative;
+    border:1px solid var(--line-strong);
+    background:linear-gradient(180deg,rgba(56,189,248,.025),rgba(255,255,255,0) 40%);
+    padding:56px 56px 0;margin-bottom:64px;
+  }
+  .case01-meta{
+    display:flex;justify-content:space-between;align-items:baseline;gap:24px;
+    padding-bottom:24px;border-bottom:1px solid var(--line);margin-bottom:64px;
+    font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.14em;
+    text-transform:uppercase;flex-wrap:wrap;
+  }
+  .case01-meta .case01-id{color:var(--accent);font-weight:600}
+  .case01-meta .case01-name{color:var(--paper);font-weight:500;flex:1;min-width:0}
+  .case01-meta .case01-policy{color:var(--muted-2);font-size:10.5px;display:inline-flex;align-items:center;gap:8px}
+  .case01-meta .case01-policy::before{content:'';width:8px;height:8px;border-radius:50%;background:var(--green);box-shadow:0 0 8px rgba(127,224,166,.6);animation:pulse 1.6s infinite}
+
+  .case01-lead{
+    display:grid;grid-template-columns:1.5fr 1fr;gap:80px;
+    margin-bottom:0;align-items:start;
+  }
+  .case01-moment{position:relative}
+  .case01-moment .scene{
+    font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.16em;
+    text-transform:uppercase;color:var(--accent);
+    display:inline-flex;align-items:center;gap:12px;margin-bottom:28px;
+  }
+  .case01-moment .scene::after{content:'';width:42px;height:1px;background:var(--accent)}
+  .case01-moment h3{
+    font-family:'Inter Tight',sans-serif;font-weight:600;
+    font-size:clamp(34px,4.4vw,60px);
+    line-height:1.08;letter-spacing:-.025em;
+    color:var(--paper);margin:0 0 28px;
+  }
+  .case01-moment h3 .acc{color:var(--accent)}
+  .case01-moment .note{
+    font-family:'Inter',sans-serif;font-size:17px;line-height:1.6;color:var(--muted);
+    margin:0;max-width:54ch;
+  }
+  .case01-moment .note b{color:var(--paper);font-weight:500}
+
+  .case01-panel{
+    border:1px solid var(--line-strong);background:rgba(255,255,255,.018);
+    padding:24px 26px;align-self:start;position:relative;
+  }
+  .case01-panel::before{
+    content:'';position:absolute;left:-1px;top:24px;width:3px;height:18px;background:var(--accent);
+  }
+  .case01-panel-head{
+    font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:.16em;
+    color:var(--muted);text-transform:uppercase;margin-bottom:18px;
+    padding-bottom:14px;border-bottom:1px dashed var(--line);
+  }
+  .case01-panel dl{
+    margin:0;display:grid;grid-template-columns:auto 1fr;gap:12px 22px;
+    font-family:'IBM Plex Mono',monospace;
+  }
+  .case01-panel dt{
+    font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);
+    padding-top:3px;
+  }
+  .case01-panel dd{
+    margin:0;font-size:13px;color:var(--paper);line-height:1.45;
+  }
+  .case01-panel dd small{color:var(--muted);font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;display:block;margin-top:2px;font-weight:400}
+
+  /* timeline · vertical rail */
+  .case01-tl{
+    border-top:1px dashed var(--line);
+    margin-top:80px;padding:48px 0 16px;
+  }
+  .case01-tl-label{
+    font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:.18em;
+    text-transform:uppercase;color:var(--accent);
+    display:inline-flex;align-items:center;gap:14px;margin-bottom:24px;
+  }
+  .case01-tl-label::after{content:'';width:42px;height:1px;background:var(--accent)}
+  .case01-tl-rail{position:relative}
+  .tl-event{
+    display:grid;grid-template-columns:100px 24px 96px minmax(0,1fr);gap:18px;
+    align-items:start;padding:18px 0;position:relative;
+  }
+  .tl-event + .tl-event{border-top:1px solid var(--line)}
+  .tl-event .tl-time{
+    font-family:'IBM Plex Mono',monospace;font-size:13px;letter-spacing:.04em;
+    color:var(--accent);font-variant-numeric:tabular-nums;padding-top:3px;
+  }
+  .tl-event .tl-tick{position:relative;display:flex;justify-content:center}
+  .tl-event .tl-tick::before{
+    content:'';position:absolute;left:50%;top:-18px;bottom:-18px;width:1px;
+    background:var(--line-strong);transform:translateX(-50%);
+  }
+  .tl-event:first-child .tl-tick::before{top:50%}
+  .tl-event:last-child .tl-tick::before{bottom:50%}
+  .tl-event .tl-tick::after{
+    content:'';width:10px;height:10px;border-radius:50%;
+    background:var(--accent);box-shadow:0 0 0 4px var(--ink),0 0 12px rgba(56,189,248,.4);
+    margin-top:6px;position:relative;z-index:1;
+  }
+  .tl-event .tl-label{
+    font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.14em;
+    text-transform:uppercase;color:var(--paper);font-weight:600;padding-top:5px;
+  }
+  .tl-event .tl-body{font-size:14.5px;line-height:1.55;color:var(--muted)}
+  .tl-event .tl-body b{color:var(--paper);font-weight:500}
+
+  /* machinery · what's behind the agent (demoted, smaller) */
+  .case01-machinery{
+    border-top:1px dashed var(--line);margin-top:32px;padding:40px 0 8px;
+  }
+  .case01-machinery-label{
+    font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:.18em;
+    text-transform:uppercase;color:var(--muted);
+    display:inline-flex;align-items:center;gap:14px;margin-bottom:22px;
+  }
+  .case01-machinery-label::before{content:'';width:42px;height:1px;background:var(--line-strong)}
+  .case01-machinery-grid{
+    display:grid;grid-template-columns:repeat(4,1fr);gap:0;
+    border:1px solid var(--line);
+  }
+  .case01-machinery-grid article{
+    padding:24px 22px 22px;border-right:1px solid var(--line);position:relative;
+    background:linear-gradient(180deg,rgba(255,255,255,.012),rgba(255,255,255,0));
+  }
+  .case01-machinery-grid article:last-child{border-right:none}
+  .case01-machinery-grid article::before{
+    content:attr(data-stage);
+    position:absolute;top:0;left:22px;
+    background:var(--ink);padding:0 8px 0 0;
+    font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.14em;
+    color:var(--muted-2);text-transform:uppercase;
+    transform:translateY(-50%);
+  }
+  .case01-machinery-grid h4{
+    font-family:'Inter Tight',sans-serif;font-weight:600;font-size:17px;
+    letter-spacing:-.01em;color:var(--paper);margin:4px 0 8px;
+  }
+  .case01-machinery-grid p{font-size:12.5px;line-height:1.55;color:var(--muted);margin:0}
+
+  /* counterfactual · big editorial closer */
+  .case01-cf{
+    border-top:1px solid var(--accent);
+    margin:48px -56px 0;padding:56px 56px 64px;
+    background:linear-gradient(180deg,rgba(56,189,248,.03),rgba(255,255,255,0));
+    position:relative;
+  }
+  .case01-cf-label{
+    font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.18em;
+    text-transform:uppercase;color:var(--muted);margin:0 0 22px;
+    display:inline-flex;align-items:center;gap:14px;
+  }
+  .case01-cf-label::before{
+    content:'';width:8px;height:8px;border-radius:50%;background:#F87171;
+    box-shadow:0 0 8px rgba(248,113,113,.5);
+  }
+  .case01-cf-body{
+    font-family:'Inter Tight',sans-serif;font-weight:500;
+    font-size:clamp(28px,3.4vw,46px);
+    line-height:1.18;letter-spacing:-.02em;
+    color:var(--paper);margin:0;max-width:32ch;
+  }
+  .case01-cf-body em{font-style:normal;color:#F87171;font-weight:500}
+
+  @keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
+
+  @media(max-width:1100px){
+    .case01-lead{grid-template-columns:1fr;gap:40px}
+    .case01-panel{justify-self:start;width:100%;max-width:520px}
+  }
+  @media(max-width:1024px){
+    .case01-machinery-grid{grid-template-columns:1fr 1fr}
+    .case01-machinery-grid article:nth-child(2){border-right:none}
+    .case01-machinery-grid article:nth-child(1),
+    .case01-machinery-grid article:nth-child(2){border-bottom:1px solid var(--line)}
+  }
+  @media(max-width:760px){
+    /* Phones · only brand + CTA in the header; nav links accessible via /about, /contact, /approach pages.
+       The header stays compact and never wraps text. */
+    .nav-right .nav-link{display:none}
+    .nav{padding:12px 14px;gap:10px}
+    .brand{font-size:13px;gap:8px;white-space:nowrap;flex-shrink:0}
+    .brand-mark{width:22px;height:22px;font-size:9px;flex-shrink:0}
+    .nav-cta{font-size:10.5px;padding:8px 12px;white-space:nowrap;letter-spacing:.06em}
+    .statusbar-inner{padding:6px 14px;font-size:9.5px;gap:14px}
+    .status-cluster{gap:10px}
+
+    .case01{padding:32px 24px 0}
+    .case01-meta{flex-direction:column;align-items:flex-start;gap:8px;font-size:10px;margin-bottom:36px}
+    .case01-lead{gap:32px}
+    .case01-moment h3{font-size:clamp(28px,8.5vw,40px)}
+    .case01-moment .note{font-size:15px}
+    .case01-tl{margin-top:48px}
+    .tl-event{grid-template-columns:84px 20px minmax(0,1fr);gap:14px}
+    .tl-event .tl-label{grid-column:1 / -1;padding-left:0;padding-top:4px;font-size:10.5px}
+    .case01-machinery-grid{grid-template-columns:1fr}
+    .case01-machinery-grid article{border-right:none;border-bottom:1px solid var(--line)}
+    .case01-machinery-grid article:last-child{border-bottom:none}
+    .case01-cf{margin:32px -24px 0;padding:36px 24px 44px}
+  }
+
+  /* legacy .sysmap block (no longer used in HTML, kept for safety) */
+  .sysmap{
+    border:1px solid var(--line-strong);padding:36px;
+    background:rgba(255,255,255,.014);
+  }
+  .sysmap-head{
+    display:flex;justify-content:space-between;align-items:center;
+    padding-bottom:18px;border-bottom:1px dashed var(--line);margin-bottom:32px;
+    font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.1em;
+    text-transform:uppercase;color:var(--muted);
+  }
+  .sysmap-title{color:var(--paper);font-weight:500}
+  .sysmap-status{display:inline-flex;align-items:center;gap:8px;color:var(--green)}
+  .sysmap-status::before{content:'';width:7px;height:7px;border-radius:50%;background:var(--green);box-shadow:0 0 8px rgba(127,224,166,.6);animation:pulse 1.6s infinite}
+  @keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
+
+  .flow{
+    display:grid;grid-template-columns:1fr auto 1fr auto 1fr;gap:0;align-items:stretch;
+    margin-bottom:32px;
+  }
+  .col{
+    border:1px solid var(--line-strong);padding:22px 22px 24px;
+    font-family:'IBM Plex Mono',monospace;font-size:13px;
+    background:rgba(255,255,255,.018);
+  }
+  .col-head{
+    font-size:10.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--accent);
+    border-bottom:1px solid var(--line);padding-bottom:10px;margin-bottom:14px;
+    display:flex;justify-content:space-between;align-items:center;
+  }
+  .col-head .stage{color:var(--muted-2)}
+  .col-items{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:8px}
+  .col-items li{
+    color:var(--paper);display:grid;grid-template-columns:auto 1fr;gap:10px;align-items:start;
+    font-size:13px;line-height:1.4;
+  }
+  .col-items li::before{content:'›';color:var(--accent);font-weight:600}
+  .col-items li small{display:block;color:var(--muted);font-size:11px;margin-top:2px;letter-spacing:.04em}
+
+  .flow-arrow{
+    display:flex;align-items:center;justify-content:center;padding:0 12px;
+    color:var(--accent);font-family:'IBM Plex Mono',monospace;font-size:18px;font-weight:600;
+  }
+
+  .control-strip{
+    margin-top:8px;border:1px solid var(--line-strong);
+    padding:18px 22px;display:grid;grid-template-columns:auto 1fr;gap:22px;align-items:center;
+    background:linear-gradient(180deg,rgba(56,189,248,.04),rgba(255,255,255,0));
+  }
+  .control-strip .label{
+    font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:.18em;
+    color:var(--accent);text-transform:uppercase;border-right:1px solid var(--line-strong);padding-right:22px;
+  }
+  .control-strip .items{
+    font-family:'IBM Plex Mono',monospace;font-size:12.5px;color:var(--paper);
+    display:flex;flex-wrap:wrap;gap:22px;
+  }
+  .control-strip .items span{display:inline-flex;align-items:center;gap:6px}
+  .control-strip .items span::before{content:'·';color:var(--muted-2)}
+
+  /* USE CASES (replaces code blocks) */
+  .uc-lead{
+    margin-top:20px;padding:22px 24px;
+    border:1px solid var(--line-strong);
+    background:linear-gradient(180deg,rgba(56,189,248,.04),rgba(255,255,255,0));
+    display:grid;grid-template-columns:auto 1fr 1fr 1fr;gap:32px;align-items:start;
+  }
+  .uc-lead-tag{
+    font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:.16em;
+    color:var(--accent);text-transform:uppercase;border-left:2px solid var(--accent);padding-left:12px;
+    align-self:stretch;display:flex;align-items:flex-start;padding-top:2px;
+  }
+  .uc-lead-col h4{
+    font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:.16em;
+    text-transform:uppercase;color:var(--muted);margin:0 0 8px;font-weight:500;
+  }
+  .uc-lead-col p{
+    font-family:'Inter',sans-serif;font-size:13.5px;line-height:1.5;color:var(--paper);
+    margin:0;
+  }
+  .uc-lead-col.avoided p{color:var(--accent)}
+
+  .uc-grid{
+    display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:32px;
+  }
+  .uc-card{
+    border:1px solid var(--line-strong);
+    background:linear-gradient(180deg,rgba(255,255,255,.014),rgba(255,255,255,0));
+    padding:24px 22px 26px;display:flex;flex-direction:column;gap:0;position:relative;
+    transition:border-color .2s,background .2s;
+  }
+  .uc-card:hover{border-color:var(--accent);background:rgba(56,189,248,.04)}
+  .uc-card::before{content:'';position:absolute;left:22px;top:0;width:32px;height:2px;background:var(--accent)}
+  .uc-meta{
+    display:flex;justify-content:space-between;align-items:center;
+    font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:.14em;
+    text-transform:uppercase;color:var(--muted);margin-top:18px;margin-bottom:12px;
+  }
+  .uc-meta .id{color:var(--accent);font-weight:600}
+  .uc-title{
+    font-family:'Inter Tight',sans-serif;font-weight:600;font-size:19px;letter-spacing:-.015em;
+    color:var(--paper);margin:0 0 18px;line-height:1.2;
+  }
+  .uc-row{display:grid;grid-template-columns:auto 1fr;gap:12px;padding:10px 0;border-top:1px dashed var(--line)}
+  .uc-row:first-of-type{border-top:none;padding-top:0}
+  .uc-row .lbl{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);padding-top:2px;min-width:64px}
+  .uc-row .val{font-size:13px;line-height:1.5;color:var(--paper)}
+  .uc-row.avoided .val{color:var(--accent)}
+  .uc-status{
+    margin-top:18px;padding-top:14px;border-top:1px solid var(--line);
+    font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.1em;
+    text-transform:uppercase;color:var(--accent);
+    display:flex;justify-content:space-between;align-items:center;
+  }
+  .uc-status .surface{color:var(--muted)}
+
+  /* CONTACT */
+  .contact-block{
+    padding:120px 24px;border-bottom:1px solid var(--line);
+    max-width:1440px;margin:0 auto;position:relative;z-index:2;
+    text-align:left;
+  }
+  .contact-line{
+    font-family:'Inter Tight',sans-serif;font-weight:500;
+    font-size:clamp(28px,3.6vw,48px);line-height:1.1;letter-spacing:-.02em;
+    color:var(--paper);margin:0 0 28px;max-width:24ch;
+  }
+  .contact-email{
+    display:inline-block;font-family:'IBM Plex Mono',monospace;
+    font-size:22px;letter-spacing:.02em;color:var(--accent);text-decoration:none;
+    border-bottom:1px solid var(--accent);padding-bottom:4px;
+  }
+  .contact-email:hover{color:var(--paper);border-bottom-color:var(--paper)}
+
+  /* FOOTER */
+  footer.foot{padding:28px 24px;color:var(--muted);position:relative;z-index:2;border-top:1px solid var(--line)}
+  .foot-strip{max-width:1440px;margin:0 auto;display:flex;justify-content:space-between;font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+  .foot-legal{max-width:1440px;margin:18px auto 0;padding-top:14px;border-top:1px dashed var(--line);display:flex;justify-content:space-between;align-items:center;font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.08em;color:var(--muted-2);text-transform:none}
+  .foot-legal a{color:var(--muted);text-decoration:none;border-bottom:1px solid var(--line-strong);padding-bottom:1px;margin-right:18px}
+  .foot-legal a:hover{color:var(--paper);border-bottom-color:var(--paper)}
+  .foot-legal-links{display:flex;align-items:center;gap:18px}
+  @media(max-width:760px){
+    .foot-legal{flex-direction:column;gap:10px;align-items:flex-start}
+  }
+
+  /* RESPONSIVE */
+  @media(max-width:1024px){
+    .offers{grid-template-columns:1fr}
+    .offer{border-right:none;border-bottom:1px solid var(--line)}
+    .offer:last-child{border-bottom:none}
+    .pillars{grid-template-columns:1fr 1fr}
+    .pillar:nth-child(2){border-right:none}
+    .pillar:nth-child(1),.pillar:nth-child(2){border-bottom:1px solid var(--line)}
+    .flow{grid-template-columns:1fr}
+    .flow-arrow{padding:8px 0;transform:rotate(90deg)}
+    .uc-lead{grid-template-columns:1fr;gap:18px}
+    .uc-lead-tag{border-left:none;border-top:2px solid var(--accent);padding-left:0;padding-top:8px}
+    .uc-grid{grid-template-columns:1fr 1fr}
+  }
+  @media(max-width:760px){
+    .statusbar-inner{flex-wrap:wrap;gap:10px;padding:8px 16px}
+    .status-cluster:last-child{display:none}
+    .nav{padding:14px 16px;gap:12px}
+    .nav-right{gap:14px}
+    .nav-link{font-size:10.5px;letter-spacing:.04em}
+    .nav-cta{font-size:10.5px;padding:8px 10px;letter-spacing:.04em}
+    .brand{font-size:13px}
+    .brand-mark{width:22px;height:22px;font-size:9px}
+
+    
+    
+    .hero{padding:48px 16px 72px}
+    h1.hero-h{font-size:clamp(28px,7.5vw,48px);line-height:1;letter-spacing:-.035em;margin-bottom:24px;overflow-wrap:break-word}
+    .hero-sub{font-size:16px;margin-bottom:28px}
+    .hero-log{font-size:10.5px;line-height:1.85;opacity:.5;height:min(48%,340px)}
+    .hero-log-list{padding:16px}
+    .logline{grid-template-columns:58px 70px 0 70px minmax(0,1fr);column-gap:8px}
+    .logline .agt{display:none}
+    /* on narrow screens the backdrop reads as atmosphere, not content */
+    .section{padding:64px 16px}
+    .section-head{grid-template-columns:1fr;gap:18px;padding-bottom:24px;margin-bottom:28px}
+    .pillars{grid-template-columns:1fr}
+    .pillar{border-right:none;border-bottom:1px solid var(--line)}
+    .pillar:last-child{border-bottom:none}
+    .uc-grid{grid-template-columns:1fr}
+    .cred-block{padding:32px 22px}
+    .cred-body{font-size:18px}
+    .sysmap{padding:20px}
+    .contact-block{padding:64px 16px}
+    .foot-strip{flex-direction:column;gap:10px;align-items:flex-start}
+  }
+
+  /* PRINT */
+  @media print{
+    @page{size:1440px 9000px;margin:0}
+    html,body{width:1440px}
+    body::before{display:none}
+    .statusbar{position:relative}
+  }
+
+
+  /* ═════════════════════════════════════════════════════════════
+     MOBILE OPTIMIZATIONS · last in cascade so these win.
+     Targets ≤ 760px (phones + small tablets in portrait).
+     Goals: tighter vertical rhythm, no word-on-word overlap in hero log,
+     and stop the case01 timeline from squishing all text to the left.
+     ═════════════════════════════════════════════════════════════ */
+  @media(max-width:760px){
+
+    /* ── HERO · tighter, log calmed down ── */
+    .hero{padding:36px 16px 56px}
+    .hero-log{opacity:.22;font-size:10px;line-height:1.85;height:min(50%,360px)}
+    .hero-log-list{padding:14px 16px 14px 16px}
+    .logline{grid-template-columns:54px 60px 0 64px minmax(0,1fr);column-gap:8px}
+    .logline .agt{display:none}
+    .logline .surf{font-size:9.5px}
+    h1.hero-h{font-size:clamp(28px,8vw,46px);line-height:1.02;letter-spacing:-.03em;margin:0 0 20px}
+    .hero-sub{font-size:15.5px;line-height:1.5;margin:0 0 28px}
+    .hero-cta{font-size:14px;padding:14px 22px}
+    .hero-mark{margin-top:36px;font-size:10px}
+
+    /* ── SECTION rhythm · less elongated ── */
+    .section{padding:48px 16px}
+    .section-head{grid-template-columns:1fr;gap:14px;padding-bottom:20px;margin-bottom:24px}
+    .section-num{align-self:flex-start;font-size:10px;padding:6px 10px}
+    .section-eyebrow{font-size:10px;margin-bottom:10px}
+    .section-heading{font-size:clamp(26px,6.5vw,40px);line-height:1.02;max-width:none}
+    .section-side{text-align:left;line-height:1.5;font-size:10px}
+
+    /* ── OFFERS · two stacked cards, tighter ── */
+    .offers{grid-template-columns:1fr;border-left:none;border-right:none}
+    .offer{padding:24px 20px 26px;border-right:none;border-bottom:1px solid var(--line)}
+    .offer:last-child{border-bottom:none}
+    .offer::before{left:20px}
+    .offer-name{font-size:22px;margin:0 0 6px}
+    .offer-duration{font-size:12px;margin-bottom:16px}
+    .offer p{font-size:14px;margin:0 0 12px}
+    .offer .terms{font-size:11px;margin-top:18px;padding-top:14px}
+
+    /* ── PILLARS · 1-column stack, label inline with title ── */
+    .pillars{grid-template-columns:1fr;border-left:none;border-right:none}
+    .pillar{padding:22px 20px 24px;border-right:none;border-bottom:1px solid var(--line)}
+    .pillar:last-child{border-bottom:none}
+    .pillar::before{left:20px;width:28px}
+    .pillar-label{font-size:10px;margin-top:14px;margin-bottom:8px}
+    .pillar-h{font-size:18px;margin:0 0 8px}
+    .pillar-body{font-size:13.5px;line-height:1.5}
+
+    /* ── CREDIBILITY block · tighter ── */
+    .cred-block{padding:28px 22px}
+    .cred-body{font-size:17px;line-height:1.45}
+
+    /* ── CASE01 · the big mobile fix ── */
+    .case01{padding:24px 20px 0;margin-bottom:36px}
+    .case01-meta{flex-direction:column;align-items:flex-start;gap:6px;font-size:9.5px;padding-bottom:18px;margin-bottom:28px}
+    .case01-meta .case01-policy{font-size:9.5px}
+    .case01-lead{grid-template-columns:1fr;gap:24px;margin-bottom:0}
+    .case01-moment .scene{font-size:10px;margin-bottom:18px}
+    .case01-moment h3{font-size:clamp(26px,7vw,38px);line-height:1.06;margin-bottom:18px}
+    .case01-moment .note{font-size:14.5px;line-height:1.5}
+    .case01-panel{padding:18px 20px;width:100%;max-width:none}
+    .case01-panel-head{font-size:10px;padding-bottom:10px;margin-bottom:12px}
+    .case01-panel dl{gap:8px 14px}
+    .case01-panel dt{font-size:9.5px}
+    .case01-panel dd{font-size:12px}
+    .case01-panel dd small{font-size:9.5px}
+
+    /* ── TIMELINE · the squished-to-left fix.
+       Each event becomes 2 rows: header (time · tick · label) inline,
+       then body wraps full-width underneath. No more empty right column. ── */
+    .case01-tl{margin-top:32px;padding:28px 0 0}
+    .case01-tl-label{font-size:10px;margin-bottom:18px}
+    .tl-event{
+      grid-template-columns:auto auto 1fr;
+      grid-template-rows:auto auto;
+      column-gap:10px;row-gap:6px;
+      padding:14px 0;
+    }
+    .tl-event .tl-time{font-size:11.5px;grid-column:1;grid-row:1;padding-top:4px}
+    .tl-event .tl-tick{grid-column:2;grid-row:1;width:14px}
+    .tl-event .tl-tick::before{top:-14px;bottom:auto;height:200%}
+    .tl-event:first-child .tl-tick::before{top:50%}
+    .tl-event:last-child .tl-tick::before{bottom:50%;height:50%}
+    .tl-event .tl-tick::after{width:8px;height:8px;margin-top:4px}
+    .tl-event .tl-label{
+      grid-column:3;grid-row:1;
+      padding-top:5px;padding-left:0;
+      font-size:10px;
+    }
+    .tl-event .tl-body{
+      grid-column:1 / -1;grid-row:2;
+      padding-left:24px;
+      font-size:13.5px;line-height:1.45;
+    }
+
+    /* ── MACHINERY · single column ── */
+    .case01-machinery{margin-top:28px;padding:28px 0 0}
+    .case01-machinery-label{font-size:10px;margin-bottom:16px}
+    .case01-machinery-grid{grid-template-columns:1fr}
+    .case01-machinery-grid article{padding:18px 20px;border-right:none;border-bottom:1px solid var(--line)}
+    .case01-machinery-grid article:last-child{border-bottom:none}
+    .case01-machinery-grid h4{font-size:15px}
+    .case01-machinery-grid p{font-size:12.5px}
+
+    /* ── COUNTERFACTUAL · tighter ── */
+    .case01-cf{margin:28px -20px 0;padding:28px 20px 36px}
+    .case01-cf-label{font-size:10px;margin-bottom:14px}
+    .case01-cf-body{font-size:clamp(22px,6vw,32px);line-height:1.2}
+
+    /* ── USE CASE CARDS (02-04) ── */
+    .uc-grid{grid-template-columns:1fr;gap:10px;margin-top:24px}
+    .uc-card{padding:20px 20px 22px}
+    .uc-title{font-size:17px;margin:0 0 14px}
+    .uc-row{padding:8px 0}
+    .uc-row .lbl{min-width:54px;font-size:9.5px}
+    .uc-row .val{font-size:12.5px}
+    .uc-status{font-size:10px;margin-top:14px;padding-top:10px}
+
+    /* ── CONTACT block ── */
+    .contact-block{padding:56px 16px}
+    .contact-line{font-size:clamp(22px,5.5vw,30px)}
+    .contact-email{font-size:17px}
+
+    /* ── FOOTER · tighter ── */
+    .foot{padding:24px 16px}
+    .foot-strip{font-size:9.5px}
+    .foot-legal{font-size:9.5px;margin-top:14px;padding-top:12px}
+
+
+    /* ── Hard width caps — content NEVER exceeds the viewport ── */
+    body{overflow-x:hidden}
+    *{min-width:0}  /* allow grid/flex children to shrink */
+    .section-head>div{min-width:0;max-width:100%}
+    .case01,.case01-lead,.case01-moment,.case01-panel,.case01-tl,.case01-tl-rail,
+    .case01-machinery,.case01-machinery-grid,.case01-cf,
+    .hero-h,.section-heading,.case01-moment h3,
+    .hero-sub,.hero-cta,.contact-line,.contact-email,
+    .uc-grid,.uc-card,.tl-event,.tl-event .tl-body{
+      max-width:100%;min-width:0;
+    }
+    .case01-meta{flex-wrap:wrap}
+    .case01-meta>*{max-width:100%;min-width:0;word-break:break-word;overflow-wrap:anywhere}
+    .hero-h,.section-heading,.case01-moment h3{
+      word-break:break-word;overflow-wrap:anywhere;hyphens:auto;
+    }
+
+  }
+
+  /* Narrow phones · overflow defences + tighter type for sub-headings.
+     MUST be inside a media query — otherwise the h1.hero-h rule below
+     caps the desktop headline at 42px (which is what was happening). */
+  @media(max-width:760px){
+    .section-heading,.case01-moment h3,.case01-meta .case01-policy,.case01-meta .case01-name,
+    .case01-cf-body,.contact-line,.uc-title,.cred-body,.firm h2,.offer-name,.pillar-h{
+      overflow-wrap:anywhere;word-break:break-word;
+    }
+    .case01-meta .case01-policy{font-size:9px;letter-spacing:.08em;line-height:1.4}
+    .case01-meta .case01-name{font-size:11px;line-height:1.4;letter-spacing:.08em}
+    .section-heading{font-size:clamp(22px,5.8vw,34px);line-height:1.05}
+    .case01-moment h3{font-size:clamp(22px,6.3vw,34px);line-height:1.08;letter-spacing:-.02em}
+    .case01-moment h3 br{display:none}
+  }
+
+  @media(max-width:380px){
+    h1.hero-h{font-size:clamp(38px,12vw,52px);line-height:1;letter-spacing:-.035em}
+    .hero-cta{font-size:13px;padding:13px 18px}
+    .case01-moment h3{font-size:clamp(22px,7.5vw,32px)}
+  }
+
+
+  /* ── Absolute overflow safety net · applies everywhere ── */
+  html,body{max-width:100%;overflow-x:clip}
+  h1,h2,h3,h4,h5,h6,p,span{overflow-wrap:break-word}
+  pre,code{overflow-x:auto;max-width:100%}
+
+  /* ═════════════════════════════════════════════════════════════
+     MOBILE POLISH · final pass, wins the cascade.
+     Goals: kill hero-log bleed-through; tighter vertical rhythm;
+     compact header; less decorative noise on small screens.
+     ═════════════════════════════════════════════════════════════ */
+  @media(max-width:760px){
+    /* Statusbar is decorative — recover ~30px of vertical and let the nav
+       breathe. Brand identity carries through the rest of the page. */
+    .statusbar{display:none}
+    .site-header{border-bottom:1px solid var(--line)}
+
+    /* Sticky nav: brand + monospace menu links inline, no CTA noise.
+       The whole header (logo + menu) stays fixed; content scrolls under. */
+    .nav{padding:11px 14px;gap:10px;align-items:center}
+    .brand{font-size:12.5px;gap:8px;min-width:0}
+    .brand-mark{width:22px;height:22px;font-size:9px;flex-shrink:0}
+    .brand-text{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+    .nav-right{gap:16px;flex-shrink:0}
+    .nav-right .nav-link{display:inline-flex;font-size:10px;letter-spacing:.06em;white-space:nowrap;color:var(--muted)}
+    .nav-link.is-current{color:var(--paper);border-bottom:1px solid var(--accent);padding-bottom:3px}
+    .nav-cta{display:none}
+
+    /* Hero · log was bleeding monospace through the headline at .22 opacity
+       on narrow screens. Drop it entirely — pure dark hero reads cleaner. */
+    .hero-log,.hero::after{display:none}
+    .hero{padding:36px 16px 56px}
+    h1.hero-h{font-size:clamp(40px,12vw,72px);line-height:1;letter-spacing:-.035em;margin:0 0 22px}
+    .hero-sub{font-size:15px;line-height:1.5;margin:0 0 24px}
+    .hero-cta{font-size:14px;padding:14px 22px}
+    .hero-mark{margin-top:28px;font-size:10px}
+
+    /* Section rhythm · tighter top-to-bottom */
+    .section{padding:40px 16px}
+    .section-head{gap:12px;padding-bottom:16px;margin-bottom:22px}
+    .section-heading{font-size:clamp(26px,7vw,36px);line-height:1.03}
+    .section-side{font-size:9.5px;line-height:1.5}
+
+    /* Pillars · less padding-per-card, content is short */
+    .pillar{padding:16px 18px 18px}
+    .pillar-label{margin-top:10px;margin-bottom:6px}
+    .pillar-h{font-size:17px;margin:0 0 6px}
+    .pillar-body{font-size:13.5px;line-height:1.5}
+
+    /* Offers · tighter */
+    .offer{padding:20px 18px 24px}
+    .offer-meta{margin-top:14px;margin-bottom:12px}
+    .offer-name{font-size:21px}
+    .offer-duration{margin-bottom:14px}
+    .offer p{font-size:14px;margin:0 0 10px}
+    .offer .terms{margin-top:14px;padding-top:12px}
+
+    /* Credibility · tighter */
+    .cred-block{padding:22px 18px}
+    .cred-body{font-size:16px;line-height:1.45}
+
+    /* Case01 · tighter and more flush to the edge */
+    .case01{padding:22px 16px 0;margin-bottom:28px}
+    .case01-moment h3{font-size:clamp(26px,7.5vw,38px);line-height:1.06;margin-bottom:16px}
+    .case01-moment .note{font-size:14px;line-height:1.5}
+    .case01-panel{padding:16px 18px}
+    .case01-panel dl{grid-template-columns:auto 1fr;gap:8px 16px}
+    .case01-panel dt{font-size:9.5px}
+    .case01-panel dd{font-size:12px;line-height:1.4}
+    .case01-panel dd small{font-size:9px;margin-top:1px}
+
+    /* Timeline · already restructured to 2-row event, just tighten */
+    .case01-tl{margin-top:24px;padding:20px 0 0}
+    .tl-event{padding:12px 0}
+    .tl-event .tl-time{font-size:11px}
+    .tl-event .tl-body{font-size:13px;line-height:1.45;padding-left:22px}
+
+    /* Machinery · denser */
+    .case01-machinery{margin-top:24px;padding:24px 0 0}
+    .case01-machinery-grid article{padding:14px 16px 16px}
+    .case01-machinery-grid h4{font-size:14.5px;margin:2px 0 6px}
+    .case01-machinery-grid p{font-size:12px;line-height:1.5}
+
+    /* CF closer · still a moment, just less heavy */
+    .case01-cf{margin:24px -16px 0;padding:28px 16px 32px}
+    .case01-cf-label{margin-bottom:12px;font-size:9.5px}
+    .case01-cf-body{font-size:clamp(22px,6.2vw,30px);line-height:1.18}
+
+    /* Use case cards · tighter */
+    .uc-card{padding:18px 18px 20px}
+    .uc-meta{font-size:9.5px;margin-top:12px;margin-bottom:10px}
+    .uc-title{font-size:16px;line-height:1.2;margin:0 0 12px}
+    .uc-row{padding:7px 0}
+    .uc-row .lbl{font-size:9px;min-width:50px}
+    .uc-row .val{font-size:12.5px;line-height:1.45}
+    .uc-status{font-size:9.5px;margin-top:12px;padding-top:10px}
+
+    /* Contact · tighter */
+    .contact-block{padding:48px 16px 56px}
+    .contact-line{font-size:clamp(22px,5.8vw,30px);margin-bottom:22px}
+    .contact-email{font-size:16px}
+
+    /* Footer · tighter */
+    .foot{padding:20px 16px}
+
+    /* Reverse the overly-aggressive break-anywhere on headings — it was
+       breaking normal words like "monitoring" mid-stroke on narrow screens.
+       break-word is the right level: only breaks when overflow is unavoidable. */
+    h1.hero-h,.section-heading,.case01-moment h3,.case01-cf-body,
+    .contact-line,.uc-title,.cred-body,.offer-name,.pillar-h,
+    .case01-meta .case01-policy,.case01-meta .case01-name{
+      overflow-wrap:break-word;word-break:normal;hyphens:none;
+    }
+  }
+
+  /* Ultra-narrow phones — drop the brand text, RS mark carries identity */
+  @media(max-width:380px){
+    .brand-text{display:none}
+    .brand-mark{width:24px;height:24px;font-size:9.5px}
+    .nav-right{gap:13px}
+    .nav-right .nav-link{font-size:9.5px;letter-spacing:.04em}
+  }
+</style>
+</head>
+<body>
+
+<div class="site-header">
+<header class="statusbar">
+  <div class="statusbar-inner">
+    <div class="status-cluster">
+      <span class="status-pill"><span class="dot"></span> SYS / OPERATIONAL</span>
+      <span class="status-pill">OPERATOR-LED</span>
+    </div>
+    <div class="status-cluster">
+      <span class="status-pill">v26.05</span>
+    </div>
+  </div>
+</header>
+<nav class="nav">
+  <a class="brand" href="/">
+    <span class="brand-mark">RS</span>
+    <span class="brand-text">Rayleigh Stark</span>
+  </a>
+  <div class="nav-right">
+    <a class="nav-link" href="/approach">Approach</a>
+    <a class="nav-link" href="/about">About</a>
+    <a class="nav-link" href="/contact">Contact</a>
+    <a class="nav-cta" href="/#use-cases">See use cases →</a>
+  </div>
+</nav>
+</div>
+<!-- HERO -->
+<section class="hero">
+  <h1 class="hero-h">
+    The always-on operations layer for <span class="outline-gold">stablecoins.</span>
+  </h1>
+  <p class="hero-sub">
+    Production agents for stablecoin operations. Reserves, redemptions, sanctions, KYT,
+    reconciliation, reporting.
+    <b>Always-on, policy-bound, deployed inside regulated programmes.</b> Built on <span class="outline-gold">Wall Street</span>.
+  </p>
+  <a class="hero-cta" href="/contact">See it on your reserves →</a>
+
+  <div class="hero-mark">Always-on agents for stablecoin operations · powered by Hermes</div>
+
+  <!-- live monitoring log: a working-looking artifact, not decoration.
+       Generated client-side, restrained, boring on purpose. -->
+  <div class="hero-log" id="agentLog" role="log" aria-label="Recent monitoring agent output" aria-live="off" aria-hidden="true">
+    <ol class="hero-log-list"></ol>
+  </div>
+</section>
+
+<!-- TWO ENTRY POINTS -->
+<section class="section">
+  <div class="section-head">
+    <span class="section-num">01 · DEPLOYMENT</span>
+    <div>
+      <p class="section-eyebrow">Two ways in</p>
+      <h2 class="section-heading">Get always-on agents <span class="accent">inside the programme.</span></h2>
+    </div>
+    <p class="section-side">Fixed scope.<br>Subscription thereafter.</p>
+  </div>
+
+  <div class="offers">
+    <article class="offer">
+      <div class="offer-meta">01 · AUDIT</div>
+      <h3 class="offer-name">Operations Audit</h3>
+      <div class="offer-duration">Two weeks</div>
+      <p>We map your current stablecoin operations against the surfaces our agents monitor: reserves coverage, redemption flow, sanctions and KYT, cross-chain reconciliation, and regulatory reporting.</p>
+      <p>Output is a deployment plan with measurable targets and the surfaces where always-on coverage adds the most value. Bridges into a design partner engagement or stands alone.</p>
+      <p class="terms">Fixed scope, fixed fee.</p>
+    </article>
+
+    <article class="offer">
+      <div class="offer-meta">02 · DESIGN PARTNER</div>
+      <h3 class="offer-name">Design Partner Programme</h3>
+      <div class="offer-duration">Six to eight weeks to first production</div>
+      <p>For stablecoin issuers and infrastructure firms running production today. We deploy always-on agents inside one operational surface, governed by your policy, integrated with your existing tooling.</p>
+      <p>Limited to a small number of partners in the first cohort. Fixed-fee deployment followed by monthly subscription. Hermes runtime, our agents, your operating surface.</p>
+      <p class="terms">Fixed deployment fee, monthly subscription.</p>
+    </article>
+  </div>
+</section>
+
+<!-- EXECUTION STANDARD -->
+<section class="section">
+  <div class="section-head">
+    <span class="section-num">02 · STANDARD</span>
+    <div>
+      <p class="section-eyebrow">What the agents deliver</p>
+      <h2 class="section-heading">What changes when agents <span class="accent">run the surface.</span></h2>
+    </div>
+    <p class="section-side">Coverage. Speed.<br>Control. Clarity.</p>
+  </div>
+
+  <div class="pillars">
+    <article class="pillar">
+      <div class="pillar-label">01</div>
+      <h3 class="pillar-h">Coverage</h3>
+      <p class="pillar-body">Continuous monitoring across chains, bank rails, and operational surfaces. Sleeps when there is nothing to watch. Acts the moment there is.</p>
+    </article>
+    <article class="pillar">
+      <div class="pillar-label">02</div>
+      <h3 class="pillar-h">Speed</h3>
+      <p class="pillar-body">Signal to escalation in minutes. Drift in reserves, anomalous redemption patterns, sanctions hits surfaced as they happen.</p>
+    </article>
+    <article class="pillar">
+      <div class="pillar-label">03</div>
+      <h3 class="pillar-h">Control</h3>
+      <p class="pillar-body">Policy-bound execution with audit trails ready for MiCA, the GENIUS Act, and equivalent regimes. Every decision logged. Every action reversible under sign-off.</p>
+    </article>
+    <article class="pillar">
+      <div class="pillar-label">04</div>
+      <h3 class="pillar-h">Clarity</h3>
+      <p class="pillar-body">Leadership visibility across reserves coverage, redemption flow, operational risk, and regulatory exposure. One surface, real-time.</p>
+    </article>
+  </div>
+</section>
+
+<!-- CREDIBILITY -->
+<section class="section">
+  <div class="section-head">
+    <span class="section-num">03 · OPERATOR</span>
+    <div>
+      <p class="section-eyebrow">Who builds the agent</p>
+      <h2 class="section-heading">Operating discipline, <span class="accent">brought across.</span></h2>
+    </div>
+    <p class="section-side">Built on <span class="outline-gold">Wall Street</span>.<br>Now applied here.</p>
+  </div>
+
+  <div class="cred-block">
+    <p class="cred-body">
+      <b>Almost a decade inside a global investment bank,</b> building LLM analytics platforms,
+      decision systems, and transaction monitoring infrastructure for institutional teams.
+      Direct work across high-value payments, cross-border settlement, and operational risk.
+      Now running it as always-on agents for stablecoin issuers and the infrastructure layer
+      they operate on.
+    </p>
+    <a href="/about" style="display:inline-flex;align-items:center;gap:8px;margin-top:28px;font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--accent);text-decoration:none;border-bottom:1px solid var(--accent);padding-bottom:3px">About the operator →</a>
+  </div>
+</section>
+
+<!-- USE CASES · 04 -->
+<section class="section" id="use-cases">
+  <div class="section-head">
+    <span class="section-num">04 · USE CASES</span>
+    <div>
+      <p class="section-eyebrow">A reserves event, walked through</p>
+      <h2 class="section-heading">What always-on <span class="accent">looks like.</span></h2>
+    </div>
+    <p class="section-side">One scenario in full.<br>Three more in summary.</p>
+  </div>
+
+  <!-- USE CASE 01 · reserves event vignette -->
+  <article class="case01">
+    <header class="case01-meta">
+      <span class="case01-id">Scenario · 01</span>
+      <span class="case01-name">Reserves coverage event, bank-holiday window</span>
+      <span class="case01-policy">policy: reserves-coverage-redemption-window@2.4.0</span>
+    </header>
+
+    <div class="case01-lead">
+      <div class="case01-moment">
+        <span class="scene">06:12 UTC · treasury offline for four hours</span>
+        <h3>
+          A bank holiday slips coverage<br>
+          0.3% below target.<br>
+          £80m in redemptions<br>
+          <span class="acc">queued for the window.</span>
+        </h3>
+        <p class="note">
+          <b>The agent is already on it.</b> Reserves split across three custody banks and
+          two on-chain venues. Eight institutional redemption requests in flight, two more
+          queued. Treasury team back online at 10am. The redemption window opens at 08:00.
+        </p>
+      </div>
+
+      <aside class="case01-panel">
+        <div class="case01-panel-head">Mandate · open</div>
+        <dl>
+          <dt>Surface</dt><dd>reserves-coverage</dd>
+          <dt>Severity</dt><dd>3<small>threshold approach</small></dd>
+          <dt>Time to draft</dt><dd>79 minutes</dd>
+          <dt>Human gate</dt><dd>treasury.lead, cfo</dd>
+          <dt>Evidence</dt><dd>MiCA Article 36<small>regulator-ready packet</small></dd>
+          <dt>Kill switches</dt><dd>head-of-compliance, cfo</dd>
+        </dl>
+      </aside>
+    </div>
+
+    <div class="case01-tl">
+      <div class="case01-tl-label">What the agent does · severity progression</div>
+      <div class="case01-tl-rail">
+        <div class="tl-event">
+          <span class="tl-time">06:12:04</span>
+          <span class="tl-tick"></span>
+          <span class="tl-label">Snapshot</span>
+          <span class="tl-body">Reserves snapshot complete. <b>Coverage 100.18%</b> across 3 custodians, 2 chains. Within normal range.</span>
+        </div>
+        <div class="tl-event">
+          <span class="tl-time">06:47:33</span>
+          <span class="tl-tick"></span>
+          <span class="tl-label">Queue</span>
+          <span class="tl-body">Redemption queue: <b>8 active, £42m total</b>. Within normal range. Treasury offline for the next 4h.</span>
+        </div>
+        <div class="tl-event">
+          <span class="tl-time">07:14:08</span>
+          <span class="tl-tick"></span>
+          <span class="tl-label">Watch</span>
+          <span class="tl-body">Custodian B reporting cash sweep delay. Liquidity-adjusted coverage <b>99.91%</b>.</span>
+        </div>
+        <div class="tl-event">
+          <span class="tl-time">07:18:42</span>
+          <span class="tl-tick"></span>
+          <span class="tl-label">Watch</span>
+          <span class="tl-body">Custodian B status unchanged. Liquidity-adjusted coverage <b>99.88%</b>. Redemption velocity model armed.</span>
+        </div>
+        <div class="tl-event">
+          <span class="tl-time">07:31:15</span>
+          <span class="tl-tick"></span>
+          <span class="tl-label">Escalate</span>
+          <span class="tl-body">Coverage approaching threshold floor. Velocity model flags risk on next 6h window. <b>Notifying treasury and CFO.</b></span>
+        </div>
+        <div class="tl-event">
+          <span class="tl-time">07:31:16</span>
+          <span class="tl-tick"></span>
+          <span class="tl-label">Evidence</span>
+          <span class="tl-body">Evidence packet drafted for <b>MiCA Article 36</b>. Low-priority outflows held pending sign-off. Awaiting human approval.</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="case01-machinery">
+      <div class="case01-machinery-label">What sits behind the agent · the operating surface</div>
+      <div class="case01-machinery-grid">
+        <article data-stage="01">
+          <h4>Ingest</h4>
+          <p>Custody attestations. On-chain reserve snapshots. Redemption queue state. Custodian operational status. Scheduled outflows.</p>
+        </article>
+        <article data-stage="02">
+          <h4>Decide</h4>
+          <p>Liquidity-adjusted coverage calculation. Redemption velocity modelling. Threshold band evaluation. Regulatory floor proximity.</p>
+        </article>
+        <article data-stage="03">
+          <h4>Execute</h4>
+          <p>Notify treasury. Draft regulator-ready evidence packet. Hold low-priority outflows pending sign-off. Log decision rationale.</p>
+        </article>
+        <article data-stage="04">
+          <h4>Control</h4>
+          <p>Dual approval gates on hold actions. Policy versioning. Escalation to CFO and head of compliance. Evidence retention per MiCA.</p>
+        </article>
+      </div>
+    </div>
+
+    <div class="case01-cf">
+      <p class="case01-cf-label">By 08:00, before the redemption window opens</p>
+      <p class="case01-cf-body">
+        Treasury wakes to a drafted regulator filing and a documented chain of decisions.<br>
+        <em>No human was awake when coverage was restored.</em>
+      </p>
+    </div>
+  </article>
+
+  <!-- three more use case cards -->
+  <div class="uc-grid" style="margin-top:0">
+
+      <article class="uc-card">
+        <div class="uc-meta">
+          <span class="id">SCENARIO · 02</span>
+          <span>Reserves drift</span>
+        </div>
+        <h3 class="uc-title">Reserves drift, three hours before the redemption window.</h3>
+        <div class="uc-row"><span class="lbl">Trigger</span><span class="val">Liquidity-adjusted coverage slips below target while treasury is offline. Redemption queue holds scheduled outflows.</span></div>
+        <div class="uc-row"><span class="lbl">Agent</span><span class="val">Pauses low-priority outflows under policy. Drafts MiCA Article 36 evidence packet. Notifies treasury and CFO with documented rationale.</span></div>
+        <div class="uc-row avoided"><span class="lbl">Avoided</span><span class="val">Coverage restored before the threshold breach. No regulator notification needed.</span></div>
+        <div class="uc-status">
+          <span>GATED → RESTORED</span>
+          <span class="surface">MiCA · FCA</span>
+        </div>
+      </article>
+
+      <article class="uc-card">
+        <div class="uc-meta">
+          <span class="id">SCENARIO · 03</span>
+          <span>Sanctions hit</span>
+        </div>
+        <h3 class="uc-title">Sanctions hit on an inbound redemption request.</h3>
+        <div class="uc-row"><span class="lbl">Trigger</span><span class="val">Address match against current sanctions list. Six-hour SLA on hold-and-report.</span></div>
+        <div class="uc-row"><span class="lbl">Agent</span><span class="val">Holds the transaction. Drafts SAR-equivalent narrative with full ledger trail. Escalates to the MLRO. Retains evidence packet for audit.</span></div>
+        <div class="uc-row avoided"><span class="lbl">Avoided</span><span class="val">Resolution in 47 minutes against a six-hour SLA. No exposure window.</span></div>
+        <div class="uc-status">
+          <span>HELD → ESCALATED</span>
+          <span class="surface">OFAC · MLRO · MiCA</span>
+        </div>
+      </article>
+
+      <article class="uc-card">
+        <div class="uc-meta">
+          <span class="id">SCENARIO · 04</span>
+          <span>Cross-chain reconciliation</span>
+        </div>
+        <h3 class="uc-title">Cross-chain reconciliation break in the next attestation.</h3>
+        <div class="uc-row"><span class="lbl">Trigger</span><span class="val">Bridged supply discrepancy of 0.018% across two chains, surfaced before the next public attestation.</span></div>
+        <div class="uc-row"><span class="lbl">Agent</span><span class="val">Traces the break to a delayed event indexer. Flags ops engineering. Withholds attestation publication until reconciliation completes.</span></div>
+        <div class="uc-row avoided"><span class="lbl">Avoided</span><span class="val">No public attestation error. No press cycle. Reconciliation logged with full chain of evidence.</span></div>
+        <div class="uc-status">
+          <span>WITHHELD → RESOLVED</span>
+          <span class="surface">Cross-chain · Indexer</span>
+        </div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact-block">
+  <p class="section-eyebrow" style="margin-bottom:18px">05 · INTAKE</p>
+  <h2 class="contact-line">Email a short note about the stablecoin operation you'd want watched.</h2>
+  <a class="contact-email" href="mailto:anthony@rayleighstark.com">anthony@rayleighstark.com</a>
+</section>
+
+<footer class="foot">
+  <div class="foot-strip">
+    <span>Rayleigh Stark · London · New York</span>
+    <span>Always-on agents for stablecoin operations</span>
+    <span><span class="dot"></span> &nbsp;SYS / OPERATIONAL</span>
+  </div>
+  <div class="foot-legal">
+    <span>Rayleigh Stark is a trading name of Premium Services &amp; Network UK Ltd.</span>
+    <span class="foot-legal-links">
+      <a href="/terms">Terms</a>
+      <span>© Rayleigh Stark · 2026</span>
+    </span>
+  </div>
+</footer>
+
+<script>
+  /* Hero log: working-looking monitoring stream beneath the hero copy.
+     ~50 entry patterns, weighted severity, 6 agents, 10 surfaces.
+     Pauses on hover and when the tab is hidden. Respects prefers-reduced-motion. */
+  (function () {
+    var host = document.getElementById('agentLog');
+    if (!host) return;
+    var list = host.querySelector('.hero-log-list');
+    if (!list) return;
+
+    var SURFACES = ['RESERVES','REDEMPTIONS','COVERAGE','MINT','BURN','KYT','SANCTIONS','RECON','ATTEST','CUSTODY','INDEXER'];
+    var AGENTS = ['AGT-02','AGT-04','AGT-07','AGT-09','AGT-11','AGT-14'];
+    var CHAINS = ['ETH-MAIN','ARB','BASE','POLY','AVAX','BNB','SOL'];
+    var CUSTODIANS = ['CUSTODIAN-A','CUSTODIAN-B','CUSTODIAN-C'];
+    var REGS = ['MiCA Art. 36','MiCA Art. 38','GENIUS Act','FCA stablecoin','FATF Travel Rule'];
+
+    /* Entry patterns. {sev}, {s}=allowed surfaces (* = any), {t}=template.
+       Stablecoin-native: reserves, redemptions, KYT, sanctions, cross-chain. */
+    var POOL = [
+      /* INFO · 70% target */
+      {sev:'INFO', s:['RESERVES'], t:'Reserves snapshot complete. Coverage 100.{N1}% across {N1c} custodians, {N1c2} chains.'},
+      {sev:'INFO', s:['*'], t:'Heartbeat. All surfaces nominal.'},
+      {sev:'INFO', s:['RECON'], t:'Cross-chain reconciliation pass: {N2} breaks, {N1} resolved automatically.'},
+      {sev:'INFO', s:['REDEMPTIONS'], t:'Redemption queue depth: {N1}. Within normal range.'},
+      {sev:'INFO', s:['KYT'], t:'KYT review batch: {N3} addresses screened, {N1} flagged.'},
+      {sev:'INFO', s:['SANCTIONS'], t:'Sanctions screen: {N2} addresses reviewed, {N1} held.'},
+      {sev:'INFO', s:['COVERAGE'], t:'Coverage ratio: 100.{N1}%. Within band.'},
+      {sev:'INFO', s:['ATTEST'], t:'Attestation packet generated. AT-{ID4}.'},
+      {sev:'INFO', s:['MINT'], t:'Mint batch processed: {N3} units. Issuer signature verified.'},
+      {sev:'INFO', s:['BURN'], t:'Burn batch processed: {N2} requests. Supply reduced.'},
+      {sev:'INFO', s:['CUSTODY'], t:'Custody attestation received from {CUSTODIAN}.'},
+      {sev:'INFO', s:['*'], t:'Health check: agents nominal.'},
+      {sev:'INFO', s:['INDEXER'], t:'Indexer lag on {CHAIN}: {N1}ms. Within target.'},
+      {sev:'INFO', s:['REDEMPTIONS'], t:'Redemption batch settled on {CHAIN}: {N2} requests.'},
+      {sev:'INFO', s:['RECON'], t:'Cross-chain supply check: parity confirmed across {N1c} venues.'},
+      {sev:'INFO', s:['KYT'], t:'KYT score distribution within policy: max {X100}.'},
+      {sev:'INFO', s:['*'], t:'Audit packet generated. ESC-{ID4}.'},
+      {sev:'INFO', s:['CUSTODY'], t:'Cash sweep confirmed at {CUSTODIAN}. Adequate.'},
+      {sev:'INFO', s:['ATTEST'], t:'Attestation pre-flight passed. Awaiting publication window.'},
+      {sev:'INFO', s:['*'], t:'Policy version active: v{V}. Coverage 100%.'},
+
+      /* WATCH · 15% */
+      {sev:'WATCH', s:['COVERAGE','RESERVES'], t:'Coverage drift: liquidity-adjusted {X100}%.'},
+      {sev:'WATCH', s:['CUSTODY'], t:'{CUSTODIAN} reporting cash sweep delay. Liquidity-adjusted coverage {X100}%.'},
+      {sev:'WATCH', s:['REDEMPTIONS'], t:'Redemption velocity {XBIG}% above 30-day average.'},
+      {sev:'WATCH', s:['INDEXER'], t:'Indexer lag on {CHAIN} above p95. Attestation hold armed.'},
+      {sev:'WATCH', s:['RECON'], t:'Cross-chain supply variance: {X}% on {CHAIN}.'},
+      {sev:'WATCH', s:['KYT'], t:'Elevated KYT score on inbound address. Score {N1}/10.'},
+      {sev:'WATCH', s:['RECON'], t:'Recon break aged {HR} hours, no auto-match.'},
+      {sev:'WATCH', s:['CUSTODY'], t:'Cash sweep at {CUSTODIAN} past expected window.'},
+      {sev:'WATCH', s:['ATTEST'], t:'Attestation window approaching. Pre-flight check armed.'},
+
+      /* ESCALATE · 8% */
+      {sev:'ESCALATE', s:['COVERAGE'], t:'Coverage approaching threshold floor. Notifying treasury.'},
+      {sev:'ESCALATE', s:['SANCTIONS'], t:'Sanctions hit on inbound redemption. Holding. MLRO paged.'},
+      {sev:'ESCALATE', s:['RECON'], t:'Cross-chain reconciliation break unresolved past SLA. Ops paged.'},
+      {sev:'ESCALATE', s:['CUSTODY'], t:'{CUSTODIAN} status degraded. CFO paged. Hold actions armed.'},
+      {sev:'ESCALATE', s:['RESERVES'], t:'Reserves coverage below regulatory floor. {REG} packet drafted.'},
+      {sev:'ESCALATE', s:['KYT'], t:'KYT score breach on inbound address. MLRO notified.'},
+      {sev:'ESCALATE', s:['ATTEST'], t:'Pre-attestation reconciliation break detected. Publication withheld.'},
+
+      /* RESOLVE · 5% */
+      {sev:'RESOLVE', s:['*'], t:'Escalation ESC-{ID4} resolved by treasury. Coverage restored.'},
+      {sev:'RESOLVE', s:['SANCTIONS'], t:'Sanctions hit cleared after MLRO review. Transaction released.'},
+      {sev:'RESOLVE', s:['RECON'], t:'Cross-chain reconciliation break matched. Resolved.'},
+      {sev:'RESOLVE', s:['CUSTODY'], t:'{CUSTODIAN} recovered. Coverage restored.'},
+      {sev:'RESOLVE', s:['COVERAGE'], t:'Coverage drift resolved. Within band.'},
+
+      /* OVERRIDE · 2% */
+      {sev:'OVERRIDE', s:['*'], t:'Policy override applied by user {U}. Audit logged.'},
+      {sev:'OVERRIDE', s:['*'], t:'Threshold adjusted on surface. New band: {X} to {X2}.'}
+    ];
+
+    function pad(n){ return String(n).padStart(2,'0'); }
+    function rint(a,b){ return Math.floor(Math.random()*(b-a+1))+a; }
+    function pick(a){ return a[rint(0, a.length-1)]; }
+
+    function weightedSeverity(){
+      var r = Math.random();
+      if (r < 0.70) return 'INFO';
+      if (r < 0.85) return 'WATCH';
+      if (r < 0.93) return 'ESCALATE';
+      if (r < 0.98) return 'RESOLVE';
+      return 'OVERRIDE';
+    }
+
+    function fill(t){
+      return t
+        .replace(/\{N3\}/g, function(){ return rint(800, 4200).toLocaleString('en-US'); })
+        .replace(/\{N2\}/g, function(){ return rint(20, 200); })
+        .replace(/\{N1c2\}/g, function(){ return rint(2, 5); })
+        .replace(/\{N1c\}/g, function(){ return rint(2, 4); })
+        .replace(/\{N1\}/g, function(){ return rint(1, 12); })
+        .replace(/\{X100\}/g, function(){ return (99 + Math.random() * 0.5).toFixed(2); })
+        .replace(/\{XBIG\}/g, function(){ return (Math.random() * 30 + 8).toFixed(1); })
+        .replace(/\{X2\}/g, function(){ return (Math.random() * 0.5 + 0.05).toFixed(2); })
+        .replace(/\{X\}/g, function(){ return (Math.random() * 0.4 + 0.01).toFixed(3); })
+        .replace(/\{V\}/g, function(){ return rint(1,9) + '.' + rint(0,9) + '.' + rint(0,3); })
+        .replace(/\{CHAIN\}/g, function(){ return pick(CHAINS); })
+        .replace(/\{CUSTODIAN\}/g, function(){ return pick(CUSTODIANS); })
+        .replace(/\{REG\}/g, function(){ return pick(REGS); })
+        .replace(/\{U\}/g, function(){ return 'U-' + rint(100, 999); })
+        .replace(/\{ID4\}/g, function(){ return String(rint(1000, 9999)); })
+        .replace(/\{HR\}/g, function(){ return rint(2, 8); });
+    }
+
+    /* Backdrop mode · more lines fit because the log now spans the hero height. */
+    var MAX_LINES = 22;
+    var clock = new Date(Date.now() - 180 * 1000);
+
+    function appendEntry(initial){
+      /* advance clock: usually 1–4s, occasionally 5–12s (a quiet moment) */
+      var dt = (!initial && rint(0,4) === 0) ? rint(5, 12) : rint(1, 4);
+      clock = new Date(clock.getTime() + dt * 1000);
+
+      var sev = weightedSeverity();
+      var candidates = POOL.filter(function(p){ return p.sev === sev; });
+      var choice = pick(candidates);
+      var surfaceList = (choice.s.length === 1 && choice.s[0] === '*') ? SURFACES : choice.s;
+      var surface = pick(surfaceList);
+      var agent = pick(AGENTS);
+      var msg = fill(choice.t);
+      var ts = pad(clock.getHours()) + ':' + pad(clock.getMinutes()) + ':' + pad(clock.getSeconds());
+
+      var li = document.createElement('li');
+      li.className = 'logline s-' + sev.toLowerCase();
+      var t = document.createElement('span'); t.className = 't'; t.textContent = ts;
+      var s = document.createElement('span'); s.className = 'sev'; s.textContent = sev;
+      var a = document.createElement('span'); a.className = 'agt'; a.textContent = agent;
+      var u = document.createElement('span'); u.className = 'surf'; u.textContent = surface;
+      var m = document.createElement('span'); m.className = 'msg'; m.textContent = msg;
+      li.appendChild(t); li.appendChild(s); li.appendChild(a); li.appendChild(u); li.appendChild(m);
+      list.appendChild(li);
+
+      while (list.children.length > MAX_LINES) {
+        list.firstElementChild.remove();
+      }
+    }
+
+    /* pre-populate enough lines to fill the backdrop on load */
+    for (var i = 0; i < 16; i++) appendEntry(true);
+
+    var prefersReduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var paused = false;
+    var timer = null;
+
+    function tick(){
+      timer = null;
+      if (paused) return;
+      appendEntry(false);
+      schedule();
+    }
+    function schedule(){
+      if (paused || prefersReduced) return;
+      if (timer) clearTimeout(timer);
+      timer = setTimeout(tick, rint(220, 550));
+    }
+
+    if (!prefersReduced) schedule();
+
+    /* pause on hover so a reader can absorb a line */
+    host.addEventListener('mouseenter', function(){ paused = true; if (timer) { clearTimeout(timer); timer = null; } });
+    host.addEventListener('mouseleave', function(){ paused = false; schedule(); });
+
+    /* pause when the tab is hidden */
+    document.addEventListener('visibilitychange', function(){
+      if (document.hidden) { paused = true; if (timer) { clearTimeout(timer); timer = null; } }
+      else { paused = false; schedule(); }
+    });
+  })();
+</script>
+
+
+
+</body>
 </html>

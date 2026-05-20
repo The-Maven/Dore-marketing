@@ -1,0 +1,16 @@
+# Cloudflare Pages config
+# https://developers.cloudflare.com/pages/configuration/build-configuration/
+
+name = "rayleigh-stark"
+compatibility_date = "2026-05-20"
+pages_build_output_dir = "dist"
+
+# Build command + output directory are also configurable in the Cloudflare
+# Pages dashboard; this file documents the canonical values.
+#
+#   Build command:  npm run build
+#   Output dir:     dist
+#   Node version:   20  (set via NODE_VERSION env var in dashboard or .nvmrc)
+#
+# Redirects + headers are handled by dist/_redirects and dist/_headers
+# (copied from the repo root by scripts/postbuild.mjs).

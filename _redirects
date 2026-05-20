@@ -1,0 +1,49 @@
+# Cloudflare Pages redirects
+# /about, /contact, /approach, /terms are served as folder/index.html
+# directly by Cloudflare — no rewrite rule needed for those.
+# Both /about and /about/ resolve to the same content via folder auto-serve.
+
+# ─── Legacy URLs from the prior site → home (the wedge changed) ─
+
+# Cut services (18 pages)
+/service-agentic-ai-operations              /  301
+/service-agricultural-market-coordination   /  301
+/service-ai-due-diligence                   /  301
+/service-ai-payments-acceleration           /  301
+/service-ai-product-workflow-design         /  301
+/service-cloud-cost-control                 /  301
+/service-decision-reliability-engineering   /  301
+/service-decision-systems-ai-infrastructure /  301
+/service-escrow-intelligence-automation     /  301
+/service-execution-intelligence-diagnostic  /  301
+/service-fractional-ai-leadership           /  301
+/service-intelligent-data-pipelines         /  301
+/service-ma-advisory-intelligence           /  301
+/service-multi-venue-connectivity-api-layer /  301
+/service-platform-diagnostic                /  301
+/service-private-markets-technology         /  301
+/service-product-workflow-sprint            /  301
+/service-trading-risk-inventory-operations  /  301
+
+# Cut case studies
+/case-study-governed-research-infrastructure  /  301
+
+# Cut category pages
+/digital-assets-infrastructure  /  301
+/payments-infrastructure        /  301
+/platform-reliability           /  301
+
+# Cut content pages
+/operator-notes   /  301
+/operator-notes/  /  301
+/manifesto        /  301
+/manifesto/       /  301
+
+# .html → clean URL (anyone bookmarked the .html versions)
+/about.html    /about     301
+/contact.html  /contact   301
+/approach.html /approach  301
+/terms.html    /terms     301
+
+# Catch-all for any other legacy /service-* path
+/service-*  /  301
