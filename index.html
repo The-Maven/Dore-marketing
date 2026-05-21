@@ -163,6 +163,8 @@
     transition:transform .15s,box-shadow .15s;
   }
   .hero-cta:hover{transform:translate(-2px,-2px);box-shadow:4px 4px 0 var(--paper)}
+  /* "reserves" reads as an embossed gold inlay on the paper button face */
+  .hero-cta .outline-gold{-webkit-text-stroke-width:1px;text-stroke-width:1px}
   .hero-mark{
     margin-top:64px;
     font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.16em;
@@ -170,6 +172,8 @@
     display:inline-flex;align-items:center;gap:12px;
   }
   .hero-mark::before{content:'';width:32px;height:1px;background:var(--line-strong);display:inline-block}
+  /* "Hermes" runtime name carries the brand thread into the byline */
+  .hermes-gold{color:var(--gold);letter-spacing:.18em}
 
   /* LIVE MONITORING LOG · backdrop behind the HEADLINE area only.
      Lives in the upper portion of the hero so the sub-line and CTA below get
@@ -1046,9 +1050,9 @@
     reconciliation, reporting.
     <b>Always-on, policy-bound, deployed inside regulated programmes.</b> Built on <span class="outline-gold">Wall Street</span>.
   </p>
-  <a class="hero-cta" href="/contact">See it on your reserves →</a>
+  <a class="hero-cta" href="/contact">See it on your <span class="outline-gold">reserves</span> →</a>
 
-  <div class="hero-mark">Always-on agents for stablecoin operations · powered by Hermes</div>
+  <div class="hero-mark">Always-on agents for stablecoin operations · powered by <span class="hermes-gold">Hermes</span></div>
 
   <!-- live monitoring log: a working-looking artifact, not decoration.
        Generated client-side, restrained, boring on purpose. -->
