@@ -288,18 +288,18 @@
 
   /* ═══ RUNTIME · Hermes architecture strip ═══ */
   .runtime-intro{
-    font-family:'Inter',sans-serif;font-size:18px;line-height:1.55;
-    color:var(--muted);max-width:64ch;margin:0 0 44px;
+    font-family:'Inter',sans-serif;font-size:19px;line-height:1.55;
+    color:var(--muted);max-width:58ch;margin:0 0 56px;
   }
   .runtime-intro b{color:var(--paper);font-weight:500}
   .runtime-arch{
     border:1px solid var(--line-strong);
     background:linear-gradient(180deg,rgba(255,255,255,.012),rgba(255,255,255,0));
-    margin-bottom:44px;
+    margin-bottom:56px;
   }
   .runtime-layer{
-    display:grid;grid-template-columns:220px 1fr;gap:36px;
-    padding:30px 32px 32px;border-top:1px solid var(--line);
+    display:grid;grid-template-columns:220px 1fr;gap:40px;
+    padding:40px 40px 42px;border-top:1px solid var(--line);
   }
   .runtime-layer:first-child{border-top:none}
   .runtime-layer-label{
@@ -319,17 +319,17 @@
   .runtime-layer-act .runtime-layer-body{grid-template-columns:1fr 1fr}
   .runtime-layer-audit .runtime-layer-body{grid-template-columns:1fr}
   .runtime-cell{
-    border:1px solid var(--line);padding:18px 18px 20px;
+    border:1px solid var(--line);padding:22px 22px 24px;
     background:rgba(255,255,255,.014);position:relative;
   }
   .runtime-cell.core{border-color:var(--gold);background:rgba(212,162,74,.035)}
   .runtime-cell.escalate{border-left:2px solid var(--gold)}
   .runtime-cell-name{
     font-family:'Inter Tight',sans-serif;font-weight:600;font-size:16px;
-    letter-spacing:-.005em;color:var(--paper);margin:0 0 10px;line-height:1.22;
+    letter-spacing:-.005em;color:var(--paper);margin:0 0 12px;line-height:1.22;
   }
   .runtime-cell-body{
-    font-family:'IBM Plex Mono',monospace;font-size:11.5px;line-height:1.7;
+    font-family:'IBM Plex Mono',monospace;font-size:11.5px;line-height:1.75;
     letter-spacing:.005em;color:var(--muted);margin:0;
   }
   .runtime-tail{
@@ -1242,10 +1242,8 @@
   </div>
 
   <p class="runtime-intro">
-    Hermes runs inside the regulated programme. It <b>ingests</b> operational signals,
-    <b>decides</b> under policy, <b>executes</b> within control, and <b>escalates</b>
-    to humans when the threshold is met. Every decision logged. Every action reversible
-    under sign-off.
+    Inside the regulated programme. <b>Ingest signals. Decide under policy. Act within
+    control. Escalate to humans when the threshold is met.</b>
   </p>
 
   <div class="runtime-arch">
@@ -1261,19 +1259,19 @@
       <div class="runtime-layer-body">
         <article class="runtime-cell">
           <h3 class="runtime-cell-name">Custody attestations</h3>
-          <p class="runtime-cell-body">From the custodian banks holding fiat reserves. Pulled on schedule, reconciled against on-chain supply.</p>
+          <p class="runtime-cell-body">From custodian banks. Reconciled against on-chain supply.</p>
         </article>
         <article class="runtime-cell">
           <h3 class="runtime-cell-name">On-chain reserves</h3>
-          <p class="runtime-cell-body">Snapshots per chain. Bridged supply, mint, burn, settlement state.</p>
+          <p class="runtime-cell-body">Snapshots per chain. Supply, mint, burn, settlement.</p>
         </article>
         <article class="runtime-cell">
           <h3 class="runtime-cell-name">Sanctions and KYT</h3>
-          <p class="runtime-cell-body">OFAC and equivalent lists polled continuously. Inbound address screening before settlement.</p>
+          <p class="runtime-cell-body">OFAC and equivalent lists. Address screening before settlement.</p>
         </article>
         <article class="runtime-cell">
           <h3 class="runtime-cell-name">Redemption queue</h3>
-          <p class="runtime-cell-body">In-flight, queued, scheduled outflows. Treasury operational status. Custodian sweep windows.</p>
+          <p class="runtime-cell-body">In-flight, queued, scheduled. Treasury state and custodian sweep windows.</p>
         </article>
       </div>
     </div>
@@ -1290,16 +1288,15 @@
         <article class="runtime-cell core">
           <h3 class="runtime-cell-name">Decision core</h3>
           <p class="runtime-cell-body">
-            Correlates signals across surfaces. Applies the active policy version.
-            Scores anomalies under confidence weighting. Drafts the evidence packet
-            a regulator can read.
+            Correlates signals. Applies policy. Scores anomalies under confidence.
+            Drafts the regulator-ready packet.
           </p>
         </article>
         <article class="runtime-cell">
           <h3 class="runtime-cell-name">Policy engine</h3>
           <p class="runtime-cell-body">
-            Versioned policies. Thresholds, escalation paths, override authority,
-            retention rules. Every policy change is itself an auditable event.
+            Versioned policies. Thresholds, escalation paths, override authority.
+            Policy changes are auditable events.
           </p>
         </article>
       </div>
@@ -1317,15 +1314,14 @@
         <article class="runtime-cell">
           <h3 class="runtime-cell-name">Execute under control</h3>
           <p class="runtime-cell-body">
-            Notify treasury. Hold low-priority outflows pending sign-off. Draft the
-            regulator-ready packet. Every action logged with rationale and policy version.
+            Notify. Hold under policy. Draft evidence. Log rationale and policy version.
           </p>
         </article>
         <article class="runtime-cell escalate">
           <h3 class="runtime-cell-name">Human escalation</h3>
           <p class="runtime-cell-body">
-            Routes decisions requiring sign-off. Notifies treasury lead, MLRO, head of
-            compliance, or CFO based on policy. Full context attached.
+            Routes sign-off to treasury, MLRO, compliance, or CFO by policy. Full
+            context attached.
           </p>
         </article>
       </div>
@@ -1343,8 +1339,7 @@
         <article class="runtime-cell">
           <h3 class="runtime-cell-name">Every signal. Every decision. Every action. Every override.</h3>
           <p class="runtime-cell-body">
-            Append-only. Retention per regulator requirements. Each entry tied to the
-            policy version that governed it. Any action reversible under documented sign-off.
+            Append-only. Retention per regulator. Each entry tied to its policy version. Reversible under sign-off.
           </p>
         </article>
       </div>
