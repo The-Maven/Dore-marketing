@@ -146,34 +146,35 @@
   .bio-body p b{color:var(--paper);font-weight:500}
   .bio-body p .accent{color:var(--accent);font-weight:500}
 
-  /* What I built strip */
-  .built{
-    margin:72px 24px 0;padding:0;max-width:1180px;
+  /* Mission · why this work, now */
+  .mission{
+    margin:96px 24px 0;padding:0;max-width:1180px;
     margin-left:auto;margin-right:auto;position:relative;z-index:2;
   }
-  .built-head{
-    display:flex;justify-content:space-between;align-items:end;
-    padding-bottom:18px;margin-bottom:0;border-bottom:1px solid var(--line);
+  .mission-eyebrow{
+    font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.16em;
+    text-transform:uppercase;color:var(--muted);margin-bottom:22px;
+    display:inline-flex;align-items:center;gap:14px;
   }
-  .built-head h2{
+  .mission-eyebrow::after{content:'';width:48px;height:1px;background:var(--gold);opacity:.55}
+  .mission-head{
     font-family:'Inter Tight',sans-serif;font-weight:600;
-    font-size:28px;letter-spacing:-.02em;color:var(--paper);margin:0;
+    font-size:clamp(32px,4.4vw,56px);line-height:1.04;letter-spacing:-.022em;
+    color:var(--paper);margin:0 0 40px;max-width:22ch;
   }
-  .built-head h2 .accent{color:transparent;-webkit-text-stroke:1.5px var(--paper);text-stroke:1.5px var(--paper);paint-order:stroke fill}
-  .built-head .meta{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
-  .built-list{
-    display:grid;grid-template-columns:repeat(4,1fr);gap:0;
-    border:1px solid var(--line-strong);border-top:none;
+  .mission-head .accent{
+    color:transparent;-webkit-text-stroke:1.5px var(--paper);
+    text-stroke:1.5px var(--paper);paint-order:stroke fill;
   }
-  .built-item{
-    padding:24px 22px 28px;border-right:1px solid var(--line);position:relative;
-    background:linear-gradient(180deg,rgba(255,255,255,.014),rgba(255,255,255,0));
+  .mission-body{
+    display:grid;grid-template-columns:1fr 1fr;gap:48px;
+    border-top:1px solid var(--line);padding-top:32px;
   }
-  .built-item:last-child{border-right:none}
-  .built-item::before{content:'';position:absolute;left:22px;top:0;width:32px;height:2px;background:var(--accent)}
-  .built-item .num{font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:.16em;color:var(--muted);text-transform:uppercase;margin-top:18px;margin-bottom:10px}
-  .built-item h3{font-family:'Inter Tight',sans-serif;font-weight:600;font-size:17px;letter-spacing:-.01em;color:var(--paper);margin:0 0 8px;line-height:1.2}
-  .built-item p{font-size:13.5px;line-height:1.5;color:var(--muted);margin:0}
+  .mission-body p{
+    font-size:16px;line-height:1.65;color:var(--muted);margin:0;
+  }
+  .mission-body p b{color:var(--paper);font-weight:500}
+  .mission-body .outline-gold{-webkit-text-stroke-width:1px;text-stroke-width:1px}
 
   /* Firm strip */
   .firm{
@@ -202,9 +203,6 @@
   @media(max-width:880px){
     .hero{grid-template-columns:1fr;gap:36px}
     .avatar{width:240px;height:240px}
-    .built-list{grid-template-columns:1fr 1fr}
-    .built-item:nth-child(2){border-right:none}
-    .built-item:nth-child(1),.built-item:nth-child(2){border-bottom:1px solid var(--line)}
   }
 @media(max-width:760px){
     /* Phones · only brand + CTA in the header; nav links accessible via /about, /contact, /approach pages.
@@ -229,12 +227,10 @@
     
     .hero{padding:40px 16px 32px}
     h1.h{font-size:clamp(32px,9vw,56px)}
-    .built,.firm{margin:48px 16px 0}
+    .mission,.firm{margin:48px 16px 0}
     .firm{padding:28px 24px}
     .firm h2{font-size:19px}
-    .built-list{grid-template-columns:1fr}
-    .built-item{border-right:none;border-bottom:1px solid var(--line)}
-    .built-item:last-child{border-bottom:none}
+    .mission-body{grid-template-columns:1fr;gap:22px;padding-top:24px}
     .contact-block{padding:56px 16px}
     .foot-strip{flex-direction:column;gap:10px;align-items:flex-start}
     .foot-legal{flex-direction:column;gap:10px;align-items:flex-start}
@@ -275,15 +271,10 @@
     .role{font-size:11px;letter-spacing:.04em;margin:0 0 22px;padding-bottom:18px}
     .bio-body{gap:14px}
     .bio-body p{font-size:15px;line-height:1.55}
-    .built{margin:32px 16px 0}
-    .built-head{padding-bottom:14px;flex-wrap:wrap;gap:8px}
-    .built-head h2{font-size:22px}
-    .built-head .meta{font-size:10px}
-    .built-item{padding:18px 18px 22px}
-    .built-item::before{left:18px;width:28px}
-    .built-item .num{font-size:10px;margin-top:14px;margin-bottom:8px}
-    .built-item h3{font-size:15.5px}
-    .built-item p{font-size:13px;line-height:1.5}
+    .mission{margin:56px 16px 0}
+    .mission-eyebrow{font-size:10px;margin-bottom:14px}
+    .mission-head{font-size:clamp(26px,7.5vw,38px);line-height:1.06;margin:0 0 24px}
+    .mission-body p{font-size:14.5px;line-height:1.55}
     .firm{margin:32px 16px 0;padding:22px 20px}
     .firm-eyebrow{font-size:10px;margin-bottom:12px}
     .firm h2{font-size:17px;line-height:1.4}
@@ -355,53 +346,55 @@
 
     <div class="bio-body">
       <p>
-        <b>Almost a decade inside a global investment bank,</b> building LLM analytics platforms,
-        decision systems, and transaction monitoring infrastructure for institutional teams.
-        Direct work across high-value payments, cross-border settlement, and operational risk.
+        <span class="accent">Money is becoming programmable.</span> Stablecoins are the rail
+        it travels on — regulated, transparent, settling 24/7 alongside the agents that will
+        increasingly do the deciding inside institutional workflows. The economic plumbing of
+        the next decade is being laid right now, by people building it and people governing
+        it. I'm here to help build the <span class="outline-gold">operations layer</span> it
+        needs.
       </p>
       <p>
-        The work included taking an LLM-powered analytics platform from blank page to
-        executive-level visibility. Leading API platform development. Running cloud migration
-        at scale. Building infrastructure for institutional operations and risk teams. Each one
-        a system that had to perform under real load, with regulators looking on, and operators
-        in step.
+        Always-on operations isn't new. <span class="outline-gold">The agentic version of it
+        is.</span> Reserves don't go offline. Sanctions screens don't sleep. Cross-chain
+        reconciliation doesn't wait for treasury to come back online on a Tuesday morning.
+        Operations runs at the cadence of the money it watches — and shows its work in
+        evidence a regulator can read on a bank-holiday morning.
       </p>
       <p>
-        <span class="accent">Now running it as always-on agents</span> for stablecoin issuers
-        and the infrastructure layer they operate on. Reserves, redemptions, sanctions, KYT,
-        cross-chain reconciliation, regulatory reporting. Hermes runtime in production.
+        Before this, almost a decade inside a global investment bank — LLM analytics, decision
+        systems, and transaction monitoring infrastructure under real institutional load.
+        <b>Policy-bound, audit-ready, deployed where it matters.</b> That's the discipline
+        Rayleigh Stark brings to stablecoin issuers today, through
+        <span class="outline-gold">Hermes</span>, our runtime.
       </p>
     </div>
   </div>
 
 </section>
 
-<section class="built">
-  <div class="built-head">
-    <h2>What got <span class="accent">shipped.</span></h2>
-    <div class="meta">Inside the global investment bank · 2017–2025</div>
-  </div>
-  <div class="built-list">
-    <article class="built-item">
-      <div class="num">01 · ANALYTICS</div>
-      <h3>LLM analytics platform</h3>
-      <p>From blank page to executive-level visibility for institutional teams.</p>
-    </article>
-    <article class="built-item">
-      <div class="num">02 · DECISION SYSTEMS</div>
-      <h3>Decision and monitoring infrastructure</h3>
-      <p>Production systems supporting high-value payments and operational risk.</p>
-    </article>
-    <article class="built-item">
-      <div class="num">03 · PLATFORM</div>
-      <h3>API platform development</h3>
-      <p>Led platform work supporting institutional operations and risk teams.</p>
-    </article>
-    <article class="built-item">
-      <div class="num">04 · INFRA</div>
-      <h3>Cloud migration at scale</h3>
-      <p>Ran institutional workloads through a regulated cloud migration.</p>
-    </article>
+<section class="mission">
+  <div class="mission-eyebrow">Why this work, now</div>
+  <h2 class="mission-head">
+    Money has always run on <span class="accent">infrastructure.</span>
+  </h2>
+  <div class="mission-body">
+    <p>
+      The dollar. The wire. The bank holiday. Every transaction since has flowed through
+      decisions made decades ago, in rooms most people will never see.
+      <span class="outline-gold">Stablecoins are the next decision.</span> Programmable
+      currency, regulated under MiCA and the GENIUS Act, settling around the clock on the
+      chains the agentic economy is being built on. Not a retail-crypto story — a story
+      about how institutions move money, and how machines will move it on their behalf.
+    </p>
+    <p>
+      Rayleigh Stark builds the operations layer for that money. Agents that watch reserves,
+      redemptions, sanctions, KYT, and cross-chain reconciliation — not because operations
+      is the glamour, but because it's where this future
+      <span class="outline-gold">holds together or doesn't.</span> Every regulator-facing
+      event, every threshold approach, every coverage drift: documented, attested, gated.
+      Built so that when the system needs human eyes, the agent has already drafted the
+      packet and called the right name.
+    </p>
   </div>
 </section>
 
