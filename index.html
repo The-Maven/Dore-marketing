@@ -1465,7 +1465,9 @@
       if (!graph) return;
       var svg = graph.querySelector('.rg-edges');
       if (!svg) return;
-      var paths = svg.querySelectorAll('path');
+      /* Only direct-child paths — excludes the arrow-marker paths
+         that live inside <defs><marker>. */
+      var paths = svg.querySelectorAll(':scope > path');
       if (paths.length < 10) return;
 
       function pt(node, sideX, sideY){
