@@ -381,20 +381,69 @@
   }
   .runtime-tail b{color:var(--paper);font-weight:500}
 
+  /* Desktop: hide the mobile connectors (the SVG carries the flow on desktop) */
+  .rg-mc{display:none}
+
   @media(max-width:880px){
+    /* Mobile graph: 2-column inner layout, explicit vertical connectors
+       between sections. Reads as a pipeline with parallelism preserved
+       at Ingest (2x2) and Act (1x2). */
     .rgraph{
-      grid-template-columns:1fr;column-gap:0;row-gap:10px;
-      padding:24px 22px 26px;background:linear-gradient(180deg,rgba(255,255,255,.012),rgba(255,255,255,0));
+      grid-template-columns:1fr 1fr;
+      grid-template-rows:none;
+      column-gap:10px;row-gap:10px;
+      padding:24px 18px 28px;
+      background:
+        radial-gradient(ellipse 80% 28% at 50% 38%, rgba(212,162,74,.04), transparent 70%),
+        linear-gradient(180deg,rgba(255,255,255,.012),rgba(255,255,255,0));
     }
     .rgraph-axis{display:none}
     .rg-edges{display:none}
-    .n-custody,.n-reserves,.n-sanctions,.n-queue,
-    .n-core,.n-policy,.n-execute,.n-escalate,.n-audit{
-      grid-column:1;grid-row:auto;align-self:stretch;
-    }
-    .n-audit{margin-top:18px}
+    .rg-node{padding:14px 14px 16px;align-self:stretch}
+
+    /* Re-place every node into the mobile flow using explicit row order */
+    .n-custody   {grid-column:1;grid-row:1}
+    .n-reserves  {grid-column:2;grid-row:1}
+    .n-sanctions {grid-column:1;grid-row:2}
+    .n-queue     {grid-column:2;grid-row:2}
+
+    .rg-mc-after-sources{grid-column:1 / -1;grid-row:3}
+    .n-core      {grid-column:1 / -1;grid-row:4}
+    .rg-mc-policy       {grid-column:1 / -1;grid-row:5}
+    .n-policy    {grid-column:1 / -1;grid-row:6}
+    .rg-mc-after-decide {grid-column:1 / -1;grid-row:7}
+    .n-execute   {grid-column:1;grid-row:8}
+    .n-escalate  {grid-column:2;grid-row:8}
+    .rg-mc-after-act    {grid-column:1 / -1;grid-row:9}
+    .n-audit     {grid-column:1 / -1;grid-row:10;margin-top:0}
     .n-audit::before{display:none}
-    .rg-node{padding:14px 14px 16px}
+
+    /* Connector style: gold dot rule with mono label, suggests flow */
+    .rg-mc{
+      display:flex;align-items:center;justify-content:center;
+      gap:12px;padding:6px 0 4px;
+    }
+    .rg-mc-arrow{
+      color:var(--gold);font-family:'IBM Plex Mono',monospace;
+      font-size:16px;line-height:1;font-weight:500;
+    }
+    .rg-mc-label{
+      font-family:'IBM Plex Mono',monospace;font-size:9.5px;
+      letter-spacing:.18em;text-transform:uppercase;color:var(--muted);
+    }
+    /* Vertical gold rule above + below the arrow makes it read as a pipeline */
+    .rg-mc::before,.rg-mc::after{
+      content:'';flex:0 0 28px;height:1px;
+      background:linear-gradient(90deg,transparent,rgba(212,162,74,.45),transparent);
+    }
+    /* The policy link uses ↕ to show bidirectional Decision Core ↔ Policy */
+    .rg-mc-policy{padding:4px 0}
+    .rg-mc-policy .rg-mc-arrow{font-size:14px}
+
+    /* Core gets a slightly stronger gold accent on mobile to read as central */
+    .n-core{
+      box-shadow:0 0 0 1px rgba(212,162,74,.18), 0 0 36px rgba(212,162,74,.07);
+    }
   }
 
   /* ═══ USE CASE 01 · editorial treatment ═══ */
@@ -1376,6 +1425,29 @@
       <h3 class="rg-node-name"><span class="rg-tag">human</span>Human escalation</h3>
       <p class="rg-node-body">Routes sign-off to treasury, MLRO, compliance, or CFO. Full context attached.</p>
     </article>
+
+    <!-- Mobile-only flow connectors. Hidden on desktop where the SVG carries
+         the flow; visible on mobile where the graph collapses to a vertical
+         pipeline and needs explicit arrows + labels to preserve the metaphor. -->
+    <div class="rg-mc rg-mc-after-sources" aria-hidden="true">
+      <span class="rg-mc-arrow">↓</span>
+      <span class="rg-mc-label">signals</span>
+    </div>
+
+    <div class="rg-mc rg-mc-policy" aria-hidden="true">
+      <span class="rg-mc-arrow">↕</span>
+      <span class="rg-mc-label">policy</span>
+    </div>
+
+    <div class="rg-mc rg-mc-after-decide" aria-hidden="true">
+      <span class="rg-mc-arrow">↓</span>
+      <span class="rg-mc-label">decisions</span>
+    </div>
+
+    <div class="rg-mc rg-mc-after-act" aria-hidden="true">
+      <span class="rg-mc-arrow">↓</span>
+      <span class="rg-mc-label">every event</span>
+    </div>
 
     <!-- Sink: audit ledger -->
     <article class="rg-node n-audit">
