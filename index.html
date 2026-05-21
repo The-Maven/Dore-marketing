@@ -587,6 +587,34 @@
   }
   .uc-status .surface{color:var(--muted)}
 
+  /* Secondary scenarios · collapsed on mobile to keep the page short.
+     Desktop: summary hidden, grid always shown. Mobile: summary is the
+     tap target, grid revealed on open. */
+  .uc-more{margin-top:0}
+  .uc-more > summary{
+    list-style:none;cursor:pointer;
+    font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.14em;
+    text-transform:uppercase;color:var(--muted);
+    display:flex;justify-content:space-between;align-items:center;gap:14px;
+    padding:18px 4px;border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+    transition:color .2s,border-color .2s;
+  }
+  .uc-more > summary::-webkit-details-marker{display:none}
+  .uc-more > summary::after{
+    content:'+';font-family:'IBM Plex Mono',monospace;font-size:18px;
+    line-height:1;color:var(--accent);font-weight:500;
+  }
+  .uc-more[open] > summary::after{content:'×'}
+  .uc-more > summary:hover{color:var(--paper);border-color:var(--line-strong)}
+  .uc-more > summary .uc-more-hint{color:var(--muted-2);letter-spacing:.06em}
+  .uc-more > .uc-grid{margin-top:18px}
+  /* Author .uc-grid{display:grid} beats UA's hide-when-closed rule; reinstate it explicitly. */
+  .uc-more:not([open]) > .uc-grid{display:none}
+  @media(min-width:761px){
+    .uc-more > summary{display:none}
+    .uc-more > .uc-grid{display:grid!important;margin-top:32px}
+  }
+
   /* CONTACT */
   .contact-block{
     padding:120px 24px;border-bottom:1px solid var(--line);
@@ -869,19 +897,19 @@
     .nav-cta{display:none}
 
     /* Hero · log is a working artifact, must actually read on mobile.
-       Compressed font, fewer columns, mask keeps it from bleeding through
-       the headline. The radial dim behind the headline core stays to
-       reinforce contrast where headline and log overlap. */
+       4-column grid (no agent col) so the message track gets the
+       right-hand width instead of falling off the end. Mask handles
+       the headline overlap; radial dim adds extra contrast where
+       headline and log cross. */
     .hero-log{
-      opacity:.42;font-size:9.5px;line-height:1.85;
+      opacity:.42;font-size:10.5px;line-height:1.9;
       height:min(54%,420px);
       mask-image:linear-gradient(180deg,transparent 0%,#000 12%,#000 58%,transparent 100%);
       -webkit-mask-image:linear-gradient(180deg,transparent 0%,#000 12%,#000 58%,transparent 100%);
     }
-    .hero-log-list{padding:14px 16px}
-    .logline{grid-template-columns:50px 56px 0 60px minmax(0,1fr);column-gap:8px}
+    .hero-log-list{padding:18px 20px}
+    .logline{grid-template-columns:56px 64px 76px minmax(0,1fr);column-gap:11px}
     .logline .agt{display:none}
-    .logline .surf{font-size:9px}
     .hero{padding:36px 16px 56px}
     h1.hero-h{font-size:clamp(40px,12vw,72px);line-height:1;letter-spacing:-.035em;margin:0 0 22px}
     .hero-sub{font-size:15px;line-height:1.5;margin:0 0 24px}
@@ -1234,8 +1262,13 @@
     </div>
   </article>
 
-  <!-- three more use case cards -->
-  <div class="uc-grid" style="margin-top:0">
+  <!-- three more use case cards · collapsed on mobile -->
+  <details class="uc-more">
+    <summary>
+      <span>Three more scenarios</span>
+      <span class="uc-more-hint">drift · sanctions · reconciliation</span>
+    </summary>
+    <div class="uc-grid">
 
       <article class="uc-card">
         <div class="uc-meta">
@@ -1283,7 +1316,7 @@
       </article>
 
     </div>
-  </div>
+  </details>
 </section>
 
 <!-- CONTACT -->
