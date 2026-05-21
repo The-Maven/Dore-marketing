@@ -39,7 +39,7 @@
     --paper:#EFEAE0;
     --muted:rgba(239,234,224,.72);
     --muted-2:rgba(239,234,224,.54);
-    --accent:#38bdf8;
+    --accent:#EFEAE0;
     --green:#7FE0A6;
     --gold:#D4A24A;
   }
@@ -89,7 +89,7 @@
   .eyebrow{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);margin-bottom:22px;display:inline-flex;align-items:center;gap:12px}
   .eyebrow::after{content:'';width:36px;height:1px;background:var(--accent)}
   h1.h{font-family:'Inter Tight',sans-serif;font-weight:700;font-size:clamp(40px,5.6vw,84px);line-height:.98;letter-spacing:-.03em;margin:0 0 32px;color:var(--paper);max-width:22ch}
-  h1.h .accent{color:var(--accent)}
+  h1.h .accent{color:transparent;-webkit-text-stroke:1.5px var(--paper);text-stroke:1.5px var(--paper);paint-order:stroke fill}
   .lede{font-size:19px;line-height:1.55;color:var(--muted);max-width:62ch;margin:0}
   .lede b{color:var(--paper);font-weight:500}
 
@@ -115,7 +115,7 @@
     font-size:32px;letter-spacing:-.02em;color:var(--paper);
     margin:0 0 18px;line-height:1.1;
   }
-  .stage h2 .accent{color:var(--accent)}
+  .stage h2 .accent{color:transparent;-webkit-text-stroke:1.5px var(--paper);text-stroke:1.5px var(--paper);paint-order:stroke fill}
   .stage p{font-size:16.5px;line-height:1.6;color:var(--muted);margin:0 0 14px;max-width:62ch}
   .stage p b{color:var(--paper);font-weight:500}
 
