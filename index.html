@@ -113,7 +113,7 @@
     font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.1em;
     text-transform:uppercase;color:var(--muted);
   }
-  .statusbar-inner{display:flex;align-items:center;justify-content:space-between;padding:10px 24px;gap:24px}
+  .statusbar-inner{display:flex;align-items:center;justify-content:space-between;padding:10px 24px;gap:24px;max-width:1440px;margin:0 auto}
   .status-cluster{display:flex;gap:18px;align-items:center}
   .status-pill{display:inline-flex;align-items:center;gap:8px}
   .dot{width:7px;height:7px;border-radius:50%;background:var(--green);box-shadow:0 0 8px rgba(127,224,166,.7);display:inline-block}
@@ -122,6 +122,7 @@
   .nav{
     position:relative;z-index:5;border-bottom:1px solid var(--line);
     display:flex;align-items:center;justify-content:space-between;padding:18px 24px;
+    max-width:1440px;margin:0 auto;
   }
   .brand{font-family:'Inter Tight',sans-serif;font-weight:700;font-size:15px;letter-spacing:-.01em;display:flex;align-items:center;gap:10px;color:var(--paper);text-decoration:none}
   .brand-mark{width:24px;height:24px;border:1.5px solid var(--paper);display:inline-flex;align-items:center;justify-content:center;font-family:'IBM Plex Mono',monospace;font-size:10px;font-weight:600}
@@ -317,7 +318,7 @@
      gets a slightly tighter, slightly faster pulse to mark it as primary. */
   @keyframes rg-flow{to{stroke-dashoffset:-100}}
   .rg-edges path,.rg-edges line{
-    stroke:rgba(239,234,224,.32);stroke-width:1;fill:none;
+    stroke:var(--gold);stroke-width:1;fill:none;
     vector-effect:non-scaling-stroke;
     stroke-dasharray:5 7;
     animation:rg-flow 5s linear infinite;
@@ -1380,21 +1381,24 @@
           <path d="M 0 0 L 10 5 L 0 10 Z" fill="var(--gold)"/>
         </marker>
       </defs>
-      <!-- Four ingest sources converging on Decision Core -->
-      <path d="M 22 25 C 30 25, 36 36, 41 38"/>
-      <path d="M 22 39 C 30 39, 36 38, 41 40"/>
-      <path d="M 22 53 C 30 53, 36 41, 41 42"/>
-      <path d="M 22 67 C 32 67, 36 44, 41 44"/>
+      <!-- Four ingest sources converging on Decision Core.
+           Each path carries a unique id so the prod SVG optimizer
+           (SVGO mergePaths) leaves them as separate elements — the
+           runtime script addresses them by index. -->
+      <path id="rg-e0" d="M 22 25 C 30 25, 36 36, 41 38"/>
+      <path id="rg-e1" d="M 22 39 C 30 39, 36 38, 41 40"/>
+      <path id="rg-e2" d="M 22 53 C 30 53, 36 41, 41 42"/>
+      <path id="rg-e3" d="M 22 67 C 32 67, 36 44, 41 44"/>
       <!-- Decision Core ↔ Policy Engine -->
-      <path d="M 50 49 L 50 60" class="rg-dotted"/>
+      <path id="rg-e4" d="M 50 49 L 50 60" class="rg-dotted"/>
       <!-- Decision Core → Execute -->
-      <path d="M 59 38 C 64 38, 70 33, 75 33" marker-end="url(#rg-arr)"/>
+      <path id="rg-e5" d="M 59 38 C 64 38, 70 33, 75 33" marker-end="url(#rg-arr-gold)"/>
       <!-- Decision Core → Human Escalation (GOLD primary path) -->
-      <path d="M 59 44 C 64 44, 70 64, 75 64" class="rg-gold" marker-end="url(#rg-arr-gold)"/>
+      <path id="rg-e6" d="M 59 44 C 64 44, 70 64, 75 64" class="rg-gold" marker-end="url(#rg-arr-gold)"/>
       <!-- Convergence to Audit Ledger -->
-      <path d="M 12 76 L 50 92" class="rg-dotted"/>
-      <path d="M 50 70 L 50 92" class="rg-dotted"/>
-      <path d="M 86 70 L 50 92" class="rg-dotted"/>
+      <path id="rg-e7" d="M 12 76 L 50 92" class="rg-dotted"/>
+      <path id="rg-e8" d="M 50 70 L 50 92" class="rg-dotted"/>
+      <path id="rg-e9" d="M 86 70 L 50 92" class="rg-dotted"/>
     </svg>
 
     <!-- Source nodes -->
@@ -1475,10 +1479,14 @@
       if (!graph) return;
       var svg = graph.querySelector('.rg-edges');
       if (!svg) return;
-      /* Only direct-child paths — excludes the arrow-marker paths
-         that live inside <defs><marker>. */
-      var paths = svg.querySelectorAll(':scope > path');
-      if (paths.length < 10) return;
+      /* Look up each connector path by id. Indices in source order:
+         0-3 ingest fan-in, 4 policy link, 5 execute, 6 escalate, 7-9 audit. */
+      var paths = [];
+      for (var k = 0; k < 10; k++) {
+        var p = svg.querySelector('#rg-e' + k);
+        if (!p) return;
+        paths.push(p);
+      }
 
       function pt(node, sideX, sideY){
         var r = node.getBoundingClientRect();
