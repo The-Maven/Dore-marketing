@@ -1457,6 +1457,107 @@
 
   </div>
 
+  <script>
+    /* Dynamically position the runtime graph edges so they actually connect
+       to the rendered node edges. Re-runs on resize and when the layout
+       settles (fonts load, etc.). */
+    (function(){
+      var graph = document.querySelector('.rgraph');
+      if (!graph) return;
+      var svg = graph.querySelector('.rg-edges');
+      if (!svg) return;
+      var paths = svg.querySelectorAll('path');
+      if (paths.length < 10) return;
+
+      function pt(node, sideX, sideY){
+        var r = node.getBoundingClientRect();
+        var g = graph.getBoundingClientRect();
+        var x = sideX === 'left' ? r.left : sideX === 'right' ? r.right : r.left + r.width / 2;
+        var y = sideY === 'top' ? r.top : sideY === 'bottom' ? r.bottom : r.top + r.height / 2;
+        return {
+          x: ((x - g.left) / g.width) * 100,
+          y: ((y - g.top) / g.height) * 100
+        };
+      }
+
+      function update(){
+        var get = function(sel){ return graph.querySelector(sel); };
+        var core = get('.n-core');
+        var policy = get('.n-policy');
+        var execute = get('.n-execute');
+        var escalate = get('.n-escalate');
+        var audit = get('.n-audit');
+        var ingest = ['.n-custody','.n-reserves','.n-sanctions','.n-queue'].map(get);
+        if (!core || !policy || !execute || !escalate || !audit) return;
+        if (ingest.some(function(n){ return !n; })) return;
+
+        var coreL = pt(core, 'left', 'mid');
+        var coreR = pt(core, 'right', 'mid');
+        var coreB = pt(core, 'mid', 'bottom');
+        var policyT = pt(policy, 'mid', 'top');
+        var policyB = pt(policy, 'mid', 'bottom');
+        var executeL = pt(execute, 'left', 'mid');
+        var escalateL = pt(escalate, 'left', 'mid');
+        var escalateB = pt(escalate, 'mid', 'bottom');
+        var auditT = pt(audit, 'mid', 'top');
+
+        /* 4 ingest -> Decision Core: each curves into a slightly different
+           point on the core's left edge so they fan in rather than overlap. */
+        for (var i = 0; i < 4; i++){
+          var s = pt(ingest[i], 'right', 'mid');
+          var spread = (i - 1.5) * 4; // -6,-2,+2,+6 in viewBox y units
+          var coreTarget = { x: coreL.x, y: coreL.y + spread };
+          var midX = (s.x + coreTarget.x) / 2;
+          paths[i].setAttribute(
+            'd',
+            'M ' + s.x + ' ' + s.y +
+            ' C ' + midX + ' ' + s.y + ', ' +
+                    midX + ' ' + coreTarget.y + ', ' +
+                    coreTarget.x + ' ' + coreTarget.y
+          );
+        }
+
+        /* Decision Core <-> Policy Engine (vertical dashed link) */
+        paths[4].setAttribute('d', 'M ' + coreB.x + ' ' + coreB.y + ' L ' + policyT.x + ' ' + policyT.y);
+
+        /* Decision Core -> Execute */
+        var coreOutTop = { x: coreR.x, y: coreR.y - 2 };
+        var exMid = (coreOutTop.x + executeL.x) / 2;
+        paths[5].setAttribute(
+          'd',
+          'M ' + coreOutTop.x + ' ' + coreOutTop.y +
+          ' C ' + exMid + ' ' + coreOutTop.y + ', ' +
+                  exMid + ' ' + executeL.y + ', ' +
+                  executeL.x + ' ' + executeL.y
+        );
+
+        /* Decision Core -> Human Escalation (gold primary path) */
+        var coreOutBot = { x: coreR.x, y: coreR.y + 2 };
+        var escMid = (coreOutBot.x + escalateL.x) / 2;
+        paths[6].setAttribute(
+          'd',
+          'M ' + coreOutBot.x + ' ' + coreOutBot.y +
+          ' C ' + escMid + ' ' + coreOutBot.y + ', ' +
+                  escMid + ' ' + escalateL.y + ', ' +
+                  escalateL.x + ' ' + escalateL.y
+        );
+
+        /* Audit drops: three dashed lines from the bottom of each column */
+        var lastIngestB = pt(ingest[3], 'mid', 'bottom');
+        paths[7].setAttribute('d', 'M ' + lastIngestB.x + ' ' + lastIngestB.y + ' L ' + auditT.x + ' ' + auditT.y);
+        paths[8].setAttribute('d', 'M ' + policyB.x + ' ' + policyB.y + ' L ' + auditT.x + ' ' + auditT.y);
+        paths[9].setAttribute('d', 'M ' + escalateB.x + ' ' + escalateB.y + ' L ' + auditT.x + ' ' + auditT.y);
+      }
+
+      update();
+      window.addEventListener('resize', update);
+      /* Run again after the layout has fully settled (fonts, images) */
+      if (document.fonts && document.fonts.ready) document.fonts.ready.then(update);
+      setTimeout(update, 80);
+      setTimeout(update, 400);
+    })();
+  </script>
+
   <p class="runtime-tail">
     Hermes does not replace the team. It runs the surfaces the team cannot watch alone.
     <b>Reserves through the night. Redemptions across timezones. Sanctions at the moment
