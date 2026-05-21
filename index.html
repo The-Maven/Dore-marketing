@@ -311,12 +311,25 @@
     position:absolute;left:0;top:0;width:100%;height:100%;
     pointer-events:none;z-index:0;
   }
+  /* Animated flow on every edge — gives the runtime the feel of live signals
+     running through it. The gold path (Decision Core -> Human Escalation)
+     gets a slightly tighter, slightly faster pulse to mark it as primary. */
+  @keyframes rg-flow{to{stroke-dashoffset:-100}}
   .rg-edges path,.rg-edges line{
-    stroke:rgba(239,234,224,.22);stroke-width:1;fill:none;
+    stroke:rgba(239,234,224,.32);stroke-width:1;fill:none;
     vector-effect:non-scaling-stroke;
+    stroke-dasharray:5 7;
+    animation:rg-flow 5s linear infinite;
   }
-  .rg-edges .rg-gold{stroke:var(--gold);stroke-width:1.5}
-  .rg-edges .rg-dotted{stroke-dasharray:3 4}
+  .rg-edges .rg-gold{
+    stroke:var(--gold);stroke-width:1.5;
+    stroke-dasharray:6 8;
+    animation-duration:3.6s;
+  }
+  .rg-edges .rg-dotted{stroke-dasharray:2 5;opacity:.7}
+  @media(prefers-reduced-motion:reduce){
+    .rg-edges path,.rg-edges line{animation:none}
+  }
 
   .rg-node{
     position:relative;z-index:1;
