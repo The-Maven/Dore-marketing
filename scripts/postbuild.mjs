@@ -71,9 +71,27 @@ ${urls}
 }
 
 async function writeRobots() {
-  const body = `User-agent: *
+  // Explicitly welcome Claude's web tools (WebFetch, browsing, search
+  // indexing). robots.txt is advisory only — if Cloudflare's "Block AI
+  // Bots" rule is also enabled, that will still 403 these UAs at the
+  // edge and override anything declared here.
+  const claudeUserAgents = [
+    "ClaudeBot",
+    "Claude-User",
+    "Claude-SearchBot",
+    "Claude-Web",
+    "anthropic-ai",
+  ];
+  const claudeBlock = claudeUserAgents
+    .map((ua) => `User-agent: ${ua}\nAllow: /\n`)
+    .join("\n");
+
+  const body = `# Default: open to all crawlers
+User-agent: *
 Allow: /
 
+# Explicit welcome for Claude's web tools
+${claudeBlock}
 Sitemap: ${ORIGIN}/sitemap.xml
 `;
   await writeFile(path.join(DIST, "robots.txt"), body);
