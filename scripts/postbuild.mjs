@@ -1,6 +1,9 @@
 #!/usr/bin/env node
-// Post-build: copy static assets, generate sitemap.xml + robots.txt.
-import { copyFile, mkdir, readdir, writeFile } from "node:fs/promises";
+// Post-build: copy static assets, generate sitemap.xml + robots.txt,
+// and re-quote meta/link attributes that Parcel's HTML optimizer
+// stripped (some social scrapers — LinkedIn, Claude's URL inspector —
+// use strict regex parsers that require quoted attribute values).
+import { copyFile, mkdir, readdir, readFile, writeFile } from "node:fs/promises";
 import { existsSync } from "node:fs";
 import path from "node:path";
 
@@ -94,6 +97,53 @@ async function moveToFolder(name) {
   console.log(`  · folderised: ${name}.html → ${name}/index.html`);
 }
 
+// Re-quote attribute values inside <meta> and <link> tags. Parcel's HTML
+// optimizer strips quotes on values that don't strictly need them per the
+// HTML5 spec — but LinkedIn's and similar scrapers use regexes that require
+// `property="og:image"` (with quotes), so without this pass they report
+// "no image found" even though the tag is present.
+const ATTR = /([\w:-]+)\s*=\s*(?:"([^"]*)"|'([^']*)'|([^\s"'`<>=]+))/g;
+function requoteTag(tag) {
+  // tag is the full match like `<meta name=image property=og:image content="...">`
+  const head = tag.match(/^<\s*([a-z]+)/i);
+  if (!head) return tag;
+  const elName = head[1];
+  let out = `<${elName}`;
+  ATTR.lastIndex = 0;
+  let m;
+  // skip the element name itself by advancing past it
+  const attrText = tag.slice(head[0].length, tag.endsWith("/>") ? -2 : -1);
+  while ((m = ATTR.exec(attrText)) !== null) {
+    const name = m[1];
+    const val = m[2] ?? m[3] ?? m[4] ?? "";
+    // Escape any embedded " in the value (rare in our content).
+    const safe = val.replace(/"/g, "&quot;");
+    out += ` ${name}="${safe}"`;
+  }
+  out += tag.endsWith("/>") ? " />" : ">";
+  return out;
+}
+async function requoteHtmlFile(file) {
+  let html = await readFile(file, "utf8");
+  const before = html;
+  html = html.replace(/<(?:meta|link)\b[^>]*>/gi, requoteTag);
+  if (html !== before) {
+    await writeFile(file, html);
+    console.log(`  · re-quoted meta/link attrs: ${path.relative(DIST, file)}`);
+  }
+}
+async function requoteAllHtml() {
+  const walk = async (dir) => {
+    const entries = await readdir(dir, { withFileTypes: true });
+    for (const e of entries) {
+      const p = path.join(dir, e.name);
+      if (e.isDirectory()) await walk(p);
+      else if (e.isFile() && e.name.endsWith(".html")) await requoteHtmlFile(p);
+    }
+  };
+  await walk(DIST);
+}
+
 async function main() {
   console.log("\n[postbuild]");
   // Folder-structure the interior pages so they serve cleanly without
@@ -115,6 +165,7 @@ async function main() {
   await copyAsset("_redirects");
   await writeSitemap();
   await writeRobots();
+  await requoteAllHtml();
   console.log("[postbuild] done\n");
 }
 
