@@ -6,6 +6,7 @@
 <title>Rayleigh Stark · The always-on operations layer for stablecoins</title>
     <meta name="description" content="Production agents for stablecoin operations. Reserves, redemptions, sanctions, KYT, reconciliation, reporting. Always-on, policy-bound, deployed inside regulated programmes. Built on Wall Street." />
     <link rel="canonical" href="https://rayleighstark.com/" />
+    <link rel="image_src" href="https://rayleighstark.com/og-image.png?v=26.05f" />
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png" />
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
     <link rel="icon" type="image/png" sizes="192x192" href="/favicon-192.png" />
@@ -1198,6 +1199,15 @@
 </style>
 </head>
 <body>
+
+<!-- Off-screen <img> referencing the OG image. LinkedIn's body-image
+     extractor needs an actual <img> tag in the DOM; without one it
+     reports "No image found" even when og:image is correctly declared. -->
+<img src="https://rayleighstark.com/og-image.png?v=26.05f"
+     alt="Rayleigh Stark · The always-on operations layer for stablecoins"
+     width="1200" height="630"
+     loading="lazy" decoding="async" aria-hidden="true"
+     style="position:absolute;left:-9999px;top:0;width:1px;height:1px;opacity:0;pointer-events:none">
 
 <div class="site-header">
 <header class="statusbar">
