@@ -7,6 +7,7 @@
     "dev": "parcel index.html approach.html about.html contact.html terms.html --port 1234",
     "build": "rm -rf dist .parcel-cache && parcel build index.html approach.html about.html contact.html terms.html --dist-dir dist --public-url / && node scripts/postbuild.mjs",
     "preview": "python3 scripts/preview.py",
+    "og": "node scripts/capture-og.mjs",
     "clean": "rm -rf dist .parcel-cache"
   },
   "devDependencies": {
