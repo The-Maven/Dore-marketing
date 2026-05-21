@@ -286,57 +286,116 @@
   }
   .cred-body b{color:var(--accent);font-weight:500}
 
-  /* ═══ RUNTIME · Hermes architecture strip ═══ */
+  /* ═══ RUNTIME · Hermes runtime as a node graph ═══ */
   .runtime-intro{
     font-family:'Inter',sans-serif;font-size:19px;line-height:1.55;
     color:var(--muted);max-width:58ch;margin:0 0 56px;
   }
   .runtime-intro b{color:var(--paper);font-weight:500}
-  .runtime-arch{
+
+  .rgraph{
+    position:relative;
     border:1px solid var(--line-strong);
-    background:linear-gradient(180deg,rgba(255,255,255,.012),rgba(255,255,255,0));
+    background:
+      radial-gradient(ellipse 50% 40% at 50% 42%, rgba(212,162,74,.045), transparent 70%),
+      linear-gradient(180deg,rgba(255,255,255,.012),rgba(255,255,255,0));
+    padding:44px 44px 48px;
     margin-bottom:56px;
+    display:grid;
+    grid-template-columns:1fr 1.3fr 1fr;
+    grid-template-rows:auto auto auto auto auto;
+    column-gap:72px;row-gap:14px;
+    overflow:hidden;
   }
-  .runtime-layer{
-    display:grid;grid-template-columns:220px 1fr;gap:40px;
-    padding:40px 40px 42px;border-top:1px solid var(--line);
+  .rgraph-axis{
+    grid-column:1 / -1;grid-row:1;
+    display:grid;grid-template-columns:1fr 1.3fr 1fr;
+    column-gap:72px;
+    font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.18em;
+    text-transform:uppercase;color:var(--muted-2);
+    padding-bottom:10px;border-bottom:1px solid var(--line);
+    margin-bottom:18px;
   }
-  .runtime-layer:first-child{border-top:none}
-  .runtime-layer-label{
-    font-family:'IBM Plex Mono',monospace;font-size:11.5px;letter-spacing:.14em;
-    text-transform:uppercase;color:var(--paper);padding-top:8px;
-    display:flex;flex-wrap:wrap;align-items:baseline;gap:10px;align-content:flex-start;
+  .rgraph-axis span{display:inline-flex;align-items:center;gap:10px}
+  .rgraph-axis span::before{content:'';width:18px;height:1px;background:var(--gold);opacity:.7}
+
+  .rg-edges{
+    position:absolute;left:0;top:0;width:100%;height:100%;
+    pointer-events:none;z-index:0;
   }
-  .runtime-layer-label .lr-num{color:var(--gold);font-weight:600;letter-spacing:.06em}
-  .runtime-layer-label .lr-arrow{color:var(--gold);font-size:13px;line-height:1}
-  .runtime-layer-label .lr-flow{
-    color:var(--muted-2);font-size:10px;letter-spacing:.1em;font-weight:400;
-    flex-basis:100%;margin-top:6px;
+  .rg-edges path,.rg-edges line{
+    stroke:rgba(239,234,224,.22);stroke-width:1;fill:none;
+    vector-effect:non-scaling-stroke;
   }
-  .runtime-layer-body{display:grid;gap:12px}
-  .runtime-layer-ingest .runtime-layer-body{grid-template-columns:repeat(4,1fr)}
-  .runtime-layer-decide .runtime-layer-body{grid-template-columns:1.25fr 1fr}
-  .runtime-layer-act .runtime-layer-body{grid-template-columns:1fr 1fr}
-  .runtime-layer-audit .runtime-layer-body{grid-template-columns:1fr}
-  .runtime-cell{
-    border:1px solid var(--line);padding:22px 22px 24px;
-    background:rgba(255,255,255,.014);position:relative;
+  .rg-edges .rg-gold{stroke:var(--gold);stroke-width:1.5}
+  .rg-edges .rg-dotted{stroke-dasharray:3 4}
+
+  .rg-node{
+    position:relative;z-index:1;
+    border:1px solid var(--line);
+    background:rgba(10,11,14,.92);
+    padding:14px 16px 16px;
+    backdrop-filter:saturate(140%) blur(2px);
   }
-  .runtime-cell.core{border-color:var(--gold);background:rgba(212,162,74,.035)}
-  .runtime-cell.escalate{border-left:2px solid var(--gold)}
-  .runtime-cell-name{
-    font-family:'Inter Tight',sans-serif;font-weight:600;font-size:16px;
-    letter-spacing:-.005em;color:var(--paper);margin:0 0 12px;line-height:1.22;
+  .rg-node.rg-core{
+    border-color:var(--gold);
+    background:rgba(20,16,8,.94);
+    box-shadow:0 0 0 1px rgba(212,162,74,.12), 0 0 24px rgba(212,162,74,.05);
   }
-  .runtime-cell-body{
-    font-family:'IBM Plex Mono',monospace;font-size:11.5px;line-height:1.75;
-    letter-spacing:.005em;color:var(--muted);margin:0;
+  .rg-node.rg-escalate{border-left:2px solid var(--gold)}
+  .rg-node-name{
+    font-family:'Inter Tight',sans-serif;font-weight:600;font-size:14.5px;
+    color:var(--paper);margin-bottom:6px;line-height:1.2;letter-spacing:-.005em;
   }
+  .rg-node-name .rg-tag{
+    display:inline-block;font-family:'IBM Plex Mono',monospace;font-size:9.5px;
+    letter-spacing:.16em;color:var(--gold);text-transform:uppercase;
+    font-weight:500;margin-right:6px;vertical-align:1px;
+  }
+  .rg-node-body{
+    font-family:'IBM Plex Mono',monospace;font-size:10.5px;line-height:1.6;
+    color:var(--muted);letter-spacing:.005em;
+  }
+
+  /* Node placement on the graph */
+  .n-custody   {grid-column:1;grid-row:2}
+  .n-reserves  {grid-column:1;grid-row:3}
+  .n-sanctions {grid-column:1;grid-row:4}
+  .n-queue     {grid-column:1;grid-row:5}
+
+  .n-core      {grid-column:2;grid-row:2 / 4;align-self:center}
+  .n-policy    {grid-column:2;grid-row:4 / 6;align-self:center}
+
+  .n-execute   {grid-column:3;grid-row:2 / 4;align-self:center}
+  .n-escalate  {grid-column:3;grid-row:4 / 6;align-self:center}
+
+  .n-audit     {grid-column:1 / -1;grid-row:6;margin-top:42px;position:relative}
+  .n-audit::before{
+    content:'';position:absolute;left:50%;top:-30px;width:1px;height:28px;
+    background:linear-gradient(180deg,transparent,rgba(212,162,74,.45));
+  }
+
   .runtime-tail{
     font-family:'Inter',sans-serif;font-size:17px;line-height:1.55;
     color:var(--muted);max-width:66ch;margin:0;
   }
   .runtime-tail b{color:var(--paper);font-weight:500}
+
+  @media(max-width:880px){
+    .rgraph{
+      grid-template-columns:1fr;column-gap:0;row-gap:10px;
+      padding:24px 22px 26px;background:linear-gradient(180deg,rgba(255,255,255,.012),rgba(255,255,255,0));
+    }
+    .rgraph-axis{display:none}
+    .rg-edges{display:none}
+    .n-custody,.n-reserves,.n-sanctions,.n-queue,
+    .n-core,.n-policy,.n-execute,.n-escalate,.n-audit{
+      grid-column:1;grid-row:auto;align-self:stretch;
+    }
+    .n-audit{margin-top:18px}
+    .n-audit::before{display:none}
+    .rg-node{padding:14px 14px 16px}
+  }
 
   /* ═══ USE CASE 01 · editorial treatment ═══ */
   .case01{
@@ -1244,104 +1303,85 @@
     control. Escalate to humans when the threshold is met.</b>
   </p>
 
-  <div class="runtime-arch">
+  <div class="rgraph" role="img" aria-label="Hermes runtime: four ingest sources feed a Decision Core that works with a Policy Engine and routes to Execute or Human Escalation; an Audit Ledger records every event.">
 
-    <!-- Layer 01 · Ingest -->
-    <div class="runtime-layer runtime-layer-ingest">
-      <div class="runtime-layer-label">
-        <span class="lr-num">01</span>
-        <span class="lr-name">Ingest</span>
-        <span class="lr-arrow">→</span>
-        <span class="lr-flow">polled continuously</span>
-      </div>
-      <div class="runtime-layer-body">
-        <article class="runtime-cell">
-          <h3 class="runtime-cell-name">Custody attestations</h3>
-          <p class="runtime-cell-body">From custodian banks. Reconciled against on-chain supply.</p>
-        </article>
-        <article class="runtime-cell">
-          <h3 class="runtime-cell-name">On-chain reserves</h3>
-          <p class="runtime-cell-body">Snapshots per chain. Supply, mint, burn, settlement.</p>
-        </article>
-        <article class="runtime-cell">
-          <h3 class="runtime-cell-name">Sanctions and KYT</h3>
-          <p class="runtime-cell-body">OFAC and equivalent lists. Address screening before settlement.</p>
-        </article>
-        <article class="runtime-cell">
-          <h3 class="runtime-cell-name">Redemption queue</h3>
-          <p class="runtime-cell-body">In-flight, queued, scheduled. Treasury state and custodian sweep windows.</p>
-        </article>
-      </div>
+    <!-- column headings -->
+    <div class="rgraph-axis">
+      <span>Ingest</span>
+      <span>Decide</span>
+      <span>Act</span>
     </div>
 
-    <!-- Layer 02 · Decide -->
-    <div class="runtime-layer runtime-layer-decide">
-      <div class="runtime-layer-label">
-        <span class="lr-num">02</span>
-        <span class="lr-name">Decide</span>
-        <span class="lr-arrow">→</span>
-        <span class="lr-flow">correlate, score, draft evidence</span>
-      </div>
-      <div class="runtime-layer-body">
-        <article class="runtime-cell core">
-          <h3 class="runtime-cell-name">Decision core</h3>
-          <p class="runtime-cell-body">
-            Correlates signals. Applies policy. Scores anomalies under confidence.
-            Drafts the regulator-ready packet.
-          </p>
-        </article>
-        <article class="runtime-cell">
-          <h3 class="runtime-cell-name">Policy engine</h3>
-          <p class="runtime-cell-body">
-            Versioned policies. Thresholds, escalation paths, override authority.
-            Policy changes are auditable events.
-          </p>
-        </article>
-      </div>
-    </div>
+    <!-- SVG edges (positioned absolutely behind the nodes) -->
+    <svg class="rg-edges" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
+      <defs>
+        <marker id="rg-arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto">
+          <path d="M 0 0 L 10 5 L 0 10 Z" fill="rgba(239,234,224,.4)"/>
+        </marker>
+        <marker id="rg-arr-gold" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto">
+          <path d="M 0 0 L 10 5 L 0 10 Z" fill="var(--gold)"/>
+        </marker>
+      </defs>
+      <!-- Four ingest sources converging on Decision Core -->
+      <path d="M 22 25 C 30 25, 36 36, 41 38"/>
+      <path d="M 22 39 C 30 39, 36 38, 41 40"/>
+      <path d="M 22 53 C 30 53, 36 41, 41 42"/>
+      <path d="M 22 67 C 32 67, 36 44, 41 44"/>
+      <!-- Decision Core ↔ Policy Engine -->
+      <path d="M 50 49 L 50 60" class="rg-dotted"/>
+      <!-- Decision Core → Execute -->
+      <path d="M 59 38 C 64 38, 70 33, 75 33" marker-end="url(#rg-arr)"/>
+      <!-- Decision Core → Human Escalation (GOLD primary path) -->
+      <path d="M 59 44 C 64 44, 70 64, 75 64" class="rg-gold" marker-end="url(#rg-arr-gold)"/>
+      <!-- Convergence to Audit Ledger -->
+      <path d="M 12 76 L 50 92" class="rg-dotted"/>
+      <path d="M 50 70 L 50 92" class="rg-dotted"/>
+      <path d="M 86 70 L 50 92" class="rg-dotted"/>
+    </svg>
 
-    <!-- Layer 03 · Execute / Escalate -->
-    <div class="runtime-layer runtime-layer-act">
-      <div class="runtime-layer-label">
-        <span class="lr-num">03</span>
-        <span class="lr-name">Execute · Escalate</span>
-        <span class="lr-arrow">→</span>
-        <span class="lr-flow">act under control, hand to humans</span>
-      </div>
-      <div class="runtime-layer-body">
-        <article class="runtime-cell">
-          <h3 class="runtime-cell-name">Execute under control</h3>
-          <p class="runtime-cell-body">
-            Notify. Hold under policy. Draft evidence. Log rationale and policy version.
-          </p>
-        </article>
-        <article class="runtime-cell escalate">
-          <h3 class="runtime-cell-name">Human escalation</h3>
-          <p class="runtime-cell-body">
-            Routes sign-off to treasury, MLRO, compliance, or CFO by policy. Full
-            context attached.
-          </p>
-        </article>
-      </div>
-    </div>
+    <!-- Source nodes -->
+    <article class="rg-node n-custody">
+      <h3 class="rg-node-name"><span class="rg-tag">01</span>Custody attestations</h3>
+      <p class="rg-node-body">From custodian banks. Reconciled against on-chain supply.</p>
+    </article>
+    <article class="rg-node n-reserves">
+      <h3 class="rg-node-name"><span class="rg-tag">02</span>On-chain reserves</h3>
+      <p class="rg-node-body">Snapshots per chain. Supply, mint, burn, settlement.</p>
+    </article>
+    <article class="rg-node n-sanctions">
+      <h3 class="rg-node-name"><span class="rg-tag">03</span>Sanctions and KYT</h3>
+      <p class="rg-node-body">OFAC and equivalent lists. Address screening before settlement.</p>
+    </article>
+    <article class="rg-node n-queue">
+      <h3 class="rg-node-name"><span class="rg-tag">04</span>Redemption queue</h3>
+      <p class="rg-node-body">In-flight, queued, scheduled. Treasury state and custodian sweeps.</p>
+    </article>
 
-    <!-- Layer 04 · Audit ledger -->
-    <div class="runtime-layer runtime-layer-audit">
-      <div class="runtime-layer-label">
-        <span class="lr-num">04</span>
-        <span class="lr-name">Audit ledger</span>
-        <span class="lr-arrow">→</span>
-        <span class="lr-flow">append-only, regulator-grade</span>
-      </div>
-      <div class="runtime-layer-body">
-        <article class="runtime-cell">
-          <h3 class="runtime-cell-name">Every signal. Every decision. Every action. Every override.</h3>
-          <p class="runtime-cell-body">
-            Append-only. Retention per regulator. Each entry tied to its policy version. Reversible under sign-off.
-          </p>
-        </article>
-      </div>
-    </div>
+    <!-- Decide nodes -->
+    <article class="rg-node n-core rg-core">
+      <h3 class="rg-node-name"><span class="rg-tag">core</span>Decision core</h3>
+      <p class="rg-node-body">Correlates signals. Applies policy. Scores anomalies under confidence. Drafts the regulator-ready packet.</p>
+    </article>
+    <article class="rg-node n-policy">
+      <h3 class="rg-node-name"><span class="rg-tag">policy</span>Policy engine</h3>
+      <p class="rg-node-body">Versioned policies. Thresholds, escalation paths, override authority. Policy changes are auditable events.</p>
+    </article>
+
+    <!-- Act nodes -->
+    <article class="rg-node n-execute">
+      <h3 class="rg-node-name"><span class="rg-tag">exec</span>Execute under control</h3>
+      <p class="rg-node-body">Notify. Hold under policy. Draft evidence. Log rationale and policy version.</p>
+    </article>
+    <article class="rg-node n-escalate rg-escalate">
+      <h3 class="rg-node-name"><span class="rg-tag">human</span>Human escalation</h3>
+      <p class="rg-node-body">Routes sign-off to treasury, MLRO, compliance, or CFO. Full context attached.</p>
+    </article>
+
+    <!-- Sink: audit ledger -->
+    <article class="rg-node n-audit">
+      <h3 class="rg-node-name"><span class="rg-tag">ledger</span>Audit ledger</h3>
+      <p class="rg-node-body">Every signal, every decision, every action, every override. Append-only. Retention per regulator. Each entry tied to its policy version. Reversible under sign-off.</p>
+    </article>
 
   </div>
 
