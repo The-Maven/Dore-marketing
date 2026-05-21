@@ -286,6 +286,58 @@
   }
   .cred-body b{color:var(--accent);font-weight:500}
 
+  /* ═══ RUNTIME · Hermes architecture strip ═══ */
+  .runtime-intro{
+    font-family:'Inter',sans-serif;font-size:18px;line-height:1.55;
+    color:var(--muted);max-width:64ch;margin:0 0 44px;
+  }
+  .runtime-intro b{color:var(--paper);font-weight:500}
+  .runtime-arch{
+    border:1px solid var(--line-strong);
+    background:linear-gradient(180deg,rgba(255,255,255,.012),rgba(255,255,255,0));
+    margin-bottom:44px;
+  }
+  .runtime-layer{
+    display:grid;grid-template-columns:220px 1fr;gap:36px;
+    padding:30px 32px 32px;border-top:1px solid var(--line);
+  }
+  .runtime-layer:first-child{border-top:none}
+  .runtime-layer-label{
+    font-family:'IBM Plex Mono',monospace;font-size:11.5px;letter-spacing:.14em;
+    text-transform:uppercase;color:var(--paper);padding-top:8px;
+    display:flex;flex-wrap:wrap;align-items:baseline;gap:10px;align-content:flex-start;
+  }
+  .runtime-layer-label .lr-num{color:var(--gold);font-weight:600;letter-spacing:.06em}
+  .runtime-layer-label .lr-arrow{color:var(--gold);font-size:13px;line-height:1}
+  .runtime-layer-label .lr-flow{
+    color:var(--muted-2);font-size:10px;letter-spacing:.1em;font-weight:400;
+    flex-basis:100%;margin-top:6px;
+  }
+  .runtime-layer-body{display:grid;gap:12px}
+  .runtime-layer-ingest .runtime-layer-body{grid-template-columns:repeat(4,1fr)}
+  .runtime-layer-decide .runtime-layer-body{grid-template-columns:1.25fr 1fr}
+  .runtime-layer-act .runtime-layer-body{grid-template-columns:1fr 1fr}
+  .runtime-layer-audit .runtime-layer-body{grid-template-columns:1fr}
+  .runtime-cell{
+    border:1px solid var(--line);padding:18px 18px 20px;
+    background:rgba(255,255,255,.014);position:relative;
+  }
+  .runtime-cell.core{border-color:var(--gold);background:rgba(212,162,74,.035)}
+  .runtime-cell.escalate{border-left:2px solid var(--gold)}
+  .runtime-cell-name{
+    font-family:'Inter Tight',sans-serif;font-weight:600;font-size:16px;
+    letter-spacing:-.005em;color:var(--paper);margin:0 0 10px;line-height:1.22;
+  }
+  .runtime-cell-body{
+    font-family:'IBM Plex Mono',monospace;font-size:11.5px;line-height:1.7;
+    letter-spacing:.005em;color:var(--muted);margin:0;
+  }
+  .runtime-tail{
+    font-family:'Inter',sans-serif;font-size:17px;line-height:1.55;
+    color:var(--muted);max-width:66ch;margin:0;
+  }
+  .runtime-tail b{color:var(--paper);font-weight:500}
+
   /* ═══ USE CASE 01 · editorial treatment ═══ */
   .case01{
     position:relative;
@@ -461,6 +513,13 @@
     .case01-machinery-grid article:nth-child(2){border-right:none}
     .case01-machinery-grid article:nth-child(1),
     .case01-machinery-grid article:nth-child(2){border-bottom:1px solid var(--line)}
+    .runtime-layer-ingest .runtime-layer-body{grid-template-columns:1fr 1fr}
+  }
+  @media(max-width:880px){
+    .runtime-layer{grid-template-columns:1fr;gap:18px;padding:24px 26px 26px}
+    .runtime-layer-label .lr-flow{margin-top:4px}
+    .runtime-layer-decide .runtime-layer-body,
+    .runtime-layer-act .runtime-layer-body{grid-template-columns:1fr}
   }
   @media(max-width:760px){
     /* Phones · only brand + CTA in the header; nav links accessible via /about, /contact, /approach pages.
@@ -722,6 +781,16 @@
      Goals: tighter vertical rhythm, no word-on-word overlap in hero log,
      and stop the case01 timeline from squishing all text to the left.
      ═════════════════════════════════════════════════════════════ */
+  @media(max-width:760px){
+    /* RUNTIME · stack cells single-column on phones */
+    .runtime-layer{padding:22px 18px 24px;gap:14px}
+    .runtime-layer-ingest .runtime-layer-body{grid-template-columns:1fr}
+    .runtime-cell{padding:16px 16px 18px}
+    .runtime-cell-name{font-size:14.5px}
+    .runtime-cell-body{font-size:11.5px;line-height:1.65}
+    .runtime-intro{font-size:15.5px;margin-bottom:32px}
+    .runtime-tail{font-size:15px}
+  }
   @media(max-width:760px){
 
     /* ── HERO · tighter, log calmed down ── */
@@ -1161,10 +1230,140 @@
   </div>
 </section>
 
-<!-- USE CASES · 04 -->
+<!-- RUNTIME · 04 · Hermes architecture strip -->
+<section class="section" id="runtime">
+  <div class="section-head">
+    <span class="section-num">04 · RUNTIME</span>
+    <div>
+      <p class="section-eyebrow">What runs inside the operations layer</p>
+      <h2 class="section-heading">Hermes is the runtime.<br>Here is <span class="outline-gold">what it does.</span></h2>
+    </div>
+    <p class="section-side">Operational pipeline.<br>Built, not pitched.</p>
+  </div>
+
+  <p class="runtime-intro">
+    Hermes runs inside the regulated programme. It <b>ingests</b> operational signals,
+    <b>decides</b> under policy, <b>executes</b> within control, and <b>escalates</b>
+    to humans when the threshold is met. Every decision logged. Every action reversible
+    under sign-off.
+  </p>
+
+  <div class="runtime-arch">
+
+    <!-- Layer 01 · Ingest -->
+    <div class="runtime-layer runtime-layer-ingest">
+      <div class="runtime-layer-label">
+        <span class="lr-num">01</span>
+        <span class="lr-name">Ingest</span>
+        <span class="lr-arrow">→</span>
+        <span class="lr-flow">polled continuously</span>
+      </div>
+      <div class="runtime-layer-body">
+        <article class="runtime-cell">
+          <h3 class="runtime-cell-name">Custody attestations</h3>
+          <p class="runtime-cell-body">From the custodian banks holding fiat reserves. Pulled on schedule, reconciled against on-chain supply.</p>
+        </article>
+        <article class="runtime-cell">
+          <h3 class="runtime-cell-name">On-chain reserves</h3>
+          <p class="runtime-cell-body">Snapshots per chain. Bridged supply, mint, burn, settlement state.</p>
+        </article>
+        <article class="runtime-cell">
+          <h3 class="runtime-cell-name">Sanctions and KYT</h3>
+          <p class="runtime-cell-body">OFAC and equivalent lists polled continuously. Inbound address screening before settlement.</p>
+        </article>
+        <article class="runtime-cell">
+          <h3 class="runtime-cell-name">Redemption queue</h3>
+          <p class="runtime-cell-body">In-flight, queued, scheduled outflows. Treasury operational status. Custodian sweep windows.</p>
+        </article>
+      </div>
+    </div>
+
+    <!-- Layer 02 · Decide -->
+    <div class="runtime-layer runtime-layer-decide">
+      <div class="runtime-layer-label">
+        <span class="lr-num">02</span>
+        <span class="lr-name">Decide</span>
+        <span class="lr-arrow">→</span>
+        <span class="lr-flow">correlate, score, draft evidence</span>
+      </div>
+      <div class="runtime-layer-body">
+        <article class="runtime-cell core">
+          <h3 class="runtime-cell-name">Decision core</h3>
+          <p class="runtime-cell-body">
+            Correlates signals across surfaces. Applies the active policy version.
+            Scores anomalies under confidence weighting. Drafts the evidence packet
+            a regulator can read.
+          </p>
+        </article>
+        <article class="runtime-cell">
+          <h3 class="runtime-cell-name">Policy engine</h3>
+          <p class="runtime-cell-body">
+            Versioned policies. Thresholds, escalation paths, override authority,
+            retention rules. Every policy change is itself an auditable event.
+          </p>
+        </article>
+      </div>
+    </div>
+
+    <!-- Layer 03 · Execute / Escalate -->
+    <div class="runtime-layer runtime-layer-act">
+      <div class="runtime-layer-label">
+        <span class="lr-num">03</span>
+        <span class="lr-name">Execute · Escalate</span>
+        <span class="lr-arrow">→</span>
+        <span class="lr-flow">act under control, hand to humans</span>
+      </div>
+      <div class="runtime-layer-body">
+        <article class="runtime-cell">
+          <h3 class="runtime-cell-name">Execute under control</h3>
+          <p class="runtime-cell-body">
+            Notify treasury. Hold low-priority outflows pending sign-off. Draft the
+            regulator-ready packet. Every action logged with rationale and policy version.
+          </p>
+        </article>
+        <article class="runtime-cell escalate">
+          <h3 class="runtime-cell-name">Human escalation</h3>
+          <p class="runtime-cell-body">
+            Routes decisions requiring sign-off. Notifies treasury lead, MLRO, head of
+            compliance, or CFO based on policy. Full context attached.
+          </p>
+        </article>
+      </div>
+    </div>
+
+    <!-- Layer 04 · Audit ledger -->
+    <div class="runtime-layer runtime-layer-audit">
+      <div class="runtime-layer-label">
+        <span class="lr-num">04</span>
+        <span class="lr-name">Audit ledger</span>
+        <span class="lr-arrow">→</span>
+        <span class="lr-flow">append-only, regulator-grade</span>
+      </div>
+      <div class="runtime-layer-body">
+        <article class="runtime-cell">
+          <h3 class="runtime-cell-name">Every signal. Every decision. Every action. Every override.</h3>
+          <p class="runtime-cell-body">
+            Append-only. Retention per regulator requirements. Each entry tied to the
+            policy version that governed it. Any action reversible under documented sign-off.
+          </p>
+        </article>
+      </div>
+    </div>
+
+  </div>
+
+  <p class="runtime-tail">
+    Hermes does not replace the team. It runs the surfaces the team cannot watch alone.
+    <b>Reserves through the night. Redemptions across timezones. Sanctions at the moment
+    they hit. Reconciliation across chains and bank rails.</b> When policy requires a
+    human, Hermes hands over with full context.
+  </p>
+</section>
+
+<!-- USE CASES · 05 -->
 <section class="section" id="use-cases">
   <div class="section-head">
-    <span class="section-num">04 · USE CASES</span>
+    <span class="section-num">05 · USE CASES</span>
     <div>
       <p class="section-eyebrow">A reserves event, walked through</p>
       <h2 class="section-heading">What always-on <span class="accent">looks like.</span></h2>
@@ -1341,7 +1540,7 @@
 
 <!-- CONTACT -->
 <section class="contact-block">
-  <p class="section-eyebrow" style="margin-bottom:18px">05 · INTAKE</p>
+  <p class="section-eyebrow" style="margin-bottom:18px">06 · INTAKE</p>
   <h2 class="contact-line">Email a short note about the stablecoin operation you'd want watched.</h2>
   <a class="contact-email" href="mailto:contact@rayleighstark.com">contact@rayleighstark.com</a>
 </section>
