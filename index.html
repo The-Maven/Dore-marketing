@@ -922,7 +922,11 @@
     h1.hero-h{font-size:clamp(40px,12vw,72px);line-height:1;letter-spacing:-.035em;margin:0 0 22px}
     .hero-sub{font-size:15px;line-height:1.5;margin:0 0 24px}
     .hero-cta{font-size:14px;padding:14px 22px}
-    .hero-mark{margin-top:28px;font-size:10px}
+    /* Drop inline-flex on phones — the gap + flex-item split was wrapping
+       "Hermes" awkwardly to its own column. Block layout lets the whole
+       byline flow as natural inline text and wrap cleanly. */
+    .hero-mark{display:block;margin-top:28px;font-size:10px;line-height:1.7;max-width:44ch}
+    .hero-mark::before{vertical-align:middle;margin-right:10px;margin-bottom:2px;width:24px}
 
     /* Section rhythm · tighter top-to-bottom */
     .section{padding:40px 16px}
