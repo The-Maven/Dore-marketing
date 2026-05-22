@@ -1,0 +1,615 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Rayleigh Stark · Always-on monitoring for institutional books</title>
+<meta name="description" content="Always-on agents for institutional asset operations. Risk, exposures, news, operational events. Policy-bound escalation. Built on Wall Street." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@300;400;500;600&family=Inter+Tight:wght@500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#0A0B0E;
+    --ink-2:#111317;
+    --line:rgba(255,255,255,.07);
+    --line-strong:rgba(255,255,255,.16);
+    --paper:#EFEAE0;
+    --muted:rgba(239,234,224,.55);
+    --muted-2:rgba(239,234,224,.38);
+    --accent:#38bdf8;
+    --green:#7FE0A6;
+    --amber:#F7B955;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0;background:var(--ink);color:var(--paper);font-family:'Inter',sans-serif;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+  body{min-height:100vh;overflow-x:hidden}
+  ::selection{background:var(--accent);color:var(--ink)}
+  a{color:inherit}
+
+  body::before{
+    content:'';position:fixed;inset:0;pointer-events:none;z-index:1;opacity:.45;
+    background-image:
+      linear-gradient(rgba(255,255,255,.022) 1px,transparent 1px),
+      linear-gradient(90deg,rgba(255,255,255,.022) 1px,transparent 1px);
+    background-size:56px 56px;
+  }
+
+  /* STATUS BAR */
+  .statusbar{
+    position:sticky;top:0;z-index:50;
+    border-bottom:1px solid var(--line);
+    background:rgba(10,11,14,.88);backdrop-filter:saturate(140%) blur(10px);
+    font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.1em;
+    text-transform:uppercase;color:var(--muted);
+  }
+  .statusbar-inner{display:flex;align-items:center;justify-content:space-between;padding:10px 24px;gap:24px}
+  .status-cluster{display:flex;gap:18px;align-items:center}
+  .status-pill{display:inline-flex;align-items:center;gap:8px}
+  .dot{width:7px;height:7px;border-radius:50%;background:var(--green);box-shadow:0 0 8px rgba(127,224,166,.7);display:inline-block}
+
+  /* NAV */
+  .nav{
+    position:relative;z-index:5;border-bottom:1px solid var(--line);
+    display:flex;align-items:center;justify-content:space-between;padding:18px 24px;
+  }
+  .brand{font-family:'Inter Tight',sans-serif;font-weight:700;font-size:15px;letter-spacing:-.01em;display:flex;align-items:center;gap:10px;color:var(--paper);text-decoration:none}
+  .brand-mark{width:24px;height:24px;border:1.5px solid var(--paper);display:inline-flex;align-items:center;justify-content:center;font-family:'IBM Plex Mono',monospace;font-size:10px;font-weight:600}
+  .nav-right{display:flex;gap:22px;align-items:center}
+  .nav-link{font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);text-decoration:none}
+  .nav-link:hover{color:var(--paper)}
+  .nav-cta{font-family:'IBM Plex Mono',monospace;font-size:12px;text-transform:uppercase;letter-spacing:.06em;background:var(--accent);color:var(--ink);text-decoration:none;padding:10px 14px;border:1px solid var(--accent);transition:transform .15s,box-shadow .15s;font-weight:600}
+  .nav-cta:hover{transform:translate(-1px,-1px);box-shadow:2px 2px 0 var(--paper)}
+
+  /* HERO */
+  .hero{padding:140px 24px 120px;max-width:1440px;margin:0 auto;position:relative;z-index:2}
+  h1.hero-h{
+    font-family:'Inter Tight',sans-serif;font-weight:700;
+    font-size:clamp(48px,7.4vw,116px);line-height:.95;letter-spacing:-.038em;
+    margin:0 0 36px;color:var(--paper);max-width:22ch;
+  }
+  h1.hero-h .accent{color:var(--accent)}
+  .hero-sub{
+    font-family:'Inter',sans-serif;font-size:19px;line-height:1.55;color:var(--muted);
+    max-width:64ch;margin:0 0 44px;
+  }
+  .hero-sub b{color:var(--paper);font-weight:500}
+  .hero-cta{
+    background:var(--accent);color:var(--ink);
+    font-family:'Inter Tight',sans-serif;font-weight:600;font-size:15px;
+    padding:18px 26px;text-decoration:none;
+    display:inline-flex;align-items:center;gap:12px;
+    border:1px solid var(--accent);
+    transition:transform .15s,box-shadow .15s;
+  }
+  .hero-cta:hover{transform:translate(-2px,-2px);box-shadow:4px 4px 0 var(--paper)}
+  .hero-mark{
+    margin-top:64px;
+    font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.16em;
+    color:var(--muted-2);text-transform:uppercase;
+    display:inline-flex;align-items:center;gap:12px;
+  }
+  .hero-mark::before{content:'';width:32px;height:1px;background:var(--line-strong);display:inline-block}
+
+  /* SECTION SHELLS */
+  .section{padding:96px 24px;border-bottom:1px solid var(--line);max-width:1440px;margin:0 auto;position:relative;z-index:2}
+  .section-head{display:grid;grid-template-columns:auto 1fr auto;gap:40px;padding-bottom:36px;margin-bottom:44px;border-bottom:1px solid var(--line);align-items:end}
+  .section-num{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);border:1px solid var(--accent);padding:8px 12px;align-self:start}
+  .section-eyebrow{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-bottom:14px}
+  .section-heading{font-family:'Inter Tight',sans-serif;font-weight:700;font-size:clamp(34px,4.6vw,68px);line-height:1;letter-spacing:-.028em;margin:0;color:var(--paper);max-width:22ch}
+  .section-heading .accent{color:var(--accent)}
+  .section-side{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.06em;color:var(--muted);text-align:right;text-transform:uppercase;line-height:1.7}
+
+  /* OFFERS */
+  .offers{display:grid;grid-template-columns:1fr 1fr;gap:0;border:1px solid var(--line-strong)}
+  .offer{padding:40px 36px 44px;border-right:1px solid var(--line);background:linear-gradient(180deg,rgba(255,255,255,.014),rgba(255,255,255,0));position:relative}
+  .offer:last-child{border-right:none}
+  .offer::before{content:'';position:absolute;left:36px;top:0;width:48px;height:2px;background:var(--accent)}
+  .offer-meta{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);margin-top:24px;margin-bottom:18px}
+  .offer-name{font-family:'Inter Tight',sans-serif;font-weight:700;font-size:30px;letter-spacing:-.02em;color:var(--paper);margin:0 0 8px;line-height:1.1}
+  .offer-duration{font-family:'IBM Plex Mono',monospace;font-size:13px;letter-spacing:.06em;color:var(--accent);margin-bottom:22px}
+  .offer p{font-size:15.5px;line-height:1.6;color:var(--muted);margin:0 0 16px}
+  .offer .terms{font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--paper);margin-top:24px;padding-top:18px;border-top:1px dashed var(--line)}
+
+  /* STANDARD (four pillars) */
+  .pillars{display:grid;grid-template-columns:repeat(4,1fr);gap:0;border:1px solid var(--line-strong)}
+  .pillar{padding:32px 28px 36px;border-right:1px solid var(--line);position:relative;background:linear-gradient(180deg,rgba(255,255,255,.014),rgba(255,255,255,0))}
+  .pillar:last-child{border-right:none}
+  .pillar::before{content:'';position:absolute;left:28px;top:0;width:36px;height:2px;background:var(--accent)}
+  .pillar-label{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.16em;color:var(--muted);text-transform:uppercase;margin-top:22px;margin-bottom:14px}
+  .pillar-h{font-family:'Inter Tight',sans-serif;font-weight:600;font-size:22px;letter-spacing:-.015em;color:var(--paper);margin:0 0 12px;line-height:1.15}
+  .pillar-body{font-size:14.5px;line-height:1.55;color:var(--muted);margin:0}
+
+  /* CREDIBILITY */
+  .cred-block{
+    border:1px solid var(--line-strong);padding:56px 56px;
+    background:linear-gradient(180deg,rgba(255,255,255,.018),rgba(255,255,255,0));
+    max-width:1180px;
+  }
+  .cred-body{
+    font-family:'Inter Tight',sans-serif;font-weight:400;
+    font-size:24px;line-height:1.45;letter-spacing:-.01em;
+    color:var(--paper);margin:0;
+  }
+  .cred-body b{color:var(--accent);font-weight:500}
+
+  /* SYSTEM MAP */
+  .sysmap{
+    border:1px solid var(--line-strong);padding:36px;
+    background:rgba(255,255,255,.014);
+  }
+  .sysmap-head{
+    display:flex;justify-content:space-between;align-items:center;
+    padding-bottom:18px;border-bottom:1px dashed var(--line);margin-bottom:32px;
+    font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.1em;
+    text-transform:uppercase;color:var(--muted);
+  }
+  .sysmap-title{color:var(--paper);font-weight:500}
+  .sysmap-status{display:inline-flex;align-items:center;gap:8px;color:var(--green)}
+  .sysmap-status::before{content:'';width:7px;height:7px;border-radius:50%;background:var(--green);box-shadow:0 0 8px rgba(127,224,166,.6);animation:pulse 1.6s infinite}
+  @keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
+
+  .flow{
+    display:grid;grid-template-columns:1fr auto 1fr auto 1fr;gap:0;align-items:stretch;
+    margin-bottom:32px;
+  }
+  .col{
+    border:1px solid var(--line-strong);padding:22px 22px 24px;
+    font-family:'IBM Plex Mono',monospace;font-size:13px;
+    background:rgba(255,255,255,.018);
+  }
+  .col-head{
+    font-size:10.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--accent);
+    border-bottom:1px solid var(--line);padding-bottom:10px;margin-bottom:14px;
+    display:flex;justify-content:space-between;align-items:center;
+  }
+  .col-head .stage{color:var(--muted-2)}
+  .col-items{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:8px}
+  .col-items li{
+    color:var(--paper);display:grid;grid-template-columns:auto 1fr;gap:10px;align-items:start;
+    font-size:13px;line-height:1.4;
+  }
+  .col-items li::before{content:'›';color:var(--accent);font-weight:600}
+  .col-items li small{display:block;color:var(--muted);font-size:11px;margin-top:2px;letter-spacing:.04em}
+
+  .flow-arrow{
+    display:flex;align-items:center;justify-content:center;padding:0 12px;
+    color:var(--accent);font-family:'IBM Plex Mono',monospace;font-size:18px;font-weight:600;
+  }
+
+  .control-strip{
+    margin-top:8px;border:1px solid var(--line-strong);
+    padding:18px 22px;display:grid;grid-template-columns:auto 1fr;gap:22px;align-items:center;
+    background:linear-gradient(180deg,rgba(56,189,248,.04),rgba(255,255,255,0));
+  }
+  .control-strip .label{
+    font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:.18em;
+    color:var(--accent);text-transform:uppercase;border-right:1px solid var(--line-strong);padding-right:22px;
+  }
+  .control-strip .items{
+    font-family:'IBM Plex Mono',monospace;font-size:12.5px;color:var(--paper);
+    display:flex;flex-wrap:wrap;gap:22px;
+  }
+  .control-strip .items span{display:inline-flex;align-items:center;gap:6px}
+  .control-strip .items span::before{content:'·';color:var(--muted-2)}
+
+  /* USE CASES (replaces code blocks) */
+  .uc-lead{
+    margin-top:20px;padding:22px 24px;
+    border:1px solid var(--line-strong);
+    background:linear-gradient(180deg,rgba(56,189,248,.04),rgba(255,255,255,0));
+    display:grid;grid-template-columns:auto 1fr 1fr 1fr;gap:32px;align-items:start;
+  }
+  .uc-lead-tag{
+    font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:.16em;
+    color:var(--accent);text-transform:uppercase;border-left:2px solid var(--accent);padding-left:12px;
+    align-self:stretch;display:flex;align-items:flex-start;padding-top:2px;
+  }
+  .uc-lead-col h4{
+    font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:.16em;
+    text-transform:uppercase;color:var(--muted);margin:0 0 8px;font-weight:500;
+  }
+  .uc-lead-col p{
+    font-family:'Inter',sans-serif;font-size:13.5px;line-height:1.5;color:var(--paper);
+    margin:0;
+  }
+  .uc-lead-col.avoided p{color:var(--accent)}
+
+  .uc-grid{
+    display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:32px;
+  }
+  .uc-card{
+    border:1px solid var(--line-strong);
+    background:linear-gradient(180deg,rgba(255,255,255,.014),rgba(255,255,255,0));
+    padding:24px 22px 26px;display:flex;flex-direction:column;gap:0;position:relative;
+    transition:border-color .2s,background .2s;
+  }
+  .uc-card:hover{border-color:var(--accent);background:rgba(56,189,248,.04)}
+  .uc-card::before{content:'';position:absolute;left:22px;top:0;width:32px;height:2px;background:var(--accent)}
+  .uc-meta{
+    display:flex;justify-content:space-between;align-items:center;
+    font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:.14em;
+    text-transform:uppercase;color:var(--muted);margin-top:18px;margin-bottom:12px;
+  }
+  .uc-meta .id{color:var(--accent);font-weight:600}
+  .uc-title{
+    font-family:'Inter Tight',sans-serif;font-weight:600;font-size:19px;letter-spacing:-.015em;
+    color:var(--paper);margin:0 0 18px;line-height:1.2;
+  }
+  .uc-row{display:grid;grid-template-columns:auto 1fr;gap:12px;padding:10px 0;border-top:1px dashed var(--line)}
+  .uc-row:first-of-type{border-top:none;padding-top:0}
+  .uc-row .lbl{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);padding-top:2px;min-width:64px}
+  .uc-row .val{font-size:13px;line-height:1.5;color:var(--paper)}
+  .uc-row.avoided .val{color:var(--accent)}
+  .uc-status{
+    margin-top:18px;padding-top:14px;border-top:1px solid var(--line);
+    font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.1em;
+    text-transform:uppercase;color:var(--accent);
+    display:flex;justify-content:space-between;align-items:center;
+  }
+  .uc-status .surface{color:var(--muted)}
+
+  /* CONTACT */
+  .contact-block{
+    padding:120px 24px;border-bottom:1px solid var(--line);
+    max-width:1440px;margin:0 auto;position:relative;z-index:2;
+    text-align:left;
+  }
+  .contact-line{
+    font-family:'Inter Tight',sans-serif;font-weight:500;
+    font-size:clamp(28px,3.6vw,48px);line-height:1.1;letter-spacing:-.02em;
+    color:var(--paper);margin:0 0 28px;max-width:24ch;
+  }
+  .contact-email{
+    display:inline-block;font-family:'IBM Plex Mono',monospace;
+    font-size:22px;letter-spacing:.02em;color:var(--accent);text-decoration:none;
+    border-bottom:1px solid var(--accent);padding-bottom:4px;
+  }
+  .contact-email:hover{color:var(--paper);border-bottom-color:var(--paper)}
+
+  /* FOOTER */
+  footer.foot{padding:28px 24px;color:var(--muted);position:relative;z-index:2;border-top:1px solid var(--line)}
+  .foot-strip{max-width:1440px;margin:0 auto;display:flex;justify-content:space-between;font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+  .foot-legal{max-width:1440px;margin:18px auto 0;padding-top:14px;border-top:1px dashed var(--line);display:flex;justify-content:space-between;align-items:center;font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.08em;color:var(--muted-2);text-transform:none}
+  .foot-legal a{color:var(--muted);text-decoration:none;border-bottom:1px solid var(--line-strong);padding-bottom:1px;margin-right:18px}
+  .foot-legal a:hover{color:var(--paper);border-bottom-color:var(--paper)}
+  .foot-legal-links{display:flex;align-items:center;gap:18px}
+  @media(max-width:760px){
+    .foot-legal{flex-direction:column;gap:10px;align-items:flex-start}
+  }
+
+  /* RESPONSIVE */
+  @media(max-width:1024px){
+    .offers{grid-template-columns:1fr}
+    .offer{border-right:none;border-bottom:1px solid var(--line)}
+    .offer:last-child{border-bottom:none}
+    .pillars{grid-template-columns:1fr 1fr}
+    .pillar:nth-child(2){border-right:none}
+    .pillar:nth-child(1),.pillar:nth-child(2){border-bottom:1px solid var(--line)}
+    .flow{grid-template-columns:1fr}
+    .flow-arrow{padding:8px 0;transform:rotate(90deg)}
+    .uc-lead{grid-template-columns:1fr;gap:18px}
+    .uc-lead-tag{border-left:none;border-top:2px solid var(--accent);padding-left:0;padding-top:8px}
+    .uc-grid{grid-template-columns:1fr 1fr}
+  }
+  @media(max-width:760px){
+    .statusbar-inner{flex-wrap:wrap;gap:10px;padding:8px 16px}
+    .status-cluster:last-child{display:none}
+    .nav{padding:14px 16px;gap:12px}
+    .nav-link{display:none}
+    .nav-cta{font-size:11px;padding:8px 12px}
+    .hero{padding:64px 16px 72px}
+    h1.hero-h{font-size:clamp(40px,11vw,68px)}
+    .section{padding:64px 16px}
+    .section-head{grid-template-columns:1fr;gap:18px;padding-bottom:24px;margin-bottom:28px}
+    .pillars{grid-template-columns:1fr}
+    .pillar{border-right:none;border-bottom:1px solid var(--line)}
+    .pillar:last-child{border-bottom:none}
+    .uc-grid{grid-template-columns:1fr}
+    .cred-block{padding:32px 22px}
+    .cred-body{font-size:18px}
+    .sysmap{padding:20px}
+    .contact-block{padding:64px 16px}
+    .foot-strip{flex-direction:column;gap:10px;align-items:flex-start}
+  }
+
+  /* PRINT */
+  @media print{
+    @page{size:1440px 9000px;margin:0}
+    html,body{width:1440px}
+    body::before{display:none}
+    .statusbar{position:relative}
+  }
+</style>
+</head>
+<body>
+
+<header class="statusbar">
+  <div class="statusbar-inner">
+    <div class="status-cluster">
+      <span class="status-pill"><span class="dot"></span> SYS / OPERATIONAL</span>
+      <span class="status-pill">London / New York</span>
+      <span class="status-pill">OPERATOR-LED</span>
+    </div>
+    <div class="status-cluster">
+      <span class="status-pill">v26.05</span>
+    </div>
+  </div>
+</header>
+
+<nav class="nav">
+  <a class="brand" href="v3-home.html">
+    <span class="brand-mark">RS</span>
+    Rayleigh Stark
+  </a>
+  <div class="nav-right">
+    <a class="nav-link" href="v3-approach.html">Approach</a>
+    <a class="nav-link" href="v3-about.html">About</a>
+    <a class="nav-link" href="v3-contact.html">Contact</a>
+    <a class="nav-cta" href="mailto:contact@rayleighstark.com?subject=Put an agent on the book">Put an agent on the book →</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <h1 class="hero-h">
+    The desk doesn't sleep.<br>
+    Neither do <span class="accent">our agents.</span>
+  </h1>
+  <p class="hero-sub">
+    Always-on monitoring for institutional books. Risk, exposures, news, operational events.
+    <b>Policy-bound escalation when something needs human eyes.</b> Built on Wall Street.
+  </p>
+  <a class="hero-cta" href="mailto:contact@rayleighstark.com?subject=Put an agent on the book">Put an agent on the book →</a>
+  <div class="hero-mark">Always-on agents for institutional asset operations</div>
+</section>
+
+<!-- TWO OFFERS -->
+<section class="section">
+  <div class="section-head">
+    <span class="section-num">§ 01 · ENGAGEMENT</span>
+    <div>
+      <p class="section-eyebrow">Two ways in</p>
+      <h2 class="section-heading">Pick the <span class="accent">shape</span> of the work.</h2>
+    </div>
+    <p class="section-side">Fixed scope.<br>Fixed fee.</p>
+  </div>
+
+  <div class="offers">
+    <article class="offer">
+      <div class="offer-meta">§ 01 · DIAGNOSTIC</div>
+      <h3 class="offer-name">Monitoring Diagnostic</h3>
+      <div class="offer-duration">Two to three weeks</div>
+      <p>We assess what your institutional book needs watched, what signals are missing, where escalation gaps live, and which surfaces are ready for agent delivery.</p>
+      <p>Output is a prioritised monitoring architecture with measurable targets in coverage, signal-to-escalation time, and false positive rate.</p>
+      <p class="terms">Fixed scope, fixed fee.</p>
+    </article>
+
+    <article class="offer">
+      <div class="offer-meta">§ 02 · BUILD</div>
+      <h3 class="offer-name">First Production Monitoring Agent</h3>
+      <div class="offer-duration">Six to eight weeks</div>
+      <p>We deploy one production-ready monitoring agent for one specific institutional surface: position monitoring, reserves, reconciliation, regulatory events, or exposure breaches.</p>
+      <p>Includes news ingestion, error system integration, policy-bound escalation logic, audit trail, and measurable improvement in coverage or response time.</p>
+      <p class="terms">Fixed scope, fixed fee.</p>
+    </article>
+  </div>
+</section>
+
+<!-- EXECUTION STANDARD -->
+<section class="section">
+  <div class="section-head">
+    <span class="section-num">§ 02 · STANDARD</span>
+    <div>
+      <p class="section-eyebrow">What the work delivers</p>
+      <h2 class="section-heading">What changes when agents <span class="accent">watch the book.</span></h2>
+    </div>
+    <p class="section-side">Coverage. Speed.<br>Control. Clarity.</p>
+  </div>
+
+  <div class="pillars">
+    <article class="pillar">
+      <div class="pillar-label">§ 01</div>
+      <h3 class="pillar-h">Coverage</h3>
+      <p class="pillar-body">Continuous monitoring across the surfaces your team can't watch alone.</p>
+    </article>
+    <article class="pillar">
+      <div class="pillar-label">§ 02</div>
+      <h3 class="pillar-h">Speed</h3>
+      <p class="pillar-body">Signal to escalation in minutes, not the next morning.</p>
+    </article>
+    <article class="pillar">
+      <div class="pillar-label">§ 03</div>
+      <h3 class="pillar-h">Control</h3>
+      <p class="pillar-body">Policy-bound escalation with audit trails ready for regulator review.</p>
+    </article>
+    <article class="pillar">
+      <div class="pillar-label">§ 04</div>
+      <h3 class="pillar-h">Clarity</h3>
+      <p class="pillar-body">Leadership visibility across exposures, events, and operational risk.</p>
+    </article>
+  </div>
+</section>
+
+<!-- CREDIBILITY -->
+<section class="section">
+  <div class="section-head">
+    <span class="section-num">§ 03 · OPERATOR</span>
+    <div>
+      <p class="section-eyebrow">Who builds the agent</p>
+      <h2 class="section-heading">Operating discipline, <span class="accent">brought across.</span></h2>
+    </div>
+    <p class="section-side">Built on Wall Street.<br>Now applied here.</p>
+  </div>
+
+  <div class="cred-block">
+    <p class="cred-body">
+      <b>Eight years inside a global investment bank,</b> building LLM analytics platforms,
+      decision systems, and monitoring infrastructure for institutional teams. Direct work
+      across high-value payments, transaction monitoring, and operational risk. Now applying
+      that operating discipline to always-on agents inside regulated financial institutions.
+    </p>
+    <a href="v3-about.html" style="display:inline-flex;align-items:center;gap:8px;margin-top:28px;font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--accent);text-decoration:none;border-bottom:1px solid var(--accent);padding-bottom:3px">About the operator →</a>
+  </div>
+</section>
+
+<!-- SYSTEM MAP / USE CASES -->
+<section class="section">
+  <div class="section-head">
+    <span class="section-num">§ 04 · USE CASES</span>
+    <div>
+      <p class="section-eyebrow">What the agents catch</p>
+      <h2 class="section-heading">Four signals. <span class="accent">One in full. Three more.</span></h2>
+    </div>
+    <p class="section-side">Same machinery.<br>Different surfaces.</p>
+  </div>
+
+  <div class="sysmap">
+    <div class="sysmap-head">
+      <span class="sysmap-title">use case 01 · overnight position monitoring, news-correlated</span>
+      <span class="sysmap-status">live · 03:47 UTC</span>
+    </div>
+
+    <div class="flow">
+      <div class="col">
+        <div class="col-head"><span>Signals</span><span class="stage">→</span></div>
+        <ul class="col-items">
+          <li>market data <small>marks, vol, OIS, FX</small></li>
+          <li>news feeds <small>Reuters, BBG, primary sources</small></li>
+          <li>internal system events <small>OMS, EMS, position store</small></li>
+          <li>exception flags <small>limit utilisation, soft breach</small></li>
+          <li>error logs <small>failed messages, recon mismatches</small></li>
+          <li>settlement events <small>cleared, failed, pending</small></li>
+        </ul>
+      </div>
+
+      <div class="flow-arrow">→</div>
+
+      <div class="col">
+        <div class="col-head"><span>Decision core</span><span class="stage">→</span></div>
+        <ul class="col-items">
+          <li>entity resolution <small>news → ticker → book line</small></li>
+          <li>signal correlation <small>across news, market, position</small></li>
+          <li>policy orchestration <small>thresholds, windows, suppression</small></li>
+          <li>LLM narrative review <small>reads 50 items, surfaces 3 that matter</small></li>
+          <li>anomaly scoring <small>vs historical mark behaviour</small></li>
+          <li>human approval gates <small>fire above hard limit, out of hours</small></li>
+        </ul>
+      </div>
+
+      <div class="flow-arrow">→</div>
+
+      <div class="col">
+        <div class="col-head"><span>Execution</span><span class="stage">·</span></div>
+        <ul class="col-items">
+          <li>action <small>notify / escalate / suppress / route</small></li>
+          <li>audit trail <small>written to system of record</small></li>
+          <li>outcome telemetry <small>acted on, false positive, time-to-ack</small></li>
+          <li>evidence packet <small>regulator-ready bundle</small></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="control-strip">
+      <span class="label">Control surface</span>
+      <div class="items">
+        <span>policy versioning</span>
+        <span>escalation paths</span>
+        <span>evidence retention (BCBS 239)</span>
+        <span>kill switches (head of risk, ops head)</span>
+      </div>
+    </div>
+
+    <!-- lead use case summary, beneath the diagram -->
+    <div class="uc-lead">
+      <span class="uc-lead-tag">Use case 01 · in full</span>
+      <div class="uc-lead-col">
+        <h4>Trigger</h4>
+        <p>BoE statement at 03:47 UTC. Severity 4. News entity resolves to GBP rates positions on the book.</p>
+      </div>
+      <div class="uc-lead-col">
+        <h4>What the agent does</h4>
+        <p>Reads 50 wire items, surfaces the 3 that matter, scores mark behaviour against history, satisfies human gate by the on-call PM, builds the evidence packet.</p>
+      </div>
+      <div class="uc-lead-col avoided">
+        <h4>What gets avoided</h4>
+        <p>The PM finding out from a Bloomberg ping at 8am, with the position already underwater.</p>
+      </div>
+    </div>
+
+    <!-- three more use case cards -->
+    <div class="uc-grid">
+
+      <article class="uc-card">
+        <div class="uc-meta">
+          <span class="id">USE CASE · 02</span>
+          <span>Stablecoin reserves</span>
+        </div>
+        <h3 class="uc-title">Reserve composition drift before the redemption window opens.</h3>
+        <div class="uc-row"><span class="lbl">Trigger</span><span class="val">Redemption volume +2.5σ. Composition drift on a held instrument breaches policy band.</span></div>
+        <div class="uc-row"><span class="lbl">Agent</span><span class="val">Correlates redemption pace with reserve quality. Scores anomaly. Human-gates. Notifies treasury and MLRO with a pre-built evidence pack.</span></div>
+        <div class="uc-row avoided"><span class="lbl">Avoided</span><span class="val">Reserve mismatch reaches social media before it reaches the ops desk.</span></div>
+        <div class="uc-status">
+          <span>GATED → ESCALATED</span>
+          <span class="surface">MiCA · FCA</span>
+        </div>
+      </article>
+
+      <article class="uc-card">
+        <div class="uc-meta">
+          <span class="id">USE CASE · 03</span>
+          <span>Decision system reliability</span>
+        </div>
+        <h3 class="uc-title">Production decision model drifts past SLO under live load.</h3>
+        <div class="uc-row"><span class="lbl">Trigger</span><span class="val">Model output drifts +12% above baseline. Fallback gate is armed. Regulator inspection due next quarter.</span></div>
+        <div class="uc-row"><span class="lbl">Agent</span><span class="val">Monitors decision SLOs, detects failure modes, triggers the documented fallback, attaches SR 11-7 evidence to the incident record.</span></div>
+        <div class="uc-row avoided"><span class="lbl">Avoided</span><span class="val">Silent fragility in a decision system the regulator opens up next quarter.</span></div>
+        <div class="uc-status">
+          <span>FALLBACK ACTIVE</span>
+          <span class="surface">SR 11-7 · NIST AI RMF</span>
+        </div>
+      </article>
+
+      <article class="uc-card">
+        <div class="uc-meta">
+          <span class="id">USE CASE · 04</span>
+          <span>High-value payments</span>
+        </div>
+        <h3 class="uc-title">Outbound wire over £10M holds in the exceptions queue, 23:14 UTC.</h3>
+        <div class="uc-row"><span class="lbl">Trigger</span><span class="val">Wire above policy threshold sits in exceptions out of hours. Sanctions and KYC checks unresolved.</span></div>
+        <div class="uc-row"><span class="lbl">Agent</span><span class="val">Prioritises the queue by financial impact. Escalates only items above policy threshold. Attaches sanctions + KYC + ledger checks per event.</span></div>
+        <div class="uc-row avoided"><span class="lbl">Avoided</span><span class="val">Out-of-hours analysts treating high-value events with the same urgency as low-value ones.</span></div>
+        <div class="uc-status">
+          <span>TRIAGED → ESCALATED</span>
+          <span class="surface">SEPA · FPS · FedNow · SWIFT</span>
+        </div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact-block">
+  <p class="section-eyebrow" style="margin-bottom:18px">§ 05 · INTAKE</p>
+  <h2 class="contact-line">Email a short note about a surface you'd want watched.</h2>
+  <a class="contact-email" href="mailto:contact@rayleighstark.com">contact@rayleighstark.com</a>
+</section>
+
+<footer class="foot">
+  <div class="foot-strip">
+    <span>Rayleigh Stark · London · New York</span>
+    <span>Always-on monitoring for institutional books</span>
+    <span><span class="dot"></span> &nbsp;SYS / OPERATIONAL</span>
+  </div>
+  <div class="foot-legal">
+    <span>Rayleigh Stark is a trading name of Premium Services &amp; Network UK Ltd.</span>
+    <span class="foot-legal-links">
+      <a href="v3-terms.html">Terms</a>
+      <span>© Rayleigh Stark · 2026</span>
+    </span>
+  </div>
+</footer>
+
+</body>
+</html>

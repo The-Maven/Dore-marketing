@@ -1,0 +1,734 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>M-004 · Payments Decision-Speed Sprint — Rayleigh Stark</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@300;400;500;600&family=Inter+Tight:wght@500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#0A0B0E;
+    --ink-2:#111317;
+    --ink-3:#16191E;
+    --line:rgba(255,255,255,.07);
+    --line-strong:rgba(255,255,255,.16);
+    --paper:#EFEAE0;
+    --muted:rgba(239,234,224,.55);
+    --muted-2:rgba(239,234,224,.38);
+    --accent:#E6FF3D;
+    --green:#7FE0A6;
+    --amber:#F7B955;
+    --red:#FF6B6B;
+    --blue:#7AC1FF;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0;background:var(--ink);color:var(--paper);font-family:'Inter',sans-serif;-webkit-font-smoothing:antialiased}
+  body{min-height:100vh;overflow-x:hidden}
+  ::selection{background:var(--accent);color:var(--ink)}
+  a{color:inherit}
+
+  body::before{
+    content:'';position:fixed;inset:0;pointer-events:none;z-index:1;opacity:.5;
+    background-image:
+      linear-gradient(rgba(255,255,255,.025) 1px,transparent 1px),
+      linear-gradient(90deg,rgba(255,255,255,.025) 1px,transparent 1px);
+    background-size:48px 48px;
+  }
+
+  /* ============ STATUS BAR ============ */
+  .statusbar{
+    position:sticky;top:0;z-index:50;
+    border-bottom:1px solid var(--line);
+    background:rgba(10,11,14,.85);backdrop-filter:saturate(140%) blur(10px);
+    font-family:'IBM Plex Mono',monospace;font-size:11px;
+    letter-spacing:.08em;text-transform:uppercase;color:var(--muted);
+  }
+  .statusbar-inner{display:flex;align-items:center;justify-content:space-between;padding:10px 24px;gap:24px}
+  .status-cluster{display:flex;gap:18px;align-items:center}
+  .status-pill{display:inline-flex;align-items:center;gap:8px}
+  .dot{width:7px;height:7px;border-radius:50%;background:var(--green);box-shadow:0 0 8px rgba(127,224,166,.7);display:inline-block}
+
+  /* ============ NAV ============ */
+  .nav{
+    position:relative;z-index:5;border-bottom:1px solid var(--line);
+    display:flex;align-items:center;justify-content:space-between;padding:18px 24px;
+  }
+  .brand{font-family:'Inter Tight',sans-serif;font-weight:700;font-size:15px;letter-spacing:-.01em;display:flex;align-items:center;gap:10px;color:var(--paper);text-decoration:none}
+  .brand-mark{width:24px;height:24px;border:1.5px solid var(--paper);display:inline-flex;align-items:center;justify-content:center;font-family:'IBM Plex Mono',monospace;font-size:10px;font-weight:600}
+  .nav-back{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);text-decoration:none;border:1px solid var(--line-strong);padding:8px 12px;transition:border-color .2s}
+  .nav-back:hover{border-color:var(--paper);color:var(--paper)}
+  .nav-cta{font-family:'IBM Plex Mono',monospace;font-size:12px;text-transform:uppercase;letter-spacing:.06em;background:var(--paper);color:var(--ink);text-decoration:none;padding:10px 16px;border:1px solid var(--paper);transition:transform .15s,background .2s,border-color .2s}
+  .nav-cta:hover{background:var(--accent);border-color:var(--accent);transform:translate(-1px,-1px);box-shadow:2px 2px 0 var(--paper)}
+
+  /* ============ BREADCRUMB ============ */
+  .crumb{
+    padding:24px 24px 0;max-width:1440px;margin:0 auto;
+    font-family:'IBM Plex Mono',monospace;font-size:11px;
+    letter-spacing:.08em;text-transform:uppercase;color:var(--muted);
+    display:flex;align-items:center;gap:8px;flex-wrap:wrap;
+  }
+  .crumb a{color:var(--muted);text-decoration:none;border-bottom:1px solid transparent}
+  .crumb a:hover{color:var(--paper);border-color:var(--line-strong)}
+  .crumb .sep{color:var(--muted-2)}
+  .crumb .current{color:var(--paper)}
+
+  /* ============ HERO ============ */
+  .hero{padding:48px 24px 64px;max-width:1440px;margin:0 auto;position:relative;z-index:2}
+  .hero-meta{
+    display:flex;align-items:center;gap:18px;margin-bottom:32px;flex-wrap:wrap;
+    font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.12em;text-transform:uppercase;
+  }
+  .hero-id{
+    background:var(--accent);color:var(--ink);padding:8px 12px;font-weight:600;letter-spacing:.08em;
+  }
+  .hero-cat{color:var(--muted);border-left:1px solid var(--line-strong);padding-left:18px}
+  .hero-status{color:var(--green);margin-left:auto;display:inline-flex;align-items:center;gap:8px}
+  .hero-status .pulse{width:7px;height:7px;border-radius:50%;background:var(--green);box-shadow:0 0 8px rgba(127,224,166,.6);animation:pulse 1.6s infinite}
+  @keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
+
+  h1.hero-h{
+    font-family:'Inter Tight',sans-serif;font-weight:700;
+    font-size:clamp(40px,6vw,84px);line-height:.98;letter-spacing:-.03em;
+    margin:0 0 28px;color:var(--paper);max-width:18ch;
+  }
+  h1.hero-h .accent{color:var(--accent)}
+
+  .hero-lede{
+    font-size:19px;line-height:1.55;color:var(--muted);max-width:64ch;margin:0 0 40px;
+  }
+  .hero-lede b{color:var(--paper);font-weight:500}
+
+  .hero-stats{
+    display:grid;grid-template-columns:repeat(4,1fr);
+    border:1px solid var(--line-strong);
+  }
+  .stat{
+    padding:22px 22px 24px;border-right:1px solid var(--line);position:relative;
+    background:linear-gradient(180deg,rgba(255,255,255,.018),rgba(255,255,255,0));
+  }
+  .stat:last-child{border-right:none}
+  .stat::before{content:'';position:absolute;left:22px;top:0;width:32px;height:2px;background:var(--accent)}
+  .stat:nth-child(2)::before{background:var(--green)}
+  .stat:nth-child(3)::before{background:var(--amber)}
+  .stat:nth-child(4)::before{background:var(--blue)}
+  .stat-label{font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:.16em;color:var(--muted);text-transform:uppercase;margin-top:18px;margin-bottom:8px}
+  .stat-value{font-family:'Inter Tight',sans-serif;font-weight:600;font-size:22px;letter-spacing:-.01em;color:var(--paper);line-height:1.15}
+  .stat-value small{display:block;font-family:'IBM Plex Mono',monospace;font-size:10.5px;font-weight:400;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;margin-top:6px}
+
+  /* ============ SECTION SHELLS ============ */
+  .section{
+    padding:88px 24px;border-bottom:1px solid var(--line);
+    max-width:1440px;margin:0 auto;position:relative;z-index:2;
+  }
+  .section-head{display:grid;grid-template-columns:auto 1fr auto;gap:40px;padding-bottom:32px;margin-bottom:40px;border-bottom:1px solid var(--line);align-items:end}
+  .section-num{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);border:1px solid var(--accent);padding:8px 12px;align-self:start}
+  .section-eyebrow{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-bottom:14px}
+  .section-heading{font-family:'Inter Tight',sans-serif;font-weight:700;font-size:clamp(28px,4vw,52px);line-height:1.02;letter-spacing:-.025em;margin:0;color:var(--paper);max-width:22ch}
+  .section-heading .accent{color:var(--accent)}
+  .section-side{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.06em;color:var(--muted);text-align:right;text-transform:uppercase;line-height:1.7}
+
+  /* ============ WHEN-THIS-FIRES ============ */
+  .symptoms{
+    display:grid;grid-template-columns:1fr 1fr;gap:0;border:1px solid var(--line-strong);
+  }
+  .sym{
+    padding:22px 24px;border-right:1px solid var(--line);border-bottom:1px solid var(--line);
+    display:grid;grid-template-columns:auto 1fr;gap:18px;align-items:start;
+  }
+  .sym:nth-child(2n){border-right:none}
+  .sym:nth-last-child(-n+2){border-bottom:none}
+  .sym-num{
+    font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--accent);
+    border:1px solid var(--accent);padding:4px 8px;letter-spacing:.06em;
+  }
+  .sym-body{font-size:15px;line-height:1.5;color:var(--paper)}
+  .sym-body b{display:block;font-weight:600;margin-bottom:4px;font-family:'Inter Tight',sans-serif;font-size:16px}
+  .sym-body span{color:var(--muted);font-size:13.5px}
+
+  /* ============ MANDATE LIST (what we take ownership of) ============ */
+  .mandate-list{
+    display:grid;grid-template-columns:1fr;gap:14px;
+  }
+  .mandate-item{
+    border:1px solid var(--line-strong);padding:22px 24px;
+    display:grid;grid-template-columns:auto 1fr;gap:24px;align-items:center;
+    background:linear-gradient(180deg,rgba(255,255,255,.014),rgba(255,255,255,0));
+    transition:border-color .2s,background .2s;
+  }
+  .mandate-item:hover{border-color:var(--accent);background:rgba(230,255,61,.04)}
+  .mandate-item .check{
+    width:32px;height:32px;border:1.5px solid var(--accent);
+    display:inline-flex;align-items:center;justify-content:center;color:var(--accent);
+    font-family:'IBM Plex Mono',monospace;font-size:14px;font-weight:600;
+  }
+  .mandate-item .body{font-size:16.5px;line-height:1.5;color:var(--paper)}
+  .mandate-item .body small{display:block;font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.08em;margin-top:6px}
+
+  /* ============ RAILS GRID ============ */
+  .rails{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+  .rail-card{
+    border:1px solid var(--line-strong);padding:22px 22px 24px;
+    background:linear-gradient(180deg,rgba(255,255,255,.014),rgba(255,255,255,0));
+    position:relative;
+  }
+  .rail-card::before{content:'';position:absolute;left:22px;top:0;width:28px;height:2px;background:var(--accent)}
+  .rail-card h3{font-family:'Inter Tight',sans-serif;font-weight:600;font-size:18px;letter-spacing:-.01em;color:var(--paper);margin:18px 0 10px;line-height:1.2}
+  .rail-card p{font-size:13.5px;line-height:1.55;color:var(--muted);margin:0 0 14px}
+  .rail-card .chips{display:flex;flex-wrap:wrap;gap:6px}
+  .rail-card .chip{font-family:'IBM Plex Mono',monospace;font-size:10.5px;padding:4px 8px;border:1px solid var(--line);color:var(--paper);letter-spacing:.04em}
+
+  /* ============ OUTCOMES ROW ============ */
+  .outcomes{display:grid;grid-template-columns:repeat(4,1fr);gap:0;border:1px solid var(--line-strong)}
+  .out{padding:28px 22px;border-right:1px solid var(--line);position:relative}
+  .out:last-child{border-right:none}
+  .out-icon{
+    width:36px;height:36px;border:1.5px solid var(--accent);color:var(--accent);
+    display:inline-flex;align-items:center;justify-content:center;
+    font-family:'IBM Plex Mono',monospace;font-size:14px;font-weight:600;
+    margin-bottom:16px;
+  }
+  .out-title{font-family:'Inter Tight',sans-serif;font-weight:600;font-size:20px;color:var(--paper);margin:0 0 8px}
+  .out-body{font-size:13.5px;line-height:1.5;color:var(--muted);margin:0}
+
+  /* ============ TIMELINE ============ */
+  .timeline{
+    display:grid;grid-template-columns:repeat(4,1fr);
+    border:1px solid var(--line-strong);position:relative;
+  }
+  .tl{padding:24px;border-right:1px solid var(--line);position:relative}
+  .tl:last-child{border-right:none}
+  .tl-num{
+    font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:.16em;
+    text-transform:uppercase;color:var(--muted);margin-bottom:12px;
+    display:flex;align-items:center;gap:10px;
+  }
+  .tl-num .day{
+    background:var(--accent);color:var(--ink);padding:2px 8px;font-weight:600;
+  }
+  .tl-title{font-family:'Inter Tight',sans-serif;font-weight:600;font-size:18px;color:var(--paper);margin:0 0 8px;line-height:1.2}
+  .tl-body{font-size:13.5px;line-height:1.5;color:var(--muted);margin:0}
+  .tl:not(:last-child)::after{
+    content:'';position:absolute;right:-7px;top:32px;width:12px;height:12px;
+    border-top:1.5px solid var(--accent);border-right:1.5px solid var(--accent);transform:rotate(45deg);background:var(--ink);
+  }
+
+  /* ============ REFS ============ */
+  .refs-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+  .ref-link{
+    border:1px solid var(--line-strong);padding:18px 20px;text-decoration:none;
+    color:var(--paper);transition:border-color .2s,background .2s;
+    display:flex;justify-content:space-between;align-items:center;gap:14px;
+    font-family:'IBM Plex Mono',monospace;font-size:12px;
+  }
+  .ref-link:hover{border-color:var(--accent);background:rgba(230,255,61,.04)}
+  .ref-link .arrow{color:var(--accent)}
+
+  /* ============ ADJACENT LEDGER ============ */
+  .adjacent{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px}
+  .adj-card{
+    border:1px solid var(--line-strong);padding:24px;text-decoration:none;color:var(--paper);
+    background:linear-gradient(180deg,rgba(255,255,255,.014),rgba(255,255,255,0));
+    transition:border-color .2s,background .2s;display:flex;flex-direction:column;
+  }
+  .adj-card:hover{border-color:var(--accent);background:rgba(230,255,61,.04)}
+  .adj-id{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--accent);letter-spacing:.08em;margin-bottom:14px}
+  .adj-title{font-family:'Inter Tight',sans-serif;font-weight:600;font-size:18px;color:var(--paper);line-height:1.2;margin-bottom:8px}
+  .adj-sub{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--muted);letter-spacing:.06em;text-transform:uppercase;margin-bottom:16px}
+  .adj-foot{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;margin-top:auto;padding-top:16px;border-top:1px dashed var(--line);display:flex;justify-content:space-between}
+  .adj-foot .arrow{color:var(--accent)}
+
+  /* ============ CONTACT ============ */
+  .contact{padding:96px 24px;border-bottom:1px solid var(--line);max-width:1440px;margin:0 auto;position:relative;z-index:2}
+  .contact-grid{display:grid;grid-template-columns:1.2fr 1fr;gap:64px;align-items:center;max-width:1200px;margin:0 auto}
+  .contact h2{font-family:'Inter Tight',sans-serif;font-weight:700;font-size:clamp(36px,5vw,68px);line-height:1;letter-spacing:-.03em;margin:0 0 28px}
+  .contact h2 .accent{color:var(--accent)}
+  .contact-sub{font-size:17px;line-height:1.55;color:var(--muted);max-width:48ch;margin:0 0 32px}
+  .contact-sub b{color:var(--paper);font-weight:500}
+  .contact-actions{display:flex;gap:14px;flex-wrap:wrap}
+  .btn-primary{background:var(--accent);color:var(--ink);font-family:'Inter Tight',sans-serif;font-weight:600;font-size:14px;padding:14px 22px;text-decoration:none;display:inline-flex;align-items:center;gap:10px;border:1px solid var(--accent);transition:transform .15s,box-shadow .15s}
+  .btn-primary:hover{transform:translate(-2px,-2px);box-shadow:4px 4px 0 var(--paper)}
+  .btn-ghost{color:var(--paper);text-decoration:none;font-family:'IBM Plex Mono',monospace;font-size:13px;letter-spacing:.04em;text-transform:uppercase;padding:14px 18px;border:1px solid var(--line-strong);transition:border-color .2s}
+  .btn-ghost:hover{border-color:var(--paper)}
+  .terminal{border:1px solid var(--line-strong);background:rgba(255,255,255,.018);font-family:'IBM Plex Mono',monospace;font-size:13px;line-height:1.7;padding:24px 26px;color:var(--paper)}
+  .term-line{display:block;color:var(--muted)}
+  .term-line .prompt{color:var(--accent);margin-right:8px}
+  .term-line .green{color:var(--green)}
+  .term-line .amber{color:var(--amber)}
+  .term-line .out{color:var(--paper)}
+
+  /* ============ FOOTER ============ */
+  footer.foot{padding:48px 24px 32px;color:var(--muted);position:relative;z-index:2}
+  .foot-strip{max-width:1440px;margin:0 auto;display:flex;justify-content:space-between;font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+
+  /* ============ RESPONSIVE ============ */
+  @media(max-width:1024px){
+    .hero-stats{grid-template-columns:1fr 1fr}
+    .stat:nth-child(2){border-right:none}
+    .stat:nth-child(1),.stat:nth-child(2){border-bottom:1px solid var(--line)}
+    .rails{grid-template-columns:1fr 1fr}
+    .outcomes{grid-template-columns:1fr 1fr}
+    .out:nth-child(2){border-right:none}
+    .out:nth-child(1),.out:nth-child(2){border-bottom:1px solid var(--line)}
+    .timeline{grid-template-columns:1fr 1fr}
+    .tl:nth-child(2)::after{display:none}
+    .tl:nth-child(1),.tl:nth-child(2){border-bottom:1px solid var(--line)}
+    .refs-grid{grid-template-columns:1fr 1fr}
+    .adjacent{grid-template-columns:1fr}
+  }
+  @media(max-width:820px){
+    .statusbar-inner{flex-wrap:wrap;gap:10px;padding:8px 16px}
+    .status-cluster:last-child{display:none}
+    .nav{padding:14px 16px}
+    .nav-back{font-size:10px;padding:6px 10px}
+    .nav-cta{font-size:11px;padding:8px 12px}
+    .crumb{font-size:10px;padding:16px 16px 0}
+    .hero{padding:32px 16px 48px}
+    h1.hero-h{font-size:clamp(36px,10vw,60px)}
+    .hero-stats{grid-template-columns:1fr}
+    .stat{border-right:none;border-bottom:1px solid var(--line)}
+    .stat:last-child{border-bottom:none}
+    .section{padding:56px 16px}
+    .section-head{grid-template-columns:1fr;gap:18px;padding-bottom:24px;margin-bottom:24px}
+    .section-num{align-self:flex-start}
+    .symptoms{grid-template-columns:1fr}
+    .sym{border-right:none;border-bottom:1px solid var(--line);padding:20px 18px}
+    .sym:last-child{border-bottom:none}
+    .rails{grid-template-columns:1fr}
+    .outcomes{grid-template-columns:1fr}
+    .out{border-right:none;border-bottom:1px solid var(--line)}
+    .out:last-child{border-bottom:none}
+    .timeline{grid-template-columns:1fr}
+    .tl{border-right:none;border-bottom:1px solid var(--line)}
+    .tl:last-child{border-bottom:none}
+    .tl::after{display:none}
+    .refs-grid{grid-template-columns:1fr}
+    .contact{padding:64px 16px}
+    .contact-grid{grid-template-columns:1fr;gap:32px}
+    .foot-strip{flex-direction:column;gap:10px;align-items:flex-start}
+  }
+</style>
+</head>
+<body>
+
+<!-- STATUS BAR -->
+<header class="statusbar">
+  <div class="statusbar-inner">
+    <div class="status-cluster">
+      <span class="status-pill"><span class="dot"></span> SYS / OPERATIONAL</span>
+      <span class="status-pill">NYC · LON</span>
+      <span class="status-pill">OPERATOR-LED · EST. WALL ST.</span>
+    </div>
+    <div class="status-cluster">
+      <span class="status-pill">v26.05</span>
+    </div>
+  </div>
+</header>
+
+<!-- NAV -->
+<nav class="nav">
+  <a class="brand" href="01-terminal-full.html">
+    <span class="brand-mark">RS</span>
+    Rayleigh Stark
+  </a>
+  <div style="display:flex;gap:14px;align-items:center">
+    <a class="nav-back" href="01-terminal-full.html">← Back to ledger</a>
+    <a class="nav-cta" href="#contact">Bring this flow →</a>
+  </div>
+</nav>
+
+<!-- BREADCRUMB -->
+<div class="crumb">
+  <a href="01-terminal-full.html">RS</a>
+  <span class="sep">/</span>
+  <a href="01-terminal-full.html#services">services</a>
+  <span class="sep">/</span>
+  <a href="#">payments-and-settlement</a>
+  <span class="sep">/</span>
+  <span class="current">payments-decision-speed-sprint.md</span>
+</div>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-meta">
+    <span class="hero-id">M-004</span>
+    <span class="hero-cat">PAYMENTS &amp; SETTLEMENT · DECISION SPRINT</span>
+    <span class="hero-status"><span class="pulse"></span> OPEN FOR INTAKE</span>
+  </div>
+
+  <h1 class="hero-h">
+    Payments<br>
+    decision-speed<br>
+    <span class="accent">sprint.</span>
+  </h1>
+
+  <p class="hero-lede">
+    <b>Cut exception latency. Lift straight-through processing.</b>
+    We insert a governed decision layer into live payments operations across
+    SEPA, UK Faster Payments, FedNow, RTP, ACH, and SWIFT gpi — plus fiat ↔
+    digital-asset on/off-ramps. The artifact is a working AI layer prioritising
+    exceptions by financial impact, not a deck.
+  </p>
+
+  <div class="hero-stats">
+    <article class="stat">
+      <div class="stat-label">Engagement length</div>
+      <div class="stat-value">90 days<small>workflow → KPI rollout</small></div>
+    </article>
+    <article class="stat">
+      <div class="stat-label">Surface stages</div>
+      <div class="stat-value">Decide · Execute<small>policy-bound · operator-owned</small></div>
+    </article>
+    <article class="stat">
+      <div class="stat-label">Owned by</div>
+      <div class="stat-value">RS operator<small>+ named client lead</small></div>
+    </article>
+    <article class="stat">
+      <div class="stat-label">Engagement shape</div>
+      <div class="stat-value">Embedded<small>inside live queues</small></div>
+    </article>
+  </div>
+</section>
+
+<!-- WHEN THIS FIRES -->
+<section class="section">
+  <div class="section-head">
+    <span class="section-num">§ 01 / WHEN THIS FIRES</span>
+    <div>
+      <p class="section-eyebrow">Symptoms in the operating surface</p>
+      <h2 class="section-heading">If any of these hold, <span class="accent">this is your mandate.</span></h2>
+    </div>
+    <p class="section-side">
+      Self-diagnostic.<br>
+      Not exhaustive.
+    </p>
+  </div>
+
+  <div class="symptoms">
+    <article class="sym">
+      <span class="sym-num">01</span>
+      <div class="sym-body">
+        <b>Exception queues are growing faster than ops headcount.</b>
+        <span>Manual triage absorbs analyst hours; the queue gets older, not smaller.</span>
+      </div>
+    </article>
+    <article class="sym">
+      <span class="sym-num">02</span>
+      <div class="sym-body">
+        <b>Straight-through rate has plateaued.</b>
+        <span>STP per rail (SEPA, FPS, FedNow, RTP, ACH) is stuck despite incremental fixes.</span>
+      </div>
+    </article>
+    <article class="sym">
+      <span class="sym-num">03</span>
+      <div class="sym-body">
+        <b>High-value events get the same attention as low-value ones.</b>
+        <span>Prioritisation by financial impact isn't built into the workflow.</span>
+      </div>
+    </article>
+    <article class="sym">
+      <span class="sym-num">04</span>
+      <div class="sym-body">
+        <b>Leadership lacks cycle-time and loss visibility.</b>
+        <span>Backlog and preventable-loss drivers aren't reported in real time.</span>
+      </div>
+    </article>
+    <article class="sym">
+      <span class="sym-num">05</span>
+      <div class="sym-body">
+        <b>Cross-border and on/off-ramp flows leak time.</b>
+        <span>SWIFT gpi, fiat-to-digital-asset routes show settlement-confidence gaps.</span>
+      </div>
+    </article>
+    <article class="sym">
+      <span class="sym-num">06</span>
+      <div class="sym-body">
+        <b>Off-chain controls aren't integrated into decisions.</b>
+        <span>KYC/KYB, sanctions, ledger checks live outside the decision flow.</span>
+      </div>
+    </article>
+  </div>
+</section>
+
+<!-- WHAT WE TAKE OWNERSHIP OF -->
+<section class="section">
+  <div class="section-head">
+    <span class="section-num">§ 02 / THE MANDATE</span>
+    <div>
+      <p class="section-eyebrow">What we take operational ownership of</p>
+      <h2 class="section-heading">What <span class="accent">changes</span> in the system.</h2>
+    </div>
+    <p class="section-side">
+      Doctrine 001:<br>
+      Ownership, not advisory.
+    </p>
+  </div>
+
+  <div class="mandate-list">
+    <article class="mandate-item">
+      <span class="check">01</span>
+      <div class="body">
+        A payments-ops AI layer that <b>prioritises exceptions by financial impact</b> — not by FIFO, not by rail.
+        <small>Plug-in to live queues · scoring logic · operator override</small>
+      </div>
+    </article>
+    <article class="mandate-item">
+      <span class="check">02</span>
+      <div class="body">
+        Faster decision support for <b>routing, retries, and reconciliation actions</b> across all rails.
+        <small>SEPA · FPS · FedNow · RTP · ACH · SWIFT gpi/MT-MX · on/off-ramp</small>
+      </div>
+    </article>
+    <article class="mandate-item">
+      <span class="check">03</span>
+      <div class="body">
+        Executive visibility on <b>cycle-time, backlog, and preventable-loss drivers</b> in real time.
+        <small>Reporting that produces audit evidence as a byproduct</small>
+      </div>
+    </article>
+    <article class="mandate-item">
+      <span class="check">04</span>
+      <div class="body">
+        Off-chain controls — KYC/KYB, sanctions, ledger checks — <b>integrated into the decision workflow</b>, not bolted on.
+        <small>Single decision surface · evidence trail per event</small>
+      </div>
+    </article>
+  </div>
+</section>
+
+<!-- RAILS & SCOPE -->
+<section class="section">
+  <div class="section-head">
+    <span class="section-num">§ 03 / RAILS &amp; SCOPE</span>
+    <div>
+      <p class="section-eyebrow">What's covered, plainly</p>
+      <h2 class="section-heading">The <span class="accent">rails</span> we operate across.</h2>
+    </div>
+    <p class="section-side">
+      Domestic · cross-border<br>
+      fiat · digital asset
+    </p>
+  </div>
+
+  <div class="rails">
+    <article class="rail-card">
+      <h3>Payment rails</h3>
+      <p>Domestic instant + scheme payments across all major rails.</p>
+      <div class="chips">
+        <span class="chip">SEPA SCT</span>
+        <span class="chip">SCT Inst</span>
+        <span class="chip">UK FPS</span>
+        <span class="chip">FedNow</span>
+        <span class="chip">RTP</span>
+        <span class="chip">ACH</span>
+        <span class="chip">SWIFT gpi</span>
+        <span class="chip">MT-MX</span>
+      </div>
+    </article>
+    <article class="rail-card">
+      <h3>On-ramp / off-ramp</h3>
+      <p>Decision support for fiat ↔ digital-asset flows: route choice, settlement confidence, exception triage.</p>
+      <div class="chips">
+        <span class="chip">Route choice</span>
+        <span class="chip">Settlement conf.</span>
+        <span class="chip">Exception triage</span>
+      </div>
+    </article>
+    <article class="rail-card">
+      <h3>Digital-asset context</h3>
+      <p>Wallet-risk + transaction-pattern enrichment from blockchain analytics and KYT signals.</p>
+      <div class="chips">
+        <span class="chip">Wallet risk</span>
+        <span class="chip">KYT</span>
+        <span class="chip">Tx patterns</span>
+      </div>
+    </article>
+    <article class="rail-card">
+      <h3>Off-chain controls</h3>
+      <p>KYC/KYB, sanctions screening, ledger controls, reconciliation — integrated into decisions.</p>
+      <div class="chips">
+        <span class="chip">KYC / KYB</span>
+        <span class="chip">Sanctions</span>
+        <span class="chip">Ledger</span>
+        <span class="chip">Recon</span>
+      </div>
+    </article>
+  </div>
+</section>
+
+<!-- OUTCOMES -->
+<section class="section">
+  <div class="section-head">
+    <span class="section-num">§ 04 / OUTCOMES</span>
+    <div>
+      <p class="section-eyebrow">What leadership sees, post-mandate</p>
+      <h2 class="section-heading">Operating outcomes, <span class="accent">measured</span>.</h2>
+    </div>
+    <p class="section-side">
+      Speed · efficiency<br>
+      control · margin
+    </p>
+  </div>
+
+  <div class="outcomes">
+    <article class="out">
+      <div class="out-icon">»</div>
+      <h3 class="out-title">Speed</h3>
+      <p class="out-body">Shorter exception-resolution and settlement decision cycles.</p>
+    </article>
+    <article class="out">
+      <div class="out-icon">≡</div>
+      <h3 class="out-title">Efficiency</h3>
+      <p class="out-body">Less manual analyst effort in repetitive triage and reporting.</p>
+    </article>
+    <article class="out">
+      <div class="out-icon">◊</div>
+      <h3 class="out-title">Control</h3>
+      <p class="out-body">Clearer operational guardrails for high-value payment events.</p>
+    </article>
+    <article class="out">
+      <div class="out-icon">+</div>
+      <h3 class="out-title">Margin</h3>
+      <p class="out-body">Lower leakage from delay, misrouting, and unprioritised incidents.</p>
+    </article>
+  </div>
+</section>
+
+<!-- EXECUTION TIMELINE -->
+<section class="section">
+  <div class="section-head">
+    <span class="section-num">§ 05 / EXECUTION MODEL</span>
+    <div>
+      <p class="section-eyebrow">The 90-day shape</p>
+      <h2 class="section-heading">From <span class="accent">first scope call</span> to live in production.</h2>
+    </div>
+    <p class="section-side">
+      Embedded · KPI-led<br>
+      no slide-deck handoff.
+    </p>
+  </div>
+
+  <div class="timeline">
+    <article class="tl">
+      <div class="tl-num"><span class="day">Day 0–14</span> Map</div>
+      <h3 class="tl-title">Workflow mapping</h3>
+      <p class="tl-body">Live observation of queues, exceptions, decision points. Identify the 20% of cases driving 80% of cycle time.</p>
+    </article>
+    <article class="tl">
+      <div class="tl-num"><span class="day">Day 15–45</span> Build</div>
+      <h3 class="tl-title">Scoring logic + operator controls</h3>
+      <p class="tl-body">Decision layer built against real data, with operator-facing override. Off-chain controls wired in.</p>
+    </article>
+    <article class="tl">
+      <div class="tl-num"><span class="day">Day 46–75</span> Ship</div>
+      <h3 class="tl-title">KPI-led rollout in live queues</h3>
+      <p class="tl-body">Phased rollout against named KPIs. Cycle-time, STP, backlog tracked in real time.</p>
+    </article>
+    <article class="tl">
+      <div class="tl-num"><span class="day">Day 76–90</span> Hand</div>
+      <h3 class="tl-title">Operator handover, named</h3>
+      <p class="tl-body">Runbook + control surface owned by a named operator on the client side. Evidence trail live.</p>
+    </article>
+  </div>
+</section>
+
+<!-- WHY NOW (REFS) -->
+<section class="section">
+  <div class="section-head">
+    <span class="section-num">§ 06 / WHY THIS, NOW</span>
+    <div>
+      <p class="section-eyebrow">Context for the rails</p>
+      <h2 class="section-heading">The <span class="accent">regulatory + rail</span> environment we operate inside.</h2>
+    </div>
+    <p class="section-side">
+      External references<br>
+      no proprietary claims.
+    </p>
+  </div>
+
+  <div class="refs-grid">
+    <a class="ref-link" href="https://www.frbservices.org/financial-services/fednow/about.html" target="_blank" rel="noopener">FedNow Service <span class="arrow">↗</span></a>
+    <a class="ref-link" href="https://www.theclearinghouse.org/payment-systems/rtp" target="_blank" rel="noopener">TCH · RTP Network <span class="arrow">↗</span></a>
+    <a class="ref-link" href="https://www.swift.com/standards/iso-20022" target="_blank" rel="noopener">SWIFT · ISO 20022 <span class="arrow">↗</span></a>
+    <a class="ref-link" href="https://www.epc-cep.eu/what-we-do/sepa-payment-schemes" target="_blank" rel="noopener">EPC · SEPA schemes <span class="arrow">↗</span></a>
+    <a class="ref-link" href="https://www.wearepay.uk/what-we-do/payment-systems/faster-payment-system/" target="_blank" rel="noopener">Pay.UK · Faster Payments <span class="arrow">↗</span></a>
+    <a class="ref-link" href="https://www.fatf-gafi.org/en/publications/Fatfrecommendations/Guidance-rba-virtual-assets-2021.html" target="_blank" rel="noopener">FATF · Virtual Assets <span class="arrow">↗</span></a>
+  </div>
+</section>
+
+<!-- ADJACENT MANDATES -->
+<section class="section">
+  <div class="section-head">
+    <span class="section-num">§ 07 / ADJACENT</span>
+    <div>
+      <p class="section-eyebrow">Mandates that travel with this one</p>
+      <h2 class="section-heading">If this isn't the <span class="accent">right shape</span>.</h2>
+    </div>
+    <p class="section-side">
+      Related ledger entries.<br>
+      <a href="01-terminal-full.html#ledger" style="color:var(--accent);text-decoration:none">See full ledger →</a>
+    </p>
+  </div>
+
+  <div class="adjacent">
+    <a class="adj-card" href="#">
+      <div class="adj-id">M-002</div>
+      <div class="adj-title">Decision reliability engineering</div>
+      <div class="adj-sub">Production AI · policy-bound · operator-owned</div>
+      <div class="adj-foot"><span>Open mandate</span><span class="arrow">→</span></div>
+    </a>
+    <a class="adj-card" href="case-study-governed-research-infrastructure.html">
+      <div class="adj-id">M-006</div>
+      <div class="adj-title">Governed research infrastructure</div>
+      <div class="adj-sub">Analyst scripts → AWS shared libraries</div>
+      <div class="adj-foot"><span>Shipped · case study</span><span class="arrow">→</span></div>
+    </a>
+    <a class="adj-card" href="#">
+      <div class="adj-id">M-008</div>
+      <div class="adj-title">Escrow intelligence automation</div>
+      <div class="adj-sub">Settlement-side · custodial controls</div>
+      <div class="adj-foot"><span>Open mandate</span><span class="arrow">→</span></div>
+    </a>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact" id="contact">
+  <div class="contact-grid">
+    <div>
+      <p class="section-eyebrow" style="margin-bottom:14px">§ 08 / INTAKE</p>
+      <h2>Bring this <span class="accent">flow</span>.</h2>
+      <p class="contact-sub">
+        <b>We set scope, ownership, and the first control decision inside the first call.</b>
+        If the flow matches the symptoms above, you'll have a written 90-day scope inside 72 hours.
+      </p>
+      <div class="contact-actions">
+        <a class="btn-primary" href="https://calendly.com/tonykkwawu/30min">Book 30-min briefing →</a>
+        <a class="btn-ghost" href="mailto:contact@rayleighstark.com">contact@rayleighstark.com</a>
+      </div>
+    </div>
+
+    <div class="terminal" aria-hidden="true">
+      <span class="term-line"><span class="prompt">$</span> rs intake --mandate M-004</span>
+      <span class="term-line"><span class="out">→ surface</span> &nbsp;payments-and-settlement</span>
+      <span class="term-line"><span class="out">→ scope</span> &nbsp;&nbsp;&nbsp;decision-speed sprint</span>
+      <span class="term-line"><span class="out">→ rails</span> &nbsp;&nbsp;&nbsp;SEPA · FPS · FedNow · RTP · ACH</span>
+      <span class="term-line"><span class="out">→ length</span> &nbsp;&nbsp;90 days</span>
+      <span class="term-line"><span class="out">→ owner</span> &nbsp;&nbsp;&nbsp;<span class="amber">pending — client lead</span></span>
+      <span class="term-line"><span class="out">→ status</span> &nbsp;&nbsp;<span class="green">awaiting first call</span></span>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="foot">
+  <div class="foot-strip">
+    <span>Rayleigh Stark · We make complex systems run · NYC / LON</span>
+    <span>M-004 · v26.05</span>
+    <span><span class="dot"></span> &nbsp;SYS / OPERATIONAL</span>
+  </div>
+</footer>
+
+</body>
+</html>

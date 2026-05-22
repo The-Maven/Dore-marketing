@@ -1,0 +1,1206 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Rayleigh Stark — Operator's Console (Full)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@300;400;500;600&family=Inter+Tight:wght@500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#0A0B0E;
+    --ink-2:#111317;
+    --ink-3:#16191E;
+    --line:rgba(255,255,255,.07);
+    --line-strong:rgba(255,255,255,.16);
+    --paper:#EFEAE0;
+    --muted:rgba(239,234,224,.55);
+    --muted-2:rgba(239,234,224,.38);
+    --accent:#E6FF3D;       /* electric lime */
+    --green:#7FE0A6;
+    --amber:#F7B955;
+    --red:#FF6B6B;
+    --blue:#7AC1FF;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0;background:var(--ink);color:var(--paper);font-family:'Inter',sans-serif;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+  body{min-height:100vh;overflow-x:hidden}
+  ::selection{background:var(--accent);color:var(--ink)}
+  a{color:inherit}
+
+  /* faint grid background */
+  body::before{
+    content:'';position:fixed;inset:0;pointer-events:none;z-index:1;opacity:.5;
+    background-image:
+      linear-gradient(rgba(255,255,255,.025) 1px,transparent 1px),
+      linear-gradient(90deg,rgba(255,255,255,.025) 1px,transparent 1px);
+    background-size:48px 48px;
+  }
+  /* ambient glow top-right */
+  body::after{
+    content:'';position:fixed;top:-20%;right:-10%;width:60vmax;height:60vmax;
+    background:radial-gradient(circle at center,rgba(230,255,61,.06),transparent 60%);
+    pointer-events:none;z-index:0;
+  }
+
+  /* ============ STATUS BAR ============ */
+  .statusbar{
+    position:sticky;top:0;z-index:50;
+    border-bottom:1px solid var(--line);
+    background:rgba(10,11,14,.85);
+    backdrop-filter:saturate(140%) blur(10px);
+    font-family:'IBM Plex Mono',monospace;
+    font-size:11px;letter-spacing:.08em;text-transform:uppercase;
+    color:var(--muted);
+  }
+  .statusbar-inner{
+    display:flex;align-items:center;justify-content:space-between;
+    padding:10px 24px;gap:24px;
+  }
+  .status-cluster{display:flex;gap:18px;align-items:center}
+  .status-pill{display:inline-flex;align-items:center;gap:8px}
+  .dot{width:7px;height:7px;border-radius:50%;display:inline-block;background:var(--green);box-shadow:0 0 8px rgba(127,224,166,.7)}
+  .dot.amber{background:var(--amber);box-shadow:0 0 8px rgba(247,185,85,.55)}
+  .ticker{flex:1;overflow:hidden;position:relative;mask-image:linear-gradient(90deg,transparent,#000 10%,#000 90%,transparent)}
+  .ticker-track{display:inline-flex;gap:48px;white-space:nowrap;animation:slide 70s linear infinite}
+  @keyframes slide{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+  .ticker-item{color:var(--muted)}
+  .ticker-item b{color:var(--paper);font-weight:500;margin-right:6px}
+  .ticker-item .pos{color:var(--green);font-weight:500}
+  .ticker-item .neg{color:var(--red);font-weight:500}
+
+  /* ============ NAV ============ */
+  .nav{
+    position:relative;z-index:5;
+    border-bottom:1px solid var(--line);
+    display:flex;align-items:center;justify-content:space-between;
+    padding:18px 24px;
+  }
+  .brand{
+    font-family:'Inter Tight',sans-serif;
+    font-weight:700;font-size:15px;letter-spacing:-.01em;
+    display:flex;align-items:center;gap:10px;color:var(--paper);text-decoration:none;
+  }
+  .brand-mark{
+    width:24px;height:24px;border:1.5px solid var(--paper);
+    display:inline-flex;align-items:center;justify-content:center;
+    font-family:'IBM Plex Mono',monospace;font-size:10px;font-weight:600;
+  }
+  .nav-center{display:flex;gap:28px;font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.04em;text-transform:uppercase}
+  .nav-center a{color:var(--muted);text-decoration:none;transition:color .2s;padding:6px 0;border-bottom:1px solid transparent}
+  .nav-center a:hover{color:var(--paper)}
+  .nav-right{display:flex;align-items:center;gap:14px}
+  .cmdk{
+    display:inline-flex;align-items:center;gap:8px;
+    font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--muted);
+    border:1px solid var(--line-strong);padding:7px 10px;border-radius:4px;
+    background:rgba(255,255,255,.02);transition:border-color .2s;
+  }
+  .cmdk:hover{border-color:var(--paper)}
+  .cmdk .kbd{
+    background:rgba(255,255,255,.06);padding:2px 5px;border-radius:3px;
+    font-size:10px;color:var(--paper);
+  }
+  .nav-cta{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:12px;text-transform:uppercase;letter-spacing:.06em;
+    background:var(--paper);color:var(--ink);text-decoration:none;
+    padding:10px 16px;border:1px solid var(--paper);
+    display:inline-flex;align-items:center;gap:8px;
+    transition:transform .15s,background .2s,border-color .2s;
+  }
+  .nav-cta:hover{background:var(--accent);border-color:var(--accent);transform:translate(-1px,-1px);box-shadow:2px 2px 0 var(--paper)}
+
+  /* ============ HERO ============ */
+  section.block{position:relative;z-index:2}
+  .hero{padding:88px 24px 72px;border-bottom:1px solid var(--line)}
+  .hero-grid{
+    display:grid;grid-template-columns:1.5fr 1fr;gap:64px;
+    max-width:1440px;margin:0 auto;
+  }
+  .hero-meta{
+    font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.12em;text-transform:uppercase;
+    color:var(--muted);display:flex;gap:24px;margin-bottom:36px;align-items:center;
+  }
+  .hero-meta-divider{width:32px;height:1px;background:var(--line-strong)}
+
+  h1.hero-headline{
+    font-family:'Inter Tight',sans-serif;
+    font-weight:700;
+    font-size:clamp(48px, 7.2vw, 108px);
+    line-height:.96;
+    letter-spacing:-.035em;
+    margin:0 0 36px;
+    color:var(--paper);
+  }
+  .hero-headline .accent{color:var(--accent)}
+  .hero-headline .underline{
+    background-image:linear-gradient(var(--accent),var(--accent));
+    background-repeat:no-repeat;
+    background-size:100% 6px;
+    background-position:0 96%;
+    padding-bottom:2px;
+  }
+  .hero-headline .crossed{
+    position:relative;display:inline-block;
+  }
+  .hero-headline .crossed::after{
+    content:'';position:absolute;left:-2%;right:-2%;top:50%;height:5px;
+    background:var(--red);opacity:.85;
+  }
+  .hero-headline .crossed.muted{opacity:.32;color:var(--muted)}
+
+  .hero-sub{
+    font-size:18px;line-height:1.55;color:var(--muted);
+    max-width:54ch;margin:0 0 40px;
+  }
+  .hero-sub b{color:var(--paper);font-weight:500}
+
+  .hero-actions{display:flex;gap:14px;align-items:center;flex-wrap:wrap}
+  .btn-primary{
+    background:var(--accent);color:var(--ink);
+    font-family:'Inter Tight',sans-serif;font-weight:600;font-size:14px;
+    padding:14px 22px;text-decoration:none;
+    display:inline-flex;align-items:center;gap:10px;
+    border:1px solid var(--accent);
+    transition:transform .15s,box-shadow .15s;
+  }
+  .btn-primary:hover{transform:translate(-2px,-2px);box-shadow:4px 4px 0 var(--paper)}
+  .btn-ghost{
+    color:var(--paper);text-decoration:none;
+    font-family:'IBM Plex Mono',monospace;font-size:13px;letter-spacing:.04em;
+    text-transform:uppercase;
+    padding:14px 18px;border:1px solid var(--line-strong);
+    transition:border-color .2s;
+  }
+  .btn-ghost:hover{border-color:var(--paper)}
+
+  /* live tape */
+  .tape{
+    border:1px solid var(--line-strong);
+    background:linear-gradient(180deg,rgba(255,255,255,.022),rgba(255,255,255,0));
+    padding:24px;align-self:start;
+  }
+  .tape-head{
+    display:flex;justify-content:space-between;align-items:center;
+    font-family:'IBM Plex Mono',monospace;font-size:11px;
+    letter-spacing:.1em;text-transform:uppercase;color:var(--muted);
+    padding-bottom:14px;border-bottom:1px solid var(--line);margin-bottom:18px;
+  }
+  .tape-live{display:inline-flex;align-items:center;gap:8px;color:var(--green)}
+  .tape-pulse{width:6px;height:6px;border-radius:50%;background:var(--green);animation:pulse 1.5s infinite}
+  @keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
+  .tape-row{
+    display:grid;grid-template-columns:auto 1fr auto;gap:14px;
+    padding:14px 0;border-bottom:1px dashed var(--line);
+    font-family:'IBM Plex Mono',monospace;font-size:12.5px;line-height:1.4;
+  }
+  .tape-row:last-child{border-bottom:none}
+  .tape-time{color:var(--muted-2);font-size:11px;padding-top:2px}
+  .tape-body{color:var(--paper)}
+  .tape-body .tag{
+    display:inline-block;font-size:10px;letter-spacing:.08em;
+    color:var(--muted);text-transform:uppercase;margin-bottom:4px;
+  }
+  .tape-body .line{display:block}
+  .tape-metric{
+    font-family:'Inter Tight',sans-serif;
+    color:var(--accent);font-weight:600;font-size:13px;
+    white-space:nowrap;padding-top:2px;
+  }
+  .tape-metric.green{color:var(--green)}
+  .tape-metric.amber{color:var(--amber)}
+  .tape-foot{
+    margin-top:14px;padding-top:12px;border-top:1px solid var(--line);
+    display:flex;justify-content:space-between;align-items:center;
+    font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--muted);
+    letter-spacing:.06em;text-transform:uppercase;
+  }
+  .tape-foot a{color:var(--accent);text-decoration:none;display:inline-flex;gap:6px;align-items:center}
+  .tape-foot a:hover{text-decoration:underline}
+
+  /* ============ BAND: BUILT FOR ============ */
+  .band{
+    border-bottom:1px solid var(--line);
+    padding:32px 24px;
+    display:grid;grid-template-columns:auto 1fr auto;
+    gap:48px;align-items:center;
+    max-width:1440px;margin:0 auto;
+  }
+  .band-label{
+    font-family:'IBM Plex Mono',monospace;font-size:11px;
+    letter-spacing:.14em;text-transform:uppercase;color:var(--muted);
+    border-left:2px solid var(--accent);padding-left:14px;
+  }
+  .band-tags{display:flex;flex-wrap:wrap;gap:10px}
+  .tag-chip{
+    font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.04em;
+    padding:8px 12px;border:1px solid var(--line-strong);color:var(--paper);
+    text-transform:uppercase;
+  }
+  .tag-chip.solid{background:var(--paper);color:var(--ink);border-color:var(--paper)}
+
+  /* ============ SECTION SHELLS ============ */
+  .section{
+    padding:96px 24px;border-bottom:1px solid var(--line);
+    max-width:1440px;margin:0 auto;position:relative;
+  }
+  .section-head{
+    display:grid;grid-template-columns:auto 1fr auto;gap:40px;
+    padding-bottom:36px;margin-bottom:44px;
+    border-bottom:1px solid var(--line);
+    align-items:end;
+  }
+  .section-num{
+    font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.16em;
+    text-transform:uppercase;color:var(--accent);
+    border:1px solid var(--accent);padding:8px 12px;align-self:start;
+  }
+  .section-eyebrow{
+    font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.14em;
+    text-transform:uppercase;color:var(--muted);margin-bottom:14px;
+  }
+  .section-heading{
+    font-family:'Inter Tight',sans-serif;font-weight:700;
+    font-size:clamp(32px,4.6vw,64px);line-height:1;letter-spacing:-.028em;
+    margin:0;color:var(--paper);max-width:18ch;
+  }
+  .section-heading .accent{color:var(--accent)}
+  .section-side{
+    font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.06em;
+    color:var(--muted);text-align:right;text-transform:uppercase;line-height:1.7;
+  }
+  .section-side a{color:var(--accent);text-decoration:none}
+
+  /* ============ OPERATING SURFACE (4 stages dark) ============ */
+  .surface{
+    display:grid;grid-template-columns:repeat(4,1fr);
+    gap:0;border:1px solid var(--line-strong);
+  }
+  .stage{
+    padding:28px 24px 32px;position:relative;
+    border-right:1px solid var(--line);
+    background:linear-gradient(180deg,rgba(255,255,255,.018),rgba(255,255,255,0));
+  }
+  .stage:last-child{border-right:none}
+  .stage::before{
+    content:'';position:absolute;left:24px;top:0;width:40px;height:2px;background:var(--accent);
+  }
+  .stage:nth-child(2)::before{background:var(--green)}
+  .stage:nth-child(3)::before{background:var(--amber)}
+  .stage:nth-child(4)::before{background:var(--blue)}
+  .stage-num{
+    font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:.16em;
+    color:var(--muted);text-transform:uppercase;margin-top:24px;margin-bottom:18px;
+    display:flex;align-items:center;gap:10px;
+  }
+  .stage-num .arrow{color:var(--muted-2)}
+  .stage-title{
+    font-family:'Inter Tight',sans-serif;font-weight:600;
+    font-size:24px;line-height:1.08;letter-spacing:-.015em;
+    color:var(--paper);margin:0 0 12px;
+  }
+  .stage-desc{font-size:13.5px;line-height:1.55;color:var(--muted);margin:0 0 22px}
+  .stage-ex{
+    font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--muted);
+    text-transform:uppercase;letter-spacing:.06em;
+    display:flex;flex-direction:column;gap:6px;
+    padding-top:14px;border-top:1px dashed var(--line);
+  }
+  .stage-ex b{color:var(--paper);font-weight:500;letter-spacing:.04em}
+
+  /* ============ MANDATE LEDGER ============ */
+  .ledger{
+    border:1px solid var(--line-strong);background:rgba(255,255,255,.012);
+  }
+  .ledger-head{
+    display:grid;grid-template-columns:90px 1.4fr 1fr 1fr auto;gap:20px;
+    padding:14px 22px;border-bottom:1px solid var(--line);
+    font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:.12em;
+    text-transform:uppercase;color:var(--muted);
+  }
+  .ledger-row{
+    display:grid;grid-template-columns:90px 1.4fr 1fr 1fr auto;gap:20px;
+    padding:22px;align-items:center;border-bottom:1px solid var(--line);
+    transition:background .2s;
+    cursor:pointer;
+  }
+  .ledger-row:hover{background:rgba(230,255,61,.04)}
+  .ledger-row:last-child{border-bottom:none}
+  .ledger-id{
+    font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--muted-2);letter-spacing:.06em;
+  }
+  .ledger-title{
+    font-family:'Inter Tight',sans-serif;font-weight:600;font-size:18px;
+    color:var(--paper);line-height:1.2;
+  }
+  .ledger-title small{
+    display:block;font-family:'IBM Plex Mono',monospace;font-size:11px;
+    color:var(--muted);font-weight:400;text-transform:uppercase;letter-spacing:.06em;
+    margin-top:4px;
+  }
+  .ledger-context{
+    font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--muted);
+    text-transform:uppercase;letter-spacing:.04em;line-height:1.5;
+  }
+  .ledger-metric{
+    font-family:'Inter Tight',sans-serif;font-weight:600;font-size:22px;
+    color:var(--accent);letter-spacing:-.01em;
+  }
+  .ledger-metric.green{color:var(--green)}
+  .ledger-metric.amber{color:var(--amber)}
+  .ledger-metric small{
+    display:block;font-family:'IBM Plex Mono',monospace;font-size:10px;
+    color:var(--muted);font-weight:400;text-transform:uppercase;letter-spacing:.08em;margin-top:4px;
+  }
+  .ledger-arrow{color:var(--muted);font-family:'IBM Plex Mono',monospace;font-size:14px}
+  .ledger-row:hover .ledger-arrow{color:var(--accent)}
+
+  /* ============ SERVICE TREE ============ */
+  .tree-grid{
+    display:grid;grid-template-columns:1fr 1fr;gap:48px;
+  }
+  .tree{
+    font-family:'IBM Plex Mono',monospace;font-size:13.5px;line-height:1.95;color:var(--paper);
+  }
+  .tree-group{
+    margin-bottom:28px;
+  }
+  .tree-group-title{
+    color:var(--accent);font-weight:600;letter-spacing:.04em;
+    display:flex;align-items:center;gap:10px;margin-bottom:6px;text-transform:uppercase;font-size:12px;letter-spacing:.12em;
+  }
+  .tree-group-title::before{content:'▸';color:var(--muted-2)}
+  .tree-item{
+    display:grid;grid-template-columns:24px 1fr auto;gap:10px;
+    padding-left:6px;color:var(--paper);text-decoration:none;
+    border-left:1px dashed var(--line);
+    transition:border-color .2s,color .2s;
+  }
+  .tree-item:hover{border-left-color:var(--accent);color:var(--accent)}
+  .tree-item .twig{color:var(--muted-2);font-size:12px}
+  .tree-item .meta{color:var(--muted);font-size:11px;letter-spacing:.04em;text-transform:uppercase}
+
+  /* ============ DOCTRINE STRIP ============ */
+  .doctrine{
+    display:grid;grid-template-columns:repeat(3,1fr);gap:0;
+    border:1px solid var(--line-strong);
+  }
+  .principle{
+    padding:36px 30px;border-right:1px solid var(--line);
+    position:relative;
+  }
+  .principle:last-child{border-right:none}
+  .principle-num{
+    font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:.18em;
+    color:var(--muted);margin-bottom:18px;
+  }
+  .principle-title{
+    font-family:'Inter Tight',sans-serif;font-weight:600;font-size:22px;line-height:1.15;
+    color:var(--paper);letter-spacing:-.015em;margin:0 0 12px;
+  }
+  .principle-title em{color:var(--accent);font-style:normal}
+  .principle-body{font-size:14px;line-height:1.55;color:var(--muted);margin:0}
+
+  /* ============ CONTACT (TERMINAL) ============ */
+  .contact{
+    padding:120px 24px;border-bottom:1px solid var(--line);
+    max-width:1440px;margin:0 auto;
+    text-align:left;
+  }
+  .contact-grid{
+    display:grid;grid-template-columns:1.2fr 1fr;gap:64px;align-items:center;
+    max-width:1200px;margin:0 auto;
+  }
+  .contact h2{
+    font-family:'Inter Tight',sans-serif;font-weight:700;
+    font-size:clamp(40px,5.4vw,76px);line-height:.98;letter-spacing:-.03em;
+    margin:0 0 28px;
+  }
+  .contact h2 .accent{color:var(--accent)}
+  .contact-sub{
+    font-size:17px;line-height:1.55;color:var(--muted);max-width:48ch;margin:0 0 36px;
+  }
+  .contact-sub b{color:var(--paper);font-weight:500}
+  .contact-actions{display:flex;gap:14px;flex-wrap:wrap}
+
+  /* command-line block */
+  .terminal{
+    border:1px solid var(--line-strong);background:rgba(255,255,255,.018);
+    font-family:'IBM Plex Mono',monospace;font-size:13px;line-height:1.7;
+    padding:24px 26px;color:var(--paper);
+  }
+  .term-line{display:block;color:var(--muted)}
+  .term-line .prompt{color:var(--accent);margin-right:8px}
+  .term-line .out{color:var(--paper)}
+  .term-line .green{color:var(--green)}
+  .term-line .amber{color:var(--amber)}
+  .term-input{
+    display:flex;align-items:center;gap:8px;margin-top:14px;
+    border-top:1px solid var(--line);padding-top:14px;
+  }
+  .term-input .prompt{color:var(--accent)}
+  .term-input .caret{
+    display:inline-block;width:8px;height:14px;background:var(--accent);
+    animation:caret 1s steps(2) infinite;vertical-align:middle;margin-left:4px;
+  }
+  @keyframes caret{0%,49%{opacity:1}50%,100%{opacity:0}}
+
+  /* ============ FOOTER ============ */
+  footer.foot{
+    padding:48px 24px 32px;color:var(--muted);
+  }
+  .foot-grid{
+    display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:48px;
+    max-width:1440px;margin:0 auto;
+    padding-bottom:36px;border-bottom:1px solid var(--line);
+  }
+  .foot-brand{
+    font-family:'Inter Tight',sans-serif;font-weight:700;font-size:18px;color:var(--paper);
+    letter-spacing:-.01em;margin-bottom:14px;
+  }
+  .foot-tag{
+    font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.08em;
+    text-transform:uppercase;color:var(--muted);max-width:36ch;line-height:1.55;
+  }
+  .foot-col h4{
+    font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.14em;
+    color:var(--muted-2);text-transform:uppercase;margin:0 0 14px;font-weight:500;
+  }
+  .foot-col a{
+    display:block;color:var(--paper);text-decoration:none;font-size:13.5px;
+    padding:4px 0;
+  }
+  .foot-col a:hover{color:var(--accent)}
+  .foot-strip{
+    max-width:1440px;margin:24px auto 0;
+    display:flex;justify-content:space-between;
+    font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:.1em;
+    text-transform:uppercase;color:var(--muted);
+  }
+
+  /* huge wordmark for footer */
+  .wordmark{
+    font-family:'Inter Tight',sans-serif;font-weight:800;
+    font-size:clamp(80px,18vw,260px);
+    line-height:.9;letter-spacing:-.045em;
+    color:transparent;-webkit-text-stroke:1px rgba(239,234,224,.18);
+    margin:64px auto 0;text-align:center;max-width:1440px;
+    padding:0 24px;user-select:none;
+  }
+
+  /* ============ MOBILE NAV ============ */
+  .menu-toggle{position:absolute;left:-9999px;opacity:0}
+  .menu-btn{
+    display:none;background:none;border:1px solid var(--line-strong);padding:8px 10px;
+    cursor:pointer;
+  }
+  .menu-btn span{display:block;width:18px;height:1.5px;background:var(--paper);margin:3px 0;transition:transform .2s,opacity .2s}
+  .menu-toggle:checked ~ .nav-drawer{transform:translateY(0);opacity:1;pointer-events:auto}
+  .nav-drawer{
+    position:fixed;top:0;left:0;right:0;background:var(--ink);z-index:60;
+    border-bottom:1px solid var(--line-strong);
+    padding:80px 24px 28px;
+    transform:translateY(-110%);opacity:0;pointer-events:none;
+    transition:transform .25s ease, opacity .2s;
+    display:flex;flex-direction:column;gap:0;
+  }
+  .nav-drawer a{
+    display:block;padding:14px 0;border-bottom:1px solid var(--line);
+    color:var(--paper);text-decoration:none;
+    font-family:'IBM Plex Mono',monospace;font-size:13px;letter-spacing:.08em;text-transform:uppercase;
+  }
+  .nav-drawer a:last-of-type{border-bottom:none}
+  .menu-close{
+    position:absolute;top:18px;right:18px;background:none;border:1px solid var(--line-strong);
+    padding:8px 12px;color:var(--paper);font-family:'IBM Plex Mono',monospace;font-size:12px;cursor:pointer;
+  }
+
+  /* ============ RESPONSIVE ============ */
+  @media(max-width:1180px){
+    .surface{grid-template-columns:1fr 1fr}
+    .stage:nth-child(2){border-right:none}
+    .stage:nth-child(1),.stage:nth-child(2){border-bottom:1px solid var(--line)}
+  }
+  @media(max-width:1024px){
+    .hero-grid{grid-template-columns:1.3fr 1fr;gap:40px}
+    .doctrine{grid-template-columns:1fr}
+    .principle{border-right:none;border-bottom:1px solid var(--line)}
+    .principle:last-child{border-bottom:none}
+    .tree-grid{grid-template-columns:1fr;gap:32px}
+    .foot-grid{grid-template-columns:1fr 1fr;gap:32px}
+    .ledger-row{grid-template-columns:70px 1.4fr 1fr auto;gap:14px;padding:18px}
+    .ledger-row .ledger-context{display:none}
+    .ledger-head{grid-template-columns:70px 1.4fr 1fr auto;gap:14px}
+    .ledger-head span:nth-child(3){display:none}
+  }
+  @media(max-width:820px){
+    /* status bar collapses */
+    .statusbar-inner{flex-wrap:wrap;gap:10px;padding:8px 16px 10px}
+    .ticker{order:3;width:100%;border-top:1px solid var(--line);padding-top:8px;margin-top:4px}
+    .status-cluster{font-size:10px;gap:12px}
+    .status-cluster:last-child{display:none}
+
+    /* nav becomes hamburger */
+    .nav{padding:14px 16px}
+    .nav-center,.cmdk{display:none}
+    .menu-btn{display:inline-flex;flex-direction:column;align-items:center;justify-content:center}
+    .nav-cta{padding:8px 12px;font-size:11px}
+
+    /* hero stacks */
+    .hero{padding:48px 16px 56px}
+    .hero-grid{grid-template-columns:1fr;gap:40px}
+    h1.hero-headline{font-size:clamp(40px,11vw,68px);line-height:.98;margin-bottom:24px}
+    .hero-meta{gap:12px;font-size:10px;margin-bottom:24px}
+    .hero-meta-divider{display:none}
+    .hero-sub{font-size:16px;margin-bottom:28px}
+    .btn-primary,.btn-ghost{padding:12px 16px;font-size:13px}
+
+    /* tape: tighter, but still card-shaped */
+    .tape{padding:18px 16px}
+    .tape-row{grid-template-columns:auto 1fr;gap:10px;padding:12px 0}
+    .tape-row .tape-metric{grid-column:2;justify-self:start;padding-top:6px;font-size:12px}
+
+    /* band */
+    .band{grid-template-columns:1fr;gap:14px;padding:24px 16px}
+    .band-tags{gap:6px}
+    .tag-chip{font-size:11px;padding:6px 10px}
+
+    /* sections */
+    .section{padding:64px 16px}
+    .section-head{grid-template-columns:1fr;gap:18px;padding-bottom:24px;margin-bottom:28px}
+    .section-num{align-self:flex-start}
+    .section-heading{font-size:clamp(28px,8vw,44px)}
+
+    /* surface: vertical stack with arrows */
+    .surface{grid-template-columns:1fr;border-left:none;border-right:none}
+    .stage{border-right:none;border-bottom:1px solid var(--line);padding:24px 18px 28px;border-left:1px solid var(--line-strong);border-right:1px solid var(--line-strong)}
+    .stage:last-child{border-bottom:1px solid var(--line-strong)}
+    .stage:first-child{border-top:1px solid var(--line-strong)}
+    .stage-title{font-size:22px}
+
+    /* ledger: cards */
+    .ledger{background:transparent;border:none}
+    .ledger-head{display:none}
+    .ledger-row{
+      grid-template-columns:1fr;gap:14px;padding:18px 16px;
+      border:1px solid var(--line-strong);margin-bottom:10px;
+      background:rgba(255,255,255,.018);
+      text-decoration:none;
+    }
+    .ledger-row:hover{background:rgba(230,255,61,.06)}
+    .ledger-row .ledger-context{
+      display:block;
+      font-size:11px;border-top:1px dashed var(--line);padding-top:10px;
+    }
+    .ledger-row .ledger-id{
+      display:inline-block;border:1px solid var(--line-strong);padding:3px 8px;
+      font-size:10px;color:var(--paper);justify-self:start;
+    }
+    .ledger-row .ledger-metric{font-size:18px}
+    .ledger-row .ledger-arrow{display:none}
+    .ledger-title{font-size:17px}
+
+    /* tree */
+    .tree{font-size:12.5px;line-height:1.85}
+    .tree-item{grid-template-columns:20px 1fr auto;gap:8px}
+
+    /* doctrine */
+    .principle{padding:28px 22px}
+
+    /* founder signature */
+    section#doctrine div[style*="grid-template-columns:auto 1fr auto"]{
+      grid-template-columns:1fr !important;gap:18px !important;padding:22px !important;
+    }
+    section#doctrine div[style*="writing-mode"]{
+      writing-mode:horizontal-tb !important;transform:none !important;
+      border-left:none !important;border-bottom:2px solid var(--accent);
+      padding-left:0 !important;padding-bottom:8px !important;
+    }
+    section#doctrine div[style*="text-align:right"]{
+      text-align:left !important;
+    }
+
+    /* contact */
+    .contact{padding:72px 16px}
+    .contact-grid{grid-template-columns:1fr;gap:32px}
+    .terminal{font-size:12px;padding:18px}
+
+    /* wordmark */
+    .wordmark{margin-top:36px;font-size:clamp(48px,16vw,120px)}
+
+    /* footer */
+    .foot{padding:32px 16px 24px}
+    .foot-grid{grid-template-columns:1fr 1fr;gap:24px;padding-bottom:24px}
+    .foot-strip{flex-direction:column;gap:10px;align-items:flex-start}
+  }
+
+  @media(max-width:480px){
+    .foot-grid{grid-template-columns:1fr}
+    .hero-actions{flex-direction:column;align-items:stretch}
+    .btn-primary,.btn-ghost{width:100%;justify-content:center}
+  }
+</style>
+</head>
+<body>
+
+<!-- STATUS BAR -->
+<header class="statusbar">
+  <div class="statusbar-inner">
+    <div class="status-cluster">
+      <span class="status-pill"><span class="dot"></span> SYS / OPERATIONAL</span>
+      <span class="status-pill">NYC · LON</span>
+      <span class="status-pill">OPERATOR-LED · EST. WALL ST.</span>
+    </div>
+    <div class="ticker" aria-hidden="true">
+      <div class="ticker-track">
+        <span class="ticker-item"><b>RESEARCH INFRA</b> analyst scripts → AWS shared libraries <span class="pos">SHIPPED</span></span>
+        <span class="ticker-item"><b>LLM ANALYTICS</b> blank page → exec visibility <span class="pos">LIVE</span></span>
+        <span class="ticker-item"><b>PAYMENTS OPS</b> SEPA · FPS · FedNow · RTP · ACH <span class="pos">STP ↑</span></span>
+        <span class="ticker-item"><b>API PLATFORM</b> cloud migration · institutional ops <span class="pos">AT SCALE</span></span>
+        <span class="ticker-item"><b>DECISION SYSTEMS</b> production AI · policy-bound <span class="pos">CONTROLLED</span></span>
+        <span class="ticker-item"><b>FRACTIONAL CPO / CTO</b> embedded operator <span class="pos">DEPLOYED</span></span>
+        <span class="ticker-item"><b>RESEARCH INFRA</b> analyst scripts → AWS shared libraries <span class="pos">SHIPPED</span></span>
+        <span class="ticker-item"><b>LLM ANALYTICS</b> blank page → exec visibility <span class="pos">LIVE</span></span>
+        <span class="ticker-item"><b>PAYMENTS OPS</b> SEPA · FPS · FedNow · RTP · ACH <span class="pos">STP ↑</span></span>
+        <span class="ticker-item"><b>API PLATFORM</b> cloud migration · institutional ops <span class="pos">AT SCALE</span></span>
+        <span class="ticker-item"><b>DECISION SYSTEMS</b> production AI · policy-bound <span class="pos">CONTROLLED</span></span>
+        <span class="ticker-item"><b>FRACTIONAL CPO / CTO</b> embedded operator <span class="pos">DEPLOYED</span></span>
+      </div>
+    </div>
+    <div class="status-cluster">
+      <span class="status-pill">v26.05</span>
+      <span class="status-pill">EST. 2024</span>
+    </div>
+  </div>
+</header>
+
+<!-- NAV -->
+<input type="checkbox" id="menu-toggle" class="menu-toggle" aria-hidden="true" />
+<nav class="nav">
+  <a class="brand" href="#">
+    <span class="brand-mark">RS</span>
+    Rayleigh Stark
+  </a>
+  <div class="nav-center">
+    <a href="#surface">Surface</a>
+    <a href="#ledger">Mandates</a>
+    <a href="#services">Services</a>
+    <a href="#doctrine">Doctrine</a>
+    <a href="#contact">Contact</a>
+  </div>
+  <div class="nav-right">
+    <span class="cmdk">Search <span class="kbd">⌘ K</span></span>
+    <a class="nav-cta" href="#contact">Discuss Live Execution →</a>
+    <label for="menu-toggle" class="menu-btn" aria-label="Open menu"><span></span><span></span><span></span></label>
+  </div>
+</nav>
+<div class="nav-drawer">
+  <label for="menu-toggle" class="menu-close" aria-label="Close menu">CLOSE ×</label>
+  <a href="#surface">§ 01 Surface</a>
+  <a href="#ledger">§ 02 Mandate ledger</a>
+  <a href="#services">§ 03 Service library</a>
+  <a href="#doctrine">§ 04 Doctrine</a>
+  <a href="#contact">§ 05 Contact</a>
+  <a href="#contact" style="color:var(--accent);margin-top:14px">Discuss live execution →</a>
+</div>
+
+<!-- HERO -->
+<section class="block hero">
+  <div class="hero-grid">
+    <div>
+      <div class="hero-meta">
+        <span>RAYLEIGH STARK · DOCTRINE 001</span>
+        <span class="hero-meta-divider"></span>
+        <span>WE TAKE OPERATIONAL OWNERSHIP</span>
+      </div>
+
+      <h1 class="hero-headline">
+        We run the<br>
+        systems that<br>
+        <span class="underline">can't go down</span>.
+      </h1>
+
+      <p class="hero-sub">
+        Trading desks, payments operations, settlement infrastructure, research platforms —
+        <b>built on Wall Street operating discipline.</b> Where data, decisions, and capital
+        break apart, we take operational ownership and make them run under real-world constraints.
+      </p>
+
+      <div class="hero-actions">
+        <a class="btn-primary" href="#contact">Bring a broken flow →</a>
+        <a class="btn-ghost" href="#doctrine">Read the doctrine</a>
+      </div>
+    </div>
+
+    <!-- LIVE TAPE -->
+    <aside class="tape" aria-label="Recent operator activity">
+      <div class="tape-head">
+        <span>Recent / Anonymized</span>
+        <span class="tape-live"><span class="tape-pulse"></span> LIVE</span>
+      </div>
+
+      <div class="tape-row">
+        <span class="tape-time">M-006</span>
+        <div class="tape-body">
+          <span class="tag">RESEARCH INFRA · INSTITUTIONAL</span>
+          <span class="line">Analyst scripts → AWS shared libraries + client sim</span>
+        </div>
+        <span class="tape-metric green">SHIPPED</span>
+      </div>
+
+      <div class="tape-row">
+        <span class="tape-time">M-005</span>
+        <div class="tape-body">
+          <span class="tag">LLM ANALYTICS · WALL ST.</span>
+          <span class="line">Blank page → executive-level visibility</span>
+        </div>
+        <span class="tape-metric">EXEC VIS.</span>
+      </div>
+
+      <div class="tape-row">
+        <span class="tape-time">M-004</span>
+        <div class="tape-body">
+          <span class="tag">PAYMENTS · DECISION-SPEED</span>
+          <span class="line">SEPA · FPS · FedNow · RTP · ACH · SWIFT gpi</span>
+        </div>
+        <span class="tape-metric green">STP ↑</span>
+      </div>
+
+      <div class="tape-row">
+        <span class="tape-time">M-003</span>
+        <div class="tape-body">
+          <span class="tag">API PLATFORM · CLOUD MIGRATION</span>
+          <span class="line">Institutional ops &amp; risk infrastructure at scale</span>
+        </div>
+        <span class="tape-metric">AT SCALE</span>
+      </div>
+
+      <div class="tape-row">
+        <span class="tape-time">M-002</span>
+        <div class="tape-body">
+          <span class="tag">DECISION RELIABILITY</span>
+          <span class="line">Production AI · policy-bound · operator-owned</span>
+        </div>
+        <span class="tape-metric green">CONTROLLED</span>
+      </div>
+
+      <div class="tape-foot">
+        <span>Wall St.-calibre · without the overhead</span>
+        <a href="#ledger">See full ledger →</a>
+      </div>
+    </aside>
+  </div>
+</section>
+
+<!-- BAND -->
+<section class="block band">
+  <span class="band-label">Built for</span>
+  <div class="band-tags">
+    <span class="tag-chip solid">Trading desks</span>
+    <span class="tag-chip">Payments operations</span>
+    <span class="tag-chip">Settlement infrastructure</span>
+    <span class="tag-chip">Research platforms</span>
+    <span class="tag-chip">M&amp;A intelligence</span>
+    <span class="tag-chip">Decision systems</span>
+  </div>
+  <span class="band-label" style="text-align:right;border-left:none;border-right:2px solid var(--accent);padding-left:0;padding-right:14px">NYC / LON</span>
+</section>
+
+<!-- ============ OPERATING SURFACE ============ -->
+<section class="block section" id="surface">
+  <div class="section-head">
+    <span class="section-num">§ 01 / SURFACE</span>
+    <div>
+      <p class="section-eyebrow">The operating surface</p>
+      <h2 class="section-heading">Four stages. <span class="accent">One system.</span></h2>
+    </div>
+    <p class="section-side">
+      Most teams break between them.<br>
+      We take ownership across all four.
+    </p>
+  </div>
+
+  <div class="surface">
+    <article class="stage">
+      <div class="stage-num">§01 <span class="arrow">→</span> INGEST</div>
+      <h3 class="stage-title">Data &amp; signals,<br>governed at the edge</h3>
+      <p class="stage-desc">Multi-venue connectivity, market &amp; alt data, governed ingestion with provenance for every record.</p>
+      <div class="stage-ex">
+        <span><b>Trading:</b> 14 venues unified</span>
+        <span><b>Research:</b> alt data lineage</span>
+      </div>
+    </article>
+
+    <article class="stage">
+      <div class="stage-num">§02 <span class="arrow">→</span> DECIDE</div>
+      <h3 class="stage-title">Decisions, built<br>under pressure</h3>
+      <p class="stage-desc">Production AI and rules — models, escalation, human-in-the-loop where it counts. Faster signal-to-action loops.</p>
+      <div class="stage-ex">
+        <span><b>Payments:</b> exception triage</span>
+        <span><b>M&amp;A:</b> diligence intelligence</span>
+      </div>
+    </article>
+
+    <article class="stage">
+      <div class="stage-num">§03 <span class="arrow">→</span> EXECUTE</div>
+      <h3 class="stage-title">Capital moves,<br>without leakage</h3>
+      <p class="stage-desc">Settlement, payment rails, order routing, fund movement — engineered for throughput and reversibility.</p>
+      <div class="stage-ex">
+        <span><b>Settlement:</b> 11bps recovered</span>
+        <span><b>Payments:</b> STP rate up</span>
+      </div>
+    </article>
+
+    <article class="stage">
+      <div class="stage-num">§04 <span class="arrow">→</span> AUDIT</div>
+      <h3 class="stage-title">Evidence, ready<br>before it's asked</h3>
+      <p class="stage-desc">Control surfaces, audit trails, regulatory artifacts — produced as a byproduct, not a project.</p>
+      <div class="stage-ex">
+        <span><b>Research:</b> governance gates</span>
+        <span><b>All:</b> control evidence</span>
+      </div>
+    </article>
+  </div>
+</section>
+
+<!-- ============ MANDATE LEDGER ============ -->
+<section class="block section" id="ledger">
+  <div class="section-head">
+    <span class="section-num">§ 02 / LEDGER</span>
+    <div>
+      <p class="section-eyebrow">Recent mandates · anonymized</p>
+      <h2 class="section-heading">The work, on the <span class="accent">record</span>.</h2>
+    </div>
+    <p class="section-side">
+      Real engagements.<br>
+      <a href="#contact">Request full references →</a>
+    </p>
+  </div>
+
+  <div class="ledger">
+    <div class="ledger-head">
+      <span>ID</span>
+      <span>Mandate</span>
+      <span>Context</span>
+      <span>Outcome</span>
+      <span></span>
+    </div>
+
+    <a class="ledger-row" href="case-study-governed-research-infrastructure.html">
+      <span class="ledger-id">M-006</span>
+      <div class="ledger-title">
+        Governed research infrastructure
+        <small>Analyst scripts → AWS shared libraries + client sim</small>
+      </div>
+      <span class="ledger-context">Institutional research<br>desk-owned tooling at scale</span>
+      <div class="ledger-metric">SHIPPED<small>case study live</small></div>
+      <span class="ledger-arrow">→</span>
+    </a>
+
+    <a class="ledger-row" href="#">
+      <span class="ledger-id">M-005</span>
+      <div class="ledger-title">
+        LLM analytics platform · zero-to-prod
+        <small>Blank page → executive-level visibility</small>
+      </div>
+      <span class="ledger-context">Wall Street firm<br>analytics for senior leadership</small></span>
+      <div class="ledger-metric green">EXEC VIS.<small>achieved &amp; live</small></div>
+      <span class="ledger-arrow">→</span>
+    </a>
+
+    <a class="ledger-row" href="#">
+      <span class="ledger-id">M-004</span>
+      <div class="ledger-title">
+        Payments decision-speed sprint
+        <small>SEPA · FPS · FedNow · RTP · ACH · SWIFT gpi</small>
+      </div>
+      <span class="ledger-context">Payments ops · cross-border<br>fiat &harr; digital-asset on/off-ramp</span>
+      <div class="ledger-metric green">STP &uarr;<small>exception cycle &darr;</small></div>
+      <span class="ledger-arrow">→</span>
+    </a>
+
+    <a class="ledger-row" href="#">
+      <span class="ledger-id">M-003</span>
+      <div class="ledger-title">
+        API platform &amp; cloud migration
+        <small>Institutional ops &amp; risk infrastructure</small>
+      </div>
+      <span class="ledger-context">Wall Street firm<br>regulated environment, at scale</span>
+      <div class="ledger-metric">AT SCALE<small>migrated &amp; live</small></div>
+      <span class="ledger-arrow">→</span>
+    </a>
+
+    <a class="ledger-row" href="#">
+      <span class="ledger-id">M-002</span>
+      <div class="ledger-title">
+        Decision reliability engineering
+        <small>Production AI · controls · audit trail</small>
+      </div>
+      <span class="ledger-context">High-consequence decisions<br>policy-bound execution</span>
+      <div class="ledger-metric">CONTROLLED<small>operator-owned</small></div>
+      <span class="ledger-arrow">→</span>
+    </a>
+
+    <a class="ledger-row" href="#">
+      <span class="ledger-id">M-001</span>
+      <div class="ledger-title">
+        Fractional CPO / CTO deployment
+        <small>Embedded leadership on live execution</small>
+      </div>
+      <span class="ledger-context">Founder-led teams<br>moving serious work forward</span>
+      <div class="ledger-metric amber">EMBEDDED<small>operator role</small></div>
+      <span class="ledger-arrow">→</span>
+    </a>
+  </div>
+</section>
+
+<!-- ============ SERVICE TREE ============ -->
+<section class="block section" id="services">
+  <div class="section-head">
+    <span class="section-num">§ 03 / SERVICES</span>
+    <div>
+      <p class="section-eyebrow">Service library · src/</p>
+      <h2 class="section-heading">What we run, <span class="accent">end-to-end</span>.</h2>
+    </div>
+    <p class="section-side">
+      Mandates start as a single<br>service or a full surface.
+    </p>
+  </div>
+
+  <div class="tree-grid">
+    <div>
+      <div class="tree-group">
+        <div class="tree-group-title">/decision-systems</div>
+        <a class="tree-item" href="#">
+          <span class="twig">└─</span>
+          <span>Agentic AI operations</span>
+          <span class="meta">PROD-AI</span>
+        </a>
+        <a class="tree-item" href="#">
+          <span class="twig">└─</span>
+          <span>Decision reliability engineering</span>
+          <span class="meta">RELIAB.</span>
+        </a>
+        <a class="tree-item" href="#">
+          <span class="twig">└─</span>
+          <span>Intelligent data pipelines</span>
+          <span class="meta">DATA</span>
+        </a>
+        <a class="tree-item" href="#">
+          <span class="twig">└─</span>
+          <span>Decision systems modernization</span>
+          <span class="meta">MOD.</span>
+        </a>
+      </div>
+
+      <div class="tree-group">
+        <div class="tree-group-title">/execution</div>
+        <a class="tree-item" href="#">
+          <span class="twig">└─</span>
+          <span>Execution performance diagnostic</span>
+          <span class="meta">DIAG.</span>
+        </a>
+        <a class="tree-item" href="#">
+          <span class="twig">└─</span>
+          <span>Multi-venue connectivity / API layer</span>
+          <span class="meta">VENUE</span>
+        </a>
+        <a class="tree-item" href="#">
+          <span class="twig">└─</span>
+          <span>Trading, risk &amp; inventory operations</span>
+          <span class="meta">RISK</span>
+        </a>
+      </div>
+    </div>
+
+    <div>
+      <div class="tree-group">
+        <div class="tree-group-title">/payments-and-settlement</div>
+        <a class="tree-item" href="#">
+          <span class="twig">└─</span>
+          <span>Payments decision-speed sprint</span>
+          <span class="meta">SPRINT</span>
+        </a>
+        <a class="tree-item" href="#">
+          <span class="twig">└─</span>
+          <span>Escrow intelligence automation</span>
+          <span class="meta">ESCROW</span>
+        </a>
+        <a class="tree-item" href="#">
+          <span class="twig">└─</span>
+          <span>Industrial coordination &amp; settlement</span>
+          <span class="meta">SETTLE</span>
+        </a>
+      </div>
+
+      <div class="tree-group">
+        <div class="tree-group-title">/advisory</div>
+        <a class="tree-item" href="#">
+          <span class="twig">└─</span>
+          <span>AI due diligence</span>
+          <span class="meta">DD</span>
+        </a>
+        <a class="tree-item" href="#">
+          <span class="twig">└─</span>
+          <span>M&amp;A advisory intelligence</span>
+          <span class="meta">M&amp;A</span>
+        </a>
+        <a class="tree-item" href="#">
+          <span class="twig">└─</span>
+          <span>Fractional AI leadership</span>
+          <span class="meta">FRAC.</span>
+        </a>
+        <a class="tree-item" href="#">
+          <span class="twig">└─</span>
+          <span>Platform diagnostic</span>
+          <span class="meta">PLAT.</span>
+        </a>
+      </div>
+
+      <div class="tree-group">
+        <div class="tree-group-title">/control-and-cost</div>
+        <a class="tree-item" href="#">
+          <span class="twig">└─</span>
+          <span>Cloud cost control</span>
+          <span class="meta">SPEND</span>
+        </a>
+        <a class="tree-item" href="#">
+          <span class="twig">└─</span>
+          <span>Private markets technology</span>
+          <span class="meta">PRIV.</span>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ DOCTRINE ============ -->
+<section class="block section" id="doctrine">
+  <div class="section-head">
+    <span class="section-num">§ 04 / DOCTRINE</span>
+    <div>
+      <p class="section-eyebrow">How we operate</p>
+      <h2 class="section-heading">Operating principles, <span class="accent">non-negotiable</span>.</h2>
+    </div>
+    <p class="section-side">
+      A short doctrine.<br>
+      Mostly what we refuse to do.
+    </p>
+  </div>
+
+  <div class="doctrine">
+    <article class="principle">
+      <div class="principle-num">¶ 001</div>
+      <h3 class="principle-title">We take <em>operational ownership</em>, not advisory tickets.</h3>
+      <p class="principle-body">If a system doesn't run, the engagement isn't done. We name the operator, set the gate, ship the change, and stay on the on-call rotation until the metric holds.</p>
+    </article>
+
+    <article class="principle">
+      <div class="principle-num">¶ 002</div>
+      <h3 class="principle-title">Evidence is <em>a byproduct</em>, not a deliverable.</h3>
+      <p class="principle-body">Audit trails, control surfaces, and regulatory artifacts are produced as the system runs — not assembled in a sprint after the fact. The work and the proof are the same artifact.</p>
+    </article>
+
+    <article class="principle">
+      <div class="principle-num">¶ 003</div>
+      <h3 class="principle-title">We refuse the <em>slide deck</em> deliverable.</h3>
+      <p class="principle-body">A working pipeline, a control gate, a runbook owned by a named person. The artifact is the system. If we hand back a deck, we have failed.</p>
+    </article>
+  </div>
+
+  <!-- founder signature block — uses real bio -->
+  <div style="margin-top:48px;padding:28px 30px;border:1px solid var(--line-strong);display:grid;grid-template-columns:auto 1fr auto;gap:32px;align-items:center;background:linear-gradient(180deg,rgba(255,255,255,.014),rgba(255,255,255,0))">
+    <div style="font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);writing-mode:vertical-rl;transform:rotate(180deg);padding:8px 0;border-left:2px solid var(--accent);padding-left:8px">Signed</div>
+    <div>
+      <div style="font-family:'Inter Tight',sans-serif;font-weight:700;font-size:20px;letter-spacing:-.015em;color:var(--paper);margin-bottom:4px">Anthony Kwawu <span style="color:var(--muted);font-weight:400;font-size:14px">— Founder</span></div>
+      <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);line-height:1.7">
+        ~ Decade on Wall Street &nbsp;·&nbsp; LLM analytics → exec visibility<br>
+        API platforms · cloud migration at scale · institutional ops &amp; risk infra
+      </div>
+    </div>
+    <div style="font-family:'Inter Tight',sans-serif;font-weight:600;font-size:13px;color:var(--accent);text-transform:uppercase;letter-spacing:.1em;text-align:right;line-height:1.5">
+      Wall Street-calibre<br>
+      <span style="color:var(--paper);font-weight:500">execution.</span><br>
+      <span style="color:var(--muted);font-weight:400;font-size:11px;letter-spacing:.08em">— without the overhead</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CONTACT ============ -->
+<section class="block contact" id="contact">
+  <div class="contact-grid">
+    <div>
+      <p class="section-eyebrow" style="margin-bottom:14px">§ 05 / INTAKE</p>
+      <h2>Bring a <span class="accent">broken flow</span>.</h2>
+      <p class="contact-sub">
+        <b>We don't pitch.</b> We set scope, ownership, and the first control decision inside the first call.
+        If the flow is real and the work is in our surface, you'll have a written scope inside 72 hours.
+      </p>
+      <div class="contact-actions">
+        <a class="btn-primary" href="https://calendly.com/tonykkwawu/30min">Book 30-min briefing →</a>
+        <a class="btn-ghost" href="mailto:contact@rayleighstark.com">contact@rayleighstark.com</a>
+      </div>
+    </div>
+
+    <div class="terminal" aria-hidden="true">
+      <span class="term-line"><span class="prompt">$</span> rs intake --new</span>
+      <span class="term-line"><span class="out">→ surface</span></span>
+      <span class="term-line">&nbsp;&nbsp;[ ] trading desk</span>
+      <span class="term-line">&nbsp;&nbsp;[<span class="green">x</span>] payments operations</span>
+      <span class="term-line">&nbsp;&nbsp;[ ] settlement</span>
+      <span class="term-line">&nbsp;&nbsp;[ ] research infra</span>
+      <span class="term-line"><span class="out">→ scope</span></span>
+      <span class="term-line">&nbsp;&nbsp;exception queue at 14%</span>
+      <span class="term-line">&nbsp;&nbsp;straight-through rate stalled</span>
+      <span class="term-line"><span class="out">→ status</span> <span class="amber">awaiting operator</span></span>
+      <div class="term-input">
+        <span class="prompt">$</span>
+        <span>route to rayleigh stark</span>
+        <span class="caret"></span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- big wordmark -->
+<div class="wordmark" aria-hidden="true">RAYLEIGH&nbsp;STARK</div>
+
+<!-- FOOTER -->
+<footer class="foot">
+  <div class="foot-grid">
+    <div>
+      <div class="foot-brand">Rayleigh Stark</div>
+      <p class="foot-tag">We make complex systems run. Built on Wall Street operating discipline · NYC / LON · Est. 2024.</p>
+    </div>
+    <div class="foot-col">
+      <h4>Surface</h4>
+      <a href="#surface">Operating surface</a>
+      <a href="#ledger">Mandate ledger</a>
+      <a href="#services">Service library</a>
+      <a href="#doctrine">Doctrine</a>
+    </div>
+    <div class="foot-col">
+      <h4>Firm</h4>
+      <a href="#">About</a>
+      <a href="#">Operator notes</a>
+      <a href="#">Press</a>
+      <a href="#">Careers</a>
+    </div>
+    <div class="foot-col">
+      <h4>Contact</h4>
+      <a href="mailto:contact@rayleighstark.com">contact@rayleighstark.com</a>
+      <a href="#">Book briefing →</a>
+      <a href="#">Terms</a>
+    </div>
+  </div>
+  <div class="foot-strip">
+    <span>© Rayleigh Stark · 2026</span>
+    <span>BUILD 26.05 · DOCTRINE 001</span>
+    <span><span class="dot" style="background:var(--green);box-shadow:0 0 8px rgba(127,224,166,.6)"></span> &nbsp;SYS / OPERATIONAL</span>
+  </div>
+</footer>
+
+</body>
+</html>

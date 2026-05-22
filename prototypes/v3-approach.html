@@ -1,0 +1,297 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Approach · Rayleigh Stark</title>
+<meta name="description" content="How a Rayleigh Stark engagement runs from diagnostic to first agent to handover." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@300;400;500;600&family=Inter+Tight:wght@500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#0A0B0E;
+    --line:rgba(255,255,255,.07);
+    --line-strong:rgba(255,255,255,.16);
+    --paper:#EFEAE0;
+    --muted:rgba(239,234,224,.55);
+    --muted-2:rgba(239,234,224,.38);
+    --accent:#38bdf8;
+    --green:#7FE0A6;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0;background:var(--ink);color:var(--paper);font-family:'Inter',sans-serif;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+  body{min-height:100vh;overflow-x:hidden}
+  ::selection{background:var(--accent);color:var(--ink)}
+  a{color:inherit}
+  body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:1;opacity:.45;background-image:linear-gradient(rgba(255,255,255,.022) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.022) 1px,transparent 1px);background-size:56px 56px}
+
+  .statusbar{position:sticky;top:0;z-index:50;border-bottom:1px solid var(--line);background:rgba(10,11,14,.88);backdrop-filter:saturate(140%) blur(10px);font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+  .statusbar-inner{display:flex;align-items:center;justify-content:space-between;padding:10px 24px;gap:24px}
+  .status-cluster{display:flex;gap:18px;align-items:center}
+  .status-pill{display:inline-flex;align-items:center;gap:8px}
+  .dot{width:7px;height:7px;border-radius:50%;background:var(--green);box-shadow:0 0 8px rgba(127,224,166,.7);display:inline-block}
+
+  .nav{position:relative;z-index:5;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;padding:18px 24px}
+  .brand{font-family:'Inter Tight',sans-serif;font-weight:700;font-size:15px;letter-spacing:-.01em;display:flex;align-items:center;gap:10px;color:var(--paper);text-decoration:none}
+  .brand-mark{width:24px;height:24px;border:1.5px solid var(--paper);display:inline-flex;align-items:center;justify-content:center;font-family:'IBM Plex Mono',monospace;font-size:10px;font-weight:600}
+  .nav-right{display:flex;gap:22px;align-items:center}
+  .nav-link{font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);text-decoration:none}
+  .nav-link.is-current{color:var(--paper);border-bottom:1px solid var(--accent);padding-bottom:4px}
+  .nav-link:hover{color:var(--paper)}
+  .nav-cta{font-family:'IBM Plex Mono',monospace;font-size:12px;text-transform:uppercase;letter-spacing:.06em;background:var(--accent);color:var(--ink);text-decoration:none;padding:10px 14px;border:1px solid var(--accent);transition:transform .15s,box-shadow .15s;font-weight:600}
+  .nav-cta:hover{transform:translate(-1px,-1px);box-shadow:2px 2px 0 var(--paper)}
+
+  .crumb{padding:24px 24px 0;max-width:1180px;margin:0 auto;font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);display:flex;gap:8px;align-items:center;flex-wrap:wrap;position:relative;z-index:2}
+  .crumb a{color:var(--muted);text-decoration:none}
+  .crumb a:hover{color:var(--paper)}
+  .crumb .sep{color:var(--muted-2)}
+  .crumb .current{color:var(--paper)}
+
+  .hero{padding:80px 24px 56px;max-width:1180px;margin:0 auto;position:relative;z-index:2}
+  .eyebrow{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);margin-bottom:22px;display:inline-flex;align-items:center;gap:12px}
+  .eyebrow::after{content:'';width:36px;height:1px;background:var(--accent)}
+  h1.h{font-family:'Inter Tight',sans-serif;font-weight:700;font-size:clamp(40px,5.6vw,84px);line-height:.98;letter-spacing:-.03em;margin:0 0 32px;color:var(--paper);max-width:22ch}
+  h1.h .accent{color:var(--accent)}
+  .lede{font-size:19px;line-height:1.55;color:var(--muted);max-width:62ch;margin:0}
+  .lede b{color:var(--paper);font-weight:500}
+
+  .stages{
+    max-width:1180px;margin:48px auto 0;padding:0 24px;position:relative;z-index:2;
+  }
+  .stage{
+    border-top:1px solid var(--line);padding:48px 0;
+    display:grid;grid-template-columns:200px 1fr;gap:48px;
+  }
+  .stage:last-of-type{border-bottom:1px solid var(--line)}
+  .stage-meta{
+    font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.12em;
+    text-transform:uppercase;color:var(--muted);line-height:1.7;
+  }
+  .stage-meta .num{
+    display:inline-block;background:var(--accent);color:var(--ink);
+    padding:4px 8px;letter-spacing:.06em;font-weight:600;margin-bottom:12px;
+  }
+  .stage-meta .duration{color:var(--paper);margin-top:8px}
+  .stage h2{
+    font-family:'Inter Tight',sans-serif;font-weight:600;
+    font-size:32px;letter-spacing:-.02em;color:var(--paper);
+    margin:0 0 18px;line-height:1.1;
+  }
+  .stage h2 .accent{color:var(--accent)}
+  .stage p{font-size:16.5px;line-height:1.6;color:var(--muted);margin:0 0 14px;max-width:62ch}
+  .stage p b{color:var(--paper);font-weight:500}
+
+  .refuse{
+    margin:64px 24px 0;padding:36px 36px;border:1px solid var(--line-strong);
+    max-width:1180px;margin-left:auto;margin-right:auto;position:relative;z-index:2;
+    background:linear-gradient(180deg,rgba(255,255,255,.014),rgba(255,255,255,0));
+  }
+  .refuse-eyebrow{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);margin-bottom:18px}
+  .refuse h3{font-family:'Inter Tight',sans-serif;font-weight:600;font-size:26px;letter-spacing:-.015em;color:var(--paper);margin:0 0 14px}
+  .refuse p{font-size:16px;line-height:1.6;color:var(--muted);margin:0 0 10px;max-width:64ch}
+  .refuse p b{color:var(--paper);font-weight:500}
+
+  .credibility{
+    margin:80px 24px 0;padding:48px 56px;border:1px solid var(--line-strong);
+    max-width:1180px;margin-left:auto;margin-right:auto;position:relative;z-index:2;
+    background:linear-gradient(180deg,rgba(255,255,255,.018),rgba(255,255,255,0));
+  }
+  .credibility-eyebrow{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);margin-bottom:18px}
+  .credibility p{font-family:'Inter Tight',sans-serif;font-weight:400;font-size:21px;line-height:1.45;letter-spacing:-.005em;color:var(--paper);margin:0;max-width:72ch}
+  .credibility p b{color:var(--accent);font-weight:500}
+
+  .contact-block{
+    padding:96px 24px 80px;max-width:1180px;margin:0 auto;position:relative;z-index:2;
+  }
+  .contact-line{font-family:'Inter Tight',sans-serif;font-weight:500;font-size:clamp(24px,3vw,40px);line-height:1.1;letter-spacing:-.02em;color:var(--paper);margin:0 0 24px;max-width:24ch}
+  .contact-email{display:inline-block;font-family:'IBM Plex Mono',monospace;font-size:20px;letter-spacing:.02em;color:var(--accent);text-decoration:none;border-bottom:1px solid var(--accent);padding-bottom:4px}
+  .contact-email:hover{color:var(--paper);border-bottom-color:var(--paper)}
+
+  footer.foot{padding:28px 24px;color:var(--muted);position:relative;z-index:2;border-top:1px solid var(--line)}
+  .foot-strip{max-width:1180px;margin:0 auto;display:flex;justify-content:space-between;font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+  .foot-legal{max-width:1180px;margin:18px auto 0;padding-top:14px;border-top:1px dashed var(--line);display:flex;justify-content:space-between;align-items:center;font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.08em;color:var(--muted-2);text-transform:none}
+  .foot-legal a{color:var(--muted);text-decoration:none;border-bottom:1px solid var(--line-strong);padding-bottom:1px;margin-right:18px}
+  .foot-legal a:hover{color:var(--paper);border-bottom-color:var(--paper)}
+  .foot-legal-links{display:flex;align-items:center;gap:18px}
+
+  @media(max-width:760px){
+    .statusbar-inner{flex-wrap:wrap;gap:10px;padding:8px 16px}
+    .status-cluster:last-child{display:none}
+    .nav{padding:14px 16px;gap:12px}
+    .nav-link{display:none}
+    .hero{padding:48px 16px 32px}
+    h1.h{font-size:clamp(32px,9vw,56px)}
+    .stages{padding:0 16px}
+    .stage{grid-template-columns:1fr;gap:18px;padding:32px 0}
+    .stage h2{font-size:24px}
+    .refuse,.credibility{margin:48px 16px 0;padding:28px 22px}
+    .credibility p{font-size:17px}
+    .contact-block{padding:56px 16px}
+    .foot-strip{flex-direction:column;gap:10px;align-items:flex-start}
+    .foot-legal{flex-direction:column;gap:10px;align-items:flex-start}
+  }
+
+  @media print{
+    @page{size:1440px 3200px;margin:0}
+    html,body{width:1440px}
+    body::before{display:none}
+    .statusbar{position:relative}
+  }
+</style>
+</head>
+<body>
+
+<header class="statusbar">
+  <div class="statusbar-inner">
+    <div class="status-cluster">
+      <span class="status-pill"><span class="dot"></span> SYS / OPERATIONAL</span>
+      <span class="status-pill">London / New York</span>
+      <span class="status-pill">OPERATOR-LED</span>
+    </div>
+    <div class="status-cluster">
+      <span class="status-pill">v26.05</span>
+    </div>
+  </div>
+</header>
+
+<nav class="nav">
+  <a class="brand" href="v3-home.html">
+    <span class="brand-mark">RS</span>
+    Rayleigh Stark
+  </a>
+  <div class="nav-right">
+    <a class="nav-link is-current" href="v3-approach.html">Approach</a>
+    <a class="nav-link" href="v3-about.html">About</a>
+    <a class="nav-link" href="v3-contact.html">Contact</a>
+    <a class="nav-cta" href="mailto:contact@rayleighstark.com?subject=Put an agent on the book">Put an agent on the book →</a>
+  </div>
+</nav>
+
+<div class="crumb">
+  <a href="v3-home.html">RS</a>
+  <span class="sep">/</span>
+  <span class="current">approach</span>
+</div>
+
+<section class="hero">
+  <div class="eyebrow">How the work runs</div>
+  <h1 class="h">
+    From diagnostic, to first agent, to <span class="accent">live in your stack.</span>
+  </h1>
+  <p class="lede">
+    Two fixed-scope engagements. <b>The artifact is an agent watching the book,</b>
+    not a deck. We stay on call through the first month of live operation.
+  </p>
+</section>
+
+<div class="stages">
+
+  <section class="stage">
+    <div class="stage-meta">
+      <span class="num">§ 01</span><br>
+      Diagnostic
+      <span class="duration">Two to three weeks</span>
+    </div>
+    <div>
+      <h2>We sit with the team running the <span class="accent">book.</span></h2>
+      <p>
+        We watch where signals are missing, where escalation paths break, where
+        out-of-hours coverage thins, and where the team is acting on incomplete picture.
+      </p>
+      <p>
+        <b>The output is a prioritised monitoring architecture:</b> which surfaces matter
+        most, what coverage looks like, what signals are needed, what escalation paths
+        should fire, and what the measurable targets are in coverage, signal-to-escalation
+        time, and false positive rate.
+      </p>
+    </div>
+  </section>
+
+  <section class="stage">
+    <div class="stage-meta">
+      <span class="num">§ 02</span><br>
+      First agent
+      <span class="duration">Six to eight weeks</span>
+    </div>
+    <div>
+      <h2>We pick one surface and <span class="accent">build the agent against real data.</span></h2>
+      <p>
+        News ingestion, error system integration, policy-bound escalation logic, audit
+        trail. We work alongside the team that owns the book, in the operator's stack,
+        not a sandbox.
+      </p>
+      <p>
+        <b>The agent ships into production with measurable improvement</b> in coverage or
+        response time, and with a named operator on the client side accountable for it.
+      </p>
+    </div>
+  </section>
+
+  <section class="stage">
+    <div class="stage-meta">
+      <span class="num">§ 03</span><br>
+      Handover
+      <span class="duration">First month live</span>
+    </div>
+    <div>
+      <h2>Policy versioned. Kill switches in place. <span class="accent">Evidence ready.</span></h2>
+      <p>
+        Operator-named ownership on the client side. Policy versioned. Kill switches
+        configured for the head of risk and the ops head. Evidence retention configured
+        to BCBS 239 or the institution's equivalent.
+      </p>
+      <p>
+        We stay on call through the first month of live operation. After that, the team
+        runs the agent. We do not become a permanent dependency.
+      </p>
+    </div>
+  </section>
+
+</div>
+
+<section class="refuse">
+  <div class="refuse-eyebrow">What we refuse</div>
+  <h3>The artifact is the agent. Not a deck.</h3>
+  <p>
+    We do not hand back a slide deck. We do not write a strategy paper. We do not run
+    a multi-year programme.
+  </p>
+  <p>
+    <b>If we leave and the book is not being watched better than when we arrived, the
+    engagement failed.</b>
+  </p>
+</section>
+
+<section class="credibility">
+  <div class="credibility-eyebrow">Who builds the agent</div>
+  <p>
+    <b>Eight years inside a global investment bank,</b> building LLM analytics platforms,
+    decision systems, and monitoring infrastructure for institutional teams. Direct work
+    across high-value payments, transaction monitoring, and operational risk. Now applying
+    that operating discipline to always-on agents inside regulated financial institutions.
+  </p>
+</section>
+
+<section class="contact-block">
+  <h2 class="contact-line">Email a short note about a surface you'd want watched.</h2>
+  <a class="contact-email" href="mailto:contact@rayleighstark.com">contact@rayleighstark.com</a>
+</section>
+
+<footer class="foot">
+  <div class="foot-strip">
+    <span>Rayleigh Stark · London · New York</span>
+    <span>Always-on monitoring for institutional books</span>
+    <span><span class="dot"></span> &nbsp;SYS / OPERATIONAL</span>
+  </div>
+  <div class="foot-legal">
+    <span>Rayleigh Stark is a trading name of Premium Services &amp; Network UK Ltd.</span>
+    <span class="foot-legal-links">
+      <a href="v3-terms.html">Terms</a>
+      <span>© Rayleigh Stark · 2026</span>
+    </span>
+  </div>
+</footer>
+
+</body>
+</html>

@@ -4,33 +4,7 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Terms · Rayleigh Stark</title>
-    <meta name="description" content="Terms governing use of the Rayleigh Stark website. Operating from London and New York." />
-    <link rel="canonical" href="https://rayleighstark.com/terms" />
-    <link rel="image_src" href="https://rayleighstark.com/og-image.png?v=26.05f" />
-    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png" />
-    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
-    <link rel="icon" type="image/png" sizes="192x192" href="/favicon-192.png" />
-    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
-    <meta name="robots" content="index,follow" />
-    <meta name="author" content="Rayleigh Stark" />
-    <meta property="og:title" content="Terms · Rayleigh Stark" />
-    <meta property="og:description" content="Terms for the Rayleigh Stark website." />
-    <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://rayleighstark.com/terms" />
-    <meta property="og:site_name" content="Rayleigh Stark" />
-    <meta property="og:image" content="https://rayleighstark.com/og-image.png?v=26.05f" />
-    <meta name="image" content="https://rayleighstark.com/og-image.png?v=26.05f" />
-    <meta itemprop="image" content="https://rayleighstark.com/og-image.png?v=26.05f" />
-    <meta property="og:image:secure_url" content="https://rayleighstark.com/og-image.png?v=26.05f" />
-    <meta property="og:image:type" content="image/png" />
-    <meta property="og:image:width" content="1200" />
-    <meta property="og:image:height" content="630" />
-    <meta property="og:image:alt" content="Rayleigh Stark · The always-on operations layer for stablecoins" />
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Terms · Rayleigh Stark" />
-    <meta name="twitter:description" content="Terms for the Rayleigh Stark website." />
-    <meta name="twitter:image" content="https://rayleighstark.com/og-image.png?v=26.05f" />
-    <meta name="twitter:image:alt" content="Rayleigh Stark · The always-on operations layer for stablecoins" />
+<meta name="description" content="Terms for the Rayleigh Stark website." />
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@300;400;500;600&family=Inter+Tight:wght@500;600;700;800&display=swap" rel="stylesheet">
@@ -40,42 +14,25 @@
     --line:rgba(255,255,255,.07);
     --line-strong:rgba(255,255,255,.16);
     --paper:#EFEAE0;
-    --muted:rgba(239,234,224,.72);
-    --muted-2:rgba(239,234,224,.54);
-    --accent:#EFEAE0;
+    --muted:rgba(239,234,224,.55);
+    --muted-2:rgba(239,234,224,.38);
+    --accent:#38bdf8;
     --green:#7FE0A6;
-    --gold:#D4A24A;
   }
-  .outline-gold{color:var(--gold)}
   *{box-sizing:border-box}
-  html,body{margin:0;padding:0;background:var(--ink);color:var(--paper);font-family:'Inter',sans-serif;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;overflow-wrap:break-word}
+  html,body{margin:0;padding:0;background:var(--ink);color:var(--paper);font-family:'Inter',sans-serif;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
   body{min-height:100vh;overflow-x:hidden}
   ::selection{background:var(--accent);color:var(--ink)}
   a{color:inherit}
   body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:1;opacity:.45;background-image:linear-gradient(rgba(255,255,255,.022) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.022) 1px,transparent 1px);background-size:56px 56px}
-  /* Scanline grain · same aesthetic family as the Doré app, far more restrained.
-     Fixed full-viewport overlay, behind content, at a fraction of the app's 0.22
-     opacity so it reads as tactile surface, never as a CRT. */
-  body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;background-image:repeating-linear-gradient(0deg,rgba(0,0,0,0) 0 2px,rgba(0,0,0,.13) 2px 3px)}
 
-  /* Unified sticky header · statusbar + nav scroll together as one block */
-  .site-header{
-    position:sticky;top:0;z-index:60;
-    background:rgba(10,11,14,.92);
-    backdrop-filter:saturate(140%) blur(10px);
-    -webkit-backdrop-filter:saturate(140%) blur(10px);
-    border-bottom:1px solid var(--line);
-  }
-  .site-header .nav{border-bottom:none;background:transparent}
-  .site-header .statusbar{background:transparent;backdrop-filter:none;-webkit-backdrop-filter:none}
-
-  .statusbar{position:relative;z-index:1;border-bottom:1px solid var(--line);background:rgba(10,11,14,.88);backdrop-filter:saturate(140%) blur(10px);font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
-  .statusbar-inner{display:flex;align-items:center;justify-content:space-between;padding:10px 24px;gap:24px;max-width:1440px;margin:0 auto}
+  .statusbar{position:sticky;top:0;z-index:50;border-bottom:1px solid var(--line);background:rgba(10,11,14,.88);backdrop-filter:saturate(140%) blur(10px);font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+  .statusbar-inner{display:flex;align-items:center;justify-content:space-between;padding:10px 24px;gap:24px}
   .status-cluster{display:flex;gap:18px;align-items:center}
   .status-pill{display:inline-flex;align-items:center;gap:8px}
   .dot{width:7px;height:7px;border-radius:50%;background:var(--green);box-shadow:0 0 8px rgba(127,224,166,.7);display:inline-block}
 
-  .nav{position:relative;z-index:5;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;padding:18px 24px;max-width:1440px;margin:0 auto}
+  .nav{position:relative;z-index:5;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;padding:18px 24px}
   .brand{font-family:'Inter Tight',sans-serif;font-weight:700;font-size:15px;letter-spacing:-.01em;display:flex;align-items:center;gap:10px;color:var(--paper);text-decoration:none}
   .brand-mark{width:24px;height:24px;border:1.5px solid var(--paper);display:inline-flex;align-items:center;justify-content:center;font-family:'IBM Plex Mono',monospace;font-size:10px;font-weight:600}
   .nav-right{display:flex;gap:22px;align-items:center}
@@ -142,27 +99,12 @@
   .foot-legal a{color:var(--muted);text-decoration:none;border-bottom:1px solid var(--line-strong);padding-bottom:1px;margin-right:18px}
   .foot-legal a:hover{color:var(--paper);border-bottom-color:var(--paper)}
   .foot-legal-links{display:flex;align-items:center;gap:18px}
-@media(max-width:760px){
-    /* Phones · only brand + CTA in the header; nav links accessible via /about, /contact, /approach pages.
-       The header stays compact and never wraps text. */
-    .nav-right .nav-link{display:none}
-    .nav{padding:12px 14px;gap:10px}
-    .brand{font-size:13px;gap:8px;white-space:nowrap;flex-shrink:0}
-    .brand-mark{width:22px;height:22px;font-size:9px;flex-shrink:0}
-    .nav-cta{font-size:10.5px;padding:8px 12px;white-space:nowrap;letter-spacing:.06em}
-    .statusbar-inner{padding:6px 14px;font-size:9.5px;gap:14px}
-    .status-cluster{gap:10px}
 
+  @media(max-width:760px){
     .statusbar-inner{flex-wrap:wrap;gap:10px;padding:8px 16px}
     .status-cluster:last-child{display:none}
     .nav{padding:14px 16px;gap:12px}
-    .nav-right{gap:14px}
-    .nav-link{font-size:10.5px;letter-spacing:.04em}
-    .nav-cta{font-size:10.5px;padding:8px 10px;letter-spacing:.04em}
-    .brand{font-size:13px}
-    .brand-mark{width:22px;height:22px;font-size:9px}
-
-    
+    .nav-link{display:none}
     .hero{padding:40px 16px 24px}
     h1.h{font-size:clamp(32px,9vw,52px)}
     .doc{padding:0 16px}
@@ -175,88 +117,41 @@
   @media print{
     @page{size:1440px 3000px;margin:0}
     html,body{width:1440px}
-    body::before,body::after{display:none}
+    body::before{display:none}
     .statusbar{position:relative}
-  }
-
-  /* MOBILE POLISH · final pass, matches index.html.
-     Statusbar is decorative — drop it on phones to recover header height.
-     Show brand + menu links inline so they stay fixed at top; content
-     scrolls underneath through the blurred sticky header. */
-  @media(max-width:760px){
-    .statusbar{display:none}
-    .site-header{border-bottom:1px solid var(--line)}
-    .nav{padding:11px 14px;gap:10px;align-items:center}
-    .brand{font-size:12.5px;gap:8px;min-width:0}
-    .brand-mark{width:22px;height:22px;font-size:9px;flex-shrink:0}
-    .brand-text{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-    .nav-right{gap:16px;flex-shrink:0}
-    .nav-right .nav-link{display:inline-flex;font-size:10px;letter-spacing:.06em;white-space:nowrap;color:var(--muted)}
-    .nav-link.is-current{color:var(--paper);border-bottom:1px solid var(--accent);padding-bottom:3px}
-    .nav-cta{display:none}
-
-    /* Document rhythm · tighter for editorial readability */
-    .crumb{padding:18px 16px 0}
-    .hero{padding:28px 16px 16px}
-    .eyebrow{font-size:10px;margin-bottom:14px}
-    h1.h{font-size:clamp(34px,9.5vw,52px);line-height:1.02;letter-spacing:-.025em;margin:0 0 16px}
-    .lede{font-size:15.5px;line-height:1.55}
-    .doc{margin:32px auto 0}
-    .doc-grid{padding:20px 0;gap:10px}
-    .doc-num{font-size:10.5px;line-height:1.6}
-    .doc-num .tag{padding:3px 7px;font-size:10px;margin-bottom:6px}
-    .doc-body h2{font-size:19px;margin:0 0 10px}
-    .doc-body p{font-size:14.5px;line-height:1.6;margin:0 0 10px}
-    .firm-note{margin:32px 16px 0;padding:22px 20px}
-    .firm-note-eyebrow{font-size:10px;margin-bottom:10px}
-    .firm-note p{font-size:15px;line-height:1.5}
-    .foot{padding:20px 16px;margin-top:40px}
-  }
-  @media(max-width:380px){
-    .brand-text{display:none}
-    .brand-mark{width:24px;height:24px;font-size:9.5px}
-    .nav-right{gap:13px}
-    .nav-right .nav-link{font-size:9.5px;letter-spacing:.04em}
   }
 </style>
 </head>
 <body>
 
-<!-- Off-screen <img> referencing the OG image so body-image extractors
-     (LinkedIn, some social inspectors) find a real <img> in the DOM. -->
-<img src="https://rayleighstark.com/og-image.png?v=26.05f"
-     alt="Rayleigh Stark · The always-on operations layer for stablecoins"
-     width="1200" height="630"
-     loading="lazy" decoding="async" aria-hidden="true"
-     style="position:absolute;left:-9999px;top:0;width:1px;height:1px;opacity:0;pointer-events:none">
-
-
-<div class="site-header">
 <header class="statusbar">
   <div class="statusbar-inner">
     <div class="status-cluster">
-      <span class="status-pill"><span class="dot"></span> The operations layer</span>
+      <span class="status-pill"><span class="dot"></span> SYS / OPERATIONAL</span>
+      <span class="status-pill">London / New York</span>
+      <span class="status-pill">OPERATOR-LED</span>
     </div>
     <div class="status-cluster">
-      <span class="status-pill">For programmable money</span>
+      <span class="status-pill">v26.05</span>
     </div>
   </div>
 </header>
+
 <nav class="nav">
-  <a class="brand" href="/">
+  <a class="brand" href="v3-home.html">
     <span class="brand-mark">RS</span>
-    <span class="brand-text">Rayleigh Stark</span>
+    Rayleigh Stark
   </a>
   <div class="nav-right">
-    <a class="nav-link" href="/approach">Approach</a>
-    <a class="nav-link" href="/about">About</a>
-    <a class="nav-link" href="/contact">Contact</a>
-    <a class="nav-cta" href="/#use-cases">See use cases →</a>
+    <a class="nav-link" href="v3-approach.html">Approach</a>
+    <a class="nav-link" href="v3-about.html">About</a>
+    <a class="nav-link" href="v3-contact.html">Contact</a>
+    <a class="nav-cta" href="mailto:contact@rayleighstark.com?subject=Put an agent on the book">Put an agent on the book →</a>
   </div>
 </nav>
-</div>
+
 <div class="crumb">
-  <a href="/">RS</a>
+  <a href="v3-home.html">RS</a>
   <span class="sep">/</span>
   <span class="current">terms</span>
 </div>
@@ -273,7 +168,7 @@
 <div class="doc">
 
   <section class="doc-grid">
-    <div class="doc-num"><span class="tag">01</span><br>Use of site</div>
+    <div class="doc-num"><span class="tag">§ 01</span><br>Use of site</div>
     <div class="doc-body">
       <h2>Use of site</h2>
       <p>You may use this site for lawful informational purposes only. You agree not to interfere with site operation, security, or availability.</p>
@@ -281,7 +176,7 @@
   </section>
 
   <section class="doc-grid">
-    <div class="doc-num"><span class="tag">02</span><br>No professional advice</div>
+    <div class="doc-num"><span class="tag">§ 02</span><br>No professional advice</div>
     <div class="doc-body">
       <h2>No professional advice</h2>
       <p>Content on this site is provided for general information and does not constitute legal, financial, investment, tax, or other professional advice.</p>
@@ -289,7 +184,7 @@
   </section>
 
   <section class="doc-grid">
-    <div class="doc-num"><span class="tag">03</span><br>Intellectual property</div>
+    <div class="doc-num"><span class="tag">§ 03</span><br>Intellectual property</div>
     <div class="doc-body">
       <h2>Intellectual property</h2>
       <p>All site content, branding, and materials are owned by Rayleigh Stark or used with permission and may not be reproduced without prior written consent.</p>
@@ -297,7 +192,7 @@
   </section>
 
   <section class="doc-grid">
-    <div class="doc-num"><span class="tag">04</span><br>External links</div>
+    <div class="doc-num"><span class="tag">§ 04</span><br>External links</div>
     <div class="doc-body">
       <h2>External links</h2>
       <p>This site may link to third-party websites. Rayleigh Stark is not responsible for third-party content, policies, or availability.</p>
@@ -305,7 +200,7 @@
   </section>
 
   <section class="doc-grid">
-    <div class="doc-num"><span class="tag">05</span><br>Contact</div>
+    <div class="doc-num"><span class="tag">§ 05</span><br>Contact</div>
     <div class="doc-body">
       <h2>Contact</h2>
       <p>For terms-related enquiries: <a href="mailto:contact@rayleighstark.com">contact@rayleighstark.com</a>.</p>
@@ -325,19 +220,17 @@
 <footer class="foot">
   <div class="foot-strip">
     <span>Rayleigh Stark · London · New York</span>
-    <span>Always-on agents for stablecoin operations</span>
+    <span>Always-on monitoring for institutional books</span>
     <span><span class="dot"></span> &nbsp;SYS / OPERATIONAL</span>
   </div>
   <div class="foot-legal">
     <span>Rayleigh Stark is a trading name of Premium Services &amp; Network UK Ltd.</span>
     <span class="foot-legal-links">
-      <a href="/terms">Terms</a>
+      <a href="v3-terms.html">Terms</a>
       <span>© Rayleigh Stark · 2026</span>
     </span>
   </div>
 </footer>
-
-
 
 </body>
 </html>

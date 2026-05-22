@@ -1,0 +1,337 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Prototype B — Editorial Manifesto</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#F4EFE6;
+    --paper-2:#EBE4D6;
+    --ink:#15130F;
+    --ink-2:#2C2823;
+    --muted:#6B6258;
+    --rule:#15130F;
+    --accent:#B5301A;   /* burnt vermillion */
+    --accent-soft:rgba(181,48,26,.12);
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0;background:var(--paper);color:var(--ink);font-family:'Inter',sans-serif;-webkit-font-smoothing:antialiased}
+  ::selection{background:var(--ink);color:var(--paper)}
+
+  /* paper grain */
+  body::before{
+    content:'';position:fixed;inset:0;pointer-events:none;z-index:1;
+    background-image:radial-gradient(rgba(21,19,15,.025) 1px, transparent 1px);
+    background-size:3px 3px;opacity:.7;
+  }
+
+  /* ============ MASTHEAD ============ */
+  .masthead{
+    border-bottom:1.5px solid var(--rule);
+    padding:18px 32px;
+    display:grid;grid-template-columns:1fr auto 1fr;
+    align-items:center;gap:24px;
+    font-family:'JetBrains Mono',monospace;
+    font-size:11px;letter-spacing:.14em;text-transform:uppercase;
+    color:var(--ink-2);
+    position:relative;z-index:2;
+  }
+  .masthead .left{display:flex;gap:24px;align-items:center}
+  .masthead .center{
+    font-family:'Fraunces',serif;
+    font-weight:500;font-size:22px;letter-spacing:-.01em;
+    text-transform:none;color:var(--ink);
+  }
+  .masthead .right{display:flex;gap:24px;justify-content:flex-end;align-items:center}
+  .masthead a{color:var(--ink-2);text-decoration:none;border-bottom:1px solid transparent;transition:border-color .2s}
+  .masthead a:hover{border-color:var(--ink)}
+
+  /* second rule line — newspaper double-rule */
+  .double-rule{
+    border-bottom:1px solid var(--rule);
+    padding:8px 32px;
+    display:flex;justify-content:space-between;align-items:center;
+    font-family:'JetBrains Mono',monospace;font-size:10px;
+    letter-spacing:.18em;text-transform:uppercase;color:var(--muted);
+    position:relative;z-index:2;
+  }
+  .double-rule .dot{
+    width:6px;height:6px;border-radius:50%;background:var(--accent);
+    display:inline-block;vertical-align:middle;margin-right:8px;
+  }
+
+  /* ============ HERO ============ */
+  .hero{
+    padding:80px 32px 56px;
+    position:relative;z-index:2;
+    max-width:1480px;margin:0 auto;
+  }
+
+  .issue-label{
+    font-family:'JetBrains Mono',monospace;
+    font-size:11px;letter-spacing:.18em;text-transform:uppercase;
+    color:var(--accent);
+    display:inline-flex;gap:14px;align-items:center;
+    margin-bottom:48px;
+  }
+  .issue-label::after{
+    content:'';width:64px;height:1px;background:var(--accent);
+  }
+
+  h1.manifesto{
+    font-family:'Fraunces',serif;
+    font-variation-settings:"opsz" 144;
+    font-weight:400;
+    font-size:clamp(56px, 9vw, 156px);
+    line-height:.92;
+    letter-spacing:-.035em;
+    margin:0 0 28px;
+    color:var(--ink);
+  }
+  h1.manifesto .italic{
+    font-style:italic;
+    font-weight:300;
+    color:var(--accent);
+  }
+  h1.manifesto .small-em{
+    font-family:'Fraunces',serif;
+    font-style:italic;
+    font-weight:300;
+    font-size:.45em;
+    color:var(--muted);
+    vertical-align:baseline;
+    letter-spacing:0;
+  }
+
+  /* layout: lede + dropcap */
+  .lede-grid{
+    display:grid;
+    grid-template-columns:1.4fr 1fr;
+    gap:80px;
+    margin-top:56px;
+    padding-top:36px;
+    border-top:1px solid var(--rule);
+  }
+  .lede{
+    font-family:'Fraunces',serif;
+    font-weight:300;
+    font-size:24px;
+    line-height:1.4;
+    letter-spacing:-.005em;
+    color:var(--ink);
+    column-count:1;
+    max-width:62ch;
+  }
+  .lede .dropcap{
+    float:left;
+    font-family:'Fraunces',serif;
+    font-weight:500;
+    font-size:84px;
+    line-height:.85;
+    padding:6px 12px 0 0;
+    color:var(--accent);
+  }
+  .lede b{font-weight:500;color:var(--ink)}
+
+  /* right column: annotated index */
+  .index-col{
+    border-left:1px solid var(--rule);
+    padding-left:40px;
+  }
+  .index-eyebrow{
+    font-family:'JetBrains Mono',monospace;
+    font-size:10px;letter-spacing:.18em;text-transform:uppercase;
+    color:var(--muted);margin-bottom:24px;
+  }
+  .index-list{margin:0;padding:0;list-style:none}
+  .index-row{
+    display:grid;grid-template-columns:auto 1fr auto;gap:16px;
+    padding:12px 0;border-bottom:1px dashed rgba(21,19,15,.2);
+    font-family:'Inter',sans-serif;font-size:14px;line-height:1.4;
+  }
+  .index-row:last-child{border-bottom:none}
+  .index-num{
+    font-family:'JetBrains Mono',monospace;
+    color:var(--muted);font-size:11px;letter-spacing:.05em;padding-top:3px;
+  }
+  .index-row .label{color:var(--ink);font-weight:500}
+  .index-row .sub{display:block;color:var(--muted);font-size:12.5px;margin-top:2px}
+  .index-page{
+    font-family:'Fraunces',serif;font-style:italic;font-size:14px;
+    color:var(--accent);padding-top:1px;white-space:nowrap;
+  }
+
+  /* CTA strip below the lede */
+  .cta-strip{
+    margin-top:48px;
+    display:flex;align-items:center;gap:24px;
+    padding-top:28px;border-top:1px solid var(--rule);
+  }
+  .btn-major{
+    background:var(--ink);color:var(--paper);text-decoration:none;
+    font-family:'Fraunces',serif;font-style:italic;font-weight:400;font-size:18px;
+    padding:18px 28px;display:inline-flex;align-items:center;gap:14px;
+    transition:background .2s;
+  }
+  .btn-major:hover{background:var(--accent)}
+  .btn-major .arrow{font-style:normal;font-family:'Inter',sans-serif;font-weight:500}
+  .btn-quiet{
+    color:var(--ink);text-decoration:underline;text-decoration-color:var(--accent);
+    text-underline-offset:5px;text-decoration-thickness:2px;
+    font-family:'Inter',sans-serif;font-size:14px;font-weight:500;
+  }
+  .signature-stamp{
+    margin-left:auto;
+    font-family:'JetBrains Mono',monospace;font-size:10.5px;
+    letter-spacing:.14em;text-transform:uppercase;color:var(--muted);
+    text-align:right;line-height:1.6;
+    border:1px solid var(--ink);padding:10px 14px;
+  }
+  .signature-stamp b{color:var(--accent);font-weight:500}
+
+  /* ============ FOLIO STRIP (footer) ============ */
+  .folio{
+    border-top:1.5px solid var(--rule);
+    margin-top:72px;
+    padding:18px 32px;
+    display:flex;justify-content:space-between;
+    font-family:'JetBrains Mono',monospace;
+    font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;
+    color:var(--muted);
+    position:relative;z-index:2;
+  }
+
+  @media(max-width:980px){
+    .masthead{grid-template-columns:1fr}
+    .masthead .left,.masthead .right{justify-content:flex-start}
+    .lede-grid{grid-template-columns:1fr;gap:48px}
+    .index-col{border-left:none;border-top:1px solid var(--rule);padding-left:0;padding-top:36px}
+    .cta-strip{flex-wrap:wrap}
+    .signature-stamp{margin-left:0;width:100%;text-align:left}
+  }
+</style>
+</head>
+<body>
+
+<!-- MASTHEAD -->
+<header class="masthead">
+  <div class="left">
+    <span>Vol. II · No. 05</span>
+    <span>2026 — Summer Quarter</span>
+  </div>
+  <div class="center">Rayleigh Stark</div>
+  <div class="right">
+    <a href="#">Doctrine</a>
+    <a href="#">Mandates</a>
+    <a href="#">Notes</a>
+    <a href="#">Briefing →</a>
+  </div>
+</header>
+
+<div class="double-rule">
+  <span><span class="dot"></span> Operating — NYC &nbsp;·&nbsp; LON</span>
+  <span>Critical systems &nbsp;·&nbsp; Built on Wall Street &nbsp;·&nbsp; Est. 2024</span>
+  <span>EDITION 26.05</span>
+</div>
+
+<!-- HERO -->
+<section class="hero">
+
+  <div class="issue-label">The Operating Doctrine</div>
+
+  <h1 class="manifesto">
+    Built for the<br>
+    systems that<br>
+    <span class="italic">cannot</span> go down.<span class="small-em"> &nbsp;¶ 001</span>
+  </h1>
+
+  <div class="lede-grid">
+
+    <p class="lede">
+      <span class="dropcap">W</span>e take operational ownership of the work that holds capital,
+      decisions, and execution together. <b>Trading desks. Payments operations.
+      Settlement infrastructure. Research platforms. Decision systems under pressure.</b>
+      Where the flow breaks between data, models, and the people who answer for outcomes —
+      we step in, set scope, and run the system until it stops being fragile.
+      Built on Wall Street operating discipline, deployed in environments where downtime is not academic.
+    </p>
+
+    <aside class="index-col" aria-label="Recent mandates">
+      <p class="index-eyebrow">Recent — Anonymized</p>
+      <ul class="index-list">
+
+        <li class="index-row">
+          <span class="index-num">01</span>
+          <div>
+            <span class="label">Payments operations · Tier-1 bank</span>
+            <span class="sub">Exception queue from 14% to 3%</span>
+          </div>
+          <span class="index-page">— 79%</span>
+        </li>
+
+        <li class="index-row">
+          <span class="index-num">02</span>
+          <div>
+            <span class="label">Governed research infrastructure</span>
+            <span class="sub">Multi-manager hedge fund · production</span>
+          </div>
+          <span class="index-page">shipped</span>
+        </li>
+
+        <li class="index-row">
+          <span class="index-num">03</span>
+          <div>
+            <span class="label">Settlement &amp; commodities</span>
+            <span class="sub">11bps leakage closed across venues</span>
+          </div>
+          <span class="index-page">+ 11bps</span>
+        </li>
+
+        <li class="index-row">
+          <span class="index-num">04</span>
+          <div>
+            <span class="label">Trading decision loops</span>
+            <span class="sub">Signal-to-action cycle time</span>
+          </div>
+          <span class="index-page">3.4 ×</span>
+        </li>
+
+        <li class="index-row">
+          <span class="index-num">05</span>
+          <div>
+            <span class="label">M&amp;A due diligence intelligence</span>
+            <span class="sub">Time-to-signal in data rooms</span>
+          </div>
+          <span class="index-page">9d → 2d</span>
+        </li>
+
+      </ul>
+    </aside>
+  </div>
+
+  <div class="cta-strip">
+    <a class="btn-major" href="#">
+      Bring a broken flow <span class="arrow">→</span>
+    </a>
+    <a class="btn-quiet" href="#">Read the full doctrine</a>
+    <div class="signature-stamp">
+      <b>RS</b> · We make complex systems run<br>
+      Operating discipline — NYC / LON
+    </div>
+  </div>
+
+</section>
+
+<!-- FOLIO -->
+<footer class="folio">
+  <span>Rayleigh Stark — The Operating Doctrine</span>
+  <span>contact@rayleighstark.com</span>
+  <span>p. 001</span>
+</footer>
+
+</body>
+</html>

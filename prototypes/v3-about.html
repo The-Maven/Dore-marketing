@@ -1,0 +1,335 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>About · Rayleigh Stark</title>
+<meta name="description" content="Anthony Kwawu, founder. Eight years inside a global investment bank, building LLM analytics platforms, decision systems, and monitoring infrastructure for institutional teams." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@300;400;500;600&family=Inter+Tight:wght@500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#0A0B0E;
+    --line:rgba(255,255,255,.07);
+    --line-strong:rgba(255,255,255,.16);
+    --paper:#EFEAE0;
+    --muted:rgba(239,234,224,.55);
+    --muted-2:rgba(239,234,224,.38);
+    --accent:#38bdf8;
+    --green:#7FE0A6;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0;background:var(--ink);color:var(--paper);font-family:'Inter',sans-serif;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+  body{min-height:100vh;overflow-x:hidden}
+  ::selection{background:var(--accent);color:var(--ink)}
+  a{color:inherit}
+  body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:1;opacity:.45;background-image:linear-gradient(rgba(255,255,255,.022) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.022) 1px,transparent 1px);background-size:56px 56px}
+
+  .statusbar{position:sticky;top:0;z-index:50;border-bottom:1px solid var(--line);background:rgba(10,11,14,.88);backdrop-filter:saturate(140%) blur(10px);font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+  .statusbar-inner{display:flex;align-items:center;justify-content:space-between;padding:10px 24px;gap:24px}
+  .status-cluster{display:flex;gap:18px;align-items:center}
+  .status-pill{display:inline-flex;align-items:center;gap:8px}
+  .dot{width:7px;height:7px;border-radius:50%;background:var(--green);box-shadow:0 0 8px rgba(127,224,166,.7);display:inline-block}
+
+  .nav{position:relative;z-index:5;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;padding:18px 24px}
+  .brand{font-family:'Inter Tight',sans-serif;font-weight:700;font-size:15px;letter-spacing:-.01em;display:flex;align-items:center;gap:10px;color:var(--paper);text-decoration:none}
+  .brand-mark{width:24px;height:24px;border:1.5px solid var(--paper);display:inline-flex;align-items:center;justify-content:center;font-family:'IBM Plex Mono',monospace;font-size:10px;font-weight:600}
+  .nav-right{display:flex;gap:22px;align-items:center}
+  .nav-link{font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);text-decoration:none}
+  .nav-link.is-current{color:var(--paper);border-bottom:1px solid var(--accent);padding-bottom:4px}
+  .nav-link:hover{color:var(--paper)}
+  .nav-cta{font-family:'IBM Plex Mono',monospace;font-size:12px;text-transform:uppercase;letter-spacing:.06em;background:var(--accent);color:var(--ink);text-decoration:none;padding:10px 14px;border:1px solid var(--accent);transition:transform .15s,box-shadow .15s;font-weight:600}
+  .nav-cta:hover{transform:translate(-1px,-1px);box-shadow:2px 2px 0 var(--paper)}
+
+  .crumb{padding:24px 24px 0;max-width:1180px;margin:0 auto;font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);display:flex;gap:8px;align-items:center;flex-wrap:wrap;position:relative;z-index:2}
+  .crumb a{color:var(--muted);text-decoration:none}
+  .crumb a:hover{color:var(--paper)}
+  .crumb .sep{color:var(--muted-2)}
+  .crumb .current{color:var(--paper)}
+
+  /* HERO with avatar */
+  .hero{
+    padding:64px 24px 56px;max-width:1180px;margin:0 auto;
+    display:grid;grid-template-columns:320px 1fr;gap:64px;align-items:start;
+    position:relative;z-index:2;
+  }
+  .avatar-wrap{
+    position:relative;
+  }
+  .avatar-label{
+    font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:.18em;
+    text-transform:uppercase;color:var(--accent);margin-bottom:14px;
+    display:inline-flex;align-items:center;gap:10px;
+  }
+  .avatar-label::before{content:'';width:24px;height:1px;background:var(--accent)}
+  .avatar{
+    width:320px;height:320px;
+    border:1px solid var(--line-strong);
+    background:#08090c;
+    overflow:hidden;
+    position:relative;
+  }
+  .avatar img{
+    width:100%;height:100%;object-fit:cover;object-position:center 8%;
+    display:block;
+    /* gentle treatment to fit terminal aesthetic without losing the human */
+    filter:contrast(1.02) saturate(.86);
+  }
+  /* corner ticks · terminal frame */
+  .avatar::before,.avatar::after{
+    content:'';position:absolute;width:14px;height:14px;border-color:var(--accent);
+    border-style:solid;border-width:0;pointer-events:none;
+  }
+  .avatar::before{top:6px;left:6px;border-top-width:1.5px;border-left-width:1.5px}
+  .avatar::after{bottom:6px;right:6px;border-bottom-width:1.5px;border-right-width:1.5px}
+  .avatar-id{
+    margin-top:14px;
+    font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.08em;
+    color:var(--muted);text-transform:uppercase;line-height:1.7;
+  }
+  .avatar-id b{color:var(--paper);font-weight:500}
+  .avatar-link{
+    color:var(--accent);text-decoration:none;
+    border-bottom:1px solid var(--accent);padding-bottom:1px;
+    transition:color .2s,border-color .2s;
+  }
+  .avatar-link:hover{color:var(--paper);border-bottom-color:var(--paper)}
+
+  .bio{padding-top:8px}
+  .eyebrow{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);margin-bottom:22px;display:inline-flex;align-items:center;gap:12px}
+  .eyebrow::after{content:'';width:36px;height:1px;background:var(--accent)}
+  h1.h{font-family:'Inter Tight',sans-serif;font-weight:700;font-size:clamp(40px,5.6vw,80px);line-height:.98;letter-spacing:-.03em;margin:0 0 8px;color:var(--paper);max-width:18ch}
+  h1.h .accent{color:var(--accent)}
+  .role{font-family:'IBM Plex Mono',monospace;font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin:0 0 32px;padding-bottom:24px;border-bottom:1px solid var(--line)}
+  .role b{color:var(--paper);font-weight:500}
+
+  .bio-body{display:flex;flex-direction:column;gap:18px}
+  .bio-body p{font-size:17px;line-height:1.6;color:var(--muted);margin:0;max-width:62ch}
+  .bio-body p b{color:var(--paper);font-weight:500}
+  .bio-body p .accent{color:var(--accent);font-weight:500}
+
+  /* What I built strip */
+  .built{
+    margin:72px 24px 0;padding:0;max-width:1180px;
+    margin-left:auto;margin-right:auto;position:relative;z-index:2;
+  }
+  .built-head{
+    display:flex;justify-content:space-between;align-items:end;
+    padding-bottom:18px;margin-bottom:0;border-bottom:1px solid var(--line);
+  }
+  .built-head h2{
+    font-family:'Inter Tight',sans-serif;font-weight:600;
+    font-size:28px;letter-spacing:-.02em;color:var(--paper);margin:0;
+  }
+  .built-head h2 .accent{color:var(--accent)}
+  .built-head .meta{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+  .built-list{
+    display:grid;grid-template-columns:repeat(4,1fr);gap:0;
+    border:1px solid var(--line-strong);border-top:none;
+  }
+  .built-item{
+    padding:24px 22px 28px;border-right:1px solid var(--line);position:relative;
+    background:linear-gradient(180deg,rgba(255,255,255,.014),rgba(255,255,255,0));
+  }
+  .built-item:last-child{border-right:none}
+  .built-item::before{content:'';position:absolute;left:22px;top:0;width:32px;height:2px;background:var(--accent)}
+  .built-item .num{font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:.16em;color:var(--muted);text-transform:uppercase;margin-top:18px;margin-bottom:10px}
+  .built-item h3{font-family:'Inter Tight',sans-serif;font-weight:600;font-size:17px;letter-spacing:-.01em;color:var(--paper);margin:0 0 8px;line-height:1.2}
+  .built-item p{font-size:13.5px;line-height:1.5;color:var(--muted);margin:0}
+
+  /* Firm strip */
+  .firm{
+    margin:72px 24px 0;padding:40px 48px;border:1px solid var(--line-strong);
+    max-width:1180px;margin-left:auto;margin-right:auto;position:relative;z-index:2;
+    background:linear-gradient(180deg,rgba(255,255,255,.018),rgba(255,255,255,0));
+  }
+  .firm-eyebrow{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);margin-bottom:18px}
+  .firm h2{font-family:'Inter Tight',sans-serif;font-weight:500;font-size:24px;line-height:1.4;letter-spacing:-.01em;color:var(--paper);margin:0;max-width:72ch}
+  .firm h2 b{color:var(--accent);font-weight:500}
+
+  .contact-block{
+    padding:96px 24px 80px;max-width:1180px;margin:0 auto;position:relative;z-index:2;
+  }
+  .contact-line{font-family:'Inter Tight',sans-serif;font-weight:500;font-size:clamp(24px,3vw,40px);line-height:1.1;letter-spacing:-.02em;color:var(--paper);margin:0 0 24px;max-width:24ch}
+  .contact-email{display:inline-block;font-family:'IBM Plex Mono',monospace;font-size:20px;letter-spacing:.02em;color:var(--accent);text-decoration:none;border-bottom:1px solid var(--accent);padding-bottom:4px}
+  .contact-email:hover{color:var(--paper);border-bottom-color:var(--paper)}
+
+  footer.foot{padding:28px 24px;color:var(--muted);position:relative;z-index:2;border-top:1px solid var(--line)}
+  .foot-strip{max-width:1180px;margin:0 auto;display:flex;justify-content:space-between;font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+  .foot-legal{max-width:1180px;margin:18px auto 0;padding-top:14px;border-top:1px dashed var(--line);display:flex;justify-content:space-between;align-items:center;font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.08em;color:var(--muted-2);text-transform:none}
+  .foot-legal a{color:var(--muted);text-decoration:none;border-bottom:1px solid var(--line-strong);padding-bottom:1px;margin-right:18px}
+  .foot-legal a:hover{color:var(--paper);border-bottom-color:var(--paper)}
+  .foot-legal-links{display:flex;align-items:center;gap:18px}
+
+  @media(max-width:880px){
+    .hero{grid-template-columns:1fr;gap:36px}
+    .avatar{width:240px;height:240px}
+    .built-list{grid-template-columns:1fr 1fr}
+    .built-item:nth-child(2){border-right:none}
+    .built-item:nth-child(1),.built-item:nth-child(2){border-bottom:1px solid var(--line)}
+  }
+  @media(max-width:760px){
+    .statusbar-inner{flex-wrap:wrap;gap:10px;padding:8px 16px}
+    .status-cluster:last-child{display:none}
+    .nav{padding:14px 16px;gap:12px}
+    .nav-link{display:none}
+    .hero{padding:40px 16px 32px}
+    h1.h{font-size:clamp(32px,9vw,56px)}
+    .built,.firm{margin:48px 16px 0}
+    .firm{padding:28px 24px}
+    .firm h2{font-size:19px}
+    .built-list{grid-template-columns:1fr}
+    .built-item{border-right:none;border-bottom:1px solid var(--line)}
+    .built-item:last-child{border-bottom:none}
+    .contact-block{padding:56px 16px}
+    .foot-strip{flex-direction:column;gap:10px;align-items:flex-start}
+    .foot-legal{flex-direction:column;gap:10px;align-items:flex-start}
+  }
+
+  @media print{
+    @page{size:1440px 3600px;margin:0}
+    html,body{width:1440px}
+    body::before{display:none}
+    .statusbar{position:relative}
+  }
+</style>
+</head>
+<body>
+
+<header class="statusbar">
+  <div class="statusbar-inner">
+    <div class="status-cluster">
+      <span class="status-pill"><span class="dot"></span> SYS / OPERATIONAL</span>
+      <span class="status-pill">London / New York</span>
+      <span class="status-pill">OPERATOR-LED</span>
+    </div>
+    <div class="status-cluster">
+      <span class="status-pill">v26.05</span>
+    </div>
+  </div>
+</header>
+
+<nav class="nav">
+  <a class="brand" href="v3-home.html">
+    <span class="brand-mark">RS</span>
+    Rayleigh Stark
+  </a>
+  <div class="nav-right">
+    <a class="nav-link" href="v3-approach.html">Approach</a>
+    <a class="nav-link is-current" href="v3-about.html">About</a>
+    <a class="nav-link" href="v3-contact.html">Contact</a>
+    <a class="nav-cta" href="mailto:contact@rayleighstark.com?subject=Put an agent on the book">Put an agent on the book →</a>
+  </div>
+</nav>
+
+<div class="crumb">
+  <a href="v3-home.html">RS</a>
+  <span class="sep">/</span>
+  <span class="current">about</span>
+</div>
+
+<section class="hero">
+
+  <div class="avatar-wrap">
+    <div class="avatar-label">Operator · 01</div>
+    <div class="avatar">
+      <img src="../src/images/anthony-kwawu-portrait.png" alt="Anthony Kwawu" />
+    </div>
+    <div class="avatar-id">
+      <b>ID</b> &nbsp;&nbsp;&nbsp;01 / FOUNDER<br>
+      <b>BASE</b> &nbsp;London / New York<br>
+      <b>YEARS</b> &nbsp;8 inside a global investment bank<br>
+      <b>LINK</b> &nbsp;<a class="avatar-link" href="https://linkedin.com/in/anthony-kwawu" target="_blank" rel="noopener">linkedin.com/in/anthony-kwawu →</a>
+    </div>
+  </div>
+
+  <div class="bio">
+    <div class="eyebrow">Who builds the agent</div>
+    <h1 class="h">Anthony <span class="accent">Kwawu.</span></h1>
+    <p class="role"><b>Founder, Rayleigh Stark.</b> &nbsp;Always-on monitoring for institutional books.</p>
+
+    <div class="bio-body">
+      <p>
+        <b>Eight years inside a global investment bank,</b> building LLM analytics platforms,
+        decision systems, and monitoring infrastructure for institutional teams. Direct work
+        across high-value payments, transaction monitoring, and operational risk.
+      </p>
+      <p>
+        The work included taking an LLM-powered analytics platform from blank page to
+        executive-level visibility. Leading API platform development. Running cloud migration
+        at scale. Building infrastructure for institutional operations and risk teams.
+        Each one a system that had to perform under real load, with regulators looking on,
+        and operators in step.
+      </p>
+      <p>
+        <span class="accent">Now applying that operating discipline</span> to always-on agents inside regulated
+        financial institutions. The work is monitoring. Risk, exposures, news, operational
+        events. Policy-bound escalation when something needs human eyes.
+      </p>
+    </div>
+  </div>
+
+</section>
+
+<section class="built">
+  <div class="built-head">
+    <h2>What got <span class="accent">shipped.</span></h2>
+    <div class="meta">Inside the global investment bank · 2017–2025</div>
+  </div>
+  <div class="built-list">
+    <article class="built-item">
+      <div class="num">§ 01 · ANALYTICS</div>
+      <h3>LLM analytics platform</h3>
+      <p>From blank page to executive-level visibility for institutional teams.</p>
+    </article>
+    <article class="built-item">
+      <div class="num">§ 02 · DECISION SYSTEMS</div>
+      <h3>Decision and monitoring infrastructure</h3>
+      <p>Production systems supporting high-value payments and operational risk.</p>
+    </article>
+    <article class="built-item">
+      <div class="num">§ 03 · PLATFORM</div>
+      <h3>API platform development</h3>
+      <p>Led platform work supporting institutional operations and risk teams.</p>
+    </article>
+    <article class="built-item">
+      <div class="num">§ 04 · INFRA</div>
+      <h3>Cloud migration at scale</h3>
+      <p>Ran institutional workloads through a regulated cloud migration.</p>
+    </article>
+  </div>
+</section>
+
+<section class="firm">
+  <div class="firm-eyebrow">The firm, plainly</div>
+  <h2>
+    Rayleigh Stark operates from London and New York. Engagements are fixed-scope, fixed-fee.
+    Two shapes: a <b>Monitoring Diagnostic</b>, two to three weeks. A
+    <b>First Production Monitoring Agent</b>, six to eight weeks.
+    The artifact is the agent watching the book. Not a deck.
+  </h2>
+</section>
+
+<section class="contact-block">
+  <h2 class="contact-line">Email a short note about a surface you'd want watched.</h2>
+  <a class="contact-email" href="mailto:contact@rayleighstark.com?subject=Surface I'd want watched">contact@rayleighstark.com</a>
+</section>
+
+<footer class="foot">
+  <div class="foot-strip">
+    <span>Rayleigh Stark · London · New York</span>
+    <span>Always-on monitoring for institutional books</span>
+    <span><span class="dot"></span> &nbsp;SYS / OPERATIONAL</span>
+  </div>
+  <div class="foot-legal">
+    <span>Rayleigh Stark is a trading name of Premium Services &amp; Network UK Ltd.</span>
+    <span class="foot-legal-links">
+      <a href="v3-terms.html">Terms</a>
+      <span>© Rayleigh Stark · 2026</span>
+    </span>
+  </div>
+</footer>
+
+</body>
+</html>

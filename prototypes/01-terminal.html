@@ -1,0 +1,364 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Prototype A — Terminal / Operator's Console</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@300;400;500;600&family=Inter+Tight:wght@500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#0A0B0E;
+    --ink-2:#111317;
+    --line:rgba(255,255,255,.08);
+    --line-strong:rgba(255,255,255,.18);
+    --paper:#EFEAE0;
+    --muted:rgba(239,234,224,.55);
+    --muted-2:rgba(239,234,224,.38);
+    --accent:#E6FF3D;       /* electric lime — one accent, used sparingly */
+    --green:#7FE0A6;
+    --amber:#F7B955;
+    --red:#FF6B6B;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0;background:var(--ink);color:var(--paper);font-family:'Inter',sans-serif;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+  body{min-height:100vh;overflow-x:hidden}
+  ::selection{background:var(--accent);color:var(--ink)}
+
+  /* ============ STATUS BAR ============ */
+  .statusbar{
+    position:sticky;top:0;z-index:50;
+    border-bottom:1px solid var(--line);
+    background:rgba(10,11,14,.85);
+    backdrop-filter:saturate(140%) blur(8px);
+    font-family:'IBM Plex Mono',monospace;
+    font-size:11px;letter-spacing:.08em;text-transform:uppercase;
+    color:var(--muted);
+  }
+  .statusbar-inner{
+    display:flex;align-items:center;justify-content:space-between;
+    padding:10px 24px;gap:24px;
+  }
+  .status-cluster{display:flex;gap:18px;align-items:center}
+  .status-pill{display:inline-flex;align-items:center;gap:8px}
+  .dot{width:7px;height:7px;border-radius:50%;display:inline-block;background:var(--green);box-shadow:0 0 8px rgba(127,224,166,.7)}
+  .dot.amber{background:var(--amber);box-shadow:0 0 8px rgba(247,185,85,.55)}
+  .ticker{flex:1;overflow:hidden;position:relative;mask-image:linear-gradient(90deg,transparent,#000 10%,#000 90%,transparent)}
+  .ticker-track{display:inline-flex;gap:48px;white-space:nowrap;animation:slide 60s linear infinite}
+  @keyframes slide{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+  .ticker-item{color:var(--muted)}
+  .ticker-item b{color:var(--paper);font-weight:500;margin-right:6px}
+
+  /* ============ NAV ============ */
+  .nav{
+    border-bottom:1px solid var(--line);
+    display:flex;align-items:center;justify-content:space-between;
+    padding:18px 24px;
+  }
+  .brand{
+    font-family:'Inter Tight',sans-serif;
+    font-weight:700;font-size:15px;letter-spacing:-.01em;
+    display:flex;align-items:center;gap:10px;color:var(--paper);text-decoration:none;
+  }
+  .brand-mark{
+    width:22px;height:22px;border:1.5px solid var(--paper);
+    display:inline-flex;align-items:center;justify-content:center;
+    font-family:'IBM Plex Mono',monospace;font-size:10px;font-weight:600;
+  }
+  .nav-links{display:flex;gap:28px;font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.04em;text-transform:uppercase}
+  .nav-links a{color:var(--muted);text-decoration:none;transition:color .2s}
+  .nav-links a:hover{color:var(--paper)}
+  .nav-cta{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:12px;text-transform:uppercase;letter-spacing:.06em;
+    background:var(--paper);color:var(--ink);text-decoration:none;
+    padding:10px 16px;border:1px solid var(--paper);
+    display:inline-flex;align-items:center;gap:8px;
+    transition:transform .2s,background .2s;
+  }
+  .nav-cta:hover{background:var(--accent);border-color:var(--accent)}
+
+  /* ============ HERO ============ */
+  .hero{
+    padding:88px 24px 64px;
+    border-bottom:1px solid var(--line);
+    position:relative;
+  }
+  .hero-grid{
+    display:grid;grid-template-columns:1.5fr 1fr;gap:64px;
+    max-width:1400px;margin:0 auto;
+  }
+  .hero-meta{
+    font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.12em;text-transform:uppercase;
+    color:var(--muted);display:flex;gap:24px;margin-bottom:36px;align-items:center;
+  }
+  .hero-meta-divider{width:32px;height:1px;background:var(--line-strong)}
+  h1.hero-headline{
+    font-family:'Inter Tight',sans-serif;
+    font-weight:700;
+    font-size:clamp(48px, 7.2vw, 104px);
+    line-height:.96;
+    letter-spacing:-.035em;
+    margin:0 0 36px;
+    color:var(--paper);
+  }
+  .hero-headline .accent{color:var(--accent)}
+  .hero-headline .underline{
+    background-image:linear-gradient(var(--accent),var(--accent));
+    background-repeat:no-repeat;
+    background-size:100% 6px;
+    background-position:0 96%;
+    padding-bottom:2px;
+  }
+  .hero-sub{
+    font-size:18px;line-height:1.55;color:var(--muted);
+    max-width:54ch;margin:0 0 40px;
+  }
+  .hero-sub b{color:var(--paper);font-weight:500}
+  .hero-actions{display:flex;gap:14px;align-items:center}
+  .btn-primary{
+    background:var(--accent);color:var(--ink);
+    font-family:'Inter Tight',sans-serif;font-weight:600;font-size:14px;
+    padding:14px 22px;text-decoration:none;
+    display:inline-flex;align-items:center;gap:10px;
+    border:1px solid var(--accent);
+    transition:transform .2s;
+  }
+  .btn-primary:hover{transform:translate(-1px,-1px);box-shadow:3px 3px 0 var(--paper)}
+  .btn-ghost{
+    color:var(--paper);text-decoration:none;
+    font-family:'IBM Plex Mono',monospace;font-size:13px;letter-spacing:.04em;
+    text-transform:uppercase;
+    padding:14px 18px;border:1px solid var(--line-strong);
+    transition:border-color .2s;
+  }
+  .btn-ghost:hover{border-color:var(--paper)}
+
+  /* ============ LIVE TAPE (right column) ============ */
+  .tape{
+    border:1px solid var(--line-strong);
+    background:linear-gradient(180deg,rgba(255,255,255,.02),rgba(255,255,255,0));
+    padding:24px;
+    position:relative;
+    align-self:start;
+  }
+  .tape::before{
+    content:'';position:absolute;inset:-1px;border:1px solid var(--accent);
+    opacity:.0;pointer-events:none;transition:opacity .3s;
+  }
+  .tape:hover::before{opacity:.4}
+  .tape-head{
+    display:flex;justify-content:space-between;align-items:center;
+    font-family:'IBM Plex Mono',monospace;font-size:11px;
+    letter-spacing:.1em;text-transform:uppercase;color:var(--muted);
+    padding-bottom:14px;border-bottom:1px solid var(--line);margin-bottom:18px;
+  }
+  .tape-live{display:inline-flex;align-items:center;gap:8px;color:var(--green)}
+  .tape-pulse{width:6px;height:6px;border-radius:50%;background:var(--green);animation:pulse 1.5s infinite}
+  @keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
+  .tape-row{
+    display:grid;grid-template-columns:auto 1fr auto;gap:14px;
+    padding:14px 0;border-bottom:1px dashed var(--line);
+    font-family:'IBM Plex Mono',monospace;font-size:12.5px;
+    line-height:1.4;
+  }
+  .tape-row:last-child{border-bottom:none}
+  .tape-time{color:var(--muted-2);font-size:11px;padding-top:2px}
+  .tape-body{color:var(--paper)}
+  .tape-body .tag{
+    display:inline-block;font-size:10px;letter-spacing:.08em;
+    color:var(--muted);text-transform:uppercase;margin-bottom:4px;
+  }
+  .tape-body .line{display:block}
+  .tape-metric{
+    font-family:'Inter Tight',sans-serif;
+    color:var(--accent);font-weight:600;font-size:13px;
+    white-space:nowrap;padding-top:2px;
+  }
+  .tape-metric.green{color:var(--green)}
+  .tape-metric.amber{color:var(--amber)}
+
+  /* ============ BAND: WHO WE WORK WITH ============ */
+  .band{
+    border-bottom:1px solid var(--line);
+    padding:36px 24px;
+    display:grid;grid-template-columns:auto 1fr auto;
+    gap:48px;align-items:center;
+    max-width:1400px;margin:0 auto;
+  }
+  .band-label{
+    font-family:'IBM Plex Mono',monospace;font-size:11px;
+    letter-spacing:.14em;text-transform:uppercase;color:var(--muted);
+    border-left:2px solid var(--accent);padding-left:14px;
+  }
+  .band-tags{display:flex;flex-wrap:wrap;gap:10px}
+  .tag-chip{
+    font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.04em;
+    padding:8px 12px;border:1px solid var(--line-strong);color:var(--paper);
+    text-transform:uppercase;
+  }
+  .tag-chip.solid{background:var(--paper);color:var(--ink);border-color:var(--paper)}
+
+  /* ============ COORD MARKS (faint background grid lines) ============ */
+  .coord{
+    position:absolute;font-family:'IBM Plex Mono',monospace;font-size:10px;
+    color:var(--muted-2);letter-spacing:.1em;pointer-events:none;
+  }
+
+  @media(max-width:980px){
+    .hero-grid{grid-template-columns:1fr;gap:40px}
+    .nav-links{display:none}
+    .band{grid-template-columns:1fr;gap:18px}
+    .statusbar-inner{flex-wrap:wrap}
+    .ticker{order:3;width:100%}
+  }
+</style>
+</head>
+<body>
+
+<!-- STATUS BAR -->
+<header class="statusbar">
+  <div class="statusbar-inner">
+    <div class="status-cluster">
+      <span class="status-pill"><span class="dot"></span> SYS / OPERATIONAL</span>
+      <span class="status-pill">NYC · LON</span>
+      <span class="status-pill">0042 OPEN MANDATES</span>
+    </div>
+    <div class="ticker" aria-hidden="true">
+      <div class="ticker-track">
+        <span class="ticker-item"><b>PAYMENTS OPS</b> exception queue 14% → 3%</span>
+        <span class="ticker-item"><b>RESEARCH INFRA</b> governance gates live</span>
+        <span class="ticker-item"><b>SETTLEMENT</b> 11bps leakage closed</span>
+        <span class="ticker-item"><b>TRADING DESK</b> decision loop 3.4× faster</span>
+        <span class="ticker-item"><b>M&amp;A DD</b> 9 → 2 days time-to-signal</span>
+        <span class="ticker-item"><b>PAYMENTS OPS</b> exception queue 14% → 3%</span>
+        <span class="ticker-item"><b>RESEARCH INFRA</b> governance gates live</span>
+        <span class="ticker-item"><b>SETTLEMENT</b> 11bps leakage closed</span>
+        <span class="ticker-item"><b>TRADING DESK</b> decision loop 3.4× faster</span>
+        <span class="ticker-item"><b>M&amp;A DD</b> 9 → 2 days time-to-signal</span>
+      </div>
+    </div>
+    <div class="status-cluster">
+      <span class="status-pill">v26.05</span>
+      <span class="status-pill">EST. 2024</span>
+    </div>
+  </div>
+</header>
+
+<!-- NAV -->
+<nav class="nav">
+  <a class="brand" href="#">
+    <span class="brand-mark">RS</span>
+    Rayleigh Stark
+  </a>
+  <div class="nav-links">
+    <a href="#">Work</a>
+    <a href="#">Mandates</a>
+    <a href="#">Operator Notes</a>
+    <a href="#">About</a>
+  </div>
+  <a class="nav-cta" href="#">Discuss Live Execution →</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <span class="coord" style="top:24px;left:24px">[A1]</span>
+  <span class="coord" style="top:24px;right:24px">[A2]</span>
+
+  <div class="hero-grid">
+    <div>
+      <div class="hero-meta">
+        <span>RAYLEIGH STARK / DOCTRINE 001</span>
+        <span class="hero-meta-divider"></span>
+        <span>WE TAKE OWNERSHIP</span>
+      </div>
+
+      <h1 class="hero-headline">
+        We run the systems<br>
+        that <span class="underline">can't go down</span>.
+      </h1>
+
+      <p class="hero-sub">
+        Trading desks, payments operations, settlement infrastructure, research platforms —
+        <b>built on Wall Street operating discipline.</b> Where data, decisions, and capital
+        break apart, we take operational ownership and make them run under real-world constraints.
+      </p>
+
+      <div class="hero-actions">
+        <a class="btn-primary" href="#">Bring a broken flow →</a>
+        <a class="btn-ghost" href="#">Read the doctrine</a>
+      </div>
+    </div>
+
+    <!-- LIVE TAPE -->
+    <aside class="tape" aria-label="Recent operator activity">
+      <div class="tape-head">
+        <span>Recent / Anonymized</span>
+        <span class="tape-live"><span class="tape-pulse"></span> LIVE</span>
+      </div>
+
+      <div class="tape-row">
+        <span class="tape-time">11:42</span>
+        <div class="tape-body">
+          <span class="tag">PAYMENTS OPS · TIER-1 BANK</span>
+          <span class="line">Exception queue reduced from 14% to 3%</span>
+        </div>
+        <span class="tape-metric green">-79%</span>
+      </div>
+
+      <div class="tape-row">
+        <span class="tape-time">11:28</span>
+        <div class="tape-body">
+          <span class="tag">RESEARCH INFRA · MULTI-MGR HF</span>
+          <span class="line">Governance gates passed; quants in production</span>
+        </div>
+        <span class="tape-metric">SHIPPED</span>
+      </div>
+
+      <div class="tape-row">
+        <span class="tape-time">10:55</span>
+        <div class="tape-body">
+          <span class="tag">SETTLEMENT · COMMODITIES DESK</span>
+          <span class="line">11bps leakage closed across three venues</span>
+        </div>
+        <span class="tape-metric green">+11bps</span>
+      </div>
+
+      <div class="tape-row">
+        <span class="tape-time">09:14</span>
+        <div class="tape-body">
+          <span class="tag">DECISION LOOPS · TRADING</span>
+          <span class="line">Signal-to-action loop time, before/after</span>
+        </div>
+        <span class="tape-metric green">3.4×</span>
+      </div>
+
+      <div class="tape-row">
+        <span class="tape-time">YDY</span>
+        <div class="tape-body">
+          <span class="tag">M&amp;A DUE DILIGENCE</span>
+          <span class="line">Time-to-signal across data rooms</span>
+        </div>
+        <span class="tape-metric amber">9d → 2d</span>
+      </div>
+    </aside>
+  </div>
+</section>
+
+<!-- BAND -->
+<section class="band">
+  <span class="band-label">Built for</span>
+  <div class="band-tags">
+    <span class="tag-chip solid">Trading desks</span>
+    <span class="tag-chip">Payments operations</span>
+    <span class="tag-chip">Settlement infrastructure</span>
+    <span class="tag-chip">Research platforms</span>
+    <span class="tag-chip">M&amp;A intelligence</span>
+    <span class="tag-chip">Decision systems</span>
+  </div>
+  <span class="band-label" style="text-align:right;border-left:none;border-right:2px solid var(--accent);padding-left:0;padding-right:14px">NYC / LON</span>
+</section>
+
+</body>
+</html>

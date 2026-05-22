@@ -4,9 +4,16 @@ node_modules/
 # Build output
 dist/
 .parcel-cache/
+rayleigh-stark-dist.zip
+
+# Generated artifacts + prospect data (output/leads holds PII — never commit)
+output/
 
 # Local tooling artifacts
 .playwright-cli/
+
+# Claude Code local overrides
+.claude/settings.local.json
 
 # Logs
 npm-debug.log*
