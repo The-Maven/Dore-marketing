@@ -626,25 +626,21 @@
 
   <!-- HERMES — the runtime under Doré. -->
   <section class="product">
-    <div class="product-meta">
-      <span class="tag">02</span><br>
-      Hermes
-      <span class="status">Runtime</span>
-    </div>
     <div>
-      <h2>The runtime our products run on, <span class="accent">policy-bound from the start.</span></h2>
+      <h2>Hermes, <span class="accent">the runtime underneath.</span></h2>
       <p>
-        Hermes is the agent runtime. Doré runs on it. Future products run on it. Policy
-        is versioned. Dual approval gates on policy changes. Kill switches configured for
-        the head of compliance and the CFO. Evidence retention configured per MiCA, the
-        GENIUS Act, and equivalent regimes.
+        Hermes is the agent runtime Doré sits on. Policy is versioned. Dual approval
+        gates guard every policy change. Kill switches are configured per role so the
+        head of compliance, the CFO, and the on-call operator each have a button.
+        Evidence retention is configured per MiCA, the GENIUS Act, and equivalent
+        regimes from the first deploy.
       </p>
       <p>
-        The agent reaches the system through a read-only tool boundary, not raw database
-        access. Every tool call is audit-logged. Native runtimes (shell, code execution,
-        unrestricted web) are switched off by default. Curation decisions — what data to
-        trust, what address to mark verified — stay with humans. <b>The agent reads and
-        recommends. The human decides.</b>
+        The agent reaches the system through a read-only tool boundary. Eight tools.
+        Every call audit-logged. Native shell, code execution, and unrestricted web
+        are switched off by default. Curation decisions stay with humans: which data
+        to trust, which address to mark verified. <b>The agent reads and recommends.
+        The human decides.</b>
       </p>
       <figure class="shot">
         <!-- Inline SVG mock of the F7 Analyst console (Hermes). -->
@@ -732,13 +728,13 @@
 
 <!-- ROADMAP — what comes next, without overpromising. -->
 <section class="roadmap">
-  <div class="roadmap-eyebrow">What we are building next</div>
+  <div class="roadmap-eyebrow">What comes next</div>
   <p>
-    The verification core is object-agnostic. <b>The same engine that checks an issuer's
-    reserve claim against on-chain reality</b> is the engine that checks an agent's
-    spending claim against settlement reality. We are designing for that today. The
-    flagship stays Doré. The runtime stays Hermes. The next surface follows the same
-    discipline.
+    The verification core is object-agnostic. <b>The same engine that reconciles an
+    issuer's reserve claim against on-chain reality</b> reconciles an agent's spending
+    claim against settlement reality. The fact store schema already holds both. The
+    flagship stays Doré. The runtime stays Hermes. The next surface lands on the
+    same discipline.
   </p>
 </section>
 
