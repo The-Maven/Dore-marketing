@@ -376,36 +376,187 @@
           redemption capacity.</li>
         <li><b>Two honest coverage numbers.</b> Attested coverage at the attestation date,
           live coverage against current on-chain supply, drift surfaced between them.</li>
+        <li><b>Multi-source verification.</b> Each figure carries the channel that found
+          it: issuer transparency page, on-chain RPC consensus, attestation PDF, or
+          web-discovered candidate awaiting a second source. Search proposes; verified
+          sources dispose.</li>
+        <li><b>Background data layer.</b> A canary thread every six hours re-resolves
+          every attestation URL, re-checks every corpus source, auto-verifies every
+          on-chain contract, and proposes replacements when sources rot. The cache
+          users read from is always warm.</li>
         <li><b>Immutable audit trail.</b> Every analysis records append-only, time-series
-          facts with full provenance, queryable point-in-time.</li>
+          facts with full provenance, queryable point-in-time. The same shape will hold
+          the next claim type without a schema rewrite.</li>
         <li><b>Hermes, the analyst.</b> A constrained conversational agent that answers
-          only from the verified fact store, cites every figure, and refuses when it
-          cannot ground an answer.</li>
-        <li><b>Compendium view.</b> An auditable surface showing how often each artefact
-          refreshes, which sources are live, what the background threads are doing now.</li>
+          only from the verified fact store through a read-only tool boundary, cites
+          every figure, and refuses when it cannot ground an answer.</li>
+        <li><b>Compendium view.</b> A live ledger of the data layer itself — provenance
+          of every URL, health of every regulatory source, the background thread's
+          recent work — written as docs, refreshable.</li>
       </ul>
       <figure class="shot">
-        <!-- Drop the analyze-view screenshot here:
-             src/images/dore-analyze.png · 1600x900 recommended.
-             Until then this placeholder renders the slot in the layout. -->
-        <div class="shot-label">
-          Analyze view · headline coverage, multi-chain consensus, cited reasoning.<br>
-          Image asset: <code>src/images/dore-analyze.png</code> (1600×900)
-        </div>
+        <!-- Inline SVG mock of the F2 Analyze view. Looks intentional;
+             swap for a real PNG by replacing the <svg> with an <img>
+             pointing at src/images/dore-analyze.png (1600x900). -->
+        <svg viewBox="0 0 1600 900" xmlns="http://www.w3.org/2000/svg"
+             role="img" aria-label="Doré analyze view mock">
+          <rect width="1600" height="900" fill="#0A0B0E"/>
+          <rect x="0" y="0" width="1600" height="56" fill="#0F1014"/>
+          <text x="36" y="36" font-family="'Inter Tight',sans-serif"
+                font-size="16" font-weight="600" fill="#EFEAE0">RS · Doré
+            <tspan font-family="'IBM Plex Mono',monospace" font-size="11"
+                   font-weight="400" fill="rgba(239,234,224,.55)" dx="14">
+              ATTESTATION ANALYSIS · USDC</tspan>
+          </text>
+          <text x="1560" y="36" text-anchor="end"
+                font-family="'IBM Plex Mono',monospace" font-size="11"
+                fill="#7FE0A6">● LIVE</text>
+          <rect x="40" y="100" width="1520" height="220" fill="none"
+                stroke="#D4A24A" stroke-width="1" opacity="0.6"/>
+          <text x="60" y="138" font-family="'IBM Plex Mono',monospace"
+                font-size="10" letter-spacing="2" fill="#D4A24A">DORÉ BRIEF</text>
+          <text x="60" y="190" font-family="'Bodoni Moda',serif"
+                font-size="34" fill="#EFEAE0">
+            <tspan>USDC fully backed across 6 chains; latest Deloitte attestation</tspan>
+          </text>
+          <text x="60" y="232" font-family="'Bodoni Moda',serif"
+                font-size="34" fill="#EFEAE0">
+            <tspan>shows 100.1% coverage, dated March 31 2026.</tspan>
+          </text>
+          <text x="60" y="278" font-family="Inter,sans-serif" font-size="14"
+                fill="rgba(239,234,224,.72)">
+            <tspan>◇ Reserves $64.2B vs attested tokens $64.13B  ·  attestation 53 days old</tspan>
+          </text>
+          <text x="60" y="300" font-family="Inter,sans-serif" font-size="14"
+                fill="rgba(239,234,224,.72)">
+            <tspan>◇ Multi-chain supply $72.55B across 6 chains, 4 cross-RPC corroborated</tspan>
+          </text>
+          <g transform="translate(40,360)">
+            <rect width="740" height="100" fill="rgba(212,162,74,.05)"
+                  stroke="rgba(212,162,74,.3)"/>
+            <text x="20" y="32" font-family="'IBM Plex Mono',monospace"
+                  font-size="10" letter-spacing="1.5"
+                  fill="rgba(239,234,224,.55)">ATTESTED COVERAGE</text>
+            <text x="20" y="78" font-family="'Inter Tight',sans-serif"
+                  font-size="44" font-weight="600" fill="#7FE0A6">100.1%</text>
+            <text x="200" y="78" font-family="'IBM Plex Mono',monospace"
+                  font-size="11" fill="rgba(239,234,224,.55)">
+              · honest backing as of Mar 31</text>
+            <rect x="740" y="0" width="40" height="100" fill="none"/>
+            <rect x="780" y="0" width="740" height="100"
+                  fill="rgba(212,162,74,.05)" stroke="rgba(212,162,74,.3)"/>
+            <text x="800" y="32" font-family="'IBM Plex Mono',monospace"
+                  font-size="10" letter-spacing="1.5"
+                  fill="rgba(239,234,224,.55)">LIVE COVERAGE</text>
+            <text x="800" y="78" font-family="'Inter Tight',sans-serif"
+                  font-size="44" font-weight="600" fill="#7FE0A6">99.8%</text>
+            <text x="980" y="78" font-family="'IBM Plex Mono',monospace"
+                  font-size="11" fill="rgba(239,234,224,.55)">
+              · against current on-chain supply</text>
+          </g>
+          <g transform="translate(40,500)" font-family="'IBM Plex Mono',monospace"
+             font-size="11" fill="rgba(239,234,224,.72)">
+            <rect x="0" y="0" width="1520" height="32"
+                  fill="rgba(212,162,74,.07)"/>
+            <text x="14" y="21" fill="#D4A24A" letter-spacing="1.5">
+              DATA LINEAGE</text>
+            <text x="180" y="21">6 chains read · 4 cross-RPC corroborated · 2 single-source</text>
+          </g>
+          <g transform="translate(40,560)" font-family="'IBM Plex Mono',monospace"
+             font-size="11">
+            <text x="0" y="0" fill="rgba(239,234,224,.55)" letter-spacing="1.5">
+              GUARDRAILS · 10 / 10 PASSED</text>
+            <g transform="translate(0,18)">
+              <circle cx="6" cy="6" r="3" fill="#7FE0A6"/>
+              <text x="18" y="10" fill="rgba(239,234,224,.72)">
+                Reserves positive  ·  Tokens positive  ·  Breakdown sums to total  ·  Date valid</text>
+            </g>
+            <g transform="translate(0,40)">
+              <circle cx="6" cy="6" r="3" fill="#7FE0A6"/>
+              <text x="18" y="10" fill="rgba(239,234,224,.72)">
+                Coverage plausible  ·  Citations resolve  ·  Figures traceable to tool outputs</text>
+            </g>
+          </g>
+          <text x="40" y="720" font-family="'IBM Plex Mono',monospace"
+                font-size="10" letter-spacing="2"
+                fill="rgba(239,234,224,.55)">REASONING FRAME</text>
+          <g transform="translate(40,740)" font-family="Inter,sans-serif"
+             font-size="13" fill="rgba(239,234,224,.72)">
+            <text x="0" y="20">§ GENIUS Act — reserve, disclosure &amp; audit provisions</text>
+            <text x="0" y="44">§ MiCA Title III — asset-referenced tokens: reserve &amp; redemption</text>
+            <text x="0" y="68">§ FSB Recommendation 8 — Disclosures</text>
+          </g>
+        </svg>
       </figure>
-      <p class="shot-caption">Doré, attestation analysis · multi-chain corroboration in
-        view, every figure traceable.</p>
+      <p class="shot-caption">F2 Analyze · the deterministic reserve verification
+        surface, with the Doré Brief leading.</p>
+
       <figure class="shot">
-        <!-- Drop the compendium-view screenshot here:
-             src/images/dore-compendium.png · 1600x900 recommended. -->
-        <div class="shot-label">
-          Compendium · attestation URL provenance per token, canary source health,
-          immutable fact trail, background-thread log.<br>
-          Image asset: <code>src/images/dore-compendium.png</code> (1600×900)
-        </div>
+        <!-- Inline SVG mock of the F8 Compendium docs page. -->
+        <svg viewBox="0 0 1600 900" xmlns="http://www.w3.org/2000/svg"
+             role="img" aria-label="Doré Compendium mock">
+          <rect width="1600" height="900" fill="#0A0B0E"/>
+          <rect x="0" y="0" width="1600" height="56" fill="#0F1014"/>
+          <text x="36" y="36" font-family="'Inter Tight',sans-serif"
+                font-size="16" font-weight="600" fill="#EFEAE0">RS · Doré
+            <tspan font-family="'IBM Plex Mono',monospace" font-size="11"
+                   font-weight="400" fill="rgba(239,234,224,.55)" dx="14">
+              COMPENDIUM · DATA LAYER</tspan>
+          </text>
+          <text x="160" y="160" font-family="'IBM Plex Mono',monospace"
+                font-size="11" letter-spacing="3" fill="#D4A24A">COMPENDIUM</text>
+          <text x="160" y="220" font-family="'Bodoni Moda',serif"
+                font-size="52" fill="#EFEAE0">The data behind every</text>
+          <text x="160" y="280" font-family="'Bodoni Moda',serif"
+                font-size="52" fill="#EFEAE0">Doré answer.</text>
+          <text x="160" y="338" font-family="Inter,sans-serif"
+                font-size="16" fill="rgba(239,234,224,.72)">
+            <tspan>Doré reconciles what stablecoin issuers say against what the</tspan>
+          </text>
+          <text x="160" y="362" font-family="Inter,sans-serif"
+                font-size="16" fill="rgba(239,234,224,.72)">
+            <tspan>blockchains show. This page is the live ledger of that work.</tspan>
+          </text>
+          <line x1="160" y1="420" x2="1440" y2="420"
+                stroke="rgba(212,162,74,.2)" stroke-width="1"/>
+          <g transform="translate(160,460)" font-family="'Bodoni Moda',serif">
+            <text font-size="28" fill="#EFEAE0">Attestation URLs</text>
+          </g>
+          <g transform="translate(160,510)" font-family="Inter,sans-serif"
+             font-size="14" fill="rgba(239,234,224,.72)">
+            <text>
+              <tspan>Every stablecoin's attestation source, the channel that</tspan>
+            </text>
+            <text y="22">
+              <tspan>found it (override, cache, seed, web search, locator), and its age.</tspan>
+            </text>
+          </g>
+          <g transform="translate(160,580)" font-family="'IBM Plex Mono',monospace"
+             font-size="12">
+            <rect x="0" y="0" width="1280" height="36"
+                  fill="rgba(212,162,74,.08)"/>
+            <text x="14" y="22" fill="#D4A24A">USDC</text>
+            <text x="120" y="22" fill="rgba(239,234,224,.72)">Circle</text>
+            <text x="300" y="22" fill="#EFEAE0">2026 USDC Examination Report March 26.pdf</text>
+            <text x="1020" y="22" fill="#7FE0A6">override</text>
+            <text x="1200" y="22" fill="rgba(239,234,224,.55)">53d</text>
+            <rect x="0" y="48" width="1280" height="36" fill="none"
+                  stroke="rgba(212,162,74,.08)"/>
+            <text x="14" y="70" fill="#D4A24A">USDT</text>
+            <text x="120" y="70" fill="rgba(239,234,224,.72)">Tether</text>
+            <text x="300" y="70" fill="#EFEAE0">ISAE-3000R-Opinion-Tether-Int-Oct-2025.pdf</text>
+            <text x="1020" y="70" fill="#7FE0A6">seed</text>
+            <text x="1200" y="70" fill="rgba(239,234,224,.55)">204d</text>
+            <text x="14" y="118" fill="#D4A24A">USD1</text>
+            <text x="120" y="118" fill="rgba(239,234,224,.72)">BitGo</text>
+            <text x="300" y="118" fill="#EFEAE0">USD1_Reserve_Attestation_Report_January_2026.pdf</text>
+            <text x="1020" y="118" fill="#7FE0A6">web_search</text>
+            <text x="1200" y="118" fill="rgba(239,234,224,.55)">112d</text>
+          </g>
+        </svg>
       </figure>
-      <p class="shot-caption">The Compendium · what the data layer is doing, in plain
-        view, refreshed live.</p>
+      <p class="shot-caption">F8 Compendium · the live ledger of the data layer
+        itself, written as docs, refreshable.</p>
     </div>
   </section>
 
@@ -432,15 +583,81 @@
         recommends. The human decides.</b>
       </p>
       <figure class="shot">
-        <!-- Drop the analyst-console (F7) screenshot here:
-             src/images/dore-analyst.png · 1600x900 recommended. -->
-        <div class="shot-label">
-          Analyst console · conversational interface, every reply citing the fact store.<br>
-          Image asset: <code>src/images/dore-analyst.png</code> (1600×900)
-        </div>
+        <!-- Inline SVG mock of the F7 Analyst console (Hermes). -->
+        <svg viewBox="0 0 1600 900" xmlns="http://www.w3.org/2000/svg"
+             role="img" aria-label="Hermes analyst console mock">
+          <rect width="1600" height="900" fill="#0A0B0E"/>
+          <rect x="0" y="0" width="1600" height="56" fill="#0F1014"/>
+          <text x="36" y="36" font-family="'Inter Tight',sans-serif"
+                font-size="16" font-weight="600" fill="#EFEAE0">RS · Doré
+            <tspan font-family="'IBM Plex Mono',monospace" font-size="11"
+                   font-weight="400" fill="rgba(239,234,224,.55)" dx="14">
+              ANALYST · HERMES</tspan>
+          </text>
+          <text x="1560" y="36" text-anchor="end"
+                font-family="'IBM Plex Mono',monospace" font-size="11"
+                fill="#7FE0A6">● READY</text>
+          <text x="200" y="160" font-family="'Bodoni Moda',serif"
+                font-size="40" fill="#EFEAE0">Doré, the analyst</text>
+          <text x="200" y="208" font-family="Inter,sans-serif"
+                font-size="15" fill="rgba(239,234,224,.72)">
+            <tspan>Eight read-only tools. Cites every figure. Refuses what it cannot ground.</tspan>
+          </text>
+          <g transform="translate(200,280)">
+            <rect x="0" y="0" width="1200" height="100"
+                  fill="rgba(212,162,74,.04)"
+                  stroke="rgba(212,162,74,.18)"/>
+            <text x="20" y="36" font-family="'IBM Plex Mono',monospace"
+                  font-size="11" letter-spacing="2"
+                  fill="rgba(239,234,224,.55)">YOU</text>
+            <text x="20" y="74" font-family="Inter,sans-serif"
+                  font-size="18" fill="#EFEAE0">
+              <tspan>What is USDC's most recent attested coverage?</tspan>
+            </text>
+          </g>
+          <g transform="translate(200,420)">
+            <rect x="0" y="0" width="1200" height="240" fill="none"
+                  stroke="#D4A24A" stroke-width="1"/>
+            <rect x="0" y="0" width="6" height="240" fill="#D4A24A"/>
+            <text x="36" y="36" font-family="'IBM Plex Mono',monospace"
+                  font-size="11" letter-spacing="2"
+                  fill="#D4A24A">DORÉ</text>
+            <text x="36" y="80" font-family="'Bodoni Moda',serif"
+                  font-size="24" fill="#EFEAE0">
+              <tspan>USDC's most recent attested coverage is 100.1%,</tspan>
+            </text>
+            <text x="36" y="108" font-family="'Bodoni Moda',serif"
+                  font-size="24" fill="#EFEAE0">
+              <tspan>per Deloitte's March 31, 2026 examination report.</tspan>
+            </text>
+            <text x="36" y="148" font-family="Inter,sans-serif"
+                  font-size="14" fill="rgba(239,234,224,.72)">
+              <tspan>Reserves $64.2B against $64.13B attested tokens. The report</tspan>
+            </text>
+            <text x="36" y="170" font-family="Inter,sans-serif"
+                  font-size="14" fill="rgba(239,234,224,.72)">
+              <tspan>is 53 days old; live coverage holds at 99.8% against current</tspan>
+            </text>
+            <text x="36" y="192" font-family="Inter,sans-serif"
+                  font-size="14" fill="rgba(239,234,224,.72)">
+              <tspan>$72.55B on-chain supply across 6 chains.</tspan>
+            </text>
+            <text x="36" y="222" font-family="'IBM Plex Mono',monospace"
+                  font-size="11" fill="rgba(239,234,224,.55)">
+              cited:
+              <tspan fill="#D4A24A">  ·  attestation report  ·  on-chain supply ·  guardrail checks</tspan>
+            </text>
+          </g>
+          <g transform="translate(200,700)" font-family="'IBM Plex Mono',monospace"
+             font-size="10" fill="rgba(239,234,224,.55)">
+            <text letter-spacing="1.5">TOOLS USED THIS TURN</text>
+            <text y="20" fill="rgba(239,234,224,.72)">
+              get_supply · run_attestation_analysis · search_corpus</text>
+          </g>
+        </svg>
       </figure>
-      <p class="shot-caption">Hermes, the analyst · cited answers from the verified fact
-        store, never a number it cannot trace.</p>
+      <p class="shot-caption">F7 Analyst · Hermes runs through a read-only tool
+        boundary; every figure cited, never invented.</p>
     </div>
   </section>
 
