@@ -139,6 +139,9 @@
     position:relative;
   }
   .shot img{display:block;width:100%;height:100%;object-fit:cover}
+  /* Inline SVG mocks need the same fill treatment so they expand to
+     the 16:9 slot rather than rendering at their default 300x150. */
+  .shot svg{display:block;width:100%;height:100%;background:#0A0B0E}
   .shot .shot-label{
     font-family:'IBM Plex Mono',monospace;font-size:10.5px;
     letter-spacing:.12em;text-transform:uppercase;color:var(--muted-2);
