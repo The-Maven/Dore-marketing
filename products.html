@@ -340,14 +340,15 @@
 </div>
 
 <section class="hero">
-  <div class="eyebrow">What we ship</div>
+  <div class="eyebrow">Doré</div>
   <h1 class="h">
-    Doré, the always-on <span class="outline-gold">reserve-verification</span> product.
+    Stablecoins, <span class="outline-gold">verified.</span>
   </h1>
   <p class="lede">
-    Stablecoin issuers publish claims. <b>Doré checks those claims against on-chain reality,
-    every figure traceable to a source.</b> Built on Hermes, our runtime. Deployed inside
-    regulated programmes. Evidence ready for an auditor on a bank-holiday morning.
+    Doré reads every attestation an issuer publishes and reconciles it against the
+    chains live, every six hours. <b>Every figure traces back to its source. Every
+    claim cites the regulation it answers to.</b> Nothing the system displays is
+    invented by a model.
   </p>
 </section>
 
@@ -355,144 +356,198 @@
 
   <!-- DORÉ — flagship product card. -->
   <section class="product">
-    <div class="product-meta">
-      <span class="tag">01</span><br>
-      Doré
-      <span class="status">In production</span>
-    </div>
     <div>
-      <h2>Reserve verification, sanctions, redemption, <span class="accent">cited.</span></h2>
+      <h2>The verification surface, <span class="accent">cited end to end.</span></h2>
       <p>
-        The product reconciles what an issuer attests against what the chains actually show.
-        Multi-chain supply reads, cross-RPC corroboration, OFAC SDN screening, redemption-
-        capacity assessment. Every figure carries provenance: the claim, the sources
-        checked against, the timestamp, the block, the verification status.
+        Three views on top of one verification core. <b>Attestation analysis</b>
+        reconciles reserves against on-chain supply, surfaces drift, and reports
+        coverage at both the attestation date and right now. <b>Sanctions screening</b>
+        runs every deployment address against the OFAC SDN list with tamper-detection
+        on the feed. <b>Redemption capacity</b> tiers reserves by speed and reports
+        what the issuer can settle today.
       </p>
       <p>
-        <b>The model proposes. Deterministic code disposes.</b> No displayed figure is ever
-        invented by a language model. Sanity bounds gate every value before it reaches the
-        analyst's view. When data cannot be verified, the surface says so plainly. An
-        honest gap is a finding.
+        Every analysis carries the channel that produced it. Multi-RPC corroboration
+        per chain, the attestation PDF, an immutable fact-store row, and where
+        relevant the secondary web references the agent considered. <b>Search
+        proposes. Deterministic code disposes.</b> An honest gap is a finding,
+        not a failure.
       </p>
-      <ul>
-        <li><b>Three compliance surfaces.</b> Attestation analysis, sanctions screening,
-          redemption capacity.</li>
-        <li><b>Two honest coverage numbers.</b> Attested coverage at the attestation date,
-          live coverage against current on-chain supply, drift surfaced between them.</li>
-        <li><b>Multi-source verification.</b> Each figure carries the channel that found
-          it: issuer transparency page, on-chain RPC consensus, attestation PDF, or
-          web-discovered candidate awaiting a second source. Search proposes; verified
-          sources dispose.</li>
-        <li><b>Background data layer.</b> A canary thread every six hours re-resolves
-          every attestation URL, re-checks every corpus source, auto-verifies every
-          on-chain contract, and proposes replacements when sources rot. The cache
-          users read from is always warm.</li>
-        <li><b>Immutable audit trail.</b> Every analysis records append-only, time-series
-          facts with full provenance, queryable point-in-time. The same shape will hold
-          the next claim type without a schema rewrite.</li>
-        <li><b>Hermes, the analyst.</b> A constrained conversational agent that answers
-          only from the verified fact store through a read-only tool boundary, cites
-          every figure, and refuses when it cannot ground an answer.</li>
-        <li><b>Compendium view.</b> A live ledger of the data layer itself — provenance
-          of every URL, health of every regulatory source, the background thread's
-          recent work — written as docs, refreshable.</li>
-      </ul>
       <figure class="shot">
-        <!-- Inline SVG mock of the F2 Analyze view. Looks intentional;
-             swap for a real PNG by replacing the <svg> with an <img>
-             pointing at src/images/dore-analyze.png (1600x900). -->
+        <!-- Inline SVG mock of the F2 Analyze view — richer detail:
+             AI Brief with key points + citations, two-cell coverage
+             strip, six-cell metric grid, per-chain breakdown table
+             with RPC consensus chips, guardrails ladder, corpus
+             reasoning frame. -->
         <svg viewBox="0 0 1600 900" xmlns="http://www.w3.org/2000/svg"
              role="img" aria-label="Doré analyze view mock">
           <rect width="1600" height="900" fill="#0A0B0E"/>
-          <rect x="0" y="0" width="1600" height="56" fill="#0F1014"/>
-          <text x="36" y="36" font-family="'Inter Tight',sans-serif"
-                font-size="16" font-weight="600" fill="#EFEAE0">RS · Doré
-            <tspan font-family="'IBM Plex Mono',monospace" font-size="11"
-                   font-weight="400" fill="rgba(239,234,224,.55)" dx="14">
-              ATTESTATION ANALYSIS · USDC</tspan>
+          <!-- topbar -->
+          <rect x="0" y="0" width="1600" height="48" fill="#0F1014"/>
+          <text x="32" y="30" font-family="'Inter Tight',sans-serif"
+                font-size="14" font-weight="600" fill="#EFEAE0">RS · Doré
+            <tspan font-family="'IBM Plex Mono',monospace" font-size="10"
+                   font-weight="400" fill="rgba(239,234,224,.55)" dx="12">
+              F2 · ATTESTATION ANALYSIS · USDC</tspan>
           </text>
-          <text x="1560" y="36" text-anchor="end"
-                font-family="'IBM Plex Mono',monospace" font-size="11"
-                fill="#7FE0A6">● LIVE</text>
-          <rect x="40" y="100" width="1520" height="220" fill="none"
-                stroke="#D4A24A" stroke-width="1" opacity="0.6"/>
-          <text x="60" y="138" font-family="'IBM Plex Mono',monospace"
-                font-size="10" letter-spacing="2" fill="#D4A24A">DORÉ BRIEF</text>
-          <text x="60" y="190" font-family="'Bodoni Moda',serif"
-                font-size="34" fill="#EFEAE0">
-            <tspan>USDC fully backed across 6 chains; latest Deloitte attestation</tspan>
-          </text>
-          <text x="60" y="232" font-family="'Bodoni Moda',serif"
-                font-size="34" fill="#EFEAE0">
-            <tspan>shows 100.1% coverage, dated March 31 2026.</tspan>
-          </text>
-          <text x="60" y="278" font-family="Inter,sans-serif" font-size="14"
-                fill="rgba(239,234,224,.72)">
-            <tspan>◇ Reserves $64.2B vs attested tokens $64.13B  ·  attestation 53 days old</tspan>
-          </text>
-          <text x="60" y="300" font-family="Inter,sans-serif" font-size="14"
-                fill="rgba(239,234,224,.72)">
-            <tspan>◇ Multi-chain supply $72.55B across 6 chains, 4 cross-RPC corroborated</tspan>
-          </text>
-          <g transform="translate(40,360)">
-            <rect width="740" height="100" fill="rgba(212,162,74,.05)"
+          <text x="1560" y="30" text-anchor="end"
+                font-family="'IBM Plex Mono',monospace" font-size="10"
+                fill="#7FE0A6">● LIVE  ·  SESSION 14:32:05  ·  TOKENS 25</text>
+
+          <!-- Doré Brief panel (gold left border, hero spot) -->
+          <g transform="translate(32,72)">
+            <rect width="1536" height="220" fill="none"
+                  stroke="rgba(212,162,74,.5)" stroke-width="1"/>
+            <rect x="0" y="0" width="4" height="220" fill="#D4A24A"/>
+            <rect x="24" y="20" width="98" height="20" fill="rgba(212,162,74,.18)"/>
+            <text x="42" y="34" font-family="'IBM Plex Mono',monospace"
+                  font-size="10" letter-spacing="1.6" fill="#D4A24A">
+              DORÉ BRIEF</text>
+            <text x="140" y="34" font-family="'IBM Plex Mono',monospace"
+                  font-size="10" letter-spacing="1.2"
+                  fill="rgba(239,234,224,.55)">
+              ATTESTATION · USDC  ·  composed 23/05/2026 14:32</text>
+            <text x="24" y="80" font-family="'Bodoni Moda',serif"
+                  font-size="30" fill="#EFEAE0">
+              <tspan>USDC fully backed across 6 chains; latest Deloitte</tspan>
+            </text>
+            <text x="24" y="116" font-family="'Bodoni Moda',serif"
+                  font-size="30" fill="#EFEAE0">
+              <tspan>attestation shows 100.1% coverage, dated March 31 2026.</tspan>
+            </text>
+            <text x="24" y="158" font-family="Inter,sans-serif" font-size="14"
+                  fill="rgba(239,234,224,.78)">
+              <tspan>◇ Reserves $64.2B against $64.13B attested tokens (Deloitte, March 31).</tspan>
+            </text>
+            <text x="24" y="180" font-family="Inter,sans-serif" font-size="14"
+                  fill="rgba(239,234,224,.78)">
+              <tspan>◇ Live supply $72.55B across 6 chains; 4 cross-RPC corroborated.</tspan>
+            </text>
+            <text x="24" y="202" font-family="Inter,sans-serif" font-size="14"
+                  fill="rgba(239,234,224,.78)">
+              <tspan>◇ Attestation 53 days old, well inside the monthly cadence.</tspan>
+            </text>
+          </g>
+
+          <!-- DATA LINEAGE banner -->
+          <g transform="translate(32,310)">
+            <rect width="1536" height="36" fill="rgba(212,162,74,.07)"/>
+            <text x="16" y="24" font-family="'IBM Plex Mono',monospace"
+                  font-size="11" letter-spacing="1.6" fill="#D4A24A">
+              DATA LINEAGE</text>
+            <text x="180" y="24" font-family="'IBM Plex Mono',monospace"
+                  font-size="11" fill="rgba(239,234,224,.78)">
+              6 chains read  ·  4 cross-RPC corroborated  ·  2 single-source</text>
+          </g>
+
+          <!-- Coverage row: attested + live -->
+          <g transform="translate(32,366)">
+            <rect width="760" height="92" fill="rgba(212,162,74,.05)"
                   stroke="rgba(212,162,74,.3)"/>
-            <text x="20" y="32" font-family="'IBM Plex Mono',monospace"
+            <text x="20" y="28" font-family="'IBM Plex Mono',monospace"
                   font-size="10" letter-spacing="1.5"
                   fill="rgba(239,234,224,.55)">ATTESTED COVERAGE</text>
-            <text x="20" y="78" font-family="'Inter Tight',sans-serif"
-                  font-size="44" font-weight="600" fill="#7FE0A6">100.1%</text>
-            <text x="200" y="78" font-family="'IBM Plex Mono',monospace"
+            <text x="20" y="70" font-family="'Inter Tight',sans-serif"
+                  font-size="38" font-weight="600" fill="#7FE0A6">100.1%</text>
+            <text x="180" y="70" font-family="'IBM Plex Mono',monospace"
                   font-size="11" fill="rgba(239,234,224,.55)">
-              · honest backing as of Mar 31</text>
-            <rect x="740" y="0" width="40" height="100" fill="none"/>
-            <rect x="780" y="0" width="740" height="100"
+              · honest backing at Mar 31</text>
+            <rect x="776" y="0" width="760" height="92"
                   fill="rgba(212,162,74,.05)" stroke="rgba(212,162,74,.3)"/>
-            <text x="800" y="32" font-family="'IBM Plex Mono',monospace"
+            <text x="796" y="28" font-family="'IBM Plex Mono',monospace"
                   font-size="10" letter-spacing="1.5"
                   fill="rgba(239,234,224,.55)">LIVE COVERAGE</text>
-            <text x="800" y="78" font-family="'Inter Tight',sans-serif"
-                  font-size="44" font-weight="600" fill="#7FE0A6">99.8%</text>
-            <text x="980" y="78" font-family="'IBM Plex Mono',monospace"
+            <text x="796" y="70" font-family="'Inter Tight',sans-serif"
+                  font-size="38" font-weight="600" fill="#7FE0A6">99.8%</text>
+            <text x="956" y="70" font-family="'IBM Plex Mono',monospace"
                   font-size="11" fill="rgba(239,234,224,.55)">
               · against current on-chain supply</text>
           </g>
-          <g transform="translate(40,500)" font-family="'IBM Plex Mono',monospace"
-             font-size="11" fill="rgba(239,234,224,.72)">
-            <rect x="0" y="0" width="1520" height="32"
-                  fill="rgba(212,162,74,.07)"/>
-            <text x="14" y="21" fill="#D4A24A" letter-spacing="1.5">
-              DATA LINEAGE</text>
-            <text x="180" y="21">6 chains read · 4 cross-RPC corroborated · 2 single-source</text>
-          </g>
-          <g transform="translate(40,560)" font-family="'IBM Plex Mono',monospace"
-             font-size="11">
-            <text x="0" y="0" fill="rgba(239,234,224,.55)" letter-spacing="1.5">
-              GUARDRAILS · 10 / 10 PASSED</text>
-            <g transform="translate(0,18)">
-              <circle cx="6" cy="6" r="3" fill="#7FE0A6"/>
-              <text x="18" y="10" fill="rgba(239,234,224,.72)">
-                Reserves positive  ·  Tokens positive  ·  Breakdown sums to total  ·  Date valid</text>
+
+          <!-- Per-chain breakdown -->
+          <g transform="translate(32,486)">
+            <text x="0" y="0" font-family="'IBM Plex Mono',monospace"
+                  font-size="10" letter-spacing="1.6"
+                  fill="rgba(239,234,224,.55)">PER-CHAIN SUPPLY  ·  multi-RPC consensus</text>
+            <g transform="translate(0,18)" font-family="'IBM Plex Mono',monospace"
+               font-size="11">
+              <!-- header -->
+              <rect width="1536" height="26" fill="rgba(212,162,74,.05)"/>
+              <text x="16" y="18" fill="rgba(239,234,224,.55)">CHAIN</text>
+              <text x="180" y="18" fill="rgba(239,234,224,.55)">CONTRACT</text>
+              <text x="780" y="18" fill="rgba(239,234,224,.55)">KIND</text>
+              <text x="900" y="18" fill="rgba(239,234,224,.55)">VERIFIED</text>
+              <text x="1080" y="18" fill="rgba(239,234,224,.55)">SUPPLY</text>
+              <text x="1380" y="18" fill="rgba(239,234,224,.55)">CONSENSUS</text>
+              <!-- rows -->
+              <g transform="translate(0,32)" fill="rgba(239,234,224,.85)">
+                <text x="16">ethereum</text>
+                <text x="180">0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48</text>
+                <text x="780" fill="#7FE0A6">native</text>
+                <text x="900" fill="#7FE0A6">✓ verified</text>
+                <text x="1080">31,420,000,000</text>
+                <text x="1380" fill="#7FE0A6">2/2 agree</text>
+              </g>
+              <g transform="translate(0,52)" fill="rgba(239,234,224,.85)">
+                <text x="16">base</text>
+                <text x="180">0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913</text>
+                <text x="780" fill="#7FE0A6">native</text>
+                <text x="900" fill="#7FE0A6">✓ verified</text>
+                <text x="1080">18,820,000,000</text>
+                <text x="1380" fill="#7FE0A6">2/2 agree</text>
+              </g>
+              <g transform="translate(0,72)" fill="rgba(239,234,224,.85)">
+                <text x="16">arbitrum</text>
+                <text x="180">0xaf88d065e77c8cC2239327C5EDb3A432268e5831</text>
+                <text x="780" fill="#7FE0A6">native</text>
+                <text x="900" fill="#F7B955">○ pending</text>
+                <text x="1080">8,310,000,000</text>
+                <text x="1380" fill="#7FE0A6">2/2 agree</text>
+              </g>
+              <g transform="translate(0,92)" fill="rgba(239,234,224,.85)">
+                <text x="16">solana</text>
+                <text x="180">EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v</text>
+                <text x="780" fill="#7FE0A6">native</text>
+                <text x="900" fill="#7FE0A6">✓ verified</text>
+                <text x="1080">7,200,000,000</text>
+                <text x="1380" fill="#F7B955">1/2 single source</text>
+              </g>
             </g>
-            <g transform="translate(0,40)">
+          </g>
+
+          <!-- Guardrails ladder -->
+          <g transform="translate(32,720)">
+            <text x="0" y="0" font-family="'IBM Plex Mono',monospace"
+                  font-size="10" letter-spacing="1.6"
+                  fill="rgba(239,234,224,.55)">GUARDRAILS  ·  10 / 10 PASSED</text>
+            <g transform="translate(0,18)" font-family="Inter,sans-serif"
+               font-size="12" fill="rgba(239,234,224,.78)">
               <circle cx="6" cy="6" r="3" fill="#7FE0A6"/>
-              <text x="18" y="10" fill="rgba(239,234,224,.72)">
-                Coverage plausible  ·  Citations resolve  ·  Figures traceable to tool outputs</text>
+              <text x="18" y="10">Reserves positive  ·  Tokens positive  ·  Breakdown sums to total  ·  Date valid</text>
+            </g>
+            <g transform="translate(0,40)" font-family="Inter,sans-serif"
+               font-size="12" fill="rgba(239,234,224,.78)">
+              <circle cx="6" cy="6" r="3" fill="#7FE0A6"/>
+              <text x="18" y="10">Coverage plausible  ·  Citations resolve  ·  Every figure traces to a tool output</text>
             </g>
           </g>
-          <text x="40" y="720" font-family="'IBM Plex Mono',monospace"
-                font-size="10" letter-spacing="2"
-                fill="rgba(239,234,224,.55)">REASONING FRAME</text>
-          <g transform="translate(40,740)" font-family="Inter,sans-serif"
-             font-size="13" fill="rgba(239,234,224,.72)">
-            <text x="0" y="20">§ GENIUS Act — reserve, disclosure &amp; audit provisions</text>
-            <text x="0" y="44">§ MiCA Title III — asset-referenced tokens: reserve &amp; redemption</text>
-            <text x="0" y="68">§ FSB Recommendation 8 — Disclosures</text>
+
+          <!-- Reasoning frame -->
+          <g transform="translate(32,808)">
+            <text x="0" y="0" font-family="'IBM Plex Mono',monospace"
+                  font-size="10" letter-spacing="1.6"
+                  fill="rgba(239,234,224,.55)">REASONING FRAME  ·  3 cited passages</text>
+            <g transform="translate(0,20)" font-family="Inter,sans-serif"
+               font-size="11.5" fill="rgba(239,234,224,.72)">
+              <text x="0" y="16">§ GENIUS Act — reserve, disclosure &amp; audit provisions  ·  genius-act</text>
+              <text x="0" y="36">§ MiCA Title III — asset-referenced tokens: reserve &amp; redemption  ·  mica-title-iii</text>
+              <text x="0" y="56">§ FSB Recommendation 8 — Disclosures  ·  fsb-global-stablecoin</text>
+            </g>
           </g>
         </svg>
       </figure>
-      <p class="shot-caption">F2 Analyze · the deterministic reserve verification
-        surface, with the Doré Brief leading.</p>
+      <p class="shot-caption">F2 Analyze · Doré Brief leads, per-chain consensus
+        and guardrail ladder underneath, regulatory citations at the foot.</p>
 
       <figure class="shot">
         <!-- Inline SVG mock of the F8 Compendium docs page. -->
@@ -672,54 +727,8 @@
 
 </div>
 
-<!-- ENGAGEMENT MODELS — three cards mirroring the Approach stages. -->
-<section class="engagements">
-  <div class="engagements-head">How we deploy it</div>
-  <h2 class="engagements-h">Three ways to put Doré inside your operation.</h2>
-  <div class="eng-grid">
-    <div class="eng">
-      <div class="eng-meta">
-        <span class="num">01</span><br>
-        Operations audit
-      </div>
-      <h3>Two weeks. Map your surfaces against ours.</h3>
-      <p>
-        We walk reserves, redemptions, sanctions, KYT, and cross-chain reconciliation
-        with your treasury, ops, and compliance leads. Where the picture goes dark, we
-        flag it. Where coverage exists, we measure it.
-      </p>
-      <div class="deliv">Output · Deployment plan, measurable targets, surface priorities.</div>
-    </div>
-    <div class="eng">
-      <div class="eng-meta">
-        <span class="num">02</span><br>
-        Design partner
-      </div>
-      <h3>Six to eight weeks. Doré inside one surface, in production.</h3>
-      <p>
-        We deploy Doré into one operational surface for issuers and infrastructure firms
-        running production today. Integrated with your custody feeds, ledger, sanctions
-        screen, and ticketing. A named operator accountable for it.
-      </p>
-      <div class="deliv">Output · Doré in production. Measurable improvement in coverage
-        and time to escalation.</div>
-    </div>
-    <div class="eng">
-      <div class="eng-meta">
-        <span class="num">03</span><br>
-        Subscription
-      </div>
-      <h3>Monthly. The agents stay deployed.</h3>
-      <p>
-        Runtime, policy reviews, human escalation on edge cases. Policy versioned, kill
-        switches in place. The agents stay watching. Your team owns the surface, with our
-        operator on call for the cases that need a human read.
-      </p>
-      <div class="deliv">Output · A live operation. Evidence retention configured per
-        MiCA, GENIUS Act, equivalents.</div>
-    </div>
-  </div>
-</section>
+<!-- (Engagement / deployment models live on /approach. This page stays
+     product-first: what the system does, not how we sell it.) -->
 
 <!-- ROADMAP — what comes next, without overpromising. -->
 <section class="roadmap">
