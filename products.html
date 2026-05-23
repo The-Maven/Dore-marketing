@@ -100,47 +100,62 @@
      full-width visual slot. Smaller engagement-model cards follow in a
      three-column grid that collapses to one column on phones. */
   .flagship{
-    max-width:1180px;margin:64px auto 0;padding:0 24px;position:relative;z-index:2;
+    max-width:1320px;margin:64px auto 0;padding:0 24px;position:relative;z-index:2;
   }
+  /* Each product is a two-column band: text occupies 5/12, the live
+     dashboard mock the remaining 7/12. The visual is the headline; the
+     prose explains what the visual shows. On wide desktops the visual
+     dominates at first glance — exactly the reverse of the older
+     200px/1fr layout that buried the screenshot below the fold. */
   .product{
-    border-top:1px solid var(--line);padding:48px 0;
-    display:grid;grid-template-columns:200px 1fr;gap:48px;
+    border-top:1px solid var(--line);padding:64px 0;
+    display:grid;grid-template-columns:5fr 7fr;gap:56px;
+    align-items:start;
   }
   .product:last-of-type{border-bottom:1px solid var(--line)}
+  /* Alternate the visual to the left on every other product for variety
+     and to give scroll-flow a heartbeat. */
+  .product.reverse{grid-template-columns:7fr 5fr}
+  .product.reverse > .product-text{order:2}
+  .product.reverse > .product-visual{order:1}
+  .product-text{display:flex;flex-direction:column;justify-content:center;min-height:480px}
   .product-meta{
     font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.12em;
-    text-transform:uppercase;color:var(--muted);line-height:1.7;
+    text-transform:uppercase;color:var(--muted);line-height:1.7;margin-bottom:18px;
   }
   .product-meta .tag{
     display:inline-block;background:var(--accent);color:var(--ink);
-    padding:4px 8px;letter-spacing:.06em;font-weight:600;margin-bottom:12px;
+    padding:4px 8px;letter-spacing:.06em;font-weight:600;margin-right:10px;
   }
-  .product-meta .status{color:var(--paper);margin-top:8px}
+  .product-meta .status{color:var(--paper)}
   .product h2{
     font-family:'Inter Tight',sans-serif;font-weight:600;
-    font-size:32px;letter-spacing:-.02em;color:var(--paper);
-    margin:0 0 18px;line-height:1.1;
+    font-size:38px;letter-spacing:-.025em;color:var(--paper);
+    margin:0 0 22px;line-height:1.05;
   }
   .product h2 .accent{color:var(--paper)}
-  .product p{font-size:16.5px;line-height:1.6;color:var(--muted);margin:0 0 14px;max-width:62ch}
+  .product p{font-size:16.5px;line-height:1.65;color:var(--muted);margin:0 0 16px}
   .product p b{color:var(--paper);font-weight:500}
-  .product ul{font-size:15.5px;line-height:1.6;color:var(--muted);margin:8px 0 18px;padding:0 0 0 18px;max-width:62ch}
-  .product ul li{margin:0 0 6px}
+  .product ul{font-size:15.5px;line-height:1.65;color:var(--muted);margin:8px 0 18px;padding:0 0 0 18px}
+  .product ul li{margin:0 0 8px}
   .product ul li b{color:var(--paper);font-weight:500}
 
-  /* Screenshot slot. Renders as a labelled placeholder so the page reads
-     well before image assets land; drop a real PNG into /src/images/ and
-     it takes over with no CSS change. */
+  /* Visual slot — claims 7/12 of the product band on desktop. Stacked
+     figures inside scroll naturally; the band itself is the headline. */
+  .product-visual{
+    display:flex;flex-direction:column;gap:24px;
+  }
   .shot{
-    margin:18px 0 0;border:1px solid var(--line-strong);
+    margin:0;border:1px solid var(--line-strong);
     background:rgba(255,255,255,.018);
     padding:0;overflow:hidden;
-    aspect-ratio:16/9;display:flex;align-items:center;justify-content:center;
+    aspect-ratio:16/10;display:flex;align-items:center;justify-content:center;
     position:relative;
+    box-shadow:0 24px 60px -16px rgba(0,0,0,.55), 0 4px 14px -4px rgba(212,162,74,.06);
   }
-  .shot img{display:block;width:100%;height:100%;object-fit:cover}
+  .shot img{display:block;width:100%;height:100%;object-fit:cover;object-position:top}
   /* Inline SVG mocks need the same fill treatment so they expand to
-     the 16:9 slot rather than rendering at their default 300x150. */
+     the slot rather than rendering at their default 300x150. */
   .shot svg{display:block;width:100%;height:100%;background:#0A0B0E}
   .shot .shot-label{
     font-family:'IBM Plex Mono',monospace;font-size:10.5px;
@@ -239,8 +254,14 @@
     .hero{padding:48px 16px 32px}
     h1.h{font-size:clamp(32px,9vw,56px)}
     .flagship,.engagements{padding:0 16px}
-    .product{grid-template-columns:1fr;gap:18px;padding:32px 0}
-    .product h2{font-size:24px}
+    .product{grid-template-columns:1fr;gap:24px;padding:40px 0}
+    .product.reverse{grid-template-columns:1fr}
+    .product.reverse > .product-text{order:1}
+    .product.reverse > .product-visual{order:2}
+    .product-text{min-height:0}
+    .product-visual{position:static}
+    .product h2{font-size:26px}
+    .shot{aspect-ratio:16/10}
     .eng-grid{grid-template-columns:1fr;gap:14px}
     .eng{padding:22px 18px}
     .roadmap{margin:48px 16px 0;padding:28px 22px}
@@ -354,9 +375,13 @@
 
 <div class="flagship">
 
-  <!-- DORÉ — flagship product card. -->
+  <!-- DORÉ — flagship product card. Text-left, dashboard-right. -->
   <section class="product">
-    <div>
+    <div class="product-text">
+      <div class="product-meta">
+        <span class="tag">Doré</span>
+        <span class="status">Live · v1.0 · in design-partner deployment</span>
+      </div>
       <h2>The verification surface, <span class="accent">cited end to end.</span></h2>
       <p>
         Three views on top of one verification core. <b>Attestation analysis</b>
@@ -373,6 +398,8 @@
         proposes. Deterministic code disposes.</b> An honest gap is a finding,
         not a failure.
       </p>
+    </div>
+    <div class="product-visual">
       <figure class="shot">
         <!-- Inline SVG mock of the F2 Analyze view — richer detail:
              AI Brief with key points + citations, two-cell coverage
@@ -624,9 +651,14 @@
     </div>
   </section>
 
-  <!-- HERMES — the runtime under Doré. -->
-  <section class="product">
-    <div>
+  <!-- HERMES — the runtime under Doré. Visual-left, text-right for
+       layout heartbeat. -->
+  <section class="product reverse">
+    <div class="product-text">
+      <div class="product-meta">
+        <span class="tag">Hermes</span>
+        <span class="status">The runtime underneath every Doré surface</span>
+      </div>
       <h2>Hermes, <span class="accent">the runtime underneath.</span></h2>
       <p>
         Hermes is the agent runtime Doré sits on. Policy is versioned. Dual approval
@@ -642,6 +674,8 @@
         to trust, which address to mark verified. <b>The agent reads and recommends.
         The human decides.</b>
       </p>
+    </div>
+    <div class="product-visual">
       <figure class="shot">
         <!-- Inline SVG mock of the F7 Analyst console (Hermes). -->
         <svg viewBox="0 0 1600 900" xmlns="http://www.w3.org/2000/svg"
