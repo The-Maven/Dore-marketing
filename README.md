@@ -7,7 +7,7 @@ events. Policy-bound escalation when something needs human eyes. Built on Wall S
 
 ## Stack
 
-- **Static HTML** — five hand-authored pages. No React, no framework.
+- **Static HTML** — six hand-authored pages. No React, no framework.
 - **Parcel** — handles HTML processing, CSS bundling, dev server, and production
   minification.
 - **Cloudflare Pages** — hosting, redirects, headers, edge cache, DDoS.
@@ -21,12 +21,26 @@ Total dependencies: one (`parcel`). The site is intentionally not a framework ap
 | `/` | `index.html` | Homepage. Hero, two offers, four pillars, credibility, four use cases, contact. |
 | `/approach` | `approach.html` | How an engagement runs from diagnostic to first agent to handover. |
 | `/about` | `about.html` | Anthony Kwawu, founder. Avatar + bio + what got shipped. |
+| `/products` | `products.html` | Doré as the flagship product. Hermes runtime. Three engagement models. Screenshot slots for the analyze + compendium + analyst views. |
 | `/contact` | `contact.html` | One-line note + email. |
 | `/terms` | `terms.html` | Site terms in five sections. |
 
-Three navigation items appear on every page: **Approach · About · Contact**, plus
-the **Put an agent on the book** CTA button. The trading-name and Terms link sit
-in the footer of every page.
+Four navigation items appear on every page: **Approach · About · Products ·
+Contact**, plus the **See use cases** CTA button. The trading-name and Terms
+link sit in the footer of every page.
+
+### Products page — image assets
+
+The Products page reserves three figure slots for product screenshots; until
+the PNGs land, each slot renders a labelled placeholder so layout is intact.
+Drop these files into `src/images/` and the placeholders take over with no
+CSS change:
+
+| Slot | File | Recommended size | Caption shown beneath |
+|------|------|------------------|-----------------------|
+| Doré analyze view | `src/images/dore-analyze.png` | 1600×900 | "Doré, attestation analysis · multi-chain corroboration in view, every figure traceable." |
+| Doré Compendium | `src/images/dore-compendium.png` | 1600×900 | "The Compendium · what the data layer is doing, in plain view, refreshed live." |
+| Analyst console | `src/images/dore-analyst.png` | 1600×900 | "Hermes, the analyst · cited answers from the verified fact store, never a number it cannot trace." |
 
 ## Develop
 

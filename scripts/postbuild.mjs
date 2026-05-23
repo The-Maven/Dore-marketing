@@ -14,6 +14,7 @@ const ORIGIN = "https://rayleighstark.com";
 const PAGES = [
   { url: "/", priority: "1.0", changefreq: "monthly" },
   { url: "/approach", priority: "0.8", changefreq: "monthly" },
+  { url: "/products", priority: "0.8", changefreq: "monthly" },
   { url: "/about", priority: "0.7", changefreq: "monthly" },
   { url: "/contact", priority: "0.6", changefreq: "monthly" },
   { url: "/terms", priority: "0.3", changefreq: "yearly" },
@@ -166,7 +167,7 @@ async function main() {
   console.log("\n[postbuild]");
   // Folder-structure the interior pages so they serve cleanly without
   // depending on host-specific _redirects rewrites.
-  for (const page of ["about", "contact", "approach", "terms"]) {
+  for (const page of ["about", "contact", "approach", "products", "terms"]) {
     await moveToFolder(page);
   }
   // Parcel hashes assets referenced in HTML (avatar, favicons). We also keep

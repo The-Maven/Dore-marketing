@@ -1,0 +1,531 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Products · Rayleigh Stark</title>
+    <meta name="description" content="Doré, the always-on reserve-verification product for stablecoin operations. Hermes runtime. Three engagement models: Operations Audit, Design Partner, Subscription." />
+    <link rel="canonical" href="https://rayleighstark.com/products" />
+    <link rel="image_src" href="https://rayleighstark.com/og-image.png?v=26.05f" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
+    <link rel="icon" type="image/png" sizes="192x192" href="/favicon-192.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <meta name="robots" content="index,follow" />
+    <meta name="author" content="Rayleigh Stark" />
+    <meta property="og:title" content="Products · Rayleigh Stark" />
+    <meta property="og:description" content="Doré, the always-on reserve-verification product for stablecoin operations. Hermes runtime." />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://rayleighstark.com/products" />
+    <meta property="og:site_name" content="Rayleigh Stark" />
+    <meta property="og:image" content="https://rayleighstark.com/og-image.png?v=26.05f" />
+    <meta name="image" content="https://rayleighstark.com/og-image.png?v=26.05f" />
+    <meta itemprop="image" content="https://rayleighstark.com/og-image.png?v=26.05f" />
+    <meta property="og:image:secure_url" content="https://rayleighstark.com/og-image.png?v=26.05f" />
+    <meta property="og:image:type" content="image/png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Rayleigh Stark · Doré, the always-on reserve-verification product for stablecoins" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Products · Rayleigh Stark" />
+    <meta name="twitter:description" content="Doré, the always-on reserve-verification product for stablecoin operations." />
+    <meta name="twitter:image" content="https://rayleighstark.com/og-image.png?v=26.05f" />
+    <meta name="twitter:image:alt" content="Rayleigh Stark · Doré, the always-on reserve-verification product for stablecoins" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@300;400;500;600&family=Inter+Tight:wght@500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#0A0B0E;
+    --line:rgba(255,255,255,.07);
+    --line-strong:rgba(255,255,255,.16);
+    --paper:#EFEAE0;
+    --muted:rgba(239,234,224,.72);
+    --muted-2:rgba(239,234,224,.54);
+    --accent:#EFEAE0;
+    --green:#7FE0A6;
+    --gold:#D4A24A;
+  }
+  .outline-gold{color:var(--gold)}
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0;background:var(--ink);color:var(--paper);font-family:'Inter',sans-serif;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;overflow-wrap:break-word}
+  body{min-height:100vh;overflow-x:hidden}
+  ::selection{background:var(--accent);color:var(--ink)}
+  a{color:inherit}
+  body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:1;opacity:.45;background-image:linear-gradient(rgba(255,255,255,.022) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.022) 1px,transparent 1px);background-size:56px 56px}
+  body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;background-image:repeating-linear-gradient(0deg,rgba(0,0,0,0) 0 2px,rgba(0,0,0,.13) 2px 3px)}
+
+  /* Unified sticky header · same shape as the other pages. */
+  .site-header{
+    position:sticky;top:0;z-index:60;
+    background:rgba(10,11,14,.92);
+    backdrop-filter:saturate(140%) blur(10px);
+    -webkit-backdrop-filter:saturate(140%) blur(10px);
+    border-bottom:1px solid var(--line);
+  }
+  .site-header .nav{border-bottom:none;background:transparent}
+  .site-header .statusbar{background:transparent;backdrop-filter:none;-webkit-backdrop-filter:none}
+
+  .statusbar{position:relative;z-index:1;border-bottom:1px solid var(--line);background:rgba(10,11,14,.88);backdrop-filter:saturate(140%) blur(10px);font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+  .statusbar-inner{display:flex;align-items:center;justify-content:space-between;padding:10px 24px;gap:24px;max-width:1440px;margin:0 auto}
+  .status-cluster{display:flex;gap:18px;align-items:center}
+  .status-pill{display:inline-flex;align-items:center;gap:8px}
+  .dot{width:7px;height:7px;border-radius:50%;background:var(--green);box-shadow:0 0 8px rgba(127,224,166,.7);display:inline-block}
+
+  .nav{position:relative;z-index:5;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;padding:18px 24px;max-width:1440px;margin:0 auto}
+  .brand{font-family:'Inter Tight',sans-serif;font-weight:700;font-size:15px;letter-spacing:-.01em;display:flex;align-items:center;gap:10px;color:var(--paper);text-decoration:none}
+  .brand-mark{width:24px;height:24px;border:1.5px solid var(--paper);display:inline-flex;align-items:center;justify-content:center;font-family:'IBM Plex Mono',monospace;font-size:10px;font-weight:600}
+  .nav-right{display:flex;gap:22px;align-items:center}
+  .nav-link{font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);text-decoration:none}
+  .nav-link.is-current{color:var(--paper);border-bottom:1px solid var(--accent);padding-bottom:4px}
+  .nav-link:hover{color:var(--paper)}
+  .nav-cta{font-family:'IBM Plex Mono',monospace;font-size:12px;text-transform:uppercase;letter-spacing:.06em;background:var(--accent);color:var(--ink);text-decoration:none;padding:10px 14px;border:1px solid var(--accent);transition:transform .15s,box-shadow .15s;font-weight:600}
+  .nav-cta:hover{transform:translate(-1px,-1px);box-shadow:2px 2px 0 var(--paper)}
+
+  .crumb{padding:24px 24px 0;max-width:1180px;margin:0 auto;font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);display:flex;gap:8px;align-items:center;flex-wrap:wrap;position:relative;z-index:2}
+  .crumb a{color:var(--muted);text-decoration:none}
+  .crumb a:hover{color:var(--paper)}
+  .crumb .sep{color:var(--muted-2)}
+  .crumb .current{color:var(--paper)}
+
+  .hero{padding:80px 24px 56px;max-width:1180px;margin:0 auto;position:relative;z-index:2}
+  .eyebrow{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);margin-bottom:22px;display:inline-flex;align-items:center;gap:12px}
+  .eyebrow::after{content:'';width:36px;height:1px;background:var(--accent)}
+  h1.h{font-family:'Inter Tight',sans-serif;font-weight:700;font-size:clamp(40px,5.6vw,84px);line-height:.98;letter-spacing:-.03em;margin:0 0 32px;color:var(--paper);max-width:22ch}
+  h1.h .accent{color:var(--paper)}
+  .lede{font-size:19px;line-height:1.55;color:var(--muted);max-width:62ch;margin:0}
+  .lede b{color:var(--paper);font-weight:500}
+
+  /* PRODUCT BLOCKS — the flagship Doré card sits at the top with a
+     full-width visual slot. Smaller engagement-model cards follow in a
+     three-column grid that collapses to one column on phones. */
+  .flagship{
+    max-width:1180px;margin:64px auto 0;padding:0 24px;position:relative;z-index:2;
+  }
+  .product{
+    border-top:1px solid var(--line);padding:48px 0;
+    display:grid;grid-template-columns:200px 1fr;gap:48px;
+  }
+  .product:last-of-type{border-bottom:1px solid var(--line)}
+  .product-meta{
+    font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.12em;
+    text-transform:uppercase;color:var(--muted);line-height:1.7;
+  }
+  .product-meta .tag{
+    display:inline-block;background:var(--accent);color:var(--ink);
+    padding:4px 8px;letter-spacing:.06em;font-weight:600;margin-bottom:12px;
+  }
+  .product-meta .status{color:var(--paper);margin-top:8px}
+  .product h2{
+    font-family:'Inter Tight',sans-serif;font-weight:600;
+    font-size:32px;letter-spacing:-.02em;color:var(--paper);
+    margin:0 0 18px;line-height:1.1;
+  }
+  .product h2 .accent{color:var(--paper)}
+  .product p{font-size:16.5px;line-height:1.6;color:var(--muted);margin:0 0 14px;max-width:62ch}
+  .product p b{color:var(--paper);font-weight:500}
+  .product ul{font-size:15.5px;line-height:1.6;color:var(--muted);margin:8px 0 18px;padding:0 0 0 18px;max-width:62ch}
+  .product ul li{margin:0 0 6px}
+  .product ul li b{color:var(--paper);font-weight:500}
+
+  /* Screenshot slot. Renders as a labelled placeholder so the page reads
+     well before image assets land; drop a real PNG into /src/images/ and
+     it takes over with no CSS change. */
+  .shot{
+    margin:18px 0 0;border:1px solid var(--line-strong);
+    background:rgba(255,255,255,.018);
+    padding:0;overflow:hidden;
+    aspect-ratio:16/9;display:flex;align-items:center;justify-content:center;
+    position:relative;
+  }
+  .shot img{display:block;width:100%;height:100%;object-fit:cover}
+  .shot .shot-label{
+    font-family:'IBM Plex Mono',monospace;font-size:10.5px;
+    letter-spacing:.12em;text-transform:uppercase;color:var(--muted-2);
+    padding:24px;text-align:center;line-height:1.5;
+  }
+  .shot-caption{
+    font-family:'IBM Plex Mono',monospace;font-size:10.5px;
+    letter-spacing:.08em;text-transform:uppercase;color:var(--muted);
+    margin:10px 0 0;
+  }
+
+  /* Three engagement-model cards · matches the .stages grid but rendered
+     as side-by-side cards with a faint border. */
+  .engagements{
+    max-width:1180px;margin:64px auto 0;padding:0 24px;position:relative;z-index:2;
+  }
+  .engagements-head{
+    font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.16em;
+    text-transform:uppercase;color:var(--accent);margin-bottom:18px;
+  }
+  .engagements h2.engagements-h{
+    font-family:'Inter Tight',sans-serif;font-weight:600;
+    font-size:32px;letter-spacing:-.02em;color:var(--paper);
+    margin:0 0 32px;line-height:1.1;max-width:32ch;
+  }
+  .eng-grid{
+    display:grid;grid-template-columns:repeat(3,1fr);gap:24px;
+  }
+  .eng{
+    border:1px solid var(--line-strong);padding:28px 24px;
+    background:linear-gradient(180deg,rgba(255,255,255,.014),rgba(255,255,255,0));
+    display:flex;flex-direction:column;
+  }
+  .eng-meta{
+    font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:.14em;
+    text-transform:uppercase;color:var(--muted-2);margin-bottom:18px;line-height:1.7;
+  }
+  .eng-meta .num{
+    display:inline-block;background:var(--accent);color:var(--ink);
+    padding:3px 7px;font-weight:600;letter-spacing:.06em;margin-bottom:10px;
+  }
+  .eng h3{
+    font-family:'Inter Tight',sans-serif;font-weight:600;font-size:22px;
+    letter-spacing:-.015em;color:var(--paper);margin:0 0 12px;line-height:1.15;
+  }
+  .eng p{font-size:14.5px;line-height:1.55;color:var(--muted);margin:0 0 12px}
+  .eng p b{color:var(--paper);font-weight:500}
+  .eng .deliv{
+    font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:.08em;
+    text-transform:uppercase;color:var(--muted-2);margin-top:auto;padding-top:14px;
+    border-top:1px solid var(--line);
+  }
+
+  /* Roadmap · what comes next, without naming it as a product. */
+  .roadmap{
+    margin:80px 24px 0;padding:48px 56px;border:1px solid var(--line-strong);
+    max-width:1180px;margin-left:auto;margin-right:auto;position:relative;z-index:2;
+    background:linear-gradient(180deg,rgba(255,255,255,.018),rgba(255,255,255,0));
+  }
+  .roadmap-eyebrow{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);margin-bottom:18px}
+  .roadmap p{font-family:'Inter Tight',sans-serif;font-weight:400;font-size:21px;line-height:1.45;letter-spacing:-.005em;color:var(--paper);margin:0;max-width:72ch}
+  .roadmap p b{color:var(--accent);font-weight:500}
+
+  .contact-block{
+    padding:96px 24px 80px;max-width:1180px;margin:0 auto;position:relative;z-index:2;
+  }
+  .contact-line{font-family:'Inter Tight',sans-serif;font-weight:500;font-size:clamp(24px,3vw,40px);line-height:1.1;letter-spacing:-.02em;color:var(--paper);margin:0 0 24px;max-width:24ch}
+  .contact-email{display:inline-block;font-family:'IBM Plex Mono',monospace;font-size:20px;letter-spacing:.02em;color:var(--accent);text-decoration:none;border-bottom:1px solid var(--accent);padding-bottom:4px}
+  .contact-email:hover{color:var(--paper);border-bottom-color:var(--paper)}
+
+  footer.foot{padding:28px 24px;color:var(--muted);position:relative;z-index:2;border-top:1px solid var(--line)}
+  .foot-strip{max-width:1180px;margin:0 auto;display:flex;justify-content:space-between;font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+  .foot-legal{max-width:1180px;margin:18px auto 0;padding-top:14px;border-top:1px dashed var(--line);display:flex;justify-content:space-between;align-items:center;font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.08em;color:var(--muted-2);text-transform:none}
+  .foot-legal a{color:var(--muted);text-decoration:none;border-bottom:1px solid var(--line-strong);padding-bottom:1px;margin-right:18px}
+  .foot-legal a:hover{color:var(--paper);border-bottom-color:var(--paper)}
+  .foot-legal-links{display:flex;align-items:center;gap:18px}
+
+@media(max-width:760px){
+    .nav-right .nav-link{display:none}
+    .nav{padding:12px 14px;gap:10px}
+    .brand{font-size:13px;gap:8px;white-space:nowrap;flex-shrink:0}
+    .brand-mark{width:22px;height:22px;font-size:9px;flex-shrink:0}
+    .nav-cta{font-size:10.5px;padding:8px 12px;white-space:nowrap;letter-spacing:.06em}
+    .statusbar-inner{padding:6px 14px;font-size:9.5px;gap:14px}
+    .status-cluster{gap:10px}
+    .statusbar-inner{flex-wrap:wrap;gap:10px;padding:8px 16px}
+    .status-cluster:last-child{display:none}
+    .nav{padding:14px 16px;gap:12px}
+    .nav-right{gap:14px}
+    .nav-link{font-size:10.5px;letter-spacing:.04em}
+    .nav-cta{font-size:10.5px;padding:8px 10px;letter-spacing:.04em}
+    .brand{font-size:13px}
+    .brand-mark{width:22px;height:22px;font-size:9px}
+
+    .hero{padding:48px 16px 32px}
+    h1.h{font-size:clamp(32px,9vw,56px)}
+    .flagship,.engagements{padding:0 16px}
+    .product{grid-template-columns:1fr;gap:18px;padding:32px 0}
+    .product h2{font-size:24px}
+    .eng-grid{grid-template-columns:1fr;gap:14px}
+    .eng{padding:22px 18px}
+    .roadmap{margin:48px 16px 0;padding:28px 22px}
+    .roadmap p{font-size:17px}
+    .contact-block{padding:56px 16px}
+    .foot-strip{flex-direction:column;gap:10px;align-items:flex-start}
+    .foot-legal{flex-direction:column;gap:10px;align-items:flex-start}
+  }
+
+  @media print{
+    @page{size:1440px 3200px;margin:0}
+    html,body{width:1440px}
+    body::before,body::after{display:none}
+    .statusbar{position:relative}
+  }
+
+  @media(max-width:760px){
+    .statusbar{display:none}
+    .site-header{border-bottom:1px solid var(--line)}
+    .nav{padding:11px 14px;gap:10px;align-items:center}
+    .brand{font-size:12.5px;gap:8px;min-width:0}
+    .brand-mark{width:22px;height:22px;font-size:9px;flex-shrink:0}
+    .brand-text{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+    .nav-right{gap:16px;flex-shrink:0}
+    .nav-right .nav-link{display:inline-flex;font-size:10px;letter-spacing:.06em;white-space:nowrap;color:var(--muted)}
+    .nav-link.is-current{color:var(--paper);border-bottom:1px solid var(--accent);padding-bottom:3px}
+    .nav-cta{display:none}
+
+    .crumb{padding:18px 16px 0}
+    .hero{padding:32px 16px 28px}
+    h1.h{font-size:clamp(30px,8.4vw,46px);line-height:1.02;letter-spacing:-.028em;margin:0 0 22px}
+    .lede{font-size:15.5px;line-height:1.5}
+    .flagship{margin:32px auto 0}
+    .product{padding:24px 0;gap:14px}
+    .product h2{font-size:21px;line-height:1.1;margin:0 0 12px}
+    .product p{font-size:14.5px;line-height:1.55;margin:0 0 10px}
+    .product ul{font-size:14px;line-height:1.5;margin:6px 0 12px;padding-left:16px}
+    .product-meta{font-size:10.5px;line-height:1.6}
+    .product-meta .tag{padding:3px 7px;font-size:10px;margin-bottom:8px}
+    .engagements{margin:48px auto 0}
+    .engagements h2.engagements-h{font-size:24px;margin:0 0 20px}
+    .eng h3{font-size:18px;margin:0 0 10px}
+    .eng p{font-size:13.5px;line-height:1.5}
+    .roadmap{margin:32px 16px 0;padding:22px 18px}
+    .roadmap p{font-size:16px;line-height:1.45}
+    .contact-block{padding:48px 16px 32px}
+    .contact-line{font-size:clamp(22px,6vw,30px);margin:0 0 18px}
+    .contact-email{font-size:16px}
+    .foot{padding:20px 16px}
+  }
+  @media(max-width:380px){
+    .brand-text{display:none}
+    .brand-mark{width:24px;height:24px;font-size:9.5px}
+    .nav-right{gap:13px}
+    .nav-right .nav-link{font-size:9.5px;letter-spacing:.04em}
+  }
+</style>
+</head>
+<body>
+
+<!-- Off-screen OG image for social inspectors. -->
+<img src="https://rayleighstark.com/og-image.png?v=26.05f"
+     alt="Rayleigh Stark · The always-on operations layer for stablecoins"
+     width="1200" height="630"
+     loading="lazy" decoding="async" aria-hidden="true"
+     style="position:absolute;left:-9999px;top:0;width:1px;height:1px;opacity:0;pointer-events:none">
+
+<div class="site-header">
+<header class="statusbar">
+  <div class="statusbar-inner">
+    <div class="status-cluster">
+      <span class="status-pill"><span class="dot"></span> The operations layer</span>
+    </div>
+    <div class="status-cluster">
+      <span class="status-pill">For programmable money</span>
+    </div>
+  </div>
+</header>
+<nav class="nav">
+  <a class="brand" href="/">
+    <span class="brand-mark">RS</span>
+    <span class="brand-text">Rayleigh Stark</span>
+  </a>
+  <div class="nav-right">
+    <a class="nav-link" href="/approach">Approach</a>
+    <a class="nav-link" href="/about">About</a>
+    <a class="nav-link is-current" href="/products">Products</a>
+    <a class="nav-link" href="/contact">Contact</a>
+    <a class="nav-cta" href="/#use-cases">See use cases →</a>
+  </div>
+</nav>
+</div>
+<div class="crumb">
+  <a href="/">RS</a>
+  <span class="sep">/</span>
+  <span class="current">products</span>
+</div>
+
+<section class="hero">
+  <div class="eyebrow">What we ship</div>
+  <h1 class="h">
+    Doré, the always-on <span class="outline-gold">reserve-verification</span> product.
+  </h1>
+  <p class="lede">
+    Stablecoin issuers publish claims. <b>Doré checks those claims against on-chain reality,
+    every figure traceable to a source.</b> Built on Hermes, our runtime. Deployed inside
+    regulated programmes. Evidence ready for an auditor on a bank-holiday morning.
+  </p>
+</section>
+
+<div class="flagship">
+
+  <!-- DORÉ — flagship product card. -->
+  <section class="product">
+    <div class="product-meta">
+      <span class="tag">01</span><br>
+      Doré
+      <span class="status">In production</span>
+    </div>
+    <div>
+      <h2>Reserve verification, sanctions, redemption, <span class="accent">cited.</span></h2>
+      <p>
+        The product reconciles what an issuer attests against what the chains actually show.
+        Multi-chain supply reads, cross-RPC corroboration, OFAC SDN screening, redemption-
+        capacity assessment. Every figure carries provenance: the claim, the sources
+        checked against, the timestamp, the block, the verification status.
+      </p>
+      <p>
+        <b>The model proposes. Deterministic code disposes.</b> No displayed figure is ever
+        invented by a language model. Sanity bounds gate every value before it reaches the
+        analyst's view. When data cannot be verified, the surface says so plainly. An
+        honest gap is a finding.
+      </p>
+      <ul>
+        <li><b>Three compliance surfaces.</b> Attestation analysis, sanctions screening,
+          redemption capacity.</li>
+        <li><b>Two honest coverage numbers.</b> Attested coverage at the attestation date,
+          live coverage against current on-chain supply, drift surfaced between them.</li>
+        <li><b>Immutable audit trail.</b> Every analysis records append-only, time-series
+          facts with full provenance, queryable point-in-time.</li>
+        <li><b>Hermes, the analyst.</b> A constrained conversational agent that answers
+          only from the verified fact store, cites every figure, and refuses when it
+          cannot ground an answer.</li>
+        <li><b>Compendium view.</b> An auditable surface showing how often each artefact
+          refreshes, which sources are live, what the background threads are doing now.</li>
+      </ul>
+      <figure class="shot">
+        <!-- Drop the analyze-view screenshot here:
+             src/images/dore-analyze.png · 1600x900 recommended.
+             Until then this placeholder renders the slot in the layout. -->
+        <div class="shot-label">
+          Analyze view · headline coverage, multi-chain consensus, cited reasoning.<br>
+          Image asset: <code>src/images/dore-analyze.png</code> (1600×900)
+        </div>
+      </figure>
+      <p class="shot-caption">Doré, attestation analysis · multi-chain corroboration in
+        view, every figure traceable.</p>
+      <figure class="shot">
+        <!-- Drop the compendium-view screenshot here:
+             src/images/dore-compendium.png · 1600x900 recommended. -->
+        <div class="shot-label">
+          Compendium · attestation URL provenance per token, canary source health,
+          immutable fact trail, background-thread log.<br>
+          Image asset: <code>src/images/dore-compendium.png</code> (1600×900)
+        </div>
+      </figure>
+      <p class="shot-caption">The Compendium · what the data layer is doing, in plain
+        view, refreshed live.</p>
+    </div>
+  </section>
+
+  <!-- HERMES — the runtime under Doré. -->
+  <section class="product">
+    <div class="product-meta">
+      <span class="tag">02</span><br>
+      Hermes
+      <span class="status">Runtime</span>
+    </div>
+    <div>
+      <h2>The runtime our products run on, <span class="accent">policy-bound from the start.</span></h2>
+      <p>
+        Hermes is the agent runtime. Doré runs on it. Future products run on it. Policy
+        is versioned. Dual approval gates on policy changes. Kill switches configured for
+        the head of compliance and the CFO. Evidence retention configured per MiCA, the
+        GENIUS Act, and equivalent regimes.
+      </p>
+      <p>
+        The agent reaches the system through a read-only tool boundary, not raw database
+        access. Every tool call is audit-logged. Native runtimes (shell, code execution,
+        unrestricted web) are switched off by default. Curation decisions — what data to
+        trust, what address to mark verified — stay with humans. <b>The agent reads and
+        recommends. The human decides.</b>
+      </p>
+      <figure class="shot">
+        <!-- Drop the analyst-console (F7) screenshot here:
+             src/images/dore-analyst.png · 1600x900 recommended. -->
+        <div class="shot-label">
+          Analyst console · conversational interface, every reply citing the fact store.<br>
+          Image asset: <code>src/images/dore-analyst.png</code> (1600×900)
+        </div>
+      </figure>
+      <p class="shot-caption">Hermes, the analyst · cited answers from the verified fact
+        store, never a number it cannot trace.</p>
+    </div>
+  </section>
+
+</div>
+
+<!-- ENGAGEMENT MODELS — three cards mirroring the Approach stages. -->
+<section class="engagements">
+  <div class="engagements-head">How we deploy it</div>
+  <h2 class="engagements-h">Three ways to put Doré inside your operation.</h2>
+  <div class="eng-grid">
+    <div class="eng">
+      <div class="eng-meta">
+        <span class="num">01</span><br>
+        Operations audit
+      </div>
+      <h3>Two weeks. Map your surfaces against ours.</h3>
+      <p>
+        We walk reserves, redemptions, sanctions, KYT, and cross-chain reconciliation
+        with your treasury, ops, and compliance leads. Where the picture goes dark, we
+        flag it. Where coverage exists, we measure it.
+      </p>
+      <div class="deliv">Output · Deployment plan, measurable targets, surface priorities.</div>
+    </div>
+    <div class="eng">
+      <div class="eng-meta">
+        <span class="num">02</span><br>
+        Design partner
+      </div>
+      <h3>Six to eight weeks. Doré inside one surface, in production.</h3>
+      <p>
+        We deploy Doré into one operational surface for issuers and infrastructure firms
+        running production today. Integrated with your custody feeds, ledger, sanctions
+        screen, and ticketing. A named operator accountable for it.
+      </p>
+      <div class="deliv">Output · Doré in production. Measurable improvement in coverage
+        and time to escalation.</div>
+    </div>
+    <div class="eng">
+      <div class="eng-meta">
+        <span class="num">03</span><br>
+        Subscription
+      </div>
+      <h3>Monthly. The agents stay deployed.</h3>
+      <p>
+        Runtime, policy reviews, human escalation on edge cases. Policy versioned, kill
+        switches in place. The agents stay watching. Your team owns the surface, with our
+        operator on call for the cases that need a human read.
+      </p>
+      <div class="deliv">Output · A live operation. Evidence retention configured per
+        MiCA, GENIUS Act, equivalents.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ROADMAP — what comes next, without overpromising. -->
+<section class="roadmap">
+  <div class="roadmap-eyebrow">What we are building next</div>
+  <p>
+    The verification core is object-agnostic. <b>The same engine that checks an issuer's
+    reserve claim against on-chain reality</b> is the engine that checks an agent's
+    spending claim against settlement reality. We are designing for that today. The
+    flagship stays Doré. The runtime stays Hermes. The next surface follows the same
+    discipline.
+  </p>
+</section>
+
+<section class="contact-block">
+  <h2 class="contact-line">Email a short note about the stablecoin operation you'd want watched.</h2>
+  <a class="contact-email" href="mailto:contact@rayleighstark.com">contact@rayleighstark.com</a>
+</section>
+
+<footer class="foot">
+  <div class="foot-strip">
+    <span>Rayleigh Stark · London · New York</span>
+    <span>Always-on agents for stablecoin operations</span>
+    <span><span class="dot"></span> &nbsp;SYS / OPERATIONAL</span>
+  </div>
+  <div class="foot-legal">
+    <span>Rayleigh Stark is a trading name of Premium Services &amp; Network UK Ltd.</span>
+    <span class="foot-legal-links">
+      <a href="/terms">Terms</a>
+      <span>© Rayleigh Stark · 2026</span>
+    </span>
+  </div>
+</footer>
+
+</body>
+</html>

@@ -43,6 +43,7 @@
 /about.html    /about     301
 /contact.html  /contact   301
 /approach.html /approach  301
+/products.html /products  301
 /terms.html    /terms     301
 
 # Catch-all for any other legacy /service-* path
