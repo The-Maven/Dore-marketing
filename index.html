@@ -4,7 +4,7 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Rayleigh Stark · The always-on operations layer for stablecoins</title>
-    <meta name="description" content="Production agents for stablecoin operations. Reserves, redemptions, sanctions, KYT, reconciliation, reporting. Always-on, policy-bound, deployed inside regulated programmes. Built on Wall Street." />
+    <meta name="description" content="Production agents for stablecoin operations. Reserves, redemptions, sanctions screening, transaction monitoring, reconciliation, reporting. Always-on, policy-bound, deployed inside regulated programmes. Built on Wall Street." />
     <link rel="canonical" href="https://rayleighstark.com/" />
     <link rel="image_src" href="https://rayleighstark.com/og-image.png?v=26.05f" />
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png" />
@@ -14,7 +14,7 @@
     <meta name="robots" content="index,follow" />
     <meta name="author" content="Rayleigh Stark" />
     <meta property="og:title" content="Rayleigh Stark · The always-on operations layer for stablecoins" />
-    <meta property="og:description" content="Production agents for stablecoin operations. Reserves, redemptions, sanctions, KYT, reconciliation, reporting. Always-on, policy-bound, deployed inside regulated programmes. Built on Wall Street." />
+    <meta property="og:description" content="Production agents for stablecoin operations. Reserves, redemptions, sanctions screening, transaction monitoring, reconciliation, reporting. Always-on, policy-bound, deployed inside regulated programmes. Built on Wall Street." />
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://rayleighstark.com/" />
     <meta property="og:site_name" content="Rayleigh Stark" />
@@ -28,7 +28,7 @@
     <meta property="og:image:alt" content="Rayleigh Stark · The always-on operations layer for stablecoins" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="Rayleigh Stark · The always-on operations layer for stablecoins" />
-    <meta name="twitter:description" content="Production agents for stablecoin operations. Reserves, redemptions, sanctions, KYT, reconciliation, reporting. Always-on, policy-bound, deployed inside regulated programmes. Built on Wall Street." />
+    <meta name="twitter:description" content="Production agents for stablecoin operations. Reserves, redemptions, sanctions screening, transaction monitoring, reconciliation, reporting. Always-on, policy-bound, deployed inside regulated programmes. Built on Wall Street." />
     <meta name="twitter:image" content="https://rayleighstark.com/og-image.png?v=26.05f" />
     <meta name="twitter:image:alt" content="Rayleigh Stark · The always-on operations layer for stablecoins" />
     <script type="application/ld+json">
@@ -38,7 +38,7 @@
       "name": "Rayleigh Stark",
       "url": "https://rayleighstark.com/",
       "logo": "https://rayleighstark.com/favicon.svg",
-      "description": "Always-on agents for stablecoin operations. Reserves, redemptions, sanctions, KYT, cross-chain reconciliation, and regulatory reporting. Policy-bound escalation when something needs human eyes. Hermes runtime in production.",
+      "description": "Always-on agents for stablecoin operations. Reserves, redemptions, sanctions screening, transaction monitoring, cross-chain reconciliation, and regulatory reporting. Policy-bound escalation when something needs human eyes. Hermes runtime in production.",
       "founder": {
         "@type": "Person",
         "name": "Anthony Kwawu",
@@ -53,7 +53,7 @@
         "Stablecoin operations",
         "Reserves monitoring",
         "Redemption flow",
-        "KYT and sanctions screening",
+        "Sanctions screening and transaction monitoring",
         "Cross-chain reconciliation",
         "MiCA Article 36",
         "GENIUS Act"
@@ -1270,8 +1270,8 @@
     The always-on operations layer for <span class="outline-gold">stablecoins.</span>
   </h1>
   <p class="hero-sub">
-    Production agents for stablecoin operations. Reserves, redemptions, sanctions, KYT,
-    reconciliation, reporting.
+    Production agents for stablecoin operations. Reserves, redemptions, sanctions
+    screening, transaction monitoring, reconciliation, reporting.
     <b>Always-on, policy-bound, deployed inside regulated programmes.</b> Built on <span class="outline-gold">Wall Street</span>.
   </p>
   <a class="hero-cta" href="/contact">See it on your reserves →</a>
@@ -1304,7 +1304,7 @@
       <div class="offer-meta">01 · AUDIT</div>
       <h3 class="offer-name">Operations Audit</h3>
       <div class="offer-duration">Two weeks</div>
-      <p>We map your stablecoin operations against the surfaces our agents monitor. Reserves, redemptions, sanctions and KYT, cross-chain reconciliation, reporting.</p>
+      <p>We map your stablecoin operations against the surfaces our agents monitor. Reserves, redemptions, sanctions screening, transaction monitoring, cross-chain reconciliation, reporting.</p>
       <p>Output: a deployment plan with measurable targets. Bridges into a design partner engagement, or stands alone.</p>
       <p class="terms">Fixed scope, fixed fee.</p>
     </article>
@@ -1446,8 +1446,8 @@
       <p class="rg-node-body">Snapshots per chain. Supply, mint, burn, settlement.</p>
     </article>
     <article class="rg-node n-sanctions">
-      <h3 class="rg-node-name"><span class="rg-tag">03</span>Sanctions and KYT</h3>
-      <p class="rg-node-body">OFAC and equivalent lists. Address screening before settlement.</p>
+      <h3 class="rg-node-name"><span class="rg-tag">03</span>Sanctions and transaction monitoring</h3>
+      <p class="rg-node-body">OFAC and equivalent lists. Every deployment address screened against the SDN feed; transaction-flow review where the regulator expects it.</p>
     </article>
     <article class="rg-node n-queue">
       <h3 class="rg-node-name"><span class="rg-tag">04</span>Redemption queue</h3>
@@ -1891,21 +1891,22 @@
     var list = host.querySelector('.hero-log-list');
     if (!list) return;
 
-    var SURFACES = ['RESERVES','REDEMPTIONS','COVERAGE','MINT','BURN','KYT','SANCTIONS','RECON','ATTEST','CUSTODY','INDEXER'];
+    var SURFACES = ['RESERVES','REDEMPTIONS','COVERAGE','MINT','BURN','MONITORING','SANCTIONS','RECON','ATTEST','CUSTODY','INDEXER'];
     var AGENTS = ['AGT-02','AGT-04','AGT-07','AGT-09','AGT-11','AGT-14'];
     var CHAINS = ['ETH-MAIN','ARB','BASE','POLY','AVAX','BNB','SOL'];
     var CUSTODIANS = ['CUSTODIAN-A','CUSTODIAN-B','CUSTODIAN-C'];
     var REGS = ['MiCA Art. 36','MiCA Art. 38','GENIUS Act','FCA stablecoin','FATF Travel Rule'];
 
     /* Entry patterns. {sev}, {s}=allowed surfaces (* = any), {t}=template.
-       Stablecoin-native: reserves, redemptions, KYT, sanctions, cross-chain. */
+       Stablecoin-native: reserves, redemptions, monitoring, sanctions,
+       cross-chain. */
     var POOL = [
       /* INFO · 70% target */
       {sev:'INFO', s:['RESERVES'], t:'Reserves snapshot complete. Coverage 100.{N1}% across {N1c} custodians, {N1c2} chains.'},
       {sev:'INFO', s:['*'], t:'Heartbeat. All surfaces nominal.'},
       {sev:'INFO', s:['RECON'], t:'Cross-chain reconciliation pass: {N2} breaks, {N1} resolved automatically.'},
       {sev:'INFO', s:['REDEMPTIONS'], t:'Redemption queue depth: {N1}. Within normal range.'},
-      {sev:'INFO', s:['KYT'], t:'KYT review batch: {N3} addresses screened, {N1} flagged.'},
+      {sev:'INFO', s:['MONITORING'], t:'Monitoring batch: {N3} addresses reviewed, {N1} flagged for follow-up.'},
       {sev:'INFO', s:['SANCTIONS'], t:'Sanctions screen: {N2} addresses reviewed, {N1} held.'},
       {sev:'INFO', s:['COVERAGE'], t:'Coverage ratio: 100.{N1}%. Within band.'},
       {sev:'INFO', s:['ATTEST'], t:'Attestation packet generated. AT-{ID4}.'},
@@ -1916,7 +1917,7 @@
       {sev:'INFO', s:['INDEXER'], t:'Indexer lag on {CHAIN}: {N1}ms. Within target.'},
       {sev:'INFO', s:['REDEMPTIONS'], t:'Redemption batch settled on {CHAIN}: {N2} requests.'},
       {sev:'INFO', s:['RECON'], t:'Cross-chain supply check: parity confirmed across {N1c} venues.'},
-      {sev:'INFO', s:['KYT'], t:'KYT score distribution within policy: max {X100}.'},
+      {sev:'INFO', s:['MONITORING'], t:'Transaction-risk distribution within policy band. Max {X100}.'},
       {sev:'INFO', s:['*'], t:'Audit packet generated. ESC-{ID4}.'},
       {sev:'INFO', s:['CUSTODY'], t:'Cash sweep confirmed at {CUSTODIAN}. Adequate.'},
       {sev:'INFO', s:['ATTEST'], t:'Attestation pre-flight passed. Awaiting publication window.'},
@@ -1928,7 +1929,7 @@
       {sev:'WATCH', s:['REDEMPTIONS'], t:'Redemption velocity {XBIG}% above 30-day average.'},
       {sev:'WATCH', s:['INDEXER'], t:'Indexer lag on {CHAIN} above p95. Attestation hold armed.'},
       {sev:'WATCH', s:['RECON'], t:'Cross-chain supply variance: {X}% on {CHAIN}.'},
-      {sev:'WATCH', s:['KYT'], t:'Elevated KYT score on inbound address. Score {N1}/10.'},
+      {sev:'WATCH', s:['MONITORING'], t:'Elevated risk score on inbound address. Score {N1}/10.'},
       {sev:'WATCH', s:['RECON'], t:'Recon break aged {HR} hours, no auto-match.'},
       {sev:'WATCH', s:['CUSTODY'], t:'Cash sweep at {CUSTODIAN} past expected window.'},
       {sev:'WATCH', s:['ATTEST'], t:'Attestation window approaching. Pre-flight check armed.'},
@@ -1939,7 +1940,7 @@
       {sev:'ESCALATE', s:['RECON'], t:'Cross-chain reconciliation break unresolved past SLA. Ops paged.'},
       {sev:'ESCALATE', s:['CUSTODY'], t:'{CUSTODIAN} status degraded. CFO paged. Hold actions armed.'},
       {sev:'ESCALATE', s:['RESERVES'], t:'Reserves coverage below regulatory floor. {REG} packet drafted.'},
-      {sev:'ESCALATE', s:['KYT'], t:'KYT score breach on inbound address. MLRO notified.'},
+      {sev:'ESCALATE', s:['MONITORING'], t:'Risk-score breach on inbound address. MLRO notified.'},
       {sev:'ESCALATE', s:['ATTEST'], t:'Pre-attestation reconciliation break detected. Publication withheld.'},
 
       /* RESOLVE · 5% */
