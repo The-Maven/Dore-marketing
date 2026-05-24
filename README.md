@@ -21,7 +21,7 @@ Total dependencies: one (`parcel`). The site is intentionally not a framework ap
 | `/` | `index.html` | Homepage. Hero, two offers, four pillars, credibility, four use cases, contact. |
 | `/approach` | `approach.html` | How an engagement runs from diagnostic to first agent to handover. |
 | `/about` | `about.html` | Anthony Kwawu, founder. Avatar + bio + what got shipped. |
-| `/products` | `products.html` | Doré as the flagship product. Hermes runtime. Three engagement models. Screenshot slots for the analyze + compendium + analyst views. |
+| `/products` | `products.html` | Doré as the flagship product. Hermes runtime. Text-left + dashboard-right side-by-side bands (5/7 split), Hermes band reverses for scroll heartbeat. Three real Doré screenshots per the asset table below. |
 | `/contact` | `contact.html` | One-line note + email. |
 | `/terms` | `terms.html` | Site terms in five sections. |
 
@@ -31,16 +31,22 @@ link sit in the footer of every page.
 
 ### Products page — image assets
 
-The Products page reserves three figure slots for product screenshots; until
-the PNGs land, each slot renders a labelled placeholder so layout is intact.
-Drop these files into `src/images/` and the placeholders take over with no
-CSS change:
+The Products page renders three real Doré dashboard screenshots
+(2760×1396 PNGs). Each `.shot` container matches the native aspect ratio
+(`aspect-ratio: 2760/1396`) with `object-fit: contain` so the sidebar
+and topbar are never cropped — captured live from a 1440px-viewport
+session against `localhost:8000`.
 
-| Slot | File | Recommended size | Caption shown beneath |
+| Slot | File | Native size | Caption shown beneath |
 |------|------|------------------|-----------------------|
-| Doré analyze view | `src/images/dore-analyze.png` | 1600×900 | "Doré, attestation analysis · multi-chain corroboration in view, every figure traceable." |
-| Doré Compendium | `src/images/dore-compendium.png` | 1600×900 | "The Compendium · what the data layer is doing, in plain view, refreshed live." |
-| Analyst console | `src/images/dore-analyst.png` | 1600×900 | "Hermes, the analyst · cited answers from the verified fact store, never a number it cannot trace." |
+| Doré band — primary | `src/images/product-view2.png` | 2760×1396 | F2 Analyze · the AI Brief opens the view: bottom-line headline, key supply and coverage figures, every cited regulation pulled from the corpus inline. |
+| Doré band — secondary | `src/images/product-view3.png` | 2760×1396 | F2 Analyze · snapshot panel showing 100.09% honest backing, attested reserves $75.18B, the six-cell metric grid, per-chain supply with multi-RPC consensus. |
+| Hermes band | `src/images/product-view1.png` | 2760×1396 | F1 Monitor · the operations log streams every supply read, attestation analysis, sanctions screen and redemption check live — every Hermes tool call surfaced in the same plane. |
+
+Replacing a screenshot: drop a new PNG into `src/images/` with the same
+filename. Native aspect ratio close to 1.98 keeps the slot layout
+intact; for materially different ratios, update the `.shot
+{aspect-ratio: ...}` rule alongside the file.
 
 ## Develop
 
@@ -91,6 +97,16 @@ it against these rules before shipping.
 Acronyms permitted where they earn their place:
 FCA, MLRO, Section 166, MiCA, BCBS 239, SR 11-7, SEPA, FPS, FedNow, RTP, ACH,
 SWIFT gpi, NIST AI RMF.
+
+**Crypto-native jargon banned in marketing copy:** KYT, TVL, MEV, "ape",
+"rugpull", "hodl", "rekt", "degen", "NGMI", "WAGMI". Sanctions screening and
+transaction monitoring are the long-form replacements that read for an
+audience that doesn't live in the crypto subculture.
+
+A repo-wide audit at the end of every visible-content change should confirm
+all six pages clean against banned words, future-tense phrasing, crypto
+jargon, and visible em-dashes. The current audit (post-rebuild) passes on
+all six.
 
 ## Design system
 
